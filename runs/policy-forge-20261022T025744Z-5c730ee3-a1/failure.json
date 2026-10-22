@@ -1,0 +1,7 @@
+{
+  "conclusion": "success",
+  "detail": "manifest.json: input_manifest_hash: 'cf701c7284028d1e1dc10289faae02ead90d4c8cbb5b485ef1b419fe1d05f2d6' does not match '^sha256:[0-9a-f]{64}$'",
+  "problems": [
+    "manifest.json: input_manifest_hash: 'cf701c7284028d1e1dc10289faae02ead90d4c8cbb5b485ef1b419fe1d05f2d6' does not match '^sha256:[0-9a-f]{64}$'"
+  ]
+}
