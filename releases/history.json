@@ -1,6 +1,13 @@
 {
   "releases": [
     {
+      "created_at": "2026-10-22T08:22:48Z",
+      "release_id": "policy-forge-20261022T082248Z-4074bbf",
+      "run_id": "policy-forge-20261022T054631Z-99a60140-a1",
+      "source_commit": "4074bbfbd98bed50b94e91999319180c2512ef54",
+      "status": "released"
+    },
+    {
       "created_at": "2026-10-22T05:51:29Z",
       "release_id": "policy-forge-20261022T055129Z-57da8ea",
       "run_id": "policy-forge-20261022T054631Z-99a60140-a1",
