@@ -1,0 +1,286 @@
+{
+  "findings": [
+    {
+      "cited": [
+        {
+          "file": "snapshots/aws-baseline-2026-10/iam-account-authorization-details.json",
+          "line": 246,
+          "pointer": "/Policies/3/PolicyVersionList/0/Document/Statement/0"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/permissions/statements",
+          "raw": "snapshots/aws-baseline-2026-10/iam-account-authorization-details.json#/Policies/3/PolicyVersionList/0/Document/Statement/0",
+          "service_wildcards": [
+            "s3:*"
+          ],
+          "value": {
+            "actions": [
+              "s3:*"
+            ],
+            "effect": "Allow",
+            "has_condition": false,
+            "not_actions": null,
+            "policy": "fh-ci-deploy",
+            "resources": [
+              "*"
+            ],
+            "sid": "DeployEverywhere"
+          }
+        }
+      ],
+      "exception_id": null,
+      "id": "PF-IAM-002::aws:iam_policy:arn:aws:iam::111122223333:policy/fh-ci-deploy",
+      "pack": "iam",
+      "provider": "aws",
+      "reason": "1 Allow statement(s) grant a whole service on every resource.",
+      "remediation": {
+        "kind": "manual",
+        "patch_id": null,
+        "patch_status": "not_proposed"
+      },
+      "resource_id": "aws:iam_policy:arn:aws:iam::111122223333:policy/fh-ci-deploy",
+      "resource_name": "fh-ci-deploy",
+      "resource_type": "iam_policy",
+      "rule_id": "PF-IAM-002",
+      "severity": "high",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            246
+          ],
+          "first_line": 240,
+          "lines": [
+            "      \"UpdateDate\": \"2025-01-10T12:00:00+00:00\",",
+            "      \"PolicyVersionList\": [",
+            "        {",
+            "          \"Document\": {",
+            "            \"Version\": \"2012-10-17\",",
+            "            \"Statement\": [",
+            "              {",
+            "                \"Sid\": \"DeployEverywhere\",",
+            "                \"Effect\": \"Allow\",",
+            "                \"Action\": \"s3:*\",",
+            "                \"Resource\": \"*\"",
+            "              }",
+            "            ]"
+          ]
+        },
+        "file": "snapshots/aws-baseline-2026-10/iam-account-authorization-details.json",
+        "line": 246,
+        "pointer": "/Policies/3/PolicyVersionList/0/Document/Statement/0"
+      },
+      "status": "active",
+      "title": "Allow statement grants a whole service on every resource"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/aws-baseline-2026-10/s3-buckets.json",
+          "line": 213,
+          "pointer": "/Buckets/4/GetBucketPolicy/Policy"
+        },
+        {
+          "file": "snapshots/aws-baseline-2026-10/s3-buckets.json",
+          "line": 215,
+          "pointer": "/Buckets/4/GetPublicAccessBlock"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/permissions/statements",
+          "raw": "snapshots/aws-baseline-2026-10/s3-buckets.json#/Buckets/4/GetBucketPolicy/Policy",
+          "value": {
+            "actions": [
+              "s3:GetObject"
+            ],
+            "effect": "Allow",
+            "has_condition": false,
+            "not_actions": null,
+            "policy": "bucket-policy",
+            "resources": [
+              "arn:aws:s3:::fh-public-docs/*"
+            ],
+            "sid": "PublicReadDocs"
+          }
+        },
+        {
+          "path": "/properties/public_access/guard",
+          "raw": "snapshots/aws-baseline-2026-10/s3-buckets.json#/Buckets/4/GetPublicAccessBlock",
+          "value": {
+            "block_public_acls": true,
+            "block_public_policy": false,
+            "configured": true,
+            "ignore_public_acls": true,
+            "restrict_public_buckets": false
+          }
+        }
+      ],
+      "exception_id": "EXC-001",
+      "id": "PF-STOR-002::aws:storage_bucket:fh-public-docs",
+      "pack": "storage",
+      "provider": "aws",
+      "reason": "The bucket policy allows the anonymous principal \"*\" in 1 statement(s) and RestrictPublicBuckets is off.",
+      "remediation": {
+        "kind": "auto",
+        "patch_id": null,
+        "patch_status": "not_proposed"
+      },
+      "resource_id": "aws:storage_bucket:fh-public-docs",
+      "resource_name": "fh-public-docs",
+      "resource_type": "storage_bucket",
+      "rule_id": "PF-STOR-002",
+      "severity": "high",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            213,
+            215
+          ],
+          "first_line": 207,
+          "lines": [
+            "            },",
+            "            \"Permission\": \"FULL_CONTROL\"",
+            "          }",
+            "        ]",
+            "      },",
+            "      \"GetBucketPolicy\": {",
+            "        \"Policy\": \"{\\\"Version\\\":\\\"2012-10-17\\\",\\\"Statement\\\":[{\\\"Sid\\\":\\\"PublicReadDocs\\\",\\\"Effect\\\":\\\"Allow\\\",\\\"Principal\\\":\\\"*\\\",\\\"Action\\\":\\\"s3:GetObject\\\",\\\"Resource\\\":\\\"arn:aws:s3:::fh-public-docs/*\\\"}]}\"",
+            "      },",
+            "      \"GetPublicAccessBlock\": {",
+            "        \"PublicAccessBlockConfiguration\": {",
+            "          \"BlockPublicAcls\": true,",
+            "          \"IgnorePublicAcls\": true,",
+            "          \"BlockPublicPolicy\": false,",
+            "          \"RestrictPublicBuckets\": false",
+            "        }"
+          ]
+        },
+        "file": "snapshots/aws-baseline-2026-10/s3-buckets.json",
+        "line": 213,
+        "pointer": "/Buckets/4/GetBucketPolicy/Policy"
+      },
+      "status": "excepted",
+      "title": "Bucket policy allows an anonymous principal"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/aws-baseline-2026-10/cloudtrail-describe-trails.json",
+          "line": 8,
+          "pointer": "/trailList/0/IsMultiRegionTrail"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/multi_region",
+          "raw": "snapshots/aws-baseline-2026-10/cloudtrail-describe-trails.json#/trailList/0/IsMultiRegionTrail",
+          "value": false
+        }
+      ],
+      "exception_id": null,
+      "id": "PF-AUD-002::aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+      "pack": "audit",
+      "provider": "aws",
+      "reason": "The trail is not multi-region; activity in other regions is not recorded by it.",
+      "remediation": {
+        "kind": "auto",
+        "patch_id": "P-01",
+        "patch_status": "accepted"
+      },
+      "resource_id": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+      "resource_name": "data-events-trail",
+      "resource_type": "audit_trail",
+      "rule_id": "PF-AUD-002",
+      "severity": "medium",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            8
+          ],
+          "first_line": 2,
+          "lines": [
+            "  \"trailList\": [",
+            "    {",
+            "      \"Name\": \"data-events-trail\",",
+            "      \"S3BucketName\": \"fh-audit-logs\",",
+            "      \"S3KeyPrefix\": \"\",",
+            "      \"IncludeGlobalServiceEvents\": true,",
+            "      \"IsMultiRegionTrail\": false,",
+            "      \"HomeRegion\": \"us-east-2\",",
+            "      \"TrailARN\": \"arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail\",",
+            "      \"LogFileValidationEnabled\": false,",
+            "      \"HasCustomEventSelectors\": false,",
+            "      \"HasInsightSelectors\": false,",
+            "      \"IsOrganizationTrail\": false"
+          ]
+        },
+        "file": "snapshots/aws-baseline-2026-10/cloudtrail-describe-trails.json",
+        "line": 8,
+        "pointer": "/trailList/0/IsMultiRegionTrail"
+      },
+      "status": "active",
+      "title": "Audit trail records only its home region"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/aws-baseline-2026-10/cloudtrail-describe-trails.json",
+          "line": 11,
+          "pointer": "/trailList/0/LogFileValidationEnabled"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/log_file_validation",
+          "raw": "snapshots/aws-baseline-2026-10/cloudtrail-describe-trails.json#/trailList/0/LogFileValidationEnabled",
+          "value": false
+        }
+      ],
+      "exception_id": null,
+      "id": "PF-AUD-003::aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+      "pack": "audit",
+      "provider": "aws",
+      "reason": "Log file integrity validation is disabled; tampering with delivered logs would not be detectable.",
+      "remediation": {
+        "kind": "auto",
+        "patch_id": "P-02",
+        "patch_status": "accepted"
+      },
+      "resource_id": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+      "resource_name": "data-events-trail",
+      "resource_type": "audit_trail",
+      "rule_id": "PF-AUD-003",
+      "severity": "medium",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            11
+          ],
+          "first_line": 5,
+          "lines": [
+            "      \"S3BucketName\": \"fh-audit-logs\",",
+            "      \"S3KeyPrefix\": \"\",",
+            "      \"IncludeGlobalServiceEvents\": true,",
+            "      \"IsMultiRegionTrail\": false,",
+            "      \"HomeRegion\": \"us-east-2\",",
+            "      \"TrailARN\": \"arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail\",",
+            "      \"LogFileValidationEnabled\": false,",
+            "      \"HasCustomEventSelectors\": false,",
+            "      \"HasInsightSelectors\": false,",
+            "      \"IsOrganizationTrail\": false",
+            "    },",
+            "    {",
+            "      \"Name\": \"org-management-trail\","
+          ]
+        },
+        "file": "snapshots/aws-baseline-2026-10/cloudtrail-describe-trails.json",
+        "line": 11,
+        "pointer": "/trailList/0/LogFileValidationEnabled"
+      },
+      "status": "active",
+      "title": "Log file integrity validation is disabled"
+    }
+  ]
+}

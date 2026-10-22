@@ -2,14 +2,14 @@
   "runs": [
     {
       "attempt": 1,
-      "completed_at": null,
+      "completed_at": "2026-10-22T05:47:08Z",
       "created_at": "2026-10-22T05:46:31Z",
-      "headline": null,
+      "headline": "aws-baseline-2026-10 as of 2026-10-22: 3 failed, 1 not evaluated, 1 excepted, 38 passed; partial coverage.",
       "issue": null,
       "request_id": "99a6014060aa779e",
       "run_id": "policy-forge-20261022T054631Z-99a60140-a1",
       "source": "manual",
-      "status": "running"
+      "status": "completed"
     },
     {
       "attempt": 1,

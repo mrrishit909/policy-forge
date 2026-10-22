@@ -1,0 +1,16 @@
+diff --git a/snapshots/aws-baseline-2026-10/cloudtrail-describe-trails.json b/snapshots/aws-baseline-2026-10/cloudtrail-describe-trails.json
+--- a/snapshots/aws-baseline-2026-10/cloudtrail-describe-trails.json
++++ b/snapshots/aws-baseline-2026-10/cloudtrail-describe-trails.json
+@@ -5,10 +5,10 @@
+       "S3BucketName": "fh-audit-logs",
+       "S3KeyPrefix": "",
+       "IncludeGlobalServiceEvents": true,
+-      "IsMultiRegionTrail": false,
++      "IsMultiRegionTrail": true,
+       "HomeRegion": "us-east-2",
+       "TrailARN": "arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+-      "LogFileValidationEnabled": false,
++      "LogFileValidationEnabled": true,
+       "HasCustomEventSelectors": false,
+       "HasInsightSelectors": false,
+       "IsOrganizationTrail": false

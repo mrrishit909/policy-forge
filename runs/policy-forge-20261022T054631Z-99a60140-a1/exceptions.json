@@ -1,0 +1,126 @@
+{
+  "as_of": "2026-10-22",
+  "counts": {
+    "active": 1,
+    "expired": 2,
+    "not_yet_active": 0,
+    "rejected": 4
+  },
+  "entries": [
+    {
+      "created": "2026-09-15",
+      "effect": "excepts the matching finding",
+      "expires": "2026-12-01",
+      "id": "EXC-001",
+      "in_scope": true,
+      "matches_failing_result": true,
+      "owner": "docs-team@fernhollow.example",
+      "problems": [],
+      "reason": "Public documentation site served from this bucket; only rendered docs are uploaded.",
+      "resource_id": "aws:storage_bucket:fh-public-docs",
+      "rule_id": "PF-STOR-002",
+      "state": "active",
+      "ticket": "SEC-1042"
+    },
+    {
+      "created": "2026-06-15",
+      "effect": "expired: any matching finding stays active",
+      "expires": "2026-09-12",
+      "id": "EXC-002",
+      "in_scope": false,
+      "matches_failing_result": false,
+      "owner": "ops@fernhollow.example",
+      "problems": [],
+      "reason": "Legacy operations host during the summer migration window.",
+      "resource_id": "aws:security_group:sg-0fe00000000000005",
+      "rule_id": "PF-NET-002",
+      "state": "expired",
+      "ticket": "SEC-0988"
+    },
+    {
+      "created": "2026-10-01",
+      "effect": "ignored: rejected by the registry hygiene checks",
+      "expires": "2026-12-01",
+      "id": "EXC-003",
+      "in_scope": false,
+      "matches_failing_result": false,
+      "owner": "platform@fernhollow.example",
+      "problems": [
+        "resource_id must be one exact resource id, not a wildcard or pattern"
+      ],
+      "reason": "All Fernhollow buckets are reviewed separately.",
+      "resource_id": "aws:storage_bucket:fh-*",
+      "rule_id": "PF-STOR-001",
+      "state": "rejected",
+      "ticket": "SEC-1050"
+    },
+    {
+      "created": "2026-10-01",
+      "effect": "ignored: rejected by the registry hygiene checks",
+      "expires": "2027-03-31",
+      "id": "EXC-004",
+      "in_scope": true,
+      "matches_failing_result": false,
+      "owner": "ops@fernhollow.example",
+      "problems": [
+        "expiry is more than 90 days after created"
+      ],
+      "reason": "Vendor needs SSH to the bastion until the contract ends.",
+      "resource_id": "aws:security_group:sg-0fe00000000000002",
+      "rule_id": "PF-NET-001",
+      "state": "rejected",
+      "ticket": "SEC-1061"
+    },
+    {
+      "created": "2026-08-01",
+      "effect": "expired: any matching finding stays active",
+      "expires": "2026-10-21",
+      "id": "EXC-005",
+      "in_scope": false,
+      "matches_failing_result": false,
+      "owner": "lab-team@fernhollow.example",
+      "problems": [],
+      "reason": "Lab jump host open for the October training cohort; closes when the cohort ends.",
+      "resource_id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-jump",
+      "rule_id": "PF-NET-001",
+      "state": "expired",
+      "ticket": "SEC-1013"
+    },
+    {
+      "created": "2026-10-01",
+      "effect": "ignored: rejected by the registry hygiene checks",
+      "expires": "2026-11-01",
+      "id": "EXC-006",
+      "in_scope": false,
+      "matches_failing_result": false,
+      "owner": "platform@fernhollow.example",
+      "problems": [
+        "missing ticket",
+        "unknown rule id"
+      ],
+      "reason": "Placeholder entry.",
+      "resource_id": "aws:storage_bucket:fh-app-artifacts",
+      "rule_id": "PF-STOR-099",
+      "state": "rejected",
+      "ticket": ""
+    },
+    {
+      "created": "2026-10-10",
+      "effect": "ignored: rejected by the registry hygiene checks",
+      "expires": "2026-10-01",
+      "id": "EXC-007",
+      "in_scope": true,
+      "matches_failing_result": true,
+      "owner": "security@fernhollow.example",
+      "problems": [
+        "expires before it was created"
+      ],
+      "reason": "Validation will be enabled with the trail rebuild.",
+      "resource_id": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+      "rule_id": "PF-AUD-003",
+      "state": "rejected",
+      "ticket": "SEC-1070"
+    }
+  ],
+  "registry": "exceptions/registry.json"
+}

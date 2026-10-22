@@ -1,0 +1,27 @@
+{
+  "exceptions_registry": {
+    "failures": [
+      "EXC-003: resource_id must be one exact resource id, not a wildcard or pattern",
+      "EXC-004: expiry is more than 90 days after created",
+      "EXC-006: missing ticket",
+      "EXC-006: unknown rule id",
+      "EXC-007: expires before it was created"
+    ],
+    "input": "exceptions-registry",
+    "passed": false,
+    "successes": 11,
+    "warnings": []
+  },
+  "inventory": {
+    "failures": [],
+    "input": "inventory",
+    "passed": true,
+    "successes": 13,
+    "warnings": [
+      "aws:unsupported:arn:aws:iam::111122223333:group/ops-readers: native type AWS::IAM::Group is inventoried but no rule evaluates it",
+      "aws:unsupported:arn:aws:lambda:us-east-2:111122223333:function:fh-report-export: native type AWS::lambda::Function is inventoried but no rule evaluates it",
+      "aws:unsupported:arn:aws:lambda:us-east-2:111122223333:function:fh-thumbnailer: native type AWS::lambda::Function is inventoried but no rule evaluates it"
+    ]
+  },
+  "tool": "conftest test --output json --policy policy/conftest"
+}

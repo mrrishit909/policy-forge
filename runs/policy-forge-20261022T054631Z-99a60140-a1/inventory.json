@@ -1,0 +1,1080 @@
+{
+  "provider": "aws",
+  "redactions": [
+    {
+      "action": "masked",
+      "path": "/properties/tags/Notes",
+      "reason": "sensitive-value",
+      "resource_id": "aws:compute_instance:i-0fe0000000000a002"
+    }
+  ],
+  "resources": [
+    {
+      "id": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+      "name": "data-events-trail",
+      "native_type": "AWS::CloudTrail::Trail",
+      "properties": {
+        "destination": "fh-audit-logs",
+        "include_global_service_events": true,
+        "is_logging": true,
+        "log_file_validation": false,
+        "multi_region": false,
+        "organization_trail": false,
+        "raw": {
+          "destination": "snapshots/aws-baseline-2026-10/cloudtrail-describe-trails.json#/trailList/0/S3BucketName",
+          "is_logging": "snapshots/aws-baseline-2026-10/cloudtrail-get-trail-status.json#/TrailStatus/0/IsLogging",
+          "log_file_validation": "snapshots/aws-baseline-2026-10/cloudtrail-describe-trails.json#/trailList/0/LogFileValidationEnabled",
+          "multi_region": "snapshots/aws-baseline-2026-10/cloudtrail-describe-trails.json#/trailList/0/IsMultiRegionTrail"
+        }
+      },
+      "provider": "aws",
+      "refs": [
+        {
+          "kind": "delivers_logs_to",
+          "target": "aws:storage_bucket:fh-audit-logs"
+        }
+      ],
+      "region": "us-east-2",
+      "source": {
+        "file": "snapshots/aws-baseline-2026-10/cloudtrail-describe-trails.json",
+        "line": 3,
+        "pointer": "/trailList/0"
+      },
+      "type": "audit_trail"
+    },
+    {
+      "id": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/org-management-trail",
+      "name": "org-management-trail",
+      "native_type": "AWS::CloudTrail::Trail",
+      "properties": {
+        "destination": "fh-audit-logs",
+        "include_global_service_events": true,
+        "is_logging": true,
+        "log_file_validation": true,
+        "multi_region": true,
+        "organization_trail": false,
+        "raw": {
+          "destination": "snapshots/aws-baseline-2026-10/cloudtrail-describe-trails.json#/trailList/1/S3BucketName",
+          "is_logging": "snapshots/aws-baseline-2026-10/cloudtrail-get-trail-status.json#/TrailStatus/1/IsLogging",
+          "log_file_validation": "snapshots/aws-baseline-2026-10/cloudtrail-describe-trails.json#/trailList/1/LogFileValidationEnabled",
+          "multi_region": "snapshots/aws-baseline-2026-10/cloudtrail-describe-trails.json#/trailList/1/IsMultiRegionTrail"
+        }
+      },
+      "provider": "aws",
+      "refs": [
+        {
+          "kind": "delivers_logs_to",
+          "target": "aws:storage_bucket:fh-audit-logs"
+        }
+      ],
+      "region": "us-east-2",
+      "source": {
+        "file": "snapshots/aws-baseline-2026-10/cloudtrail-describe-trails.json",
+        "line": 16,
+        "pointer": "/trailList/1"
+      },
+      "type": "audit_trail"
+    },
+    {
+      "id": "aws:compute_instance:i-0fe0000000000a001",
+      "name": "web-1",
+      "native_type": "AWS::EC2::Instance",
+      "properties": {
+        "instance_profile": "arn:aws:iam::111122223333:instance-profile/app-server-profile",
+        "network_groups": [
+          "aws:security_group:sg-0fe00000000000001"
+        ],
+        "public_ips": [
+          "203.0.113.10"
+        ],
+        "raw": {
+          "instance_profile": "snapshots/aws-baseline-2026-10/ec2-describe-instances.json#/Reservations/0/Instances/0/IamInstanceProfile",
+          "network_groups": "snapshots/aws-baseline-2026-10/ec2-describe-instances.json#/Reservations/0/Instances/0/SecurityGroups",
+          "public_ips": "snapshots/aws-baseline-2026-10/ec2-describe-instances.json#/Reservations/0/Instances/0/PublicIpAddress"
+        },
+        "state": "running",
+        "tags": {
+          "Name": "web-1"
+        }
+      },
+      "provider": "aws",
+      "refs": [
+        {
+          "kind": "uses_network_group",
+          "target": "aws:security_group:sg-0fe00000000000001"
+        },
+        {
+          "kind": "instance_role",
+          "target": "aws:iam_role:arn:aws:iam::111122223333:role/app-server-role"
+        }
+      ],
+      "region": "us-east-2",
+      "source": {
+        "file": "snapshots/aws-baseline-2026-10/ec2-describe-instances.json",
+        "line": 6,
+        "pointer": "/Reservations/0/Instances/0"
+      },
+      "type": "compute_instance"
+    },
+    {
+      "id": "aws:compute_instance:i-0fe0000000000a002",
+      "name": "bastion-1",
+      "native_type": "AWS::EC2::Instance",
+      "properties": {
+        "instance_profile": null,
+        "network_groups": [
+          "aws:security_group:sg-0fe00000000000002"
+        ],
+        "public_ips": [
+          "203.0.113.11"
+        ],
+        "raw": {
+          "instance_profile": "snapshots/aws-baseline-2026-10/ec2-describe-instances.json#/Reservations/1/Instances/0/IamInstanceProfile",
+          "network_groups": "snapshots/aws-baseline-2026-10/ec2-describe-instances.json#/Reservations/1/Instances/0/SecurityGroups",
+          "public_ips": "snapshots/aws-baseline-2026-10/ec2-describe-instances.json#/Reservations/1/Instances/0/PublicIpAddress"
+        },
+        "state": "running",
+        "tags": {
+          "Name": "bastion-1",
+          "Notes": "[redacted]"
+        }
+      },
+      "provider": "aws",
+      "refs": [
+        {
+          "kind": "uses_network_group",
+          "target": "aws:security_group:sg-0fe00000000000002"
+        }
+      ],
+      "region": "us-east-2",
+      "source": {
+        "file": "snapshots/aws-baseline-2026-10/ec2-describe-instances.json",
+        "line": 47,
+        "pointer": "/Reservations/1/Instances/0"
+      },
+      "type": "compute_instance"
+    },
+    {
+      "id": "aws:compute_instance:i-0fe0000000000a003",
+      "name": "app-1",
+      "native_type": "AWS::EC2::Instance",
+      "properties": {
+        "instance_profile": "arn:aws:iam::111122223333:instance-profile/app-server-profile",
+        "network_groups": [
+          "aws:security_group:sg-0fe00000000000003"
+        ],
+        "public_ips": [],
+        "raw": {
+          "instance_profile": "snapshots/aws-baseline-2026-10/ec2-describe-instances.json#/Reservations/2/Instances/0/IamInstanceProfile",
+          "network_groups": "snapshots/aws-baseline-2026-10/ec2-describe-instances.json#/Reservations/2/Instances/0/SecurityGroups",
+          "public_ips": "snapshots/aws-baseline-2026-10/ec2-describe-instances.json#/Reservations/2/Instances/0/PublicIpAddress"
+        },
+        "state": "running",
+        "tags": {
+          "Name": "app-1"
+        }
+      },
+      "provider": "aws",
+      "refs": [
+        {
+          "kind": "uses_network_group",
+          "target": "aws:security_group:sg-0fe00000000000003"
+        },
+        {
+          "kind": "instance_role",
+          "target": "aws:iam_role:arn:aws:iam::111122223333:role/app-server-role"
+        }
+      ],
+      "region": "us-east-2",
+      "source": {
+        "file": "snapshots/aws-baseline-2026-10/ec2-describe-instances.json",
+        "line": 88,
+        "pointer": "/Reservations/2/Instances/0"
+      },
+      "type": "compute_instance"
+    },
+    {
+      "id": "aws:iam_policy:arn:aws:iam::111122223333:policy/fh-app-read",
+      "name": "fh-app-read",
+      "native_type": "AWS::IAM::ManagedPolicy",
+      "properties": {
+        "arn": "arn:aws:iam::111122223333:policy/fh-app-read",
+        "attachment_count": 1,
+        "managed_by": "customer",
+        "permissions": {
+          "parse_error": false,
+          "statements": [
+            {
+              "actions": [
+                "s3:GetObject",
+                "s3:ListBucket"
+              ],
+              "effect": "Allow",
+              "has_condition": false,
+              "not_actions": null,
+              "not_principals": null,
+              "not_resources": null,
+              "policy": "fh-app-read",
+              "principals": null,
+              "raw": "snapshots/aws-baseline-2026-10/iam-account-authorization-details.json#/Policies/2/PolicyVersionList/0/Document/Statement/0",
+              "resources": [
+                "arn:aws:s3:::fh-app-artifacts",
+                "arn:aws:s3:::fh-app-artifacts/*"
+              ],
+              "sid": "ReadArtifacts"
+            }
+          ]
+        }
+      },
+      "provider": "aws",
+      "refs": [],
+      "region": "global",
+      "source": {
+        "file": "snapshots/aws-baseline-2026-10/iam-account-authorization-details.json",
+        "line": 194,
+        "pointer": "/Policies/2"
+      },
+      "type": "iam_policy"
+    },
+    {
+      "id": "aws:iam_policy:arn:aws:iam::111122223333:policy/fh-ci-deploy",
+      "name": "fh-ci-deploy",
+      "native_type": "AWS::IAM::ManagedPolicy",
+      "properties": {
+        "arn": "arn:aws:iam::111122223333:policy/fh-ci-deploy",
+        "attachment_count": 0,
+        "managed_by": "customer",
+        "permissions": {
+          "parse_error": false,
+          "statements": [
+            {
+              "actions": [
+                "s3:*"
+              ],
+              "effect": "Allow",
+              "has_condition": false,
+              "not_actions": null,
+              "not_principals": null,
+              "not_resources": null,
+              "policy": "fh-ci-deploy",
+              "principals": null,
+              "raw": "snapshots/aws-baseline-2026-10/iam-account-authorization-details.json#/Policies/3/PolicyVersionList/0/Document/Statement/0",
+              "resources": [
+                "*"
+              ],
+              "sid": "DeployEverywhere"
+            }
+          ]
+        }
+      },
+      "provider": "aws",
+      "refs": [],
+      "region": "global",
+      "source": {
+        "file": "snapshots/aws-baseline-2026-10/iam-account-authorization-details.json",
+        "line": 230,
+        "pointer": "/Policies/3"
+      },
+      "type": "iam_policy"
+    },
+    {
+      "id": "aws:iam_policy:arn:aws:iam::aws:policy/AdministratorAccess",
+      "name": "AdministratorAccess",
+      "native_type": "AWS::IAM::ManagedPolicy",
+      "properties": {
+        "arn": "arn:aws:iam::aws:policy/AdministratorAccess",
+        "attachment_count": 1,
+        "managed_by": "aws",
+        "permissions": {
+          "parse_error": false,
+          "statements": [
+            {
+              "actions": [
+                "*"
+              ],
+              "effect": "Allow",
+              "has_condition": false,
+              "not_actions": null,
+              "not_principals": null,
+              "not_resources": null,
+              "policy": "AdministratorAccess",
+              "principals": null,
+              "raw": "snapshots/aws-baseline-2026-10/iam-account-authorization-details.json#/Policies/0/PolicyVersionList/0/Document/Statement/0",
+              "resources": [
+                "*"
+              ],
+              "sid": null
+            }
+          ]
+        }
+      },
+      "provider": "aws",
+      "refs": [],
+      "region": "global",
+      "source": {
+        "file": "snapshots/aws-baseline-2026-10/iam-account-authorization-details.json",
+        "line": 128,
+        "pointer": "/Policies/0"
+      },
+      "type": "iam_policy"
+    },
+    {
+      "id": "aws:iam_policy:arn:aws:iam::aws:policy/ReadOnlyAccess",
+      "name": "ReadOnlyAccess",
+      "native_type": "AWS::IAM::ManagedPolicy",
+      "properties": {
+        "arn": "arn:aws:iam::aws:policy/ReadOnlyAccess",
+        "attachment_count": 2,
+        "managed_by": "aws",
+        "permissions": {
+          "parse_error": false,
+          "statements": [
+            {
+              "actions": [
+                "s3:Get*",
+                "s3:List*",
+                "ec2:Describe*",
+                "iam:Get*",
+                "iam:List*",
+                "cloudtrail:Describe*",
+                "cloudtrail:Get*"
+              ],
+              "effect": "Allow",
+              "has_condition": false,
+              "not_actions": null,
+              "not_principals": null,
+              "not_resources": null,
+              "policy": "ReadOnlyAccess",
+              "principals": null,
+              "raw": "snapshots/aws-baseline-2026-10/iam-account-authorization-details.json#/Policies/1/PolicyVersionList/0/Document/Statement/0",
+              "resources": [
+                "*"
+              ],
+              "sid": null
+            }
+          ]
+        }
+      },
+      "provider": "aws",
+      "refs": [],
+      "region": "global",
+      "source": {
+        "file": "snapshots/aws-baseline-2026-10/iam-account-authorization-details.json",
+        "line": 157,
+        "pointer": "/Policies/1"
+      },
+      "type": "iam_policy"
+    },
+    {
+      "id": "aws:iam_role:arn:aws:iam::111122223333:role/app-server-role",
+      "name": "app-server-role",
+      "native_type": "AWS::IAM::Role",
+      "properties": {
+        "arn": "arn:aws:iam::111122223333:role/app-server-role",
+        "attached_policy_arns": [
+          "arn:aws:iam::111122223333:policy/fh-app-read"
+        ],
+        "instance_profile_arns": [
+          "arn:aws:iam::111122223333:instance-profile/app-server-profile"
+        ],
+        "permissions": {
+          "parse_error": false,
+          "statements": []
+        }
+      },
+      "provider": "aws",
+      "refs": [
+        {
+          "kind": "attached_policy",
+          "target": "aws:iam_policy:arn:aws:iam::111122223333:policy/fh-app-read"
+        }
+      ],
+      "region": "global",
+      "source": {
+        "file": "snapshots/aws-baseline-2026-10/iam-account-authorization-details.json",
+        "line": 90,
+        "pointer": "/RoleDetailList/0"
+      },
+      "type": "iam_role"
+    },
+    {
+      "id": "aws:iam_user:arn:aws:iam::111122223333:user/alice.ops",
+      "name": "alice.ops",
+      "native_type": "AWS::IAM::User",
+      "properties": {
+        "arn": "arn:aws:iam::111122223333:user/alice.ops",
+        "attached_policy_arns": [
+          "arn:aws:iam::aws:policy/ReadOnlyAccess"
+        ],
+        "group_names": [
+          "ops-readers"
+        ],
+        "permissions": {
+          "parse_error": false,
+          "statements": []
+        },
+        "raw": {
+          "attached_policy_arns": "snapshots/aws-baseline-2026-10/iam-account-authorization-details.json#/UserDetailList/0/AttachedManagedPolicies",
+          "group_names": "snapshots/aws-baseline-2026-10/iam-account-authorization-details.json#/UserDetailList/0/GroupList"
+        }
+      },
+      "provider": "aws",
+      "refs": [
+        {
+          "kind": "attached_policy",
+          "target": "aws:iam_policy:arn:aws:iam::aws:policy/ReadOnlyAccess"
+        },
+        {
+          "kind": "member_of",
+          "target": "arn:aws:iam::111122223333:group/ops-readers"
+        }
+      ],
+      "region": "global",
+      "source": {
+        "file": "snapshots/aws-baseline-2026-10/iam-account-authorization-details.json",
+        "line": 3,
+        "pointer": "/UserDetailList/0"
+      },
+      "type": "iam_user"
+    },
+    {
+      "id": "aws:iam_user:arn:aws:iam::111122223333:user/breakglass.admin",
+      "name": "breakglass.admin",
+      "native_type": "AWS::IAM::User",
+      "properties": {
+        "arn": "arn:aws:iam::111122223333:user/breakglass.admin",
+        "attached_policy_arns": [
+          "arn:aws:iam::aws:policy/AdministratorAccess"
+        ],
+        "group_names": [],
+        "permissions": {
+          "parse_error": false,
+          "statements": []
+        },
+        "raw": {
+          "attached_policy_arns": "snapshots/aws-baseline-2026-10/iam-account-authorization-details.json#/UserDetailList/1/AttachedManagedPolicies",
+          "group_names": "snapshots/aws-baseline-2026-10/iam-account-authorization-details.json#/UserDetailList/1/GroupList"
+        }
+      },
+      "provider": "aws",
+      "refs": [
+        {
+          "kind": "attached_policy",
+          "target": "aws:iam_policy:arn:aws:iam::aws:policy/AdministratorAccess"
+        }
+      ],
+      "region": "global",
+      "source": {
+        "file": "snapshots/aws-baseline-2026-10/iam-account-authorization-details.json",
+        "line": 22,
+        "pointer": "/UserDetailList/1"
+      },
+      "type": "iam_user"
+    },
+    {
+      "id": "aws:iam_user:arn:aws:iam::111122223333:user/ci.deployer",
+      "name": "ci.deployer",
+      "native_type": "AWS::IAM::User",
+      "properties": {
+        "arn": "arn:aws:iam::111122223333:user/ci.deployer",
+        "attached_policy_arns": [],
+        "group_names": [],
+        "permissions": {
+          "parse_error": false,
+          "statements": [
+            {
+              "actions": [
+                "s3:PutObject"
+              ],
+              "effect": "Allow",
+              "has_condition": false,
+              "not_actions": null,
+              "not_principals": null,
+              "not_resources": null,
+              "policy": "inline:artifact-upload",
+              "principals": null,
+              "raw": "snapshots/aws-baseline-2026-10/iam-account-authorization-details.json#/UserDetailList/2/UserPolicyList/0/PolicyDocument/Statement/0",
+              "resources": [
+                "arn:aws:s3:::fh-app-artifacts/*"
+              ],
+              "sid": null
+            }
+          ]
+        },
+        "raw": {
+          "attached_policy_arns": "snapshots/aws-baseline-2026-10/iam-account-authorization-details.json#/UserDetailList/2/AttachedManagedPolicies",
+          "group_names": "snapshots/aws-baseline-2026-10/iam-account-authorization-details.json#/UserDetailList/2/GroupList"
+        }
+      },
+      "provider": "aws",
+      "refs": [],
+      "region": "global",
+      "source": {
+        "file": "snapshots/aws-baseline-2026-10/iam-account-authorization-details.json",
+        "line": 39,
+        "pointer": "/UserDetailList/2"
+      },
+      "type": "iam_user"
+    },
+    {
+      "id": "aws:security_group:sg-0fe00000000000001",
+      "name": "web-public",
+      "native_type": "AWS::EC2::SecurityGroup",
+      "properties": {
+        "ingress": [
+          {
+            "action": "allow",
+            "cidrs": [
+              "0.0.0.0/0",
+              "::/0"
+            ],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 443,
+            "port_to": 443,
+            "prefix_lists": [],
+            "priority": null,
+            "protocol": "tcp",
+            "raw": "snapshots/aws-baseline-2026-10/ec2-describe-security-groups.json#/SecurityGroups/0/IpPermissions/0",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": []
+          },
+          {
+            "action": "allow",
+            "cidrs": [
+              "0.0.0.0/0"
+            ],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 80,
+            "port_to": 80,
+            "prefix_lists": [],
+            "priority": null,
+            "protocol": "tcp",
+            "raw": "snapshots/aws-baseline-2026-10/ec2-describe-security-groups.json#/SecurityGroups/0/IpPermissions/1",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": []
+          }
+        ],
+        "tags": {
+          "Name": "web-public"
+        },
+        "vpc_id": "vpc-0fe0000000000c001"
+      },
+      "provider": "aws",
+      "refs": [],
+      "region": "us-east-2",
+      "source": {
+        "file": "snapshots/aws-baseline-2026-10/ec2-describe-security-groups.json",
+        "line": 3,
+        "pointer": "/SecurityGroups/0"
+      },
+      "type": "security_group"
+    },
+    {
+      "id": "aws:security_group:sg-0fe00000000000002",
+      "name": "bastion-admin",
+      "native_type": "AWS::EC2::SecurityGroup",
+      "properties": {
+        "ingress": [
+          {
+            "action": "allow",
+            "cidrs": [
+              "203.0.113.0/26"
+            ],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 22,
+            "port_to": 22,
+            "prefix_lists": [],
+            "priority": null,
+            "protocol": "tcp",
+            "raw": "snapshots/aws-baseline-2026-10/ec2-describe-security-groups.json#/SecurityGroups/1/IpPermissions/0",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": []
+          }
+        ],
+        "tags": {
+          "Name": "bastion-admin"
+        },
+        "vpc_id": "vpc-0fe0000000000c001"
+      },
+      "provider": "aws",
+      "refs": [],
+      "region": "us-east-2",
+      "source": {
+        "file": "snapshots/aws-baseline-2026-10/ec2-describe-security-groups.json",
+        "line": 63,
+        "pointer": "/SecurityGroups/1"
+      },
+      "type": "security_group"
+    },
+    {
+      "id": "aws:security_group:sg-0fe00000000000003",
+      "name": "app-internal",
+      "native_type": "AWS::EC2::SecurityGroup",
+      "properties": {
+        "ingress": [
+          {
+            "action": "allow",
+            "cidrs": [],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 8080,
+            "port_to": 8080,
+            "prefix_lists": [],
+            "priority": null,
+            "protocol": "tcp",
+            "raw": "snapshots/aws-baseline-2026-10/ec2-describe-security-groups.json#/SecurityGroups/2/IpPermissions/0",
+            "source_groups": [
+              "aws:security_group:sg-0fe00000000000001"
+            ],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": []
+          },
+          {
+            "action": "allow",
+            "cidrs": [
+              "10.20.0.0/16"
+            ],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 5432,
+            "port_to": 5432,
+            "prefix_lists": [],
+            "priority": null,
+            "protocol": "tcp",
+            "raw": "snapshots/aws-baseline-2026-10/ec2-describe-security-groups.json#/SecurityGroups/2/IpPermissions/1",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": []
+          }
+        ],
+        "tags": {
+          "Name": "app-internal"
+        },
+        "vpc_id": "vpc-0fe0000000000c001"
+      },
+      "provider": "aws",
+      "refs": [],
+      "region": "us-east-2",
+      "source": {
+        "file": "snapshots/aws-baseline-2026-10/ec2-describe-security-groups.json",
+        "line": 105,
+        "pointer": "/SecurityGroups/2"
+      },
+      "type": "security_group"
+    },
+    {
+      "id": "aws:security_group:sg-0fe00000000000004",
+      "name": "db-private",
+      "native_type": "AWS::EC2::SecurityGroup",
+      "properties": {
+        "ingress": [
+          {
+            "action": "allow",
+            "cidrs": [],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 5432,
+            "port_to": 5432,
+            "prefix_lists": [],
+            "priority": null,
+            "protocol": "tcp",
+            "raw": "snapshots/aws-baseline-2026-10/ec2-describe-security-groups.json#/SecurityGroups/3/IpPermissions/0",
+            "source_groups": [
+              "aws:security_group:sg-0fe00000000000003"
+            ],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": []
+          }
+        ],
+        "tags": {
+          "Name": "db-private"
+        },
+        "vpc_id": "vpc-0fe0000000000c001"
+      },
+      "provider": "aws",
+      "refs": [],
+      "region": "us-east-2",
+      "source": {
+        "file": "snapshots/aws-baseline-2026-10/ec2-describe-security-groups.json",
+        "line": 161,
+        "pointer": "/SecurityGroups/3"
+      },
+      "type": "security_group"
+    },
+    {
+      "id": "aws:storage_bucket:fh-app-artifacts",
+      "name": "fh-app-artifacts",
+      "native_type": "AWS::S3::Bucket",
+      "properties": {
+        "logging": {
+          "enabled": true,
+          "target": "fh-logs-access"
+        },
+        "public_access": {
+          "anonymous_grants": [],
+          "anonymous_grants_blocked": true,
+          "guard": {
+            "block_public_acls": true,
+            "block_public_policy": true,
+            "configured": true,
+            "ignore_public_acls": true,
+            "restrict_public_buckets": true
+          },
+          "policy": null,
+          "public_policy_blocked": true
+        },
+        "raw": {
+          "guard": "snapshots/aws-baseline-2026-10/s3-buckets.json#/Buckets/0/GetPublicAccessBlock",
+          "policy": "snapshots/aws-baseline-2026-10/s3-buckets.json#/Buckets/0/GetBucketPolicy"
+        },
+        "tags": {
+          "owner": "platform"
+        }
+      },
+      "provider": "aws",
+      "refs": [
+        {
+          "kind": "logs_to",
+          "target": "aws:storage_bucket:fh-logs-access"
+        }
+      ],
+      "region": "us-east-2",
+      "source": {
+        "file": "snapshots/aws-baseline-2026-10/s3-buckets.json",
+        "line": 3,
+        "pointer": "/Buckets/0"
+      },
+      "type": "storage_bucket"
+    },
+    {
+      "id": "aws:storage_bucket:fh-audit-logs",
+      "name": "fh-audit-logs",
+      "native_type": "AWS::S3::Bucket",
+      "properties": {
+        "logging": {
+          "enabled": true,
+          "target": "fh-logs-access"
+        },
+        "public_access": {
+          "anonymous_grants": [],
+          "anonymous_grants_blocked": true,
+          "guard": {
+            "block_public_acls": true,
+            "block_public_policy": true,
+            "configured": true,
+            "ignore_public_acls": true,
+            "restrict_public_buckets": true
+          },
+          "policy": {
+            "parse_error": false,
+            "statements": [
+              {
+                "actions": [
+                  "s3:GetBucketAcl"
+                ],
+                "effect": "Allow",
+                "has_condition": false,
+                "not_actions": null,
+                "not_principals": null,
+                "not_resources": null,
+                "policy": "bucket-policy",
+                "principals": [
+                  "Service:cloudtrail.amazonaws.com"
+                ],
+                "raw": "snapshots/aws-baseline-2026-10/s3-buckets.json#/Buckets/1/GetBucketPolicy/Policy",
+                "resources": [
+                  "arn:aws:s3:::fh-audit-logs"
+                ],
+                "sid": "AWSCloudTrailAclCheck"
+              },
+              {
+                "actions": [
+                  "s3:PutObject"
+                ],
+                "effect": "Allow",
+                "has_condition": true,
+                "not_actions": null,
+                "not_principals": null,
+                "not_resources": null,
+                "policy": "bucket-policy",
+                "principals": [
+                  "Service:cloudtrail.amazonaws.com"
+                ],
+                "raw": "snapshots/aws-baseline-2026-10/s3-buckets.json#/Buckets/1/GetBucketPolicy/Policy",
+                "resources": [
+                  "arn:aws:s3:::fh-audit-logs/AWSLogs/111122223333/*"
+                ],
+                "sid": "AWSCloudTrailWrite"
+              }
+            ]
+          },
+          "public_policy_blocked": true
+        },
+        "raw": {
+          "guard": "snapshots/aws-baseline-2026-10/s3-buckets.json#/Buckets/1/GetPublicAccessBlock",
+          "policy": "snapshots/aws-baseline-2026-10/s3-buckets.json#/Buckets/1/GetBucketPolicy"
+        },
+        "tags": {
+          "owner": "platform"
+        }
+      },
+      "provider": "aws",
+      "refs": [
+        {
+          "kind": "logs_to",
+          "target": "aws:storage_bucket:fh-logs-access"
+        }
+      ],
+      "region": "us-east-2",
+      "source": {
+        "file": "snapshots/aws-baseline-2026-10/s3-buckets.json",
+        "line": 47,
+        "pointer": "/Buckets/1"
+      },
+      "type": "storage_bucket"
+    },
+    {
+      "id": "aws:storage_bucket:fh-data-lake",
+      "name": "fh-data-lake",
+      "native_type": "AWS::S3::Bucket",
+      "properties": {
+        "logging": {
+          "enabled": true,
+          "target": "fh-logs-access"
+        },
+        "public_access": {
+          "anonymous_grants": [],
+          "anonymous_grants_blocked": true,
+          "guard": {
+            "block_public_acls": true,
+            "block_public_policy": true,
+            "configured": true,
+            "ignore_public_acls": true,
+            "restrict_public_buckets": true
+          },
+          "policy": {
+            "parse_error": false,
+            "statements": [
+              {
+                "actions": [
+                  "s3:*"
+                ],
+                "effect": "Deny",
+                "has_condition": true,
+                "not_actions": null,
+                "not_principals": null,
+                "not_resources": null,
+                "policy": "bucket-policy",
+                "principals": [
+                  "*"
+                ],
+                "raw": "snapshots/aws-baseline-2026-10/s3-buckets.json#/Buckets/2/GetBucketPolicy/Policy",
+                "resources": [
+                  "arn:aws:s3:::fh-data-lake",
+                  "arn:aws:s3:::fh-data-lake/*"
+                ],
+                "sid": "DenyInsecureTransport"
+              }
+            ]
+          },
+          "public_policy_blocked": true
+        },
+        "raw": {
+          "guard": "snapshots/aws-baseline-2026-10/s3-buckets.json#/Buckets/2/GetPublicAccessBlock",
+          "policy": "snapshots/aws-baseline-2026-10/s3-buckets.json#/Buckets/2/GetBucketPolicy"
+        },
+        "tags": {
+          "owner": "platform"
+        }
+      },
+      "provider": "aws",
+      "refs": [
+        {
+          "kind": "logs_to",
+          "target": "aws:storage_bucket:fh-logs-access"
+        }
+      ],
+      "region": "us-east-2",
+      "source": {
+        "file": "snapshots/aws-baseline-2026-10/s3-buckets.json",
+        "line": 93,
+        "pointer": "/Buckets/2"
+      },
+      "type": "storage_bucket"
+    },
+    {
+      "id": "aws:storage_bucket:fh-logs-access",
+      "name": "fh-logs-access",
+      "native_type": "AWS::S3::Bucket",
+      "properties": {
+        "logging": {
+          "enabled": false,
+          "target": null
+        },
+        "public_access": {
+          "anonymous_grants": [],
+          "anonymous_grants_blocked": true,
+          "guard": {
+            "block_public_acls": true,
+            "block_public_policy": true,
+            "configured": true,
+            "ignore_public_acls": true,
+            "restrict_public_buckets": false
+          },
+          "policy": null,
+          "public_policy_blocked": false
+        },
+        "raw": {
+          "guard": "snapshots/aws-baseline-2026-10/s3-buckets.json#/Buckets/3/GetPublicAccessBlock",
+          "policy": "snapshots/aws-baseline-2026-10/s3-buckets.json#/Buckets/3/GetBucketPolicy"
+        },
+        "tags": {
+          "owner": "platform"
+        }
+      },
+      "provider": "aws",
+      "refs": [],
+      "region": "us-east-2",
+      "source": {
+        "file": "snapshots/aws-baseline-2026-10/s3-buckets.json",
+        "line": 139,
+        "pointer": "/Buckets/3"
+      },
+      "type": "storage_bucket"
+    },
+    {
+      "id": "aws:storage_bucket:fh-public-docs",
+      "name": "fh-public-docs",
+      "native_type": "AWS::S3::Bucket",
+      "properties": {
+        "logging": {
+          "enabled": false,
+          "target": null
+        },
+        "public_access": {
+          "anonymous_grants": [],
+          "anonymous_grants_blocked": true,
+          "guard": {
+            "block_public_acls": true,
+            "block_public_policy": false,
+            "configured": true,
+            "ignore_public_acls": true,
+            "restrict_public_buckets": false
+          },
+          "policy": {
+            "parse_error": false,
+            "statements": [
+              {
+                "actions": [
+                  "s3:GetObject"
+                ],
+                "effect": "Allow",
+                "has_condition": false,
+                "not_actions": null,
+                "not_principals": null,
+                "not_resources": null,
+                "policy": "bucket-policy",
+                "principals": [
+                  "*"
+                ],
+                "raw": "snapshots/aws-baseline-2026-10/s3-buckets.json#/Buckets/4/GetBucketPolicy/Policy",
+                "resources": [
+                  "arn:aws:s3:::fh-public-docs/*"
+                ],
+                "sid": "PublicReadDocs"
+              }
+            ]
+          },
+          "public_policy_blocked": false
+        },
+        "raw": {
+          "guard": "snapshots/aws-baseline-2026-10/s3-buckets.json#/Buckets/4/GetPublicAccessBlock",
+          "policy": "snapshots/aws-baseline-2026-10/s3-buckets.json#/Buckets/4/GetBucketPolicy"
+        },
+        "tags": {
+          "owner": "docs-team",
+          "purpose": "static-site"
+        }
+      },
+      "provider": "aws",
+      "refs": [],
+      "region": "us-east-2",
+      "source": {
+        "file": "snapshots/aws-baseline-2026-10/s3-buckets.json",
+        "line": 192,
+        "pointer": "/Buckets/4"
+      },
+      "type": "storage_bucket"
+    },
+    {
+      "id": "aws:unsupported:arn:aws:iam::111122223333:group/ops-readers",
+      "name": "ops-readers",
+      "native_type": "AWS::IAM::Group",
+      "properties": {},
+      "provider": "aws",
+      "refs": [],
+      "region": "global",
+      "source": {
+        "file": "snapshots/aws-baseline-2026-10/iam-account-authorization-details.json",
+        "line": 74,
+        "pointer": "/GroupDetailList/0"
+      },
+      "type": "unsupported"
+    },
+    {
+      "id": "aws:unsupported:arn:aws:lambda:us-east-2:111122223333:function:fh-report-export",
+      "name": "fh-report-export",
+      "native_type": "AWS::lambda::Function",
+      "properties": {},
+      "provider": "aws",
+      "refs": [],
+      "region": "us-east-2",
+      "source": {
+        "file": "snapshots/aws-baseline-2026-10/lambda-list-functions.json",
+        "line": 17,
+        "pointer": "/Functions/1"
+      },
+      "type": "unsupported"
+    },
+    {
+      "id": "aws:unsupported:arn:aws:lambda:us-east-2:111122223333:function:fh-thumbnailer",
+      "name": "fh-thumbnailer",
+      "native_type": "AWS::lambda::Function",
+      "properties": {},
+      "provider": "aws",
+      "refs": [],
+      "region": "us-east-2",
+      "source": {
+        "file": "snapshots/aws-baseline-2026-10/lambda-list-functions.json",
+        "line": 3,
+        "pointer": "/Functions/0"
+      },
+      "type": "unsupported"
+    }
+  ],
+  "snapshot": "aws-baseline-2026-10"
+}

@@ -1,0 +1,91 @@
+{
+  "input_manifest_hash": "sha256:1c2f74bb06a464797282b101966a1d8a26bfe800a48ec1be964f338c9295baf6",
+  "outputs": {
+    "catalog.json": "1606aebb8d19c9ecbee4362c46f9ac89d2404cb853808e5010fe7e4f74158120",
+    "conftest.json": "63c6a6434e49e8082915b052874294c7beb639fe789d7052104531b174568ab9",
+    "coverage.json": "13505a6b2d4f979fea02d0045a5a21f39688b59536fca4dc4be80aecb58a6ff7",
+    "exceptions.json": "64cc97fead0fe6184d3da83fbce10a5a77375958fefbf760559fb396a55cdc00",
+    "findings.json": "0a7015e1d50a900ec9c9df9f568b9624c0c0783128d6ac292aeef1db28694bd3",
+    "inventory.json": "9268b1e51246afc9f8f838a367bfa727d8bbad0d83c5862b5a59ff6f507e27c6",
+    "relationships.json": "040edebad642c704e1648f63e6e15b5daa5f68760724dc7b8e211b680727b9c5",
+    "remediation.json": "bfda52621c9c2f9a980133ca4f59c301d8c282323b09dbf308cf3baaa1455ceb",
+    "remediation.patch": "34286706bdba63b60602e8cd791c61cbbb373a01a24cc1f7dfb3f4a539bbd741",
+    "report.md": "9f72b29c3177ab3c2a10cf082014649241b0803e2db720b2167cfebde474ff16",
+    "rule_tests.json": "6782f11f8bf7cd3a5a001c831995569ec310a9181d6c2600c8708e9036ce916d",
+    "summary.json": "36a53945ddaf07dda1f96ecfdc461fe591318490ef676410aab32daa21f87760"
+  },
+  "package": "policyforge",
+  "package_version": "1.0.0",
+  "params": {
+    "as_of": "2026-10-22",
+    "remediation": "propose",
+    "rule_packs": [
+      "storage",
+      "iam",
+      "network",
+      "audit",
+      "relationships"
+    ],
+    "snapshot": "aws-baseline-2026-10"
+  },
+  "snapshot": {
+    "captured_at": "2026-10-05T09:00:00Z",
+    "files": [
+      {
+        "bytes": 950,
+        "path": "snapshots/aws-baseline-2026-10/cloudtrail-describe-trails.json",
+        "sha256": "6f71c2a834c5781069ee0ee83d1d41e0937a64b0911b244aecf418cd6e359b87"
+      },
+      {
+        "bytes": 574,
+        "path": "snapshots/aws-baseline-2026-10/cloudtrail-get-trail-status.json",
+        "sha256": "a8b76184a395555e6139a9ba24009bf7e9a8364f5c358f9c509bf1b5ebfe0f88"
+      },
+      {
+        "bytes": 521,
+        "path": "snapshots/aws-baseline-2026-10/context.json",
+        "sha256": "5b362bfdafc4e7c6580b0ccc0e348857c406db4b399b0c9b6b0d2cf67d776735"
+      },
+      {
+        "bytes": 3613,
+        "path": "snapshots/aws-baseline-2026-10/ec2-describe-instances.json",
+        "sha256": "27bf7d21d29590c0fe9827db3e108c7778f278185a9f380c436456457447da0c"
+      },
+      {
+        "bytes": 4646,
+        "path": "snapshots/aws-baseline-2026-10/ec2-describe-security-groups.json",
+        "sha256": "0f27eea780bc64b949541ff7985265ed012ecc95913b8b4b0033b20c2a5343f2"
+      },
+      {
+        "bytes": 7251,
+        "path": "snapshots/aws-baseline-2026-10/iam-account-authorization-details.json",
+        "sha256": "aebc4fa844e005b7336c0fea8e47ca4fca33d6503e99566c5b6c2adcdf50844c"
+      },
+      {
+        "bytes": 983,
+        "path": "snapshots/aws-baseline-2026-10/lambda-list-functions.json",
+        "sha256": "09733ad43ac3f350516d54c7a70cdbd89be0bca59363d636f27edcfcfb625606"
+      },
+      {
+        "bytes": 578,
+        "path": "snapshots/aws-baseline-2026-10/manifest.json",
+        "sha256": "6cdcb002b025e7abc03a5eef78dee08ea58a233ddd62e726ef45c3be9e35adc6"
+      },
+      {
+        "bytes": 7304,
+        "path": "snapshots/aws-baseline-2026-10/s3-buckets.json",
+        "sha256": "5a8c4c426e8afb2d2ddbdb5358c45b4b7c8a4b52d52481c06136894cc986d382"
+      }
+    ],
+    "name": "aws-baseline-2026-10",
+    "provider": "aws",
+    "synthetic": true
+  },
+  "tools": {
+    "bash": "5.2.21(1)-release",
+    "conftest": "0.71.1",
+    "jq": "1.7",
+    "opa": "1.21.1",
+    "pwsh": "7.6.7"
+  }
+}

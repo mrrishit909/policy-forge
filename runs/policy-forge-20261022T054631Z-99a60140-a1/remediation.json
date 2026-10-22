@@ -1,0 +1,165 @@
+{
+  "combined": {
+    "files": [
+      "snapshots/aws-baseline-2026-10/cloudtrail-describe-trails.json"
+    ],
+    "ok": true,
+    "patch_file": "remediation.patch",
+    "patch_ids": [
+      "P-01",
+      "P-02"
+    ],
+    "regression": {
+      "changed_findings": [],
+      "changed_resources": [],
+      "changed_results": [],
+      "checked_resources": 25,
+      "checked_results": 43,
+      "ok": true,
+      "reasons": [],
+      "targets": [
+        {
+          "after": "pass",
+          "before": "fail",
+          "resource_id": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+          "rule_id": "PF-AUD-002"
+        },
+        {
+          "after": "pass",
+          "before": "fail",
+          "resource_id": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+          "rule_id": "PF-AUD-003"
+        }
+      ],
+      "touched_resources": [
+        "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail"
+      ]
+    },
+    "withheld_reason": null
+  },
+  "counts": {
+    "accepted": 2,
+    "not_proposed": 2,
+    "proposed": 2,
+    "rejected": 0,
+    "withheld": 0
+  },
+  "explanation": "Each auto-remediable active finding gets a JSON Patch against its raw snapshot file. The patch is applied to a temporary copy of the snapshot and the whole evaluation is re-run; it is accepted only when the targeted finding resolves to pass and nothing else changes. remediation.patch combines the accepted patches (one diff per file, re-verified together) and applies from the repository root. The committed snapshot is never modified.",
+  "mode": "propose",
+  "not_proposed": [
+    {
+      "finding_id": "PF-IAM-002::aws:iam_policy:arn:aws:iam::111122223333:policy/fh-ci-deploy",
+      "reason": "manual remediation: Narrow the service wildcard to the actions in use and scope Resource to the specific ARNs or resource groups. Intent is required, so no patch is generated.",
+      "resource_id": "aws:iam_policy:arn:aws:iam::111122223333:policy/fh-ci-deploy",
+      "rule_id": "PF-IAM-002"
+    },
+    {
+      "finding_id": "PF-STOR-002::aws:storage_bucket:fh-public-docs",
+      "reason": "finding is excepted by EXC-001",
+      "resource_id": "aws:storage_bucket:fh-public-docs",
+      "rule_id": "PF-STOR-002"
+    }
+  ],
+  "patches": [
+    {
+      "diff": "diff --git a/snapshots/aws-baseline-2026-10/cloudtrail-describe-trails.json b/snapshots/aws-baseline-2026-10/cloudtrail-describe-trails.json\n--- a/snapshots/aws-baseline-2026-10/cloudtrail-describe-trails.json\n+++ b/snapshots/aws-baseline-2026-10/cloudtrail-describe-trails.json\n@@ -5,7 +5,7 @@\n       \"S3BucketName\": \"fh-audit-logs\",\n       \"S3KeyPrefix\": \"\",\n       \"IncludeGlobalServiceEvents\": true,\n-      \"IsMultiRegionTrail\": false,\n+      \"IsMultiRegionTrail\": true,\n       \"HomeRegion\": \"us-east-2\",\n       \"TrailARN\": \"arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail\",\n       \"LogFileValidationEnabled\": false,\n",
+      "files": [
+        "snapshots/aws-baseline-2026-10/cloudtrail-describe-trails.json"
+      ],
+      "finding_id": "PF-AUD-002::aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+      "id": "P-01",
+      "json_patch": [
+        {
+          "file": "snapshots/aws-baseline-2026-10/cloudtrail-describe-trails.json",
+          "ops": [
+            {
+              "op": "test",
+              "path": "/trailList/0/IsMultiRegionTrail",
+              "value": false
+            },
+            {
+              "op": "replace",
+              "path": "/trailList/0/IsMultiRegionTrail",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "reason": "target finding resolves to pass; no other rule result, finding or resource changes",
+      "regression": {
+        "changed_findings": [],
+        "changed_resources": [],
+        "changed_results": [],
+        "checked_resources": 25,
+        "checked_results": 43,
+        "ok": true,
+        "reasons": [],
+        "targets": [
+          {
+            "after": "pass",
+            "before": "fail",
+            "resource_id": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+            "rule_id": "PF-AUD-002"
+          }
+        ],
+        "touched_resources": [
+          "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail"
+        ]
+      },
+      "resource_id": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+      "rule_id": "PF-AUD-002",
+      "status": "accepted",
+      "strategy": "Set IsMultiRegionTrail to true on the trail."
+    },
+    {
+      "diff": "diff --git a/snapshots/aws-baseline-2026-10/cloudtrail-describe-trails.json b/snapshots/aws-baseline-2026-10/cloudtrail-describe-trails.json\n--- a/snapshots/aws-baseline-2026-10/cloudtrail-describe-trails.json\n+++ b/snapshots/aws-baseline-2026-10/cloudtrail-describe-trails.json\n@@ -8,7 +8,7 @@\n       \"IsMultiRegionTrail\": false,\n       \"HomeRegion\": \"us-east-2\",\n       \"TrailARN\": \"arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail\",\n-      \"LogFileValidationEnabled\": false,\n+      \"LogFileValidationEnabled\": true,\n       \"HasCustomEventSelectors\": false,\n       \"HasInsightSelectors\": false,\n       \"IsOrganizationTrail\": false\n",
+      "files": [
+        "snapshots/aws-baseline-2026-10/cloudtrail-describe-trails.json"
+      ],
+      "finding_id": "PF-AUD-003::aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+      "id": "P-02",
+      "json_patch": [
+        {
+          "file": "snapshots/aws-baseline-2026-10/cloudtrail-describe-trails.json",
+          "ops": [
+            {
+              "op": "test",
+              "path": "/trailList/0/LogFileValidationEnabled",
+              "value": false
+            },
+            {
+              "op": "replace",
+              "path": "/trailList/0/LogFileValidationEnabled",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "reason": "target finding resolves to pass; no other rule result, finding or resource changes",
+      "regression": {
+        "changed_findings": [],
+        "changed_resources": [],
+        "changed_results": [],
+        "checked_resources": 25,
+        "checked_results": 43,
+        "ok": true,
+        "reasons": [],
+        "targets": [
+          {
+            "after": "pass",
+            "before": "fail",
+            "resource_id": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+            "rule_id": "PF-AUD-003"
+          }
+        ],
+        "touched_resources": [
+          "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail"
+        ]
+      },
+      "resource_id": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+      "rule_id": "PF-AUD-003",
+      "status": "accepted",
+      "strategy": "Set LogFileValidationEnabled to true on the trail."
+    }
+  ]
+}
