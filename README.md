@@ -56,6 +56,18 @@ are reported, not offered.
 [portfolio integration](docs/PORTFOLIO_INTEGRATION.md), [design contract](docs/DESIGN_CONTRACT.md),
 [portfolio manifest](portfolio-manifest.json).
 
+## Assets and licences
+
+| Font | Package | Licence |
+|---|---|---|
+| Atkinson Hyperlegible Next | `@fontsource-variable/atkinson-hyperlegible-next` 5.3.0 | SIL Open Font License 1.1, (c) The Atkinson Hyperlegible Next Project Authors |
+| Atkinson Hyperlegible Mono | `@fontsource-variable/atkinson-hyperlegible-mono` 5.3.0 | SIL Open Font License 1.1, (c) The Atkinson Hyperlegible Mono Project Authors |
+
+The fonts are installed from npm (Fontsource packages, which carry the OFL text) and bundled into the
+site's build; nothing loads from a third-party font service. Icons and illustrations are original inline
+SVG and CSS; there are no photographs or third-party images. Every configuration snapshot is a synthetic export of a fictional organisation. The code is published
+in this public repository.
+
 ## Limitations
 
 Synthetic snapshots only; no real cloud account is read or changed and no upload path exists.
