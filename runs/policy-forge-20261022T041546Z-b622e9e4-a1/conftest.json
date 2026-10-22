@@ -1,0 +1,30 @@
+{
+  "exceptions_registry": {
+    "failures": [
+      "EXC-003: resource_id must be one exact resource id, not a wildcard or pattern",
+      "EXC-004: expiry is more than 90 days after created",
+      "EXC-006: missing ticket",
+      "EXC-006: unknown rule id",
+      "EXC-007: expires before it was created"
+    ],
+    "input": "exceptions-registry",
+    "passed": false,
+    "successes": 11,
+    "warnings": []
+  },
+  "inventory": {
+    "failures": [],
+    "input": "inventory",
+    "passed": true,
+    "successes": 10,
+    "warnings": [
+      "azure:unsupported:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.KeyVault/vaults/kv-fh-lab: native type Microsoft.KeyVault/vaults is inventoried but no rule evaluates it",
+      "azure:unsupported:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Web/sites/app-fh-portal: native type Microsoft.Web/sites is inventoried but no rule evaluates it",
+      "azure:unsupported:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-jump: native type Microsoft.Network/networkInterfaces is inventoried but no rule evaluates it",
+      "azure:unsupported:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-ops: native type Microsoft.Network/networkInterfaces is inventoried but no rule evaluates it",
+      "azure:unsupported:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-rdp: native type Microsoft.Network/networkInterfaces is inventoried but no rule evaluates it",
+      "azure:unsupported:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-worker: native type Microsoft.Network/networkInterfaces is inventoried but no rule evaluates it"
+    ]
+  },
+  "tool": "conftest test --output json --policy policy/conftest"
+}

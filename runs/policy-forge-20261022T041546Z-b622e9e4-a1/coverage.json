@@ -1,0 +1,2251 @@
+{
+  "packs_without_rules_for_provider": [],
+  "resource_types": [
+    {
+      "count": 4,
+      "covered": true,
+      "native_types": [
+        "Microsoft.Compute/virtualMachines"
+      ],
+      "rules": [
+        "PF-REL-001"
+      ],
+      "type": "compute_instance"
+    },
+    {
+      "count": 3,
+      "covered": true,
+      "native_types": [
+        "Microsoft.Insights/diagnosticSettings"
+      ],
+      "rules": [
+        "PF-AUD-004"
+      ],
+      "type": "diagnostic_setting"
+    },
+    {
+      "count": 6,
+      "covered": true,
+      "native_types": [
+        "Microsoft.Network/networkSecurityGroups"
+      ],
+      "rules": [
+        "PF-NET-001",
+        "PF-NET-002"
+      ],
+      "type": "network_security_group"
+    },
+    {
+      "count": 10,
+      "covered": true,
+      "native_types": [
+        "Microsoft.Authorization/roleAssignments"
+      ],
+      "rules": [
+        "PF-IAM-003"
+      ],
+      "type": "role_assignment"
+    },
+    {
+      "count": 8,
+      "covered": true,
+      "native_types": [
+        "Microsoft.Authorization/roleDefinitions"
+      ],
+      "rules": [
+        "PF-IAM-001",
+        "PF-IAM-002"
+      ],
+      "type": "role_definition"
+    },
+    {
+      "count": 5,
+      "covered": true,
+      "native_types": [
+        "Microsoft.Storage/storageAccounts"
+      ],
+      "rules": [
+        "PF-REL-002",
+        "PF-STOR-001"
+      ],
+      "type": "storage_bucket"
+    },
+    {
+      "count": 6,
+      "covered": false,
+      "native_types": [
+        "Microsoft.KeyVault/vaults",
+        "Microsoft.Network/networkInterfaces",
+        "Microsoft.Web/sites"
+      ],
+      "rules": [],
+      "type": "unsupported"
+    }
+  ],
+  "resources": [
+    {
+      "evaluated_rules": 1,
+      "id": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-jump",
+      "name": "vm-fh-jump",
+      "native_type": "Microsoft.Compute/virtualMachines",
+      "note": null,
+      "status": "pass",
+      "type": "compute_instance"
+    },
+    {
+      "evaluated_rules": 1,
+      "id": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-ops",
+      "name": "vm-fh-ops",
+      "native_type": "Microsoft.Compute/virtualMachines",
+      "note": null,
+      "status": "fail",
+      "type": "compute_instance"
+    },
+    {
+      "evaluated_rules": 1,
+      "id": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-rdp",
+      "name": "vm-fh-rdp",
+      "native_type": "Microsoft.Compute/virtualMachines",
+      "note": null,
+      "status": "pass",
+      "type": "compute_instance"
+    },
+    {
+      "evaluated_rules": 1,
+      "id": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-worker",
+      "name": "vm-fh-worker",
+      "native_type": "Microsoft.Compute/virtualMachines",
+      "note": null,
+      "status": "pass",
+      "type": "compute_instance"
+    },
+    {
+      "evaluated_rules": 1,
+      "id": "azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-000000000001/providers/microsoft.insights/diagnosticSettings/activity-to-storage",
+      "name": "activity-to-storage",
+      "native_type": "Microsoft.Insights/diagnosticSettings",
+      "note": null,
+      "status": "fail",
+      "type": "diagnostic_setting"
+    },
+    {
+      "evaluated_rules": 1,
+      "id": "azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-000000000001/providers/microsoft.insights/diagnosticSettings/activity-to-workspace",
+      "name": "activity-to-workspace",
+      "native_type": "Microsoft.Insights/diagnosticSettings",
+      "note": null,
+      "status": "pass",
+      "type": "diagnostic_setting"
+    },
+    {
+      "evaluated_rules": 1,
+      "id": "azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.KeyVault/vaults/kv-fh-lab/providers/microsoft.insights/diagnosticSettings/kv-diagnostics",
+      "name": "kv-diagnostics",
+      "native_type": "Microsoft.Insights/diagnosticSettings",
+      "note": null,
+      "status": "unknown",
+      "type": "diagnostic_setting"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-data",
+      "name": "nsg-fh-data",
+      "native_type": "Microsoft.Network/networkSecurityGroups",
+      "note": null,
+      "status": "fail",
+      "type": "network_security_group"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-edge",
+      "name": "nsg-fh-edge",
+      "native_type": "Microsoft.Network/networkSecurityGroups",
+      "note": null,
+      "status": "fail",
+      "type": "network_security_group"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-jump",
+      "name": "nsg-fh-jump",
+      "native_type": "Microsoft.Network/networkSecurityGroups",
+      "note": null,
+      "status": "fail",
+      "type": "network_security_group"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-rdp",
+      "name": "nsg-fh-rdp",
+      "native_type": "Microsoft.Network/networkSecurityGroups",
+      "note": null,
+      "status": "fail",
+      "type": "network_security_group"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-vpn",
+      "name": "nsg-fh-vpn",
+      "native_type": "Microsoft.Network/networkSecurityGroups",
+      "note": null,
+      "status": "unknown",
+      "type": "network_security_group"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-web",
+      "name": "nsg-fh-web",
+      "native_type": "Microsoft.Network/networkSecurityGroups",
+      "note": null,
+      "status": "pass",
+      "type": "network_security_group"
+    },
+    {
+      "evaluated_rules": 1,
+      "id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000701",
+      "name": "00000000-0000-4000-9000-000000000701",
+      "native_type": "Microsoft.Authorization/roleAssignments",
+      "note": null,
+      "status": "pass",
+      "type": "role_assignment"
+    },
+    {
+      "evaluated_rules": 1,
+      "id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000702",
+      "name": "00000000-0000-4000-9000-000000000702",
+      "native_type": "Microsoft.Authorization/roleAssignments",
+      "note": null,
+      "status": "fail",
+      "type": "role_assignment"
+    },
+    {
+      "evaluated_rules": 1,
+      "id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000703",
+      "name": "00000000-0000-4000-9000-000000000703",
+      "native_type": "Microsoft.Authorization/roleAssignments",
+      "note": null,
+      "status": "fail",
+      "type": "role_assignment"
+    },
+    {
+      "evaluated_rules": 1,
+      "id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000704",
+      "name": "00000000-0000-4000-9000-000000000704",
+      "native_type": "Microsoft.Authorization/roleAssignments",
+      "note": null,
+      "status": "unknown",
+      "type": "role_assignment"
+    },
+    {
+      "evaluated_rules": 1,
+      "id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000705",
+      "name": "00000000-0000-4000-9000-000000000705",
+      "native_type": "Microsoft.Authorization/roleAssignments",
+      "note": null,
+      "status": "pass",
+      "type": "role_assignment"
+    },
+    {
+      "evaluated_rules": 1,
+      "id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000707",
+      "name": "00000000-0000-4000-9000-000000000707",
+      "native_type": "Microsoft.Authorization/roleAssignments",
+      "note": null,
+      "status": "unknown",
+      "type": "role_assignment"
+    },
+    {
+      "evaluated_rules": 1,
+      "id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000708",
+      "name": "00000000-0000-4000-9000-000000000708",
+      "native_type": "Microsoft.Authorization/roleAssignments",
+      "note": null,
+      "status": "unknown",
+      "type": "role_assignment"
+    },
+    {
+      "evaluated_rules": 1,
+      "id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000709",
+      "name": "00000000-0000-4000-9000-000000000709",
+      "native_type": "Microsoft.Authorization/roleAssignments",
+      "note": null,
+      "status": "unknown",
+      "type": "role_assignment"
+    },
+    {
+      "evaluated_rules": 1,
+      "id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-00000000070a",
+      "name": "00000000-0000-4000-9000-00000000070a",
+      "native_type": "Microsoft.Authorization/roleAssignments",
+      "note": null,
+      "status": "fail",
+      "type": "role_assignment"
+    },
+    {
+      "evaluated_rules": 1,
+      "id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000706",
+      "name": "00000000-0000-4000-9000-000000000706",
+      "native_type": "Microsoft.Authorization/roleAssignments",
+      "note": null,
+      "status": "pass",
+      "type": "role_assignment"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "azure:role_definition:00000000-0000-4000-9000-000000000901",
+      "name": "FH Lab Operator",
+      "native_type": "Microsoft.Authorization/roleDefinitions",
+      "note": null,
+      "status": "fail",
+      "type": "role_definition"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "azure:role_definition:00000000-0000-4000-9000-000000000902",
+      "name": "FH Network Reader",
+      "native_type": "Microsoft.Authorization/roleDefinitions",
+      "note": null,
+      "status": "pass",
+      "type": "role_definition"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "azure:role_definition:00000000-0000-4000-9000-000000000903",
+      "name": "FH Restricted Ops",
+      "native_type": "Microsoft.Authorization/roleDefinitions",
+      "note": null,
+      "status": "unknown",
+      "type": "role_definition"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "azure:role_definition:00000000-0000-4000-9000-000000000904",
+      "name": "FH Storage Admin",
+      "native_type": "Microsoft.Authorization/roleDefinitions",
+      "note": null,
+      "status": "fail",
+      "type": "role_definition"
+    },
+    {
+      "evaluated_rules": 0,
+      "id": "azure:role_definition:18d7d88d-d35e-4fb5-a5c3-7773c20a72d9",
+      "name": "User Access Administrator",
+      "native_type": "Microsoft.Authorization/roleDefinitions",
+      "note": "no requested rule applies to this resource (for example a provider-managed policy)",
+      "status": "not_evaluated",
+      "type": "role_definition"
+    },
+    {
+      "evaluated_rules": 0,
+      "id": "azure:role_definition:8e3af657-a8ff-443c-a75c-2fe8c4bcb635",
+      "name": "Owner",
+      "native_type": "Microsoft.Authorization/roleDefinitions",
+      "note": "no requested rule applies to this resource (for example a provider-managed policy)",
+      "status": "not_evaluated",
+      "type": "role_definition"
+    },
+    {
+      "evaluated_rules": 0,
+      "id": "azure:role_definition:acdd72a7-3385-48ef-bd42-f606fba81ae7",
+      "name": "Reader",
+      "native_type": "Microsoft.Authorization/roleDefinitions",
+      "note": "no requested rule applies to this resource (for example a provider-managed policy)",
+      "status": "not_evaluated",
+      "type": "role_definition"
+    },
+    {
+      "evaluated_rules": 0,
+      "id": "azure:role_definition:b24988ac-6180-42a0-ab88-20f7382dd24c",
+      "name": "Contributor",
+      "native_type": "Microsoft.Authorization/roleDefinitions",
+      "note": "no requested rule applies to this resource (for example a provider-managed policy)",
+      "status": "not_evaluated",
+      "type": "role_definition"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlabaudit",
+      "name": "stfhlabaudit",
+      "native_type": "Microsoft.Storage/storageAccounts",
+      "note": null,
+      "status": "pass",
+      "type": "storage_bucket"
+    },
+    {
+      "evaluated_rules": 1,
+      "id": "azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlabblocked",
+      "name": "stfhlabblocked",
+      "native_type": "Microsoft.Storage/storageAccounts",
+      "note": null,
+      "status": "pass",
+      "type": "storage_bucket"
+    },
+    {
+      "evaluated_rules": 1,
+      "id": "azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlabdata",
+      "name": "stfhlabdata",
+      "native_type": "Microsoft.Storage/storageAccounts",
+      "note": null,
+      "status": "pass",
+      "type": "storage_bucket"
+    },
+    {
+      "evaluated_rules": 1,
+      "id": "azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlablegacy",
+      "name": "stfhlablegacy",
+      "native_type": "Microsoft.Storage/storageAccounts",
+      "note": null,
+      "status": "unknown",
+      "type": "storage_bucket"
+    },
+    {
+      "evaluated_rules": 1,
+      "id": "azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlabpublic",
+      "name": "stfhlabpublic",
+      "native_type": "Microsoft.Storage/storageAccounts",
+      "note": null,
+      "status": "fail",
+      "type": "storage_bucket"
+    },
+    {
+      "evaluated_rules": 0,
+      "id": "azure:unsupported:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.KeyVault/vaults/kv-fh-lab",
+      "name": "kv-fh-lab",
+      "native_type": "Microsoft.KeyVault/vaults",
+      "note": "unsupported native type Microsoft.KeyVault/vaults: no rule evaluates it",
+      "status": "unknown",
+      "type": "unsupported"
+    },
+    {
+      "evaluated_rules": 0,
+      "id": "azure:unsupported:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Web/sites/app-fh-portal",
+      "name": "app-fh-portal",
+      "native_type": "Microsoft.Web/sites",
+      "note": "unsupported native type Microsoft.Web/sites: no rule evaluates it",
+      "status": "unknown",
+      "type": "unsupported"
+    },
+    {
+      "evaluated_rules": 0,
+      "id": "azure:unsupported:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-jump",
+      "name": "nic-fh-jump",
+      "native_type": "Microsoft.Network/networkInterfaces",
+      "note": "unsupported native type Microsoft.Network/networkInterfaces: no rule evaluates it",
+      "status": "unknown",
+      "type": "unsupported"
+    },
+    {
+      "evaluated_rules": 0,
+      "id": "azure:unsupported:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-ops",
+      "name": "nic-fh-ops",
+      "native_type": "Microsoft.Network/networkInterfaces",
+      "note": "unsupported native type Microsoft.Network/networkInterfaces: no rule evaluates it",
+      "status": "unknown",
+      "type": "unsupported"
+    },
+    {
+      "evaluated_rules": 0,
+      "id": "azure:unsupported:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-rdp",
+      "name": "nic-fh-rdp",
+      "native_type": "Microsoft.Network/networkInterfaces",
+      "note": "unsupported native type Microsoft.Network/networkInterfaces: no rule evaluates it",
+      "status": "unknown",
+      "type": "unsupported"
+    },
+    {
+      "evaluated_rules": 0,
+      "id": "azure:unsupported:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-worker",
+      "name": "nic-fh-worker",
+      "native_type": "Microsoft.Network/networkInterfaces",
+      "note": "unsupported native type Microsoft.Network/networkInterfaces: no rule evaluates it",
+      "status": "unknown",
+      "type": "unsupported"
+    }
+  ],
+  "results": [
+    {
+      "evidence": [
+        {
+          "path": "/properties/categories/0",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/0/Log/0",
+          "value": {
+            "category": "Administrative",
+            "enabled": true,
+            "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/0/Log/0"
+          }
+        },
+        {
+          "path": "/properties/categories/1",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/0/Log/1",
+          "value": {
+            "category": "Security",
+            "enabled": false,
+            "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/0/Log/1"
+          }
+        },
+        {
+          "path": "/properties/categories/5",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/0/Log/5",
+          "value": {
+            "category": "Policy",
+            "enabled": true,
+            "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/0/Log/5"
+          }
+        },
+        {
+          "path": "/properties/categories",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/0/Log",
+          "value": {
+            "missing": [
+              "Security"
+            ]
+          }
+        }
+      ],
+      "reason": "Required Activity Log categories are not exported: Security.",
+      "resource_id": "azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-000000000001/providers/microsoft.insights/diagnosticSettings/activity-to-storage",
+      "resource_type": "diagnostic_setting",
+      "rule_id": "PF-AUD-004",
+      "status": "fail"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/categories/0",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/1/Log/0",
+          "value": {
+            "category": "Administrative",
+            "enabled": true,
+            "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/1/Log/0"
+          }
+        },
+        {
+          "path": "/properties/categories/1",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/1/Log/1",
+          "value": {
+            "category": "Security",
+            "enabled": true,
+            "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/1/Log/1"
+          }
+        },
+        {
+          "path": "/properties/categories/5",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/1/Log/5",
+          "value": {
+            "category": "Policy",
+            "enabled": true,
+            "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/1/Log/5"
+          }
+        }
+      ],
+      "reason": "Every required Activity Log category is exported to a destination.",
+      "resource_id": "azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-000000000001/providers/microsoft.insights/diagnosticSettings/activity-to-workspace",
+      "resource_type": "diagnostic_setting",
+      "rule_id": "PF-AUD-004",
+      "status": "pass"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json",
+          "line": 93,
+          "pointer": "/2/Log"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/target_resource_id",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/2/Log",
+          "value": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.KeyVault/vaults/kv-fh-lab"
+        }
+      ],
+      "reason": "Resource-level diagnostic settings have per-resource-type categories that are not evaluated.",
+      "resource_id": "azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.KeyVault/vaults/kv-fh-lab/providers/microsoft.insights/diagnosticSettings/kv-diagnostics",
+      "resource_type": "diagnostic_setting",
+      "rule_id": "PF-AUD-004",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            93
+          ],
+          "first_line": 87,
+          "lines": [
+            "    \"Name\": \"kv-diagnostics\",",
+            "    \"Id\": \"/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.KeyVault/vaults/kv-fh-lab/providers/microsoft.insights/diagnosticSettings/kv-diagnostics\",",
+            "    \"StorageAccountId\": null,",
+            "    \"WorkspaceId\": \"/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.OperationalInsights/workspaces/law-fh-lab\",",
+            "    \"EventHubAuthorizationRuleId\": null,",
+            "    \"EventHubName\": null,",
+            "    \"Log\": [",
+            "      {",
+            "        \"Category\": \"AuditEvent\",",
+            "        \"Enabled\": true",
+            "      }",
+            "    ],",
+            "    \"Metric\": ["
+          ]
+        },
+        "file": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json",
+        "line": 93,
+        "pointer": "/2/Log"
+      },
+      "status": "unknown"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/permissions/statements",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json#/1/Actions",
+          "value": {
+            "actions": [
+              "*"
+            ],
+            "effect": "Allow",
+            "has_condition": false,
+            "not_actions": null,
+            "policy": "role-definition",
+            "resources": [
+              "/subscriptions/00000000-0000-4000-8000-000000000001"
+            ],
+            "sid": null
+          }
+        }
+      ],
+      "reason": "1 Allow statement(s) grant every action on every resource.",
+      "resource_id": "azure:role_definition:00000000-0000-4000-9000-000000000901",
+      "resource_type": "role_definition",
+      "rule_id": "PF-IAM-001",
+      "status": "fail"
+    },
+    {
+      "evidence": [],
+      "reason": "No Allow statement grants every action on every resource.",
+      "resource_id": "azure:role_definition:00000000-0000-4000-9000-000000000902",
+      "resource_type": "role_definition",
+      "rule_id": "PF-IAM-001",
+      "status": "pass"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json",
+          "line": 62,
+          "pointer": "/3/Actions"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/permissions/statements",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json#/3/Actions",
+          "value": {
+            "actions": [
+              "*"
+            ],
+            "effect": "Allow",
+            "has_condition": false,
+            "not_actions": [
+              "Microsoft.Authorization/*"
+            ],
+            "policy": "role-definition",
+            "resources": [
+              "/subscriptions/00000000-0000-4000-8000-000000000001"
+            ],
+            "sid": null
+          }
+        }
+      ],
+      "reason": "An Allow statement uses NotAction or NotResource; the effective grant is not computed.",
+      "resource_id": "azure:role_definition:00000000-0000-4000-9000-000000000903",
+      "resource_type": "role_definition",
+      "rule_id": "PF-IAM-001",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            62
+          ],
+          "first_line": 56,
+          "lines": [
+            "  },",
+            "  {",
+            "    \"Name\": \"FH Restricted Ops\",",
+            "    \"Id\": \"00000000-0000-4000-9000-000000000903\",",
+            "    \"IsCustom\": true,",
+            "    \"Description\": \"\",",
+            "    \"Actions\": [",
+            "      \"*\"",
+            "    ],",
+            "    \"NotActions\": [",
+            "      \"Microsoft.Authorization/*\"",
+            "    ],",
+            "    \"DataActions\": [],"
+          ]
+        },
+        "file": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json",
+        "line": 62,
+        "pointer": "/3/Actions"
+      },
+      "status": "unknown"
+    },
+    {
+      "evidence": [],
+      "reason": "No Allow statement grants every action on every resource.",
+      "resource_id": "azure:role_definition:00000000-0000-4000-9000-000000000904",
+      "resource_type": "role_definition",
+      "rule_id": "PF-IAM-001",
+      "status": "pass"
+    },
+    {
+      "evidence": [],
+      "reason": "No Allow statement grants a whole service on every resource.",
+      "resource_id": "azure:role_definition:00000000-0000-4000-9000-000000000901",
+      "resource_type": "role_definition",
+      "rule_id": "PF-IAM-002",
+      "status": "pass"
+    },
+    {
+      "evidence": [],
+      "reason": "No Allow statement grants a whole service on every resource.",
+      "resource_id": "azure:role_definition:00000000-0000-4000-9000-000000000902",
+      "resource_type": "role_definition",
+      "rule_id": "PF-IAM-002",
+      "status": "pass"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json",
+          "line": 62,
+          "pointer": "/3/Actions"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/permissions/statements",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json#/3/Actions",
+          "value": {
+            "actions": [
+              "*"
+            ],
+            "effect": "Allow",
+            "has_condition": false,
+            "not_actions": [
+              "Microsoft.Authorization/*"
+            ],
+            "policy": "role-definition",
+            "resources": [
+              "/subscriptions/00000000-0000-4000-8000-000000000001"
+            ],
+            "sid": null
+          }
+        }
+      ],
+      "reason": "A statement uses NotAction, NotResource, a Condition, a wildcard resource pattern or an unreadable Effect or action alongside service-level actions; not evaluated.",
+      "resource_id": "azure:role_definition:00000000-0000-4000-9000-000000000903",
+      "resource_type": "role_definition",
+      "rule_id": "PF-IAM-002",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            62
+          ],
+          "first_line": 56,
+          "lines": [
+            "  },",
+            "  {",
+            "    \"Name\": \"FH Restricted Ops\",",
+            "    \"Id\": \"00000000-0000-4000-9000-000000000903\",",
+            "    \"IsCustom\": true,",
+            "    \"Description\": \"\",",
+            "    \"Actions\": [",
+            "      \"*\"",
+            "    ],",
+            "    \"NotActions\": [",
+            "      \"Microsoft.Authorization/*\"",
+            "    ],",
+            "    \"DataActions\": [],"
+          ]
+        },
+        "file": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json",
+        "line": 62,
+        "pointer": "/3/Actions"
+      },
+      "status": "unknown"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/permissions/statements",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json#/4/Actions",
+          "service_wildcards": [
+            "Microsoft.Storage/*"
+          ],
+          "value": {
+            "actions": [
+              "Microsoft.Storage/*"
+            ],
+            "effect": "Allow",
+            "has_condition": false,
+            "not_actions": null,
+            "policy": "role-definition",
+            "resources": [
+              "/subscriptions/00000000-0000-4000-8000-000000000001"
+            ],
+            "sid": null
+          }
+        }
+      ],
+      "reason": "1 Allow statement(s) grant a whole service on every resource.",
+      "resource_id": "azure:role_definition:00000000-0000-4000-9000-000000000904",
+      "resource_type": "role_definition",
+      "rule_id": "PF-IAM-002",
+      "status": "fail"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/scope",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/0/Scope",
+          "value": "/subscriptions/00000000-0000-4000-8000-000000000001"
+        },
+        {
+          "path": "/properties/role_definition_id",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/0/RoleDefinitionId",
+          "value": {
+            "id": "8e3af657-a8ff-443c-a75c-2fe8c4bcb635",
+            "name": "Owner"
+          }
+        }
+      ],
+      "reason": "Principal is on the break-glass list.",
+      "resource_id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000701",
+      "resource_type": "role_assignment",
+      "rule_id": "PF-IAM-003",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/scope",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/1/Scope",
+          "value": "/subscriptions/00000000-0000-4000-8000-000000000001"
+        },
+        {
+          "path": "/properties/role_definition_id",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/1/RoleDefinitionId",
+          "value": {
+            "id": "8e3af657-a8ff-443c-a75c-2fe8c4bcb635",
+            "name": "Owner"
+          }
+        },
+        {
+          "path": "/properties/permissions/statements",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json#/5/Actions",
+          "value": {
+            "actions": [
+              "*"
+            ],
+            "effect": "Allow",
+            "has_condition": false,
+            "not_actions": null,
+            "policy": "role-definition",
+            "resources": [
+              "/"
+            ],
+            "sid": null
+          }
+        }
+      ],
+      "reason": "Admin-capable role \"Owner\" is assigned at subscription scope to a principal outside the break-glass list.",
+      "resource_id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000702",
+      "resource_type": "role_assignment",
+      "rule_id": "PF-IAM-003",
+      "status": "fail"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/scope",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/2/Scope",
+          "value": "/subscriptions/00000000-0000-4000-8000-000000000001"
+        },
+        {
+          "path": "/properties/role_definition_id",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/2/RoleDefinitionId",
+          "value": {
+            "id": "8e3af657-a8ff-443c-a75c-2fe8c4bcb635",
+            "name": "Owner"
+          }
+        },
+        {
+          "path": "/properties/permissions/statements",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json#/5/Actions",
+          "value": {
+            "actions": [
+              "*"
+            ],
+            "effect": "Allow",
+            "has_condition": false,
+            "not_actions": null,
+            "policy": "role-definition",
+            "resources": [
+              "/"
+            ],
+            "sid": null
+          }
+        }
+      ],
+      "reason": "Admin-capable role \"Owner\" is assigned at subscription scope to a principal outside the break-glass list.",
+      "resource_id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000703",
+      "resource_type": "role_assignment",
+      "rule_id": "PF-IAM-003",
+      "status": "fail"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+          "line": 50,
+          "pointer": "/3/Scope"
+        },
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+          "line": 54,
+          "pointer": "/3/RoleDefinitionId"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/scope",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/3/Scope",
+          "value": "/subscriptions/00000000-0000-4000-8000-000000000001"
+        },
+        {
+          "path": "/properties/role_definition_id",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/3/RoleDefinitionId",
+          "value": {
+            "id": "b24988ac-6180-42a0-ab88-20f7382dd24c",
+            "name": "Contributor"
+          }
+        }
+      ],
+      "reason": "Role \"Contributor\" uses NotActions; its effective permissions are not computed.",
+      "resource_id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000704",
+      "resource_type": "role_assignment",
+      "rule_id": "PF-IAM-003",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            50,
+            54
+          ],
+          "first_line": 44,
+          "lines": [
+            "    \"ConditionVersion\": null,",
+            "    \"Condition\": null",
+            "  },",
+            "  {",
+            "    \"RoleAssignmentName\": \"00000000-0000-4000-9000-000000000704\",",
+            "    \"RoleAssignmentId\": \"/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000704\",",
+            "    \"Scope\": \"/subscriptions/00000000-0000-4000-8000-000000000001\",",
+            "    \"DisplayName\": \"lab-engineers\",",
+            "    \"SignInName\": null,",
+            "    \"RoleDefinitionName\": \"Contributor\",",
+            "    \"RoleDefinitionId\": \"b24988ac-6180-42a0-ab88-20f7382dd24c\",",
+            "    \"ObjectId\": \"00000000-0000-4000-9000-000000000803\",",
+            "    \"ObjectType\": \"Group\",",
+            "    \"CanDelegate\": false,",
+            "    \"Description\": null,",
+            "    \"ConditionVersion\": null,",
+            "    \"Condition\": null"
+          ]
+        },
+        "file": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+        "line": 50,
+        "pointer": "/3/Scope"
+      },
+      "status": "unknown"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/scope",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/4/Scope",
+          "value": "/subscriptions/00000000-0000-4000-8000-000000000001"
+        },
+        {
+          "path": "/properties/role_definition_id",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/4/RoleDefinitionId",
+          "value": {
+            "id": "acdd72a7-3385-48ef-bd42-f606fba81ae7",
+            "name": "Reader"
+          }
+        }
+      ],
+      "reason": "The assigned role is not admin-capable.",
+      "resource_id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000705",
+      "resource_type": "role_assignment",
+      "rule_id": "PF-IAM-003",
+      "status": "pass"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+          "line": 95,
+          "pointer": "/6/Scope"
+        },
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+          "line": 99,
+          "pointer": "/6/RoleDefinitionId"
+        },
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+          "line": 105,
+          "pointer": "/6/Condition"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/scope",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/6/Scope",
+          "value": "/subscriptions/00000000-0000-4000-8000-000000000001"
+        },
+        {
+          "path": "/properties/role_definition_id",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/6/RoleDefinitionId",
+          "value": {
+            "id": "18d7d88d-d35e-4fb5-a5c3-7773c20a72d9",
+            "name": "User Access Administrator"
+          }
+        },
+        {
+          "path": "/properties/has_condition",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/6/Condition",
+          "value": true
+        }
+      ],
+      "reason": "The role assignment carries a Condition; conditional assignments are not evaluated.",
+      "resource_id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000707",
+      "resource_type": "role_assignment",
+      "rule_id": "PF-IAM-003",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            95,
+            99,
+            105
+          ],
+          "first_line": 89,
+          "lines": [
+            "    \"ConditionVersion\": null,",
+            "    \"Condition\": null",
+            "  },",
+            "  {",
+            "    \"RoleAssignmentName\": \"00000000-0000-4000-9000-000000000707\",",
+            "    \"RoleAssignmentId\": \"/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000707\",",
+            "    \"Scope\": \"/subscriptions/00000000-0000-4000-8000-000000000001\",",
+            "    \"DisplayName\": \"Ira Lab\",",
+            "    \"SignInName\": \"ira.lab@fernhollow.example\",",
+            "    \"RoleDefinitionName\": \"User Access Administrator\",",
+            "    \"RoleDefinitionId\": \"18d7d88d-d35e-4fb5-a5c3-7773c20a72d9\",",
+            "    \"ObjectId\": \"00000000-0000-4000-9000-000000000805\",",
+            "    \"ObjectType\": \"User\",",
+            "    \"CanDelegate\": false,",
+            "    \"Description\": null,",
+            "    \"ConditionVersion\": \"2.0\",",
+            "    \"Condition\": \"((!(ActionMatches{'Microsoft.Authorization/roleAssignments/write'})) OR (@Request[Microsoft.Authorization/roleAssignments:RoleDefinitionId] ForAnyOfAnyValues:GuidEquals {acdd72a7-3385-48ef-bd42-f606fba81ae7}))\"",
+            "  },",
+            "  {",
+            "    \"RoleAssignmentName\": \"00000000-0000-4000-9000-000000000708\",",
+            "    \"RoleAssignmentId\": \"/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000708\",",
+            "    \"Scope\": \"/subscriptions/00000000-0000-4000-8000-000000000001\",",
+            "    \"DisplayName\": \"vm-fh-worker\","
+          ]
+        },
+        "file": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+        "line": 95,
+        "pointer": "/6/Scope"
+      },
+      "status": "unknown"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+          "line": 110,
+          "pointer": "/7/Scope"
+        },
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+          "line": 114,
+          "pointer": "/7/RoleDefinitionId"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/scope",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/7/Scope",
+          "value": "/subscriptions/00000000-0000-4000-8000-000000000001"
+        },
+        {
+          "path": "/properties/role_definition_id",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/7/RoleDefinitionId",
+          "value": {
+            "id": "b24988ac-6180-42a0-ab88-20f7382dd24c",
+            "name": "Contributor"
+          }
+        }
+      ],
+      "reason": "Role \"Contributor\" uses NotActions; its effective permissions are not computed.",
+      "resource_id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000708",
+      "resource_type": "role_assignment",
+      "rule_id": "PF-IAM-003",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            110,
+            114
+          ],
+          "first_line": 104,
+          "lines": [
+            "    \"ConditionVersion\": \"2.0\",",
+            "    \"Condition\": \"((!(ActionMatches{'Microsoft.Authorization/roleAssignments/write'})) OR (@Request[Microsoft.Authorization/roleAssignments:RoleDefinitionId] ForAnyOfAnyValues:GuidEquals {acdd72a7-3385-48ef-bd42-f606fba81ae7}))\"",
+            "  },",
+            "  {",
+            "    \"RoleAssignmentName\": \"00000000-0000-4000-9000-000000000708\",",
+            "    \"RoleAssignmentId\": \"/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000708\",",
+            "    \"Scope\": \"/subscriptions/00000000-0000-4000-8000-000000000001\",",
+            "    \"DisplayName\": \"vm-fh-worker\",",
+            "    \"SignInName\": null,",
+            "    \"RoleDefinitionName\": \"Contributor\",",
+            "    \"RoleDefinitionId\": \"b24988ac-6180-42a0-ab88-20f7382dd24c\",",
+            "    \"ObjectId\": \"00000000-0000-4000-9000-000000000602\",",
+            "    \"ObjectType\": \"ServicePrincipal\",",
+            "    \"CanDelegate\": false,",
+            "    \"Description\": null,",
+            "    \"ConditionVersion\": null,",
+            "    \"Condition\": null"
+          ]
+        },
+        "file": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+        "line": 110,
+        "pointer": "/7/Scope"
+      },
+      "status": "unknown"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+          "line": 125,
+          "pointer": "/8/Scope"
+        },
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+          "line": 129,
+          "pointer": "/8/RoleDefinitionId"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/scope",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/8/Scope",
+          "value": "/subscriptions/00000000-0000-4000-8000-000000000001"
+        },
+        {
+          "path": "/properties/role_definition_id",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/8/RoleDefinitionId",
+          "value": {
+            "id": "00000000-0000-4000-9000-0000000009ff",
+            "name": null
+          }
+        }
+      ],
+      "reason": "The assigned role definition is not in the snapshot.",
+      "resource_id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000709",
+      "resource_type": "role_assignment",
+      "rule_id": "PF-IAM-003",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            125,
+            129
+          ],
+          "first_line": 119,
+          "lines": [
+            "    \"ConditionVersion\": null,",
+            "    \"Condition\": null",
+            "  },",
+            "  {",
+            "    \"RoleAssignmentName\": \"00000000-0000-4000-9000-000000000709\",",
+            "    \"RoleAssignmentId\": \"/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000709\",",
+            "    \"Scope\": \"/subscriptions/00000000-0000-4000-8000-000000000001\",",
+            "    \"DisplayName\": \"Former Contractor\",",
+            "    \"SignInName\": \"former.contractor@fernhollow.example\",",
+            "    \"RoleDefinitionName\": null,",
+            "    \"RoleDefinitionId\": \"00000000-0000-4000-9000-0000000009ff\",",
+            "    \"ObjectId\": \"00000000-0000-4000-9000-000000000806\",",
+            "    \"ObjectType\": \"User\",",
+            "    \"CanDelegate\": false,",
+            "    \"Description\": null,",
+            "    \"ConditionVersion\": null,",
+            "    \"Condition\": null"
+          ]
+        },
+        "file": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+        "line": 125,
+        "pointer": "/8/Scope"
+      },
+      "status": "unknown"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/scope",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/9/Scope",
+          "value": "/subscriptions/00000000-0000-4000-8000-000000000001"
+        },
+        {
+          "path": "/properties/role_definition_id",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/9/RoleDefinitionId",
+          "value": {
+            "id": "00000000-0000-4000-9000-000000000901",
+            "name": "FH Lab Operator"
+          }
+        },
+        {
+          "path": "/properties/permissions/statements",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json#/1/Actions",
+          "value": {
+            "actions": [
+              "*"
+            ],
+            "effect": "Allow",
+            "has_condition": false,
+            "not_actions": null,
+            "policy": "role-definition",
+            "resources": [
+              "/subscriptions/00000000-0000-4000-8000-000000000001"
+            ],
+            "sid": null
+          }
+        }
+      ],
+      "reason": "Admin-capable role \"FH Lab Operator\" is assigned at subscription scope to a principal outside the break-glass list.",
+      "resource_id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-00000000070a",
+      "resource_type": "role_assignment",
+      "rule_id": "PF-IAM-003",
+      "status": "fail"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/scope",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/5/Scope",
+          "value": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab"
+        },
+        {
+          "path": "/properties/role_definition_id",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/5/RoleDefinitionId",
+          "value": {
+            "id": "8e3af657-a8ff-443c-a75c-2fe8c4bcb635",
+            "name": "Owner"
+          }
+        }
+      ],
+      "reason": "Assignment scope is narrower than a subscription.",
+      "resource_id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000706",
+      "resource_type": "role_assignment",
+      "rule_id": "PF-IAM-003",
+      "status": "pass"
+    },
+    {
+      "evidence": [],
+      "reason": "No remote administration port is open to internet-wide sources.",
+      "resource_id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-data",
+      "resource_type": "network_security_group",
+      "rule_id": "PF-NET-001",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "internet_sources": [
+            "*"
+          ],
+          "path": "/properties/ingress/0",
+          "ports": [
+            3389
+          ],
+          "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/1/SecurityRules/0",
+          "value": {
+            "cidrs": [],
+            "port_from": 3380,
+            "port_to": 3389,
+            "prefix_lists": [],
+            "priority": 100,
+            "protocol": "tcp",
+            "source_tags": [
+              "*"
+            ]
+          }
+        }
+      ],
+      "reason": "1 ingress rule(s) expose remote administration ports to internet-wide sources.",
+      "resource_id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-edge",
+      "resource_type": "network_security_group",
+      "rule_id": "PF-NET-001",
+      "status": "fail"
+    },
+    {
+      "evidence": [
+        {
+          "internet_sources": [
+            "*"
+          ],
+          "path": "/properties/ingress/0",
+          "ports": [
+            22
+          ],
+          "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/2/SecurityRules/0",
+          "value": {
+            "cidrs": [],
+            "port_from": 22,
+            "port_to": 22,
+            "prefix_lists": [],
+            "priority": 100,
+            "protocol": "tcp",
+            "source_tags": [
+              "*"
+            ]
+          }
+        }
+      ],
+      "reason": "1 ingress rule(s) expose remote administration ports to internet-wide sources.",
+      "resource_id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-jump",
+      "resource_type": "network_security_group",
+      "rule_id": "PF-NET-001",
+      "status": "fail"
+    },
+    {
+      "evidence": [
+        {
+          "internet_sources": [
+            "0.0.0.0/0"
+          ],
+          "path": "/properties/ingress/0",
+          "ports": [
+            3389
+          ],
+          "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/3/SecurityRules/0",
+          "value": {
+            "cidrs": [
+              "0.0.0.0/0"
+            ],
+            "port_from": 3389,
+            "port_to": 3389,
+            "prefix_lists": [],
+            "priority": 110,
+            "protocol": "all",
+            "source_tags": []
+          }
+        }
+      ],
+      "reason": "1 ingress rule(s) expose remote administration ports to internet-wide sources.",
+      "resource_id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-rdp",
+      "resource_type": "network_security_group",
+      "rule_id": "PF-NET-001",
+      "status": "fail"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json",
+          "line": 515,
+          "pointer": "/4/SecurityRules/0"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/ingress/0",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/4/SecurityRules/0",
+          "value": {
+            "cidrs": [],
+            "port_from": null,
+            "port_to": null,
+            "prefix_lists": [],
+            "priority": 100,
+            "protocol": "esp",
+            "source_tags": [
+              "Internet"
+            ]
+          },
+          "why": "protocol form not evaluated"
+        }
+      ],
+      "reason": "An ingress rule uses a protocol, port form, prefix list or service tag that is not evaluated.",
+      "resource_id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-vpn",
+      "resource_type": "network_security_group",
+      "rule_id": "PF-NET-001",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            515
+          ],
+          "first_line": 509,
+          "lines": [
+            "    \"Name\": \"nsg-fh-vpn\",",
+            "    \"ResourceGroupName\": \"rg-fh-net\",",
+            "    \"Location\": \"eastus2\",",
+            "    \"Id\": \"/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-vpn\",",
+            "    \"ProvisioningState\": \"Succeeded\",",
+            "    \"SecurityRules\": [",
+            "      {",
+            "        \"Name\": \"AllowEspFromInternet\",",
+            "        \"Protocol\": \"Esp\",",
+            "        \"SourcePortRange\": [",
+            "          \"*\"",
+            "        ],",
+            "        \"DestinationPortRange\": ["
+          ]
+        },
+        "file": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json",
+        "line": 515,
+        "pointer": "/4/SecurityRules/0"
+      },
+      "status": "unknown"
+    },
+    {
+      "evidence": [],
+      "reason": "No remote administration port is open to internet-wide sources.",
+      "resource_id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-web",
+      "resource_type": "network_security_group",
+      "rule_id": "PF-NET-001",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "internet_sources": [
+            "Internet"
+          ],
+          "path": "/properties/ingress/2",
+          "ports": [
+            3306
+          ],
+          "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/0/SecurityRules/2",
+          "value": {
+            "cidrs": [],
+            "port_from": 3306,
+            "port_to": 3306,
+            "prefix_lists": [],
+            "priority": 150,
+            "protocol": "tcp",
+            "source_tags": [
+              "Internet"
+            ]
+          }
+        },
+        {
+          "internet_sources": [
+            "Internet"
+          ],
+          "path": "/properties/ingress/3",
+          "ports": [
+            27017
+          ],
+          "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/0/SecurityRules/2",
+          "value": {
+            "cidrs": [],
+            "port_from": 27017,
+            "port_to": 27017,
+            "prefix_lists": [],
+            "priority": 150,
+            "protocol": "tcp",
+            "source_tags": [
+              "Internet"
+            ]
+          }
+        }
+      ],
+      "reason": "2 ingress rule(s) expose data-service ports to internet-wide sources.",
+      "resource_id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-data",
+      "resource_type": "network_security_group",
+      "rule_id": "PF-NET-002",
+      "status": "fail"
+    },
+    {
+      "evidence": [],
+      "reason": "No data-service port is open to internet-wide sources.",
+      "resource_id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-edge",
+      "resource_type": "network_security_group",
+      "rule_id": "PF-NET-002",
+      "status": "pass"
+    },
+    {
+      "evidence": [],
+      "reason": "No data-service port is open to internet-wide sources.",
+      "resource_id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-jump",
+      "resource_type": "network_security_group",
+      "rule_id": "PF-NET-002",
+      "status": "pass"
+    },
+    {
+      "evidence": [],
+      "reason": "No data-service port is open to internet-wide sources.",
+      "resource_id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-rdp",
+      "resource_type": "network_security_group",
+      "rule_id": "PF-NET-002",
+      "status": "pass"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json",
+          "line": 515,
+          "pointer": "/4/SecurityRules/0"
+        },
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json",
+          "line": 538,
+          "pointer": "/4/SecurityRules/1"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/ingress/0",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/4/SecurityRules/0",
+          "value": {
+            "cidrs": [],
+            "port_from": null,
+            "port_to": null,
+            "prefix_lists": [],
+            "priority": 100,
+            "protocol": "esp",
+            "source_tags": [
+              "Internet"
+            ]
+          },
+          "why": "protocol form not evaluated"
+        },
+        {
+          "path": "/properties/ingress/1",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/4/SecurityRules/1",
+          "unevaluable_sources": [
+            "AzureCloud"
+          ],
+          "value": {
+            "cidrs": [],
+            "port_from": 6379,
+            "port_to": 6379,
+            "prefix_lists": [],
+            "priority": 120,
+            "protocol": "tcp",
+            "source_tags": [
+              "AzureCloud"
+            ]
+          },
+          "why": "source not expanded"
+        }
+      ],
+      "reason": "An ingress rule uses a protocol, port form, prefix list or service tag that is not evaluated.",
+      "resource_id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-vpn",
+      "resource_type": "network_security_group",
+      "rule_id": "PF-NET-002",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            515,
+            538
+          ],
+          "first_line": 509,
+          "lines": [
+            "    \"Name\": \"nsg-fh-vpn\",",
+            "    \"ResourceGroupName\": \"rg-fh-net\",",
+            "    \"Location\": \"eastus2\",",
+            "    \"Id\": \"/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-vpn\",",
+            "    \"ProvisioningState\": \"Succeeded\",",
+            "    \"SecurityRules\": [",
+            "      {",
+            "        \"Name\": \"AllowEspFromInternet\",",
+            "        \"Protocol\": \"Esp\",",
+            "        \"SourcePortRange\": [",
+            "          \"*\"",
+            "        ],",
+            "        \"DestinationPortRange\": [",
+            "          \"*\"",
+            "        ],",
+            "        \"SourceAddressPrefix\": [",
+            "          \"Internet\"",
+            "        ],",
+            "        \"DestinationAddressPrefix\": [",
+            "          \"*\"",
+            "        ],",
+            "        \"SourceApplicationSecurityGroups\": [],",
+            "        \"DestinationApplicationSecurityGroups\": [],",
+            "        \"Access\": \"Allow\",",
+            "        \"Priority\": 100,",
+            "        \"Direction\": \"Inbound\",",
+            "        \"ProvisioningState\": \"Succeeded\",",
+            "        \"Id\": \"/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-vpn/securityRules/AllowEspFromInternet\"",
+            "      },",
+            "      {",
+            "        \"Name\": \"AllowCacheFromAzure\",",
+            "        \"Protocol\": \"Tcp\",",
+            "        \"SourcePortRange\": [",
+            "          \"*\"",
+            "        ],",
+            "        \"DestinationPortRange\": ["
+          ]
+        },
+        "file": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json",
+        "line": 515,
+        "pointer": "/4/SecurityRules/0"
+      },
+      "status": "unknown"
+    },
+    {
+      "evidence": [],
+      "reason": "No data-service port is open to internet-wide sources.",
+      "resource_id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-web",
+      "resource_type": "network_security_group",
+      "rule_id": "PF-NET-002",
+      "status": "pass"
+    },
+    {
+      "evidence": [],
+      "reason": "The instance identity is not admin-capable.",
+      "resource_id": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-jump",
+      "resource_type": "compute_instance",
+      "rule_id": "PF-REL-001",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/network_groups",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzVM.json#/1/NetworkProfile/NetworkInterfaces",
+          "value": {
+            "open_groups": [
+              "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-web"
+            ],
+            "public_ips": [
+              "203.0.113.40"
+            ]
+          }
+        },
+        {
+          "path": "/refs/assigned_to",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/2/RoleDefinitionId",
+          "value": {
+            "assignment": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000703",
+            "role": "Owner",
+            "scope": "/subscriptions/00000000-0000-4000-8000-000000000001"
+          }
+        }
+      ],
+      "reason": "The instance has a public IP, admits internet-wide ingress and runs with an admin-capable identity.",
+      "resource_id": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-ops",
+      "resource_type": "compute_instance",
+      "rule_id": "PF-REL-001",
+      "status": "fail"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/refs/assigned_to",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/4/RoleDefinitionId",
+          "value": {
+            "assignment": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000705",
+            "role": "Reader",
+            "scope": "/subscriptions/00000000-0000-4000-8000-000000000001"
+          }
+        }
+      ],
+      "reason": "The instance identity is not admin-capable.",
+      "resource_id": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-rdp",
+      "resource_type": "compute_instance",
+      "rule_id": "PF-REL-001",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/network_groups",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzVM.json#/3/NetworkProfile/NetworkInterfaces",
+          "value": {
+            "open_groups": [
+              "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-data"
+            ],
+            "public_ips": []
+          }
+        }
+      ],
+      "reason": "The instance is not internet-exposed.",
+      "resource_id": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-worker",
+      "resource_type": "compute_instance",
+      "rule_id": "PF-REL-001",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/refs",
+          "raw": null,
+          "value": {
+            "delivered_by": [
+              "azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-000000000001/providers/microsoft.insights/diagnosticSettings/activity-to-storage"
+            ]
+          }
+        },
+        {
+          "path": "/properties/public_access/guard",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json#/0/AllowBlobPublicAccess",
+          "value": {
+            "allow_blob_public_access": false
+          }
+        }
+      ],
+      "reason": "This audit log storage is not publicly readable.",
+      "resource_id": "azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlabaudit",
+      "resource_type": "storage_bucket",
+      "rule_id": "PF-REL-002",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/public_access/guard",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json#/0/AllowBlobPublicAccess",
+          "value": {
+            "allow_blob_public_access": false
+          }
+        }
+      ],
+      "reason": "No anonymous ACL grant or public container access level.",
+      "resource_id": "azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlabaudit",
+      "resource_type": "storage_bucket",
+      "rule_id": "PF-STOR-001",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/public_access/anonymous_grants/0",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json#/1/Containers/0",
+          "value": {
+            "grantee": "web",
+            "permission": "Blob",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json#/1/Containers/0",
+            "via": "container"
+          }
+        },
+        {
+          "path": "/properties/public_access/guard",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json#/1/AllowBlobPublicAccess",
+          "value": {
+            "allow_blob_public_access": false
+          }
+        }
+      ],
+      "reason": "Anonymous grants exist but the public access guard neutralizes them.",
+      "resource_id": "azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlabblocked",
+      "resource_type": "storage_bucket",
+      "rule_id": "PF-STOR-001",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/public_access/guard",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json#/2/AllowBlobPublicAccess",
+          "value": {
+            "allow_blob_public_access": true
+          }
+        }
+      ],
+      "reason": "No anonymous ACL grant or public container access level.",
+      "resource_id": "azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlabdata",
+      "resource_type": "storage_bucket",
+      "rule_id": "PF-STOR-001",
+      "status": "pass"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json",
+          "line": 121,
+          "pointer": "/3/Containers/0"
+        },
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json",
+          "line": 106,
+          "pointer": "/3/AllowBlobPublicAccess"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/public_access/anonymous_grants/0",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json#/3/Containers/0",
+          "value": {
+            "grantee": "archive",
+            "permission": "Container",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json#/3/Containers/0",
+            "via": "container"
+          }
+        },
+        {
+          "path": "/properties/public_access/guard",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json#/3/AllowBlobPublicAccess",
+          "value": {
+            "allow_blob_public_access": null
+          }
+        }
+      ],
+      "reason": "Anonymous access is configured (archive Container) but the account-level guard is not set, so the effective behaviour depends on account defaults that are not evaluated.",
+      "resource_id": "azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlablegacy",
+      "resource_type": "storage_bucket",
+      "rule_id": "PF-STOR-001",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            106,
+            121
+          ],
+          "first_line": 100,
+          "lines": [
+            "    \"Location\": \"eastus2\",",
+            "    \"Sku\": {",
+            "      \"Name\": \"Standard_LRS\",",
+            "      \"Tier\": \"Standard\"",
+            "    },",
+            "    \"Kind\": \"StorageV2\",",
+            "    \"AllowBlobPublicAccess\": null,",
+            "    \"EnableHttpsTrafficOnly\": true,",
+            "    \"MinimumTlsVersion\": \"TLS1_2\",",
+            "    \"PublicNetworkAccess\": \"Enabled\",",
+            "    \"NetworkRuleSet\": {",
+            "      \"Bypass\": \"AzureServices\",",
+            "      \"DefaultAction\": \"Allow\",",
+            "      \"IpRules\": [],",
+            "      \"VirtualNetworkRules\": []",
+            "    },",
+            "    \"Tags\": {",
+            "      \"env\": \"lab\",",
+            "      \"created\": \"2019\"",
+            "    },",
+            "    \"Containers\": [",
+            "      {",
+            "        \"Name\": \"archive\",",
+            "        \"PublicAccess\": \"Container\"",
+            "      }",
+            "    ]",
+            "  },",
+            "  {"
+          ]
+        },
+        "file": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json",
+        "line": 121,
+        "pointer": "/3/Containers/0"
+      },
+      "status": "unknown"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/public_access/anonymous_grants/0",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json#/4/Containers/0",
+          "value": {
+            "grantee": "downloads",
+            "permission": "Blob",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json#/4/Containers/0",
+            "via": "container"
+          }
+        },
+        {
+          "path": "/properties/public_access/guard",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json#/4/AllowBlobPublicAccess",
+          "value": {
+            "allow_blob_public_access": true
+          }
+        }
+      ],
+      "reason": "Anonymous access is granted (downloads Blob) and the public access guard does not neutralize it.",
+      "resource_id": "azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlabpublic",
+      "resource_type": "storage_bucket",
+      "rule_id": "PF-STOR-001",
+      "status": "fail"
+    }
+  ],
+  "rules": [
+    {
+      "evaluated": 5,
+      "fail": 1,
+      "pack": "storage",
+      "pass": 3,
+      "resource_types": [
+        "storage_bucket"
+      ],
+      "rule_id": "PF-STOR-001",
+      "severity": "high",
+      "title": "Storage readable anonymously through ACL grants or container access levels",
+      "unknown": 1
+    },
+    {
+      "evaluated": 4,
+      "fail": 1,
+      "pack": "iam",
+      "pass": 2,
+      "resource_types": [
+        "iam_policy",
+        "iam_role",
+        "iam_user",
+        "role_definition"
+      ],
+      "rule_id": "PF-IAM-001",
+      "severity": "critical",
+      "title": "Allow statement grants every action on every resource",
+      "unknown": 1
+    },
+    {
+      "evaluated": 4,
+      "fail": 1,
+      "pack": "iam",
+      "pass": 2,
+      "resource_types": [
+        "iam_policy",
+        "iam_role",
+        "iam_user",
+        "role_definition"
+      ],
+      "rule_id": "PF-IAM-002",
+      "severity": "high",
+      "title": "Allow statement grants a whole service on every resource",
+      "unknown": 1
+    },
+    {
+      "evaluated": 10,
+      "fail": 3,
+      "pack": "iam",
+      "pass": 3,
+      "resource_types": [
+        "iam_user",
+        "role_assignment"
+      ],
+      "rule_id": "PF-IAM-003",
+      "severity": "high",
+      "title": "Standing admin-capable access outside the break-glass list",
+      "unknown": 4
+    },
+    {
+      "evaluated": 6,
+      "fail": 3,
+      "pack": "network",
+      "pass": 2,
+      "resource_types": [
+        "security_group",
+        "network_security_group"
+      ],
+      "rule_id": "PF-NET-001",
+      "severity": "critical",
+      "title": "Remote administration ports open to internet-wide sources",
+      "unknown": 1
+    },
+    {
+      "evaluated": 6,
+      "fail": 1,
+      "pack": "network",
+      "pass": 4,
+      "resource_types": [
+        "security_group",
+        "network_security_group"
+      ],
+      "rule_id": "PF-NET-002",
+      "severity": "high",
+      "title": "Data-service ports open to internet-wide sources",
+      "unknown": 1
+    },
+    {
+      "evaluated": 3,
+      "fail": 1,
+      "pack": "audit",
+      "pass": 1,
+      "resource_types": [
+        "diagnostic_setting"
+      ],
+      "rule_id": "PF-AUD-004",
+      "severity": "high",
+      "title": "Activity Log export misses a required category or a destination",
+      "unknown": 1
+    },
+    {
+      "evaluated": 4,
+      "fail": 1,
+      "pack": "relationships",
+      "pass": 3,
+      "resource_types": [
+        "compute_instance"
+      ],
+      "rule_id": "PF-REL-001",
+      "severity": "critical",
+      "title": "Internet-exposed compute runs with an admin-capable identity",
+      "unknown": 0
+    },
+    {
+      "evaluated": 1,
+      "fail": 0,
+      "pack": "relationships",
+      "pass": 1,
+      "resource_types": [
+        "storage_bucket"
+      ],
+      "rule_id": "PF-REL-002",
+      "severity": "critical",
+      "title": "Storage that receives audit logs is publicly readable",
+      "unknown": 0
+    }
+  ],
+  "totals": {
+    "checks": 43,
+    "fail": 12,
+    "pass": 21,
+    "resources": 42,
+    "resources_by_status": {
+      "fail": 12,
+      "not_evaluated": 4,
+      "pass": 12,
+      "unknown": 14
+    },
+    "resources_not_evaluated": 4,
+    "resources_unsupported": 6,
+    "unknown": 10
+  },
+  "unsupported": [
+    {
+      "cited": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzKeyVault.json",
+          "line": 2,
+          "pointer": "/0"
+        }
+      ],
+      "id": "azure:unsupported:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.KeyVault/vaults/kv-fh-lab",
+      "name": "kv-fh-lab",
+      "native_type": "Microsoft.KeyVault/vaults",
+      "reason": "unsupported native type Microsoft.KeyVault/vaults: no rule evaluates it",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            2
+          ],
+          "first_line": 1,
+          "lines": [
+            "[",
+            "  {",
+            "    \"VaultName\": \"kv-fh-lab\",",
+            "    \"ResourceId\": \"/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.KeyVault/vaults/kv-fh-lab\",",
+            "    \"ResourceGroupName\": \"rg-fh-lab\",",
+            "    \"Location\": \"eastus2\",",
+            "    \"Sku\": \"Standard\",",
+            "    \"EnableRbacAuthorization\": true,"
+          ]
+        },
+        "file": "snapshots/azure-lab-2026-10/Get-AzKeyVault.json",
+        "line": 2,
+        "pointer": "/0"
+      },
+      "status": "unknown"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzWebApp.json",
+          "line": 2,
+          "pointer": "/0"
+        }
+      ],
+      "id": "azure:unsupported:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Web/sites/app-fh-portal",
+      "name": "app-fh-portal",
+      "native_type": "Microsoft.Web/sites",
+      "reason": "unsupported native type Microsoft.Web/sites: no rule evaluates it",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            2
+          ],
+          "first_line": 1,
+          "lines": [
+            "[",
+            "  {",
+            "    \"Name\": \"app-fh-portal\",",
+            "    \"Id\": \"/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Web/sites/app-fh-portal\",",
+            "    \"ResourceGroup\": \"rg-fh-lab\",",
+            "    \"Location\": \"eastus2\",",
+            "    \"State\": \"Running\",",
+            "    \"HttpsOnly\": true,"
+          ]
+        },
+        "file": "snapshots/azure-lab-2026-10/Get-AzWebApp.json",
+        "line": 2,
+        "pointer": "/0"
+      },
+      "status": "unknown"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzNetworkInterface.json",
+          "line": 2,
+          "pointer": "/0"
+        }
+      ],
+      "id": "azure:unsupported:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-jump",
+      "name": "nic-fh-jump",
+      "native_type": "Microsoft.Network/networkInterfaces",
+      "reason": "unsupported native type Microsoft.Network/networkInterfaces: no rule evaluates it",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            2
+          ],
+          "first_line": 1,
+          "lines": [
+            "[",
+            "  {",
+            "    \"Name\": \"nic-fh-jump\",",
+            "    \"Id\": \"/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-jump\",",
+            "    \"ResourceGroupName\": \"rg-fh-net\",",
+            "    \"Location\": \"eastus2\",",
+            "    \"VirtualMachine\": {",
+            "      \"Id\": \"/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-jump\""
+          ]
+        },
+        "file": "snapshots/azure-lab-2026-10/Get-AzNetworkInterface.json",
+        "line": 2,
+        "pointer": "/0"
+      },
+      "status": "unknown"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzNetworkInterface.json",
+          "line": 30,
+          "pointer": "/1"
+        }
+      ],
+      "id": "azure:unsupported:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-ops",
+      "name": "nic-fh-ops",
+      "native_type": "Microsoft.Network/networkInterfaces",
+      "reason": "unsupported native type Microsoft.Network/networkInterfaces: no rule evaluates it",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            30
+          ],
+          "first_line": 24,
+          "lines": [
+            "        }",
+            "      }",
+            "    ],",
+            "    \"EnableIPForwarding\": false,",
+            "    \"EnableAcceleratedNetworking\": false",
+            "  },",
+            "  {",
+            "    \"Name\": \"nic-fh-ops\",",
+            "    \"Id\": \"/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-ops\",",
+            "    \"ResourceGroupName\": \"rg-fh-net\",",
+            "    \"Location\": \"eastus2\",",
+            "    \"VirtualMachine\": {",
+            "      \"Id\": \"/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-ops\""
+          ]
+        },
+        "file": "snapshots/azure-lab-2026-10/Get-AzNetworkInterface.json",
+        "line": 30,
+        "pointer": "/1"
+      },
+      "status": "unknown"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzNetworkInterface.json",
+          "line": 58,
+          "pointer": "/2"
+        }
+      ],
+      "id": "azure:unsupported:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-rdp",
+      "name": "nic-fh-rdp",
+      "native_type": "Microsoft.Network/networkInterfaces",
+      "reason": "unsupported native type Microsoft.Network/networkInterfaces: no rule evaluates it",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            58
+          ],
+          "first_line": 52,
+          "lines": [
+            "        }",
+            "      }",
+            "    ],",
+            "    \"EnableIPForwarding\": false,",
+            "    \"EnableAcceleratedNetworking\": false",
+            "  },",
+            "  {",
+            "    \"Name\": \"nic-fh-rdp\",",
+            "    \"Id\": \"/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-rdp\",",
+            "    \"ResourceGroupName\": \"rg-fh-net\",",
+            "    \"Location\": \"eastus2\",",
+            "    \"VirtualMachine\": {",
+            "      \"Id\": \"/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-rdp\""
+          ]
+        },
+        "file": "snapshots/azure-lab-2026-10/Get-AzNetworkInterface.json",
+        "line": 58,
+        "pointer": "/2"
+      },
+      "status": "unknown"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzNetworkInterface.json",
+          "line": 86,
+          "pointer": "/3"
+        }
+      ],
+      "id": "azure:unsupported:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-worker",
+      "name": "nic-fh-worker",
+      "native_type": "Microsoft.Network/networkInterfaces",
+      "reason": "unsupported native type Microsoft.Network/networkInterfaces: no rule evaluates it",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            86
+          ],
+          "first_line": 80,
+          "lines": [
+            "        }",
+            "      }",
+            "    ],",
+            "    \"EnableIPForwarding\": false,",
+            "    \"EnableAcceleratedNetworking\": false",
+            "  },",
+            "  {",
+            "    \"Name\": \"nic-fh-worker\",",
+            "    \"Id\": \"/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-worker\",",
+            "    \"ResourceGroupName\": \"rg-fh-net\",",
+            "    \"Location\": \"eastus2\",",
+            "    \"VirtualMachine\": {",
+            "      \"Id\": \"/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-worker\""
+          ]
+        },
+        "file": "snapshots/azure-lab-2026-10/Get-AzNetworkInterface.json",
+        "line": 86,
+        "pointer": "/3"
+      },
+      "status": "unknown"
+    }
+  ]
+}

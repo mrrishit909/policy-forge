@@ -1,0 +1,444 @@
+{
+  "combined": {
+    "files": [
+      "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json",
+      "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json",
+      "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json"
+    ],
+    "ok": true,
+    "patch_file": "remediation.patch",
+    "patch_ids": [
+      "P-01",
+      "P-02",
+      "P-03",
+      "P-04",
+      "P-05",
+      "P-06"
+    ],
+    "regression": {
+      "changed_findings": [],
+      "changed_resources": [],
+      "changed_results": [],
+      "checked_resources": 42,
+      "checked_results": 43,
+      "ok": true,
+      "reasons": [],
+      "targets": [
+        {
+          "after": "pass",
+          "before": "fail",
+          "resource_id": "azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-000000000001/providers/microsoft.insights/diagnosticSettings/activity-to-storage",
+          "rule_id": "PF-AUD-004"
+        },
+        {
+          "after": "pass",
+          "before": "fail",
+          "resource_id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-edge",
+          "rule_id": "PF-NET-001"
+        },
+        {
+          "after": "pass",
+          "before": "fail",
+          "resource_id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-jump",
+          "rule_id": "PF-NET-001"
+        },
+        {
+          "after": "pass",
+          "before": "fail",
+          "resource_id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-rdp",
+          "rule_id": "PF-NET-001"
+        },
+        {
+          "after": "pass",
+          "before": "fail",
+          "resource_id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-data",
+          "rule_id": "PF-NET-002"
+        },
+        {
+          "after": "pass",
+          "before": "fail",
+          "resource_id": "azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlabpublic",
+          "rule_id": "PF-STOR-001"
+        }
+      ],
+      "touched_resources": [
+        "azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-000000000001/providers/microsoft.insights/diagnosticSettings/activity-to-storage",
+        "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-data",
+        "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-edge",
+        "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-jump",
+        "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-rdp",
+        "azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlabpublic"
+      ]
+    },
+    "withheld_reason": null
+  },
+  "counts": {
+    "accepted": 6,
+    "not_proposed": 6,
+    "proposed": 6,
+    "rejected": 0,
+    "withheld": 0
+  },
+  "explanation": "Each auto-remediable active finding gets a JSON Patch against its raw snapshot file. The patch is applied to a temporary copy of the snapshot and the whole evaluation is re-run; it is accepted only when the targeted finding resolves to pass and nothing else changes. remediation.patch combines the accepted patches (one diff per file, re-verified together) and applies from the repository root. The committed snapshot is never modified.",
+  "mode": "propose",
+  "not_proposed": [
+    {
+      "finding_id": "PF-IAM-001::azure:role_definition:00000000-0000-4000-9000-000000000901",
+      "reason": "manual remediation: Replace the wildcard with the specific actions and resources the workload uses. The intended permission set cannot be inferred from configuration, so no patch is generated.",
+      "resource_id": "azure:role_definition:00000000-0000-4000-9000-000000000901",
+      "rule_id": "PF-IAM-001"
+    },
+    {
+      "finding_id": "PF-IAM-002::azure:role_definition:00000000-0000-4000-9000-000000000904",
+      "reason": "manual remediation: Narrow the service wildcard to the actions in use and scope Resource to the specific ARNs or resource groups. Intent is required, so no patch is generated.",
+      "resource_id": "azure:role_definition:00000000-0000-4000-9000-000000000904",
+      "rule_id": "PF-IAM-002"
+    },
+    {
+      "finding_id": "PF-IAM-003::azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000702",
+      "reason": "manual remediation: Move standing admin access to just-in-time elevation or the break-glass principal, and grant the user a least-privilege role. Requires an owner decision.",
+      "resource_id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000702",
+      "rule_id": "PF-IAM-003"
+    },
+    {
+      "finding_id": "PF-IAM-003::azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000703",
+      "reason": "manual remediation: Move standing admin access to just-in-time elevation or the break-glass principal, and grant the user a least-privilege role. Requires an owner decision.",
+      "resource_id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000703",
+      "rule_id": "PF-IAM-003"
+    },
+    {
+      "finding_id": "PF-IAM-003::azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-00000000070a",
+      "reason": "manual remediation: Move standing admin access to just-in-time elevation or the break-glass principal, and grant the user a least-privilege role. Requires an owner decision.",
+      "resource_id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-00000000070a",
+      "rule_id": "PF-IAM-003"
+    },
+    {
+      "finding_id": "PF-REL-001::azure:compute_instance:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-ops",
+      "reason": "manual remediation: Remove the public exposure or replace the identity with a least-privilege one. Either change alters workload behaviour, so no patch is generated.",
+      "resource_id": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-ops",
+      "rule_id": "PF-REL-001"
+    }
+  ],
+  "patches": [
+    {
+      "diff": "diff --git a/snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json b/snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json\n--- a/snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json\n+++ b/snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json\n@@ -13,7 +13,7 @@\n       },\n       {\n         \"Category\": \"Security\",\n-        \"Enabled\": false\n+        \"Enabled\": true\n       },\n       {\n         \"Category\": \"ServiceHealth\",\n",
+      "files": [
+        "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json"
+      ],
+      "finding_id": "PF-AUD-004::azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-000000000001/providers/microsoft.insights/diagnosticSettings/activity-to-storage",
+      "id": "P-01",
+      "json_patch": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json",
+          "ops": [
+            {
+              "op": "test",
+              "path": "/0/Log/1/Enabled",
+              "value": false
+            },
+            {
+              "op": "replace",
+              "path": "/0/Log/1/Enabled",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "reason": "target finding resolves to pass; no other rule result, finding or resource changes",
+      "regression": {
+        "changed_findings": [],
+        "changed_resources": [],
+        "changed_results": [],
+        "checked_resources": 42,
+        "checked_results": 43,
+        "ok": true,
+        "reasons": [],
+        "targets": [
+          {
+            "after": "pass",
+            "before": "fail",
+            "resource_id": "azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-000000000001/providers/microsoft.insights/diagnosticSettings/activity-to-storage",
+            "rule_id": "PF-AUD-004"
+          }
+        ],
+        "touched_resources": [
+          "azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-000000000001/providers/microsoft.insights/diagnosticSettings/activity-to-storage"
+        ]
+      },
+      "resource_id": "azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-000000000001/providers/microsoft.insights/diagnosticSettings/activity-to-storage",
+      "rule_id": "PF-AUD-004",
+      "status": "accepted",
+      "strategy": "Enable the missing required categories on the existing diagnostic setting (an entry is added when a category is absent). Not proposed when the setting has no destination, because a destination must be chosen by the owner."
+    },
+    {
+      "diff": "diff --git a/snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json b/snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json\n--- a/snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json\n+++ b/snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json\n@@ -173,7 +173,8 @@\n           \"3380-3389\"\n         ],\n         \"SourceAddressPrefix\": [\n-          \"*\"\n+          \"203.0.113.0/26\",\n+          \"198.51.100.16/28\"\n         ],\n         \"DestinationAddressPrefix\": [\n           \"*\"\n",
+      "files": [
+        "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json"
+      ],
+      "finding_id": "PF-NET-001::azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-edge",
+      "id": "P-02",
+      "json_patch": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json",
+          "ops": [
+            {
+              "op": "test",
+              "path": "/1/SecurityRules/0/SourceAddressPrefix",
+              "value": [
+                "*"
+              ]
+            },
+            {
+              "op": "replace",
+              "path": "/1/SecurityRules/0/SourceAddressPrefix",
+              "value": [
+                "203.0.113.0/26",
+                "198.51.100.16/28"
+              ]
+            }
+          ]
+        }
+      ],
+      "reason": "target finding resolves to pass; no other rule result, finding or resource changes",
+      "regression": {
+        "changed_findings": [],
+        "changed_resources": [],
+        "changed_results": [],
+        "checked_resources": 42,
+        "checked_results": 43,
+        "ok": true,
+        "reasons": [],
+        "targets": [
+          {
+            "after": "pass",
+            "before": "fail",
+            "resource_id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-edge",
+            "rule_id": "PF-NET-001"
+          }
+        ],
+        "touched_resources": [
+          "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-edge"
+        ]
+      },
+      "resource_id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-edge",
+      "rule_id": "PF-NET-001",
+      "status": "accepted",
+      "strategy": "replace the internet-wide sources of each offending ingress rule with the context admin_cidrs (AWS: IpRanges/Ipv6Ranges of the IpPermissions entry; Azure: SourceAddressPrefix of the security rule)"
+    },
+    {
+      "diff": "diff --git a/snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json b/snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json\n--- a/snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json\n+++ b/snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json\n@@ -302,7 +302,8 @@\n           \"22\"\n         ],\n         \"SourceAddressPrefix\": [\n-          \"*\"\n+          \"203.0.113.0/26\",\n+          \"198.51.100.16/28\"\n         ],\n         \"DestinationAddressPrefix\": [\n           \"*\"\n",
+      "files": [
+        "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json"
+      ],
+      "finding_id": "PF-NET-001::azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-jump",
+      "id": "P-03",
+      "json_patch": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json",
+          "ops": [
+            {
+              "op": "test",
+              "path": "/2/SecurityRules/0/SourceAddressPrefix",
+              "value": [
+                "*"
+              ]
+            },
+            {
+              "op": "replace",
+              "path": "/2/SecurityRules/0/SourceAddressPrefix",
+              "value": [
+                "203.0.113.0/26",
+                "198.51.100.16/28"
+              ]
+            }
+          ]
+        }
+      ],
+      "reason": "target finding resolves to pass; no other rule result, finding or resource changes",
+      "regression": {
+        "changed_findings": [],
+        "changed_resources": [],
+        "changed_results": [],
+        "checked_resources": 42,
+        "checked_results": 43,
+        "ok": true,
+        "reasons": [],
+        "targets": [
+          {
+            "after": "pass",
+            "before": "fail",
+            "resource_id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-jump",
+            "rule_id": "PF-NET-001"
+          }
+        ],
+        "touched_resources": [
+          "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-jump"
+        ]
+      },
+      "resource_id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-jump",
+      "rule_id": "PF-NET-001",
+      "status": "accepted",
+      "strategy": "replace the internet-wide sources of each offending ingress rule with the context admin_cidrs (AWS: IpRanges/Ipv6Ranges of the IpPermissions entry; Azure: SourceAddressPrefix of the security rule)"
+    },
+    {
+      "diff": "diff --git a/snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json b/snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json\n--- a/snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json\n+++ b/snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json\n@@ -412,7 +412,8 @@\n           \"3389\"\n         ],\n         \"SourceAddressPrefix\": [\n-          \"0.0.0.0/0\"\n+          \"203.0.113.0/26\",\n+          \"198.51.100.16/28\"\n         ],\n         \"DestinationAddressPrefix\": [\n           \"*\"\n",
+      "files": [
+        "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json"
+      ],
+      "finding_id": "PF-NET-001::azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-rdp",
+      "id": "P-04",
+      "json_patch": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json",
+          "ops": [
+            {
+              "op": "test",
+              "path": "/3/SecurityRules/0/SourceAddressPrefix",
+              "value": [
+                "0.0.0.0/0"
+              ]
+            },
+            {
+              "op": "replace",
+              "path": "/3/SecurityRules/0/SourceAddressPrefix",
+              "value": [
+                "203.0.113.0/26",
+                "198.51.100.16/28"
+              ]
+            }
+          ]
+        }
+      ],
+      "reason": "target finding resolves to pass; no other rule result, finding or resource changes",
+      "regression": {
+        "changed_findings": [],
+        "changed_resources": [],
+        "changed_results": [],
+        "checked_resources": 42,
+        "checked_results": 43,
+        "ok": true,
+        "reasons": [],
+        "targets": [
+          {
+            "after": "pass",
+            "before": "fail",
+            "resource_id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-rdp",
+            "rule_id": "PF-NET-001"
+          }
+        ],
+        "touched_resources": [
+          "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-rdp"
+        ]
+      },
+      "resource_id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-rdp",
+      "rule_id": "PF-NET-001",
+      "status": "accepted",
+      "strategy": "replace the internet-wide sources of each offending ingress rule with the context admin_cidrs (AWS: IpRanges/Ipv6Ranges of the IpPermissions entry; Azure: SourceAddressPrefix of the security rule)"
+    },
+    {
+      "diff": "diff --git a/snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json b/snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json\n--- a/snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json\n+++ b/snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json\n@@ -63,7 +63,8 @@\n           \"27017\"\n         ],\n         \"SourceAddressPrefix\": [\n-          \"Internet\"\n+          \"203.0.113.0/26\",\n+          \"198.51.100.16/28\"\n         ],\n         \"DestinationAddressPrefix\": [\n           \"*\"\n",
+      "files": [
+        "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json"
+      ],
+      "finding_id": "PF-NET-002::azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-data",
+      "id": "P-05",
+      "json_patch": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json",
+          "ops": [
+            {
+              "op": "test",
+              "path": "/0/SecurityRules/2/SourceAddressPrefix",
+              "value": [
+                "Internet"
+              ]
+            },
+            {
+              "op": "replace",
+              "path": "/0/SecurityRules/2/SourceAddressPrefix",
+              "value": [
+                "203.0.113.0/26",
+                "198.51.100.16/28"
+              ]
+            }
+          ]
+        }
+      ],
+      "reason": "target finding resolves to pass; no other rule result, finding or resource changes",
+      "regression": {
+        "changed_findings": [],
+        "changed_resources": [],
+        "changed_results": [],
+        "checked_resources": 42,
+        "checked_results": 43,
+        "ok": true,
+        "reasons": [],
+        "targets": [
+          {
+            "after": "pass",
+            "before": "fail",
+            "resource_id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-data",
+            "rule_id": "PF-NET-002"
+          }
+        ],
+        "touched_resources": [
+          "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-data"
+        ]
+      },
+      "resource_id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-data",
+      "rule_id": "PF-NET-002",
+      "status": "accepted",
+      "strategy": "replace the internet-wide sources of each offending ingress rule with the context admin_cidrs (AWS: IpRanges/Ipv6Ranges of the IpPermissions entry; Azure: SourceAddressPrefix of the security rule)"
+    },
+    {
+      "diff": "diff --git a/snapshots/azure-lab-2026-10/Get-AzStorageAccount.json b/snapshots/azure-lab-2026-10/Get-AzStorageAccount.json\n--- a/snapshots/azure-lab-2026-10/Get-AzStorageAccount.json\n+++ b/snapshots/azure-lab-2026-10/Get-AzStorageAccount.json\n@@ -134,7 +134,7 @@\n       \"Tier\": \"Standard\"\n     },\n     \"Kind\": \"StorageV2\",\n-    \"AllowBlobPublicAccess\": true,\n+    \"AllowBlobPublicAccess\": false,\n     \"EnableHttpsTrafficOnly\": true,\n     \"MinimumTlsVersion\": \"TLS1_2\",\n     \"PublicNetworkAccess\": \"Enabled\",\n",
+      "files": [
+        "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json"
+      ],
+      "finding_id": "PF-STOR-001::azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlabpublic",
+      "id": "P-06",
+      "json_patch": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json",
+          "ops": [
+            {
+              "op": "test",
+              "path": "/4/AllowBlobPublicAccess",
+              "value": true
+            },
+            {
+              "op": "replace",
+              "path": "/4/AllowBlobPublicAccess",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "reason": "target finding resolves to pass; no other rule result, finding or resource changes",
+      "regression": {
+        "changed_findings": [],
+        "changed_resources": [],
+        "changed_results": [],
+        "checked_resources": 42,
+        "checked_results": 43,
+        "ok": true,
+        "reasons": [],
+        "targets": [
+          {
+            "after": "pass",
+            "before": "fail",
+            "resource_id": "azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlabpublic",
+            "rule_id": "PF-STOR-001"
+          }
+        ],
+        "touched_resources": [
+          "azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlabpublic"
+        ]
+      },
+      "resource_id": "azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlabpublic",
+      "rule_id": "PF-STOR-001",
+      "status": "accepted",
+      "strategy": "AWS: turn on BlockPublicAcls and IgnorePublicAcls in the bucket's public access block (the policy-related flags are left as they are). Azure: set AllowBlobPublicAccess to false on the storage account."
+    }
+  ]
+}

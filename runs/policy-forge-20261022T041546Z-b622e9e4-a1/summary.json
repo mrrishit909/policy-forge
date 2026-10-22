@@ -1,0 +1,97 @@
+{
+  "as_of": "2026-10-22",
+  "checks": {
+    "evaluated": 43,
+    "failed": 12,
+    "passed": 21,
+    "unknown": 10
+  },
+  "complete_coverage": false,
+  "coverage_statement": "Evaluated 9 rules from the storage, iam, network, audit, relationships packs against 32 of 42 resources in azure-lab-2026-10: 43 checks, 21 passed, 12 failed, 10 unknown. 10 unknown checks rely on configuration semantics these rules do not evaluate (for example IAM Conditions, NotAction, unexpanded prefix lists or service tags) and are neither passes nor failures. 6 resources of unsupported types (Microsoft.KeyVault/vaults, Microsoft.Network/networkInterfaces, Microsoft.Web/sites) were inventoried but not evaluated. 4 resources of covered types had no applicable rule and were not evaluated. Coverage is partial: passing checks describe only what was evaluated, not the whole configuration.",
+  "exceptions": {
+    "active": 1,
+    "expired": 2,
+    "not_yet_active": 0,
+    "rejected": 4
+  },
+  "findings": {
+    "active": 12,
+    "by_severity": {
+      "critical": 5,
+      "high": 7,
+      "low": 0,
+      "medium": 0
+    },
+    "excepted": 0,
+    "total": 12
+  },
+  "provider": "azure",
+  "relationships": {
+    "edges": 22,
+    "unresolved": 3
+  },
+  "remediation": {
+    "accepted": 6,
+    "not_proposed": 6,
+    "proposed": 6,
+    "rejected": 0,
+    "withheld": 0
+  },
+  "remediation_mode": "propose",
+  "resource_types": {
+    "covered": [
+      "compute_instance",
+      "diagnostic_setting",
+      "network_security_group",
+      "role_assignment",
+      "role_definition",
+      "storage_bucket"
+    ],
+    "not_covered": [
+      "unsupported"
+    ],
+    "present": [
+      "compute_instance",
+      "diagnostic_setting",
+      "network_security_group",
+      "role_assignment",
+      "role_definition",
+      "storage_bucket",
+      "unsupported"
+    ]
+  },
+  "resources": {
+    "evaluated": 32,
+    "not_evaluated": 4,
+    "present": 42,
+    "unsupported": 6
+  },
+  "rule_packs": [
+    "storage",
+    "iam",
+    "network",
+    "audit",
+    "relationships"
+  ],
+  "rules": {
+    "evaluated": [
+      "PF-STOR-001",
+      "PF-IAM-001",
+      "PF-IAM-002",
+      "PF-IAM-003",
+      "PF-NET-001",
+      "PF-NET-002",
+      "PF-AUD-004",
+      "PF-REL-001",
+      "PF-REL-002"
+    ],
+    "packs_without_rules_for_provider": [],
+    "requested_not_applicable": [
+      "PF-AUD-001",
+      "PF-AUD-002",
+      "PF-AUD-003",
+      "PF-STOR-002"
+    ]
+  },
+  "snapshot": "azure-lab-2026-10"
+}

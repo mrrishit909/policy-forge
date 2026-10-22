@@ -1,0 +1,1067 @@
+{
+  "findings": [
+    {
+      "cited": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json",
+          "line": 28,
+          "pointer": "/1/Actions"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/permissions/statements",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json#/1/Actions",
+          "value": {
+            "actions": [
+              "*"
+            ],
+            "effect": "Allow",
+            "has_condition": false,
+            "not_actions": null,
+            "policy": "role-definition",
+            "resources": [
+              "/subscriptions/00000000-0000-4000-8000-000000000001"
+            ],
+            "sid": null
+          }
+        }
+      ],
+      "exception_id": null,
+      "id": "PF-IAM-001::azure:role_definition:00000000-0000-4000-9000-000000000901",
+      "pack": "iam",
+      "provider": "azure",
+      "reason": "1 Allow statement(s) grant every action on every resource.",
+      "remediation": {
+        "kind": "manual",
+        "patch_id": null,
+        "patch_status": "not_proposed"
+      },
+      "resource_id": "azure:role_definition:00000000-0000-4000-9000-000000000901",
+      "resource_name": "FH Lab Operator",
+      "resource_type": "role_definition",
+      "rule_id": "PF-IAM-001",
+      "severity": "critical",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            28
+          ],
+          "first_line": 22,
+          "lines": [
+            "  },",
+            "  {",
+            "    \"Name\": \"FH Lab Operator\",",
+            "    \"Id\": \"00000000-0000-4000-9000-000000000901\",",
+            "    \"IsCustom\": true,",
+            "    \"Description\": \"Custom lab operator role\",",
+            "    \"Actions\": [",
+            "      \"*\"",
+            "    ],",
+            "    \"NotActions\": [],",
+            "    \"DataActions\": [],",
+            "    \"NotDataActions\": [],",
+            "    \"AssignableScopes\": ["
+          ]
+        },
+        "file": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json",
+        "line": 28,
+        "pointer": "/1/Actions"
+      },
+      "status": "active",
+      "title": "Allow statement grants every action on every resource"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json",
+          "line": 166,
+          "pointer": "/1/SecurityRules/0"
+        }
+      ],
+      "evidence": [
+        {
+          "internet_sources": [
+            "*"
+          ],
+          "path": "/properties/ingress/0",
+          "ports": [
+            3389
+          ],
+          "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/1/SecurityRules/0",
+          "value": {
+            "cidrs": [],
+            "port_from": 3380,
+            "port_to": 3389,
+            "prefix_lists": [],
+            "priority": 100,
+            "protocol": "tcp",
+            "source_tags": [
+              "*"
+            ]
+          }
+        }
+      ],
+      "exception_id": null,
+      "id": "PF-NET-001::azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-edge",
+      "pack": "network",
+      "provider": "azure",
+      "reason": "1 ingress rule(s) expose remote administration ports to internet-wide sources.",
+      "remediation": {
+        "kind": "auto",
+        "patch_id": "P-02",
+        "patch_status": "accepted"
+      },
+      "resource_id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-edge",
+      "resource_name": "nsg-fh-edge",
+      "resource_type": "network_security_group",
+      "rule_id": "PF-NET-001",
+      "severity": "critical",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            166
+          ],
+          "first_line": 160,
+          "lines": [
+            "    \"Name\": \"nsg-fh-edge\",",
+            "    \"ResourceGroupName\": \"rg-fh-net\",",
+            "    \"Location\": \"eastus2\",",
+            "    \"Id\": \"/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-edge\",",
+            "    \"ProvisioningState\": \"Succeeded\",",
+            "    \"SecurityRules\": [",
+            "      {",
+            "        \"Name\": \"AllowRdpBand\",",
+            "        \"Protocol\": \"Tcp\",",
+            "        \"SourcePortRange\": [",
+            "          \"*\"",
+            "        ],",
+            "        \"DestinationPortRange\": ["
+          ]
+        },
+        "file": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json",
+        "line": 166,
+        "pointer": "/1/SecurityRules/0"
+      },
+      "status": "active",
+      "title": "Remote administration ports open to internet-wide sources"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json",
+          "line": 295,
+          "pointer": "/2/SecurityRules/0"
+        }
+      ],
+      "evidence": [
+        {
+          "internet_sources": [
+            "*"
+          ],
+          "path": "/properties/ingress/0",
+          "ports": [
+            22
+          ],
+          "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/2/SecurityRules/0",
+          "value": {
+            "cidrs": [],
+            "port_from": 22,
+            "port_to": 22,
+            "prefix_lists": [],
+            "priority": 100,
+            "protocol": "tcp",
+            "source_tags": [
+              "*"
+            ]
+          }
+        }
+      ],
+      "exception_id": null,
+      "id": "PF-NET-001::azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-jump",
+      "pack": "network",
+      "provider": "azure",
+      "reason": "1 ingress rule(s) expose remote administration ports to internet-wide sources.",
+      "remediation": {
+        "kind": "auto",
+        "patch_id": "P-03",
+        "patch_status": "accepted"
+      },
+      "resource_id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-jump",
+      "resource_name": "nsg-fh-jump",
+      "resource_type": "network_security_group",
+      "rule_id": "PF-NET-001",
+      "severity": "critical",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            295
+          ],
+          "first_line": 289,
+          "lines": [
+            "    \"Name\": \"nsg-fh-jump\",",
+            "    \"ResourceGroupName\": \"rg-fh-net\",",
+            "    \"Location\": \"eastus2\",",
+            "    \"Id\": \"/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-jump\",",
+            "    \"ProvisioningState\": \"Succeeded\",",
+            "    \"SecurityRules\": [",
+            "      {",
+            "        \"Name\": \"AllowSshAnywhere\",",
+            "        \"Protocol\": \"Tcp\",",
+            "        \"SourcePortRange\": [",
+            "          \"*\"",
+            "        ],",
+            "        \"DestinationPortRange\": ["
+          ]
+        },
+        "file": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json",
+        "line": 295,
+        "pointer": "/2/SecurityRules/0"
+      },
+      "status": "active",
+      "title": "Remote administration ports open to internet-wide sources"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json",
+          "line": 405,
+          "pointer": "/3/SecurityRules/0"
+        }
+      ],
+      "evidence": [
+        {
+          "internet_sources": [
+            "0.0.0.0/0"
+          ],
+          "path": "/properties/ingress/0",
+          "ports": [
+            3389
+          ],
+          "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/3/SecurityRules/0",
+          "value": {
+            "cidrs": [
+              "0.0.0.0/0"
+            ],
+            "port_from": 3389,
+            "port_to": 3389,
+            "prefix_lists": [],
+            "priority": 110,
+            "protocol": "all",
+            "source_tags": []
+          }
+        }
+      ],
+      "exception_id": null,
+      "id": "PF-NET-001::azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-rdp",
+      "pack": "network",
+      "provider": "azure",
+      "reason": "1 ingress rule(s) expose remote administration ports to internet-wide sources.",
+      "remediation": {
+        "kind": "auto",
+        "patch_id": "P-04",
+        "patch_status": "accepted"
+      },
+      "resource_id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-rdp",
+      "resource_name": "nsg-fh-rdp",
+      "resource_type": "network_security_group",
+      "rule_id": "PF-NET-001",
+      "severity": "critical",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            405
+          ],
+          "first_line": 399,
+          "lines": [
+            "    \"Name\": \"nsg-fh-rdp\",",
+            "    \"ResourceGroupName\": \"rg-fh-net\",",
+            "    \"Location\": \"eastus2\",",
+            "    \"Id\": \"/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-rdp\",",
+            "    \"ProvisioningState\": \"Succeeded\",",
+            "    \"SecurityRules\": [",
+            "      {",
+            "        \"Name\": \"AllowRdp\",",
+            "        \"Protocol\": \"*\",",
+            "        \"SourcePortRange\": [",
+            "          \"*\"",
+            "        ],",
+            "        \"DestinationPortRange\": ["
+          ]
+        },
+        "file": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json",
+        "line": 405,
+        "pointer": "/3/SecurityRules/0"
+      },
+      "status": "active",
+      "title": "Remote administration ports open to internet-wide sources"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzVM.json",
+          "line": 55,
+          "pointer": "/1/NetworkProfile/NetworkInterfaces"
+        },
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+          "line": 39,
+          "pointer": "/2/RoleDefinitionId"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/network_groups",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzVM.json#/1/NetworkProfile/NetworkInterfaces",
+          "value": {
+            "open_groups": [
+              "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-web"
+            ],
+            "public_ips": [
+              "203.0.113.40"
+            ]
+          }
+        },
+        {
+          "path": "/refs/assigned_to",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/2/RoleDefinitionId",
+          "value": {
+            "assignment": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000703",
+            "role": "Owner",
+            "scope": "/subscriptions/00000000-0000-4000-8000-000000000001"
+          }
+        }
+      ],
+      "exception_id": null,
+      "id": "PF-REL-001::azure:compute_instance:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-ops",
+      "pack": "relationships",
+      "provider": "azure",
+      "reason": "The instance has a public IP, admits internet-wide ingress and runs with an admin-capable identity.",
+      "remediation": {
+        "kind": "manual",
+        "patch_id": null,
+        "patch_status": "not_proposed"
+      },
+      "resource_id": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-ops",
+      "resource_name": "vm-fh-ops",
+      "resource_type": "compute_instance",
+      "rule_id": "PF-REL-001",
+      "severity": "critical",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            55
+          ],
+          "first_line": 49,
+          "lines": [
+            "    \"Identity\": {",
+            "      \"Type\": \"SystemAssigned\",",
+            "      \"PrincipalId\": \"00000000-0000-4000-9000-000000000601\",",
+            "      \"TenantId\": \"00000000-0000-4000-8000-0000000000aa\"",
+            "    },",
+            "    \"NetworkProfile\": {",
+            "      \"NetworkInterfaces\": [",
+            "        {",
+            "          \"Id\": \"/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-ops\",",
+            "          \"Primary\": true",
+            "        }",
+            "      ]",
+            "    },"
+          ]
+        },
+        "file": "snapshots/azure-lab-2026-10/Get-AzVM.json",
+        "line": 55,
+        "pointer": "/1/NetworkProfile/NetworkInterfaces"
+      },
+      "status": "active",
+      "title": "Internet-exposed compute runs with an admin-capable identity"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json",
+          "line": 10,
+          "pointer": "/0/Log/0"
+        },
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json",
+          "line": 14,
+          "pointer": "/0/Log/1"
+        },
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json",
+          "line": 30,
+          "pointer": "/0/Log/5"
+        },
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json",
+          "line": 9,
+          "pointer": "/0/Log"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/categories/0",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/0/Log/0",
+          "value": {
+            "category": "Administrative",
+            "enabled": true,
+            "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/0/Log/0"
+          }
+        },
+        {
+          "path": "/properties/categories/1",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/0/Log/1",
+          "value": {
+            "category": "Security",
+            "enabled": false,
+            "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/0/Log/1"
+          }
+        },
+        {
+          "path": "/properties/categories/5",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/0/Log/5",
+          "value": {
+            "category": "Policy",
+            "enabled": true,
+            "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/0/Log/5"
+          }
+        },
+        {
+          "path": "/properties/categories",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/0/Log",
+          "value": {
+            "missing": [
+              "Security"
+            ]
+          }
+        }
+      ],
+      "exception_id": null,
+      "id": "PF-AUD-004::azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-000000000001/providers/microsoft.insights/diagnosticSettings/activity-to-storage",
+      "pack": "audit",
+      "provider": "azure",
+      "reason": "Required Activity Log categories are not exported: Security.",
+      "remediation": {
+        "kind": "auto",
+        "patch_id": "P-01",
+        "patch_status": "accepted"
+      },
+      "resource_id": "azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-000000000001/providers/microsoft.insights/diagnosticSettings/activity-to-storage",
+      "resource_name": "activity-to-storage",
+      "resource_type": "diagnostic_setting",
+      "rule_id": "PF-AUD-004",
+      "severity": "high",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            9,
+            10,
+            14,
+            30
+          ],
+          "first_line": 3,
+          "lines": [
+            "    \"Name\": \"activity-to-storage\",",
+            "    \"Id\": \"/subscriptions/00000000-0000-4000-8000-000000000001/providers/microsoft.insights/diagnosticSettings/activity-to-storage\",",
+            "    \"StorageAccountId\": \"/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlabaudit\",",
+            "    \"WorkspaceId\": null,",
+            "    \"EventHubAuthorizationRuleId\": null,",
+            "    \"EventHubName\": null,",
+            "    \"Log\": [",
+            "      {",
+            "        \"Category\": \"Administrative\",",
+            "        \"Enabled\": true",
+            "      },",
+            "      {",
+            "        \"Category\": \"Security\",",
+            "        \"Enabled\": false",
+            "      },",
+            "      {",
+            "        \"Category\": \"ServiceHealth\",",
+            "        \"Enabled\": true",
+            "      },",
+            "      {",
+            "        \"Category\": \"Alert\",",
+            "        \"Enabled\": true",
+            "      },",
+            "      {",
+            "        \"Category\": \"Recommendation\",",
+            "        \"Enabled\": false",
+            "      },",
+            "      {",
+            "        \"Category\": \"Policy\",",
+            "        \"Enabled\": true",
+            "      },",
+            "      {",
+            "        \"Category\": \"Autoscale\",",
+            "        \"Enabled\": false"
+          ]
+        },
+        "file": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json",
+        "line": 10,
+        "pointer": "/0/Log/0"
+      },
+      "status": "active",
+      "title": "Activity Log export misses a required category or a destination"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json",
+          "line": 81,
+          "pointer": "/4/Actions"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/permissions/statements",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json#/4/Actions",
+          "service_wildcards": [
+            "Microsoft.Storage/*"
+          ],
+          "value": {
+            "actions": [
+              "Microsoft.Storage/*"
+            ],
+            "effect": "Allow",
+            "has_condition": false,
+            "not_actions": null,
+            "policy": "role-definition",
+            "resources": [
+              "/subscriptions/00000000-0000-4000-8000-000000000001"
+            ],
+            "sid": null
+          }
+        }
+      ],
+      "exception_id": null,
+      "id": "PF-IAM-002::azure:role_definition:00000000-0000-4000-9000-000000000904",
+      "pack": "iam",
+      "provider": "azure",
+      "reason": "1 Allow statement(s) grant a whole service on every resource.",
+      "remediation": {
+        "kind": "manual",
+        "patch_id": null,
+        "patch_status": "not_proposed"
+      },
+      "resource_id": "azure:role_definition:00000000-0000-4000-9000-000000000904",
+      "resource_name": "FH Storage Admin",
+      "resource_type": "role_definition",
+      "rule_id": "PF-IAM-002",
+      "severity": "high",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            81
+          ],
+          "first_line": 75,
+          "lines": [
+            "  },",
+            "  {",
+            "    \"Name\": \"FH Storage Admin\",",
+            "    \"Id\": \"00000000-0000-4000-9000-000000000904\",",
+            "    \"IsCustom\": true,",
+            "    \"Description\": \"\",",
+            "    \"Actions\": [",
+            "      \"Microsoft.Storage/*\"",
+            "    ],",
+            "    \"NotActions\": [],",
+            "    \"DataActions\": [],",
+            "    \"NotDataActions\": [],",
+            "    \"AssignableScopes\": ["
+          ]
+        },
+        "file": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json",
+        "line": 81,
+        "pointer": "/4/Actions"
+      },
+      "status": "active",
+      "title": "Allow statement grants a whole service on every resource"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+          "line": 20,
+          "pointer": "/1/Scope"
+        },
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+          "line": 24,
+          "pointer": "/1/RoleDefinitionId"
+        },
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json",
+          "line": 98,
+          "pointer": "/5/Actions"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/scope",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/1/Scope",
+          "value": "/subscriptions/00000000-0000-4000-8000-000000000001"
+        },
+        {
+          "path": "/properties/role_definition_id",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/1/RoleDefinitionId",
+          "value": {
+            "id": "8e3af657-a8ff-443c-a75c-2fe8c4bcb635",
+            "name": "Owner"
+          }
+        },
+        {
+          "path": "/properties/permissions/statements",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json#/5/Actions",
+          "value": {
+            "actions": [
+              "*"
+            ],
+            "effect": "Allow",
+            "has_condition": false,
+            "not_actions": null,
+            "policy": "role-definition",
+            "resources": [
+              "/"
+            ],
+            "sid": null
+          }
+        }
+      ],
+      "exception_id": null,
+      "id": "PF-IAM-003::azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000702",
+      "pack": "iam",
+      "provider": "azure",
+      "reason": "Admin-capable role \"Owner\" is assigned at subscription scope to a principal outside the break-glass list.",
+      "remediation": {
+        "kind": "manual",
+        "patch_id": null,
+        "patch_status": "not_proposed"
+      },
+      "resource_id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000702",
+      "resource_name": "00000000-0000-4000-9000-000000000702",
+      "resource_type": "role_assignment",
+      "rule_id": "PF-IAM-003",
+      "severity": "high",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            20,
+            24
+          ],
+          "first_line": 14,
+          "lines": [
+            "    \"ConditionVersion\": null,",
+            "    \"Condition\": null",
+            "  },",
+            "  {",
+            "    \"RoleAssignmentName\": \"00000000-0000-4000-9000-000000000702\",",
+            "    \"RoleAssignmentId\": \"/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000702\",",
+            "    \"Scope\": \"/subscriptions/00000000-0000-4000-8000-000000000001\",",
+            "    \"DisplayName\": \"Dana Lab\",",
+            "    \"SignInName\": \"dana.lab@fernhollow.example\",",
+            "    \"RoleDefinitionName\": \"Owner\",",
+            "    \"RoleDefinitionId\": \"8e3af657-a8ff-443c-a75c-2fe8c4bcb635\",",
+            "    \"ObjectId\": \"00000000-0000-4000-9000-000000000802\",",
+            "    \"ObjectType\": \"User\",",
+            "    \"CanDelegate\": false,",
+            "    \"Description\": null,",
+            "    \"ConditionVersion\": null,",
+            "    \"Condition\": null"
+          ]
+        },
+        "file": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+        "line": 20,
+        "pointer": "/1/Scope"
+      },
+      "status": "active",
+      "title": "Standing admin-capable access outside the break-glass list"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+          "line": 35,
+          "pointer": "/2/Scope"
+        },
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+          "line": 39,
+          "pointer": "/2/RoleDefinitionId"
+        },
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json",
+          "line": 98,
+          "pointer": "/5/Actions"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/scope",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/2/Scope",
+          "value": "/subscriptions/00000000-0000-4000-8000-000000000001"
+        },
+        {
+          "path": "/properties/role_definition_id",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/2/RoleDefinitionId",
+          "value": {
+            "id": "8e3af657-a8ff-443c-a75c-2fe8c4bcb635",
+            "name": "Owner"
+          }
+        },
+        {
+          "path": "/properties/permissions/statements",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json#/5/Actions",
+          "value": {
+            "actions": [
+              "*"
+            ],
+            "effect": "Allow",
+            "has_condition": false,
+            "not_actions": null,
+            "policy": "role-definition",
+            "resources": [
+              "/"
+            ],
+            "sid": null
+          }
+        }
+      ],
+      "exception_id": null,
+      "id": "PF-IAM-003::azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000703",
+      "pack": "iam",
+      "provider": "azure",
+      "reason": "Admin-capable role \"Owner\" is assigned at subscription scope to a principal outside the break-glass list.",
+      "remediation": {
+        "kind": "manual",
+        "patch_id": null,
+        "patch_status": "not_proposed"
+      },
+      "resource_id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000703",
+      "resource_name": "00000000-0000-4000-9000-000000000703",
+      "resource_type": "role_assignment",
+      "rule_id": "PF-IAM-003",
+      "severity": "high",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            35,
+            39
+          ],
+          "first_line": 29,
+          "lines": [
+            "    \"ConditionVersion\": null,",
+            "    \"Condition\": null",
+            "  },",
+            "  {",
+            "    \"RoleAssignmentName\": \"00000000-0000-4000-9000-000000000703\",",
+            "    \"RoleAssignmentId\": \"/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000703\",",
+            "    \"Scope\": \"/subscriptions/00000000-0000-4000-8000-000000000001\",",
+            "    \"DisplayName\": \"vm-fh-ops\",",
+            "    \"SignInName\": null,",
+            "    \"RoleDefinitionName\": \"Owner\",",
+            "    \"RoleDefinitionId\": \"8e3af657-a8ff-443c-a75c-2fe8c4bcb635\",",
+            "    \"ObjectId\": \"00000000-0000-4000-9000-000000000601\",",
+            "    \"ObjectType\": \"ServicePrincipal\",",
+            "    \"CanDelegate\": false,",
+            "    \"Description\": null,",
+            "    \"ConditionVersion\": null,",
+            "    \"Condition\": null"
+          ]
+        },
+        "file": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+        "line": 35,
+        "pointer": "/2/Scope"
+      },
+      "status": "active",
+      "title": "Standing admin-capable access outside the break-glass list"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+          "line": 140,
+          "pointer": "/9/Scope"
+        },
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+          "line": 144,
+          "pointer": "/9/RoleDefinitionId"
+        },
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json",
+          "line": 28,
+          "pointer": "/1/Actions"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/scope",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/9/Scope",
+          "value": "/subscriptions/00000000-0000-4000-8000-000000000001"
+        },
+        {
+          "path": "/properties/role_definition_id",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/9/RoleDefinitionId",
+          "value": {
+            "id": "00000000-0000-4000-9000-000000000901",
+            "name": "FH Lab Operator"
+          }
+        },
+        {
+          "path": "/properties/permissions/statements",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json#/1/Actions",
+          "value": {
+            "actions": [
+              "*"
+            ],
+            "effect": "Allow",
+            "has_condition": false,
+            "not_actions": null,
+            "policy": "role-definition",
+            "resources": [
+              "/subscriptions/00000000-0000-4000-8000-000000000001"
+            ],
+            "sid": null
+          }
+        }
+      ],
+      "exception_id": null,
+      "id": "PF-IAM-003::azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-00000000070a",
+      "pack": "iam",
+      "provider": "azure",
+      "reason": "Admin-capable role \"FH Lab Operator\" is assigned at subscription scope to a principal outside the break-glass list.",
+      "remediation": {
+        "kind": "manual",
+        "patch_id": null,
+        "patch_status": "not_proposed"
+      },
+      "resource_id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-00000000070a",
+      "resource_name": "00000000-0000-4000-9000-00000000070a",
+      "resource_type": "role_assignment",
+      "rule_id": "PF-IAM-003",
+      "severity": "high",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            140,
+            144
+          ],
+          "first_line": 134,
+          "lines": [
+            "    \"ConditionVersion\": null,",
+            "    \"Condition\": null",
+            "  },",
+            "  {",
+            "    \"RoleAssignmentName\": \"00000000-0000-4000-9000-00000000070a\",",
+            "    \"RoleAssignmentId\": \"/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-00000000070a\",",
+            "    \"Scope\": \"/subscriptions/00000000-0000-4000-8000-000000000001\",",
+            "    \"DisplayName\": \"Sam Lab\",",
+            "    \"SignInName\": \"sam.lab@fernhollow.example\",",
+            "    \"RoleDefinitionName\": \"FH Lab Operator\",",
+            "    \"RoleDefinitionId\": \"00000000-0000-4000-9000-000000000901\",",
+            "    \"ObjectId\": \"00000000-0000-4000-9000-000000000807\",",
+            "    \"ObjectType\": \"User\",",
+            "    \"CanDelegate\": false,",
+            "    \"Description\": null,",
+            "    \"ConditionVersion\": null,",
+            "    \"Condition\": null"
+          ]
+        },
+        "file": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+        "line": 140,
+        "pointer": "/9/Scope"
+      },
+      "status": "active",
+      "title": "Standing admin-capable access outside the break-glass list"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json",
+          "line": 55,
+          "pointer": "/0/SecurityRules/2"
+        }
+      ],
+      "evidence": [
+        {
+          "internet_sources": [
+            "Internet"
+          ],
+          "path": "/properties/ingress/2",
+          "ports": [
+            3306
+          ],
+          "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/0/SecurityRules/2",
+          "value": {
+            "cidrs": [],
+            "port_from": 3306,
+            "port_to": 3306,
+            "prefix_lists": [],
+            "priority": 150,
+            "protocol": "tcp",
+            "source_tags": [
+              "Internet"
+            ]
+          }
+        },
+        {
+          "internet_sources": [
+            "Internet"
+          ],
+          "path": "/properties/ingress/3",
+          "ports": [
+            27017
+          ],
+          "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/0/SecurityRules/2",
+          "value": {
+            "cidrs": [],
+            "port_from": 27017,
+            "port_to": 27017,
+            "prefix_lists": [],
+            "priority": 150,
+            "protocol": "tcp",
+            "source_tags": [
+              "Internet"
+            ]
+          }
+        }
+      ],
+      "exception_id": null,
+      "id": "PF-NET-002::azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-data",
+      "pack": "network",
+      "provider": "azure",
+      "reason": "2 ingress rule(s) expose data-service ports to internet-wide sources.",
+      "remediation": {
+        "kind": "auto",
+        "patch_id": "P-05",
+        "patch_status": "accepted"
+      },
+      "resource_id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-data",
+      "resource_name": "nsg-fh-data",
+      "resource_type": "network_security_group",
+      "rule_id": "PF-NET-002",
+      "severity": "high",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            55
+          ],
+          "first_line": 49,
+          "lines": [
+            "        \"Access\": \"Allow\",",
+            "        \"Priority\": 110,",
+            "        \"Direction\": \"Inbound\",",
+            "        \"ProvisioningState\": \"Succeeded\",",
+            "        \"Id\": \"/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-data/securityRules/AllowPostgresPrivate\"",
+            "      },",
+            "      {",
+            "        \"Name\": \"AllowVendorDatabases\",",
+            "        \"Protocol\": \"Tcp\",",
+            "        \"SourcePortRange\": [",
+            "          \"*\"",
+            "        ],",
+            "        \"DestinationPortRange\": ["
+          ]
+        },
+        "file": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json",
+        "line": 55,
+        "pointer": "/0/SecurityRules/2"
+      },
+      "status": "active",
+      "title": "Data-service ports open to internet-wide sources"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json",
+          "line": 151,
+          "pointer": "/4/Containers/0"
+        },
+        {
+          "file": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json",
+          "line": 137,
+          "pointer": "/4/AllowBlobPublicAccess"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/public_access/anonymous_grants/0",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json#/4/Containers/0",
+          "value": {
+            "grantee": "downloads",
+            "permission": "Blob",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json#/4/Containers/0",
+            "via": "container"
+          }
+        },
+        {
+          "path": "/properties/public_access/guard",
+          "raw": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json#/4/AllowBlobPublicAccess",
+          "value": {
+            "allow_blob_public_access": true
+          }
+        }
+      ],
+      "exception_id": null,
+      "id": "PF-STOR-001::azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlabpublic",
+      "pack": "storage",
+      "provider": "azure",
+      "reason": "Anonymous access is granted (downloads Blob) and the public access guard does not neutralize it.",
+      "remediation": {
+        "kind": "auto",
+        "patch_id": "P-06",
+        "patch_status": "accepted"
+      },
+      "resource_id": "azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlabpublic",
+      "resource_name": "stfhlabpublic",
+      "resource_type": "storage_bucket",
+      "rule_id": "PF-STOR-001",
+      "severity": "high",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            137,
+            151
+          ],
+          "first_line": 131,
+          "lines": [
+            "    \"Location\": \"eastus2\",",
+            "    \"Sku\": {",
+            "      \"Name\": \"Standard_LRS\",",
+            "      \"Tier\": \"Standard\"",
+            "    },",
+            "    \"Kind\": \"StorageV2\",",
+            "    \"AllowBlobPublicAccess\": true,",
+            "    \"EnableHttpsTrafficOnly\": true,",
+            "    \"MinimumTlsVersion\": \"TLS1_2\",",
+            "    \"PublicNetworkAccess\": \"Enabled\",",
+            "    \"NetworkRuleSet\": {",
+            "      \"Bypass\": \"AzureServices\",",
+            "      \"DefaultAction\": \"Allow\",",
+            "      \"IpRules\": [],",
+            "      \"VirtualNetworkRules\": []",
+            "    },",
+            "    \"Tags\": {",
+            "      \"env\": \"lab\"",
+            "    },",
+            "    \"Containers\": [",
+            "      {",
+            "        \"Name\": \"downloads\",",
+            "        \"PublicAccess\": \"Blob\"",
+            "      },",
+            "      {",
+            "        \"Name\": \"private\",",
+            "        \"PublicAccess\": \"None\""
+          ]
+        },
+        "file": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json",
+        "line": 151,
+        "pointer": "/4/Containers/0"
+      },
+      "status": "active",
+      "title": "Storage readable anonymously through ACL grants or container access levels"
+    }
+  ]
+}

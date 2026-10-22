@@ -1,0 +1,67 @@
+diff --git a/snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json b/snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json
+--- a/snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json
++++ b/snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json
+@@ -13,7 +13,7 @@
+       },
+       {
+         "Category": "Security",
+-        "Enabled": false
++        "Enabled": true
+       },
+       {
+         "Category": "ServiceHealth",
+diff --git a/snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json b/snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json
+--- a/snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json
++++ b/snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json
+@@ -63,7 +63,8 @@
+           "27017"
+         ],
+         "SourceAddressPrefix": [
+-          "Internet"
++          "203.0.113.0/26",
++          "198.51.100.16/28"
+         ],
+         "DestinationAddressPrefix": [
+           "*"
+@@ -173,7 +174,8 @@
+           "3380-3389"
+         ],
+         "SourceAddressPrefix": [
+-          "*"
++          "203.0.113.0/26",
++          "198.51.100.16/28"
+         ],
+         "DestinationAddressPrefix": [
+           "*"
+@@ -302,7 +304,8 @@
+           "22"
+         ],
+         "SourceAddressPrefix": [
+-          "*"
++          "203.0.113.0/26",
++          "198.51.100.16/28"
+         ],
+         "DestinationAddressPrefix": [
+           "*"
+@@ -412,7 +415,8 @@
+           "3389"
+         ],
+         "SourceAddressPrefix": [
+-          "0.0.0.0/0"
++          "203.0.113.0/26",
++          "198.51.100.16/28"
+         ],
+         "DestinationAddressPrefix": [
+           "*"
+diff --git a/snapshots/azure-lab-2026-10/Get-AzStorageAccount.json b/snapshots/azure-lab-2026-10/Get-AzStorageAccount.json
+--- a/snapshots/azure-lab-2026-10/Get-AzStorageAccount.json
++++ b/snapshots/azure-lab-2026-10/Get-AzStorageAccount.json
+@@ -134,7 +134,7 @@
+       "Tier": "Standard"
+     },
+     "Kind": "StorageV2",
+-    "AllowBlobPublicAccess": true,
++    "AllowBlobPublicAccess": false,
+     "EnableHttpsTrafficOnly": true,
+     "MinimumTlsVersion": "TLS1_2",
+     "PublicNetworkAccess": "Enabled",

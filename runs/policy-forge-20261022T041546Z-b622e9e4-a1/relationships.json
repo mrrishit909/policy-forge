@@ -1,0 +1,131 @@
+{
+  "edges": [
+    {
+      "from": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-jump",
+      "kind": "uses_network_group",
+      "to": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-jump"
+    },
+    {
+      "from": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-jump",
+      "kind": "network_interface",
+      "to": "azure:unsupported:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-jump"
+    },
+    {
+      "from": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-ops",
+      "kind": "uses_network_group",
+      "to": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-web"
+    },
+    {
+      "from": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-ops",
+      "kind": "network_interface",
+      "to": "azure:unsupported:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-ops"
+    },
+    {
+      "from": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-rdp",
+      "kind": "uses_network_group",
+      "to": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-rdp"
+    },
+    {
+      "from": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-rdp",
+      "kind": "network_interface",
+      "to": "azure:unsupported:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-rdp"
+    },
+    {
+      "from": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-worker",
+      "kind": "uses_network_group",
+      "to": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-data"
+    },
+    {
+      "from": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-worker",
+      "kind": "network_interface",
+      "to": "azure:unsupported:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-worker"
+    },
+    {
+      "from": "azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-000000000001/providers/microsoft.insights/diagnosticSettings/activity-to-storage",
+      "kind": "delivers_logs_to",
+      "to": "azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlabaudit"
+    },
+    {
+      "from": "azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.KeyVault/vaults/kv-fh-lab/providers/microsoft.insights/diagnosticSettings/kv-diagnostics",
+      "kind": "monitors",
+      "to": "azure:unsupported:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.KeyVault/vaults/kv-fh-lab"
+    },
+    {
+      "from": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000701",
+      "kind": "assigned_role",
+      "to": "azure:role_definition:8e3af657-a8ff-443c-a75c-2fe8c4bcb635"
+    },
+    {
+      "from": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000702",
+      "kind": "assigned_role",
+      "to": "azure:role_definition:8e3af657-a8ff-443c-a75c-2fe8c4bcb635"
+    },
+    {
+      "from": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000703",
+      "kind": "assigned_to",
+      "to": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-ops"
+    },
+    {
+      "from": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000703",
+      "kind": "assigned_role",
+      "to": "azure:role_definition:8e3af657-a8ff-443c-a75c-2fe8c4bcb635"
+    },
+    {
+      "from": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000704",
+      "kind": "assigned_role",
+      "to": "azure:role_definition:b24988ac-6180-42a0-ab88-20f7382dd24c"
+    },
+    {
+      "from": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000705",
+      "kind": "assigned_to",
+      "to": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-rdp"
+    },
+    {
+      "from": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000705",
+      "kind": "assigned_role",
+      "to": "azure:role_definition:acdd72a7-3385-48ef-bd42-f606fba81ae7"
+    },
+    {
+      "from": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000707",
+      "kind": "assigned_role",
+      "to": "azure:role_definition:18d7d88d-d35e-4fb5-a5c3-7773c20a72d9"
+    },
+    {
+      "from": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000708",
+      "kind": "assigned_to",
+      "to": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-worker"
+    },
+    {
+      "from": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000708",
+      "kind": "assigned_role",
+      "to": "azure:role_definition:b24988ac-6180-42a0-ab88-20f7382dd24c"
+    },
+    {
+      "from": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-00000000070a",
+      "kind": "assigned_role",
+      "to": "azure:role_definition:00000000-0000-4000-9000-000000000901"
+    },
+    {
+      "from": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000706",
+      "kind": "assigned_role",
+      "to": "azure:role_definition:8e3af657-a8ff-443c-a75c-2fe8c4bcb635"
+    }
+  ],
+  "unresolved": [
+    {
+      "from": "azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-000000000001/providers/microsoft.insights/diagnosticSettings/activity-to-workspace",
+      "kind": "delivers_logs_to",
+      "target": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.OperationalInsights/workspaces/law-fh-lab"
+    },
+    {
+      "from": "azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.KeyVault/vaults/kv-fh-lab/providers/microsoft.insights/diagnosticSettings/kv-diagnostics",
+      "kind": "delivers_logs_to",
+      "target": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.OperationalInsights/workspaces/law-fh-lab"
+    },
+    {
+      "from": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000709",
+      "kind": "assigned_role",
+      "target": "azure:role_definition:00000000-0000-4000-9000-0000000009ff"
+    }
+  ]
+}

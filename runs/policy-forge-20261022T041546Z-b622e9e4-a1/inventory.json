@@ -1,0 +1,2107 @@
+{
+  "provider": "azure",
+  "redactions": [
+    {
+      "action": "masked",
+      "path": "/properties/tags/notes",
+      "reason": "sensitive-value",
+      "resource_id": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-ops"
+    }
+  ],
+  "resources": [
+    {
+      "id": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-jump",
+      "name": "vm-fh-jump",
+      "native_type": "Microsoft.Compute/virtualMachines",
+      "properties": {
+        "identity_principal_id": null,
+        "identity_type": null,
+        "network_groups": [
+          "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-jump"
+        ],
+        "public_ips": [
+          "203.0.113.41"
+        ],
+        "raw": {
+          "identity": "snapshots/azure-lab-2026-10/Get-AzVM.json#/0/Identity",
+          "network_groups": "snapshots/azure-lab-2026-10/Get-AzVM.json#/0/NetworkProfile/NetworkInterfaces"
+        },
+        "tags": {
+          "owner": "lab-team"
+        }
+      },
+      "provider": "azure",
+      "refs": [
+        {
+          "kind": "network_interface",
+          "target": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-jump"
+        },
+        {
+          "kind": "uses_network_group",
+          "target": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-jump"
+        }
+      ],
+      "region": "eastus2",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzVM.json",
+        "line": 2,
+        "pointer": "/0"
+      },
+      "type": "compute_instance"
+    },
+    {
+      "id": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-ops",
+      "name": "vm-fh-ops",
+      "native_type": "Microsoft.Compute/virtualMachines",
+      "properties": {
+        "identity_principal_id": "00000000-0000-4000-9000-000000000601",
+        "identity_type": "SystemAssigned",
+        "network_groups": [
+          "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-web"
+        ],
+        "public_ips": [
+          "203.0.113.40"
+        ],
+        "raw": {
+          "identity": "snapshots/azure-lab-2026-10/Get-AzVM.json#/1/Identity",
+          "network_groups": "snapshots/azure-lab-2026-10/Get-AzVM.json#/1/NetworkProfile/NetworkInterfaces"
+        },
+        "tags": {
+          "notes": "[redacted]",
+          "owner": "lab-team"
+        }
+      },
+      "provider": "azure",
+      "refs": [
+        {
+          "kind": "network_interface",
+          "target": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-ops"
+        },
+        {
+          "kind": "uses_network_group",
+          "target": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-web"
+        }
+      ],
+      "region": "eastus2",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzVM.json",
+        "line": 40,
+        "pointer": "/1"
+      },
+      "type": "compute_instance"
+    },
+    {
+      "id": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-rdp",
+      "name": "vm-fh-rdp",
+      "native_type": "Microsoft.Compute/virtualMachines",
+      "properties": {
+        "identity_principal_id": "00000000-0000-4000-9000-000000000603",
+        "identity_type": "SystemAssigned",
+        "network_groups": [
+          "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-rdp"
+        ],
+        "public_ips": [
+          "203.0.113.42"
+        ],
+        "raw": {
+          "identity": "snapshots/azure-lab-2026-10/Get-AzVM.json#/2/Identity",
+          "network_groups": "snapshots/azure-lab-2026-10/Get-AzVM.json#/2/NetworkProfile/NetworkInterfaces"
+        },
+        "tags": {
+          "owner": "lab-team"
+        }
+      },
+      "provider": "azure",
+      "refs": [
+        {
+          "kind": "network_interface",
+          "target": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-rdp"
+        },
+        {
+          "kind": "uses_network_group",
+          "target": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-rdp"
+        }
+      ],
+      "region": "eastus2",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzVM.json",
+        "line": 83,
+        "pointer": "/2"
+      },
+      "type": "compute_instance"
+    },
+    {
+      "id": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-worker",
+      "name": "vm-fh-worker",
+      "native_type": "Microsoft.Compute/virtualMachines",
+      "properties": {
+        "identity_principal_id": "00000000-0000-4000-9000-000000000602",
+        "identity_type": "SystemAssigned",
+        "network_groups": [
+          "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-data"
+        ],
+        "public_ips": [],
+        "raw": {
+          "identity": "snapshots/azure-lab-2026-10/Get-AzVM.json#/3/Identity",
+          "network_groups": "snapshots/azure-lab-2026-10/Get-AzVM.json#/3/NetworkProfile/NetworkInterfaces"
+        },
+        "tags": {
+          "owner": "data-team"
+        }
+      },
+      "provider": "azure",
+      "refs": [
+        {
+          "kind": "network_interface",
+          "target": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-worker"
+        },
+        {
+          "kind": "uses_network_group",
+          "target": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-data"
+        }
+      ],
+      "region": "eastus2",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzVM.json",
+        "line": 125,
+        "pointer": "/3"
+      },
+      "type": "compute_instance"
+    },
+    {
+      "id": "azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-000000000001/providers/microsoft.insights/diagnosticSettings/activity-to-storage",
+      "name": "activity-to-storage",
+      "native_type": "Microsoft.Insights/diagnosticSettings",
+      "properties": {
+        "categories": [
+          {
+            "category": "Administrative",
+            "enabled": true,
+            "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/0/Log/0"
+          },
+          {
+            "category": "Security",
+            "enabled": false,
+            "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/0/Log/1"
+          },
+          {
+            "category": "ServiceHealth",
+            "enabled": true,
+            "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/0/Log/2"
+          },
+          {
+            "category": "Alert",
+            "enabled": true,
+            "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/0/Log/3"
+          },
+          {
+            "category": "Recommendation",
+            "enabled": false,
+            "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/0/Log/4"
+          },
+          {
+            "category": "Policy",
+            "enabled": true,
+            "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/0/Log/5"
+          },
+          {
+            "category": "Autoscale",
+            "enabled": false,
+            "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/0/Log/6"
+          },
+          {
+            "category": "ResourceHealth",
+            "enabled": false,
+            "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/0/Log/7"
+          }
+        ],
+        "destinations": {
+          "event_hub_rule_id": null,
+          "storage_account_id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlabaudit",
+          "workspace_id": null
+        },
+        "raw": {
+          "categories": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/0/Log",
+          "destinations": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/0/StorageAccountId"
+        },
+        "scope_kind": "subscription",
+        "target_resource_id": "/subscriptions/00000000-0000-4000-8000-000000000001"
+      },
+      "provider": "azure",
+      "refs": [
+        {
+          "kind": "delivers_logs_to",
+          "target": "azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlabaudit"
+        }
+      ],
+      "region": "global",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json",
+        "line": 2,
+        "pointer": "/0"
+      },
+      "type": "diagnostic_setting"
+    },
+    {
+      "id": "azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-000000000001/providers/microsoft.insights/diagnosticSettings/activity-to-workspace",
+      "name": "activity-to-workspace",
+      "native_type": "Microsoft.Insights/diagnosticSettings",
+      "properties": {
+        "categories": [
+          {
+            "category": "Administrative",
+            "enabled": true,
+            "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/1/Log/0"
+          },
+          {
+            "category": "Security",
+            "enabled": true,
+            "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/1/Log/1"
+          },
+          {
+            "category": "ServiceHealth",
+            "enabled": false,
+            "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/1/Log/2"
+          },
+          {
+            "category": "Alert",
+            "enabled": true,
+            "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/1/Log/3"
+          },
+          {
+            "category": "Recommendation",
+            "enabled": false,
+            "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/1/Log/4"
+          },
+          {
+            "category": "Policy",
+            "enabled": true,
+            "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/1/Log/5"
+          },
+          {
+            "category": "Autoscale",
+            "enabled": false,
+            "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/1/Log/6"
+          },
+          {
+            "category": "ResourceHealth",
+            "enabled": false,
+            "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/1/Log/7"
+          }
+        ],
+        "destinations": {
+          "event_hub_rule_id": null,
+          "storage_account_id": null,
+          "workspace_id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.OperationalInsights/workspaces/law-fh-lab"
+        },
+        "raw": {
+          "categories": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/1/Log",
+          "destinations": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/1/StorageAccountId"
+        },
+        "scope_kind": "subscription",
+        "target_resource_id": "/subscriptions/00000000-0000-4000-8000-000000000001"
+      },
+      "provider": "azure",
+      "refs": [
+        {
+          "kind": "delivers_logs_to",
+          "target": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.OperationalInsights/workspaces/law-fh-lab"
+        }
+      ],
+      "region": "global",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json",
+        "line": 44,
+        "pointer": "/1"
+      },
+      "type": "diagnostic_setting"
+    },
+    {
+      "id": "azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.KeyVault/vaults/kv-fh-lab/providers/microsoft.insights/diagnosticSettings/kv-diagnostics",
+      "name": "kv-diagnostics",
+      "native_type": "Microsoft.Insights/diagnosticSettings",
+      "properties": {
+        "categories": [
+          {
+            "category": "AuditEvent",
+            "enabled": true,
+            "raw": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/2/Log/0"
+          }
+        ],
+        "destinations": {
+          "event_hub_rule_id": null,
+          "storage_account_id": null,
+          "workspace_id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.OperationalInsights/workspaces/law-fh-lab"
+        },
+        "raw": {
+          "categories": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/2/Log",
+          "destinations": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json#/2/StorageAccountId"
+        },
+        "scope_kind": "resource",
+        "target_resource_id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.KeyVault/vaults/kv-fh-lab"
+      },
+      "provider": "azure",
+      "refs": [
+        {
+          "kind": "delivers_logs_to",
+          "target": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.OperationalInsights/workspaces/law-fh-lab"
+        },
+        {
+          "kind": "monitors",
+          "target": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.KeyVault/vaults/kv-fh-lab"
+        }
+      ],
+      "region": "global",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json",
+        "line": 86,
+        "pointer": "/2"
+      },
+      "type": "diagnostic_setting"
+    },
+    {
+      "id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-data",
+      "name": "nsg-fh-data",
+      "native_type": "Microsoft.Network/networkSecurityGroups",
+      "properties": {
+        "ingress": [
+          {
+            "action": "allow",
+            "cidrs": [],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 1433,
+            "port_to": 1433,
+            "prefix_lists": [],
+            "priority": 100,
+            "protocol": "tcp",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/0/SecurityRules/0",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": [
+              "VirtualNetwork"
+            ]
+          },
+          {
+            "action": "allow",
+            "cidrs": [
+              "10.0.0.0/8"
+            ],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 5432,
+            "port_to": 5432,
+            "prefix_lists": [],
+            "priority": 110,
+            "protocol": "tcp",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/0/SecurityRules/1",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": []
+          },
+          {
+            "action": "allow",
+            "cidrs": [],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 3306,
+            "port_to": 3306,
+            "prefix_lists": [],
+            "priority": 150,
+            "protocol": "tcp",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/0/SecurityRules/2",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": [
+              "Internet"
+            ]
+          },
+          {
+            "action": "allow",
+            "cidrs": [],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 27017,
+            "port_to": 27017,
+            "prefix_lists": [],
+            "priority": 150,
+            "protocol": "tcp",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/0/SecurityRules/2",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": [
+              "Internet"
+            ]
+          },
+          {
+            "action": "allow",
+            "cidrs": [],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 0,
+            "port_to": 65535,
+            "prefix_lists": [],
+            "priority": 65000,
+            "protocol": "all",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/0/DefaultSecurityRules/0",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": [
+              "VirtualNetwork"
+            ]
+          },
+          {
+            "action": "allow",
+            "cidrs": [],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 0,
+            "port_to": 65535,
+            "prefix_lists": [],
+            "priority": 65001,
+            "protocol": "all",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/0/DefaultSecurityRules/1",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": [
+              "AzureLoadBalancer"
+            ]
+          },
+          {
+            "action": "deny",
+            "cidrs": [],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 0,
+            "port_to": 65535,
+            "prefix_lists": [],
+            "priority": 65500,
+            "protocol": "all",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/0/DefaultSecurityRules/2",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": [
+              "*"
+            ]
+          }
+        ],
+        "tags": {}
+      },
+      "provider": "azure",
+      "refs": [],
+      "region": "eastus2",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json",
+        "line": 2,
+        "pointer": "/0"
+      },
+      "type": "network_security_group"
+    },
+    {
+      "id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-edge",
+      "name": "nsg-fh-edge",
+      "native_type": "Microsoft.Network/networkSecurityGroups",
+      "properties": {
+        "ingress": [
+          {
+            "action": "allow",
+            "cidrs": [],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 3380,
+            "port_to": 3389,
+            "prefix_lists": [],
+            "priority": 100,
+            "protocol": "tcp",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/1/SecurityRules/0",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": [
+              "*"
+            ]
+          },
+          {
+            "action": "allow",
+            "cidrs": [],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 3390,
+            "port_to": 3400,
+            "prefix_lists": [],
+            "priority": 110,
+            "protocol": "tcp",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/1/SecurityRules/1",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": [
+              "*"
+            ]
+          },
+          {
+            "action": "allow",
+            "cidrs": [],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 0,
+            "port_to": 65535,
+            "prefix_lists": [],
+            "priority": 65000,
+            "protocol": "all",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/1/DefaultSecurityRules/0",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": [
+              "VirtualNetwork"
+            ]
+          },
+          {
+            "action": "allow",
+            "cidrs": [],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 0,
+            "port_to": 65535,
+            "prefix_lists": [],
+            "priority": 65001,
+            "protocol": "all",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/1/DefaultSecurityRules/1",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": [
+              "AzureLoadBalancer"
+            ]
+          },
+          {
+            "action": "deny",
+            "cidrs": [],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 0,
+            "port_to": 65535,
+            "prefix_lists": [],
+            "priority": 65500,
+            "protocol": "all",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/1/DefaultSecurityRules/2",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": [
+              "*"
+            ]
+          }
+        ],
+        "tags": {}
+      },
+      "provider": "azure",
+      "refs": [],
+      "region": "eastus2",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json",
+        "line": 159,
+        "pointer": "/1"
+      },
+      "type": "network_security_group"
+    },
+    {
+      "id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-jump",
+      "name": "nsg-fh-jump",
+      "native_type": "Microsoft.Network/networkSecurityGroups",
+      "properties": {
+        "ingress": [
+          {
+            "action": "allow",
+            "cidrs": [],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 22,
+            "port_to": 22,
+            "prefix_lists": [],
+            "priority": 100,
+            "protocol": "tcp",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/2/SecurityRules/0",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": [
+              "*"
+            ]
+          },
+          {
+            "action": "allow",
+            "cidrs": [],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 0,
+            "port_to": 65535,
+            "prefix_lists": [],
+            "priority": 65000,
+            "protocol": "all",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/2/DefaultSecurityRules/0",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": [
+              "VirtualNetwork"
+            ]
+          },
+          {
+            "action": "allow",
+            "cidrs": [],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 0,
+            "port_to": 65535,
+            "prefix_lists": [],
+            "priority": 65001,
+            "protocol": "all",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/2/DefaultSecurityRules/1",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": [
+              "AzureLoadBalancer"
+            ]
+          },
+          {
+            "action": "deny",
+            "cidrs": [],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 0,
+            "port_to": 65535,
+            "prefix_lists": [],
+            "priority": 65500,
+            "protocol": "all",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/2/DefaultSecurityRules/2",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": [
+              "*"
+            ]
+          }
+        ],
+        "tags": {}
+      },
+      "provider": "azure",
+      "refs": [],
+      "region": "eastus2",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json",
+        "line": 288,
+        "pointer": "/2"
+      },
+      "type": "network_security_group"
+    },
+    {
+      "id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-rdp",
+      "name": "nsg-fh-rdp",
+      "native_type": "Microsoft.Network/networkSecurityGroups",
+      "properties": {
+        "ingress": [
+          {
+            "action": "allow",
+            "cidrs": [
+              "0.0.0.0/0"
+            ],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 3389,
+            "port_to": 3389,
+            "prefix_lists": [],
+            "priority": 110,
+            "protocol": "all",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/3/SecurityRules/0",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": []
+          },
+          {
+            "action": "allow",
+            "cidrs": [],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 0,
+            "port_to": 65535,
+            "prefix_lists": [],
+            "priority": 65000,
+            "protocol": "all",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/3/DefaultSecurityRules/0",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": [
+              "VirtualNetwork"
+            ]
+          },
+          {
+            "action": "allow",
+            "cidrs": [],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 0,
+            "port_to": 65535,
+            "prefix_lists": [],
+            "priority": 65001,
+            "protocol": "all",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/3/DefaultSecurityRules/1",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": [
+              "AzureLoadBalancer"
+            ]
+          },
+          {
+            "action": "deny",
+            "cidrs": [],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 0,
+            "port_to": 65535,
+            "prefix_lists": [],
+            "priority": 65500,
+            "protocol": "all",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/3/DefaultSecurityRules/2",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": [
+              "*"
+            ]
+          }
+        ],
+        "tags": {}
+      },
+      "provider": "azure",
+      "refs": [],
+      "region": "eastus2",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json",
+        "line": 398,
+        "pointer": "/3"
+      },
+      "type": "network_security_group"
+    },
+    {
+      "id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-vpn",
+      "name": "nsg-fh-vpn",
+      "native_type": "Microsoft.Network/networkSecurityGroups",
+      "properties": {
+        "ingress": [
+          {
+            "action": "allow",
+            "cidrs": [],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": null,
+            "port_to": null,
+            "prefix_lists": [],
+            "priority": 100,
+            "protocol": "esp",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/4/SecurityRules/0",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": [
+              "Internet"
+            ]
+          },
+          {
+            "action": "allow",
+            "cidrs": [],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 6379,
+            "port_to": 6379,
+            "prefix_lists": [],
+            "priority": 120,
+            "protocol": "tcp",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/4/SecurityRules/1",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": [
+              "AzureCloud"
+            ]
+          },
+          {
+            "action": "allow",
+            "cidrs": [],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 0,
+            "port_to": 65535,
+            "prefix_lists": [],
+            "priority": 65000,
+            "protocol": "all",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/4/DefaultSecurityRules/0",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": [
+              "VirtualNetwork"
+            ]
+          },
+          {
+            "action": "allow",
+            "cidrs": [],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 0,
+            "port_to": 65535,
+            "prefix_lists": [],
+            "priority": 65001,
+            "protocol": "all",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/4/DefaultSecurityRules/1",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": [
+              "AzureLoadBalancer"
+            ]
+          },
+          {
+            "action": "deny",
+            "cidrs": [],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 0,
+            "port_to": 65535,
+            "prefix_lists": [],
+            "priority": 65500,
+            "protocol": "all",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/4/DefaultSecurityRules/2",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": [
+              "*"
+            ]
+          }
+        ],
+        "tags": {}
+      },
+      "provider": "azure",
+      "refs": [],
+      "region": "eastus2",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json",
+        "line": 508,
+        "pointer": "/4"
+      },
+      "type": "network_security_group"
+    },
+    {
+      "id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-web",
+      "name": "nsg-fh-web",
+      "native_type": "Microsoft.Network/networkSecurityGroups",
+      "properties": {
+        "ingress": [
+          {
+            "action": "allow",
+            "cidrs": [],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 443,
+            "port_to": 443,
+            "prefix_lists": [],
+            "priority": 100,
+            "protocol": "tcp",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/5/SecurityRules/0",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": [
+              "Internet"
+            ]
+          },
+          {
+            "action": "deny",
+            "cidrs": [],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 3389,
+            "port_to": 3389,
+            "prefix_lists": [],
+            "priority": 200,
+            "protocol": "tcp",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/5/SecurityRules/1",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": [
+              "*"
+            ]
+          },
+          {
+            "action": "allow",
+            "cidrs": [],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 3389,
+            "port_to": 3389,
+            "prefix_lists": [],
+            "priority": 300,
+            "protocol": "tcp",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/5/SecurityRules/2",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": [
+              "Internet"
+            ]
+          },
+          {
+            "action": "allow",
+            "cidrs": [],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 0,
+            "port_to": 65535,
+            "prefix_lists": [],
+            "priority": 65000,
+            "protocol": "all",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/5/DefaultSecurityRules/0",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": [
+              "VirtualNetwork"
+            ]
+          },
+          {
+            "action": "allow",
+            "cidrs": [],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 0,
+            "port_to": 65535,
+            "prefix_lists": [],
+            "priority": 65001,
+            "protocol": "all",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/5/DefaultSecurityRules/1",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": [
+              "AzureLoadBalancer"
+            ]
+          },
+          {
+            "action": "deny",
+            "cidrs": [],
+            "destination_prefixes": [
+              "*"
+            ],
+            "port_from": 0,
+            "port_to": 65535,
+            "prefix_lists": [],
+            "priority": 65500,
+            "protocol": "all",
+            "raw": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json#/5/DefaultSecurityRules/2",
+            "source_groups": [],
+            "source_port_ranges": [
+              "*"
+            ],
+            "source_tags": [
+              "*"
+            ]
+          }
+        ],
+        "tags": {}
+      },
+      "provider": "azure",
+      "refs": [],
+      "region": "eastus2",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json",
+        "line": 637,
+        "pointer": "/5"
+      },
+      "type": "network_security_group"
+    },
+    {
+      "id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000701",
+      "name": "00000000-0000-4000-9000-000000000701",
+      "native_type": "Microsoft.Authorization/roleAssignments",
+      "properties": {
+        "has_condition": false,
+        "principal_id": "00000000-0000-4000-9000-000000000801",
+        "principal_name": "breakglass@fernhollow.example",
+        "principal_type": "User",
+        "raw": {
+          "condition": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/0/Condition",
+          "principal": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/0/ObjectId",
+          "role": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/0/RoleDefinitionId",
+          "scope": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/0/Scope"
+        },
+        "role_definition_id": "8e3af657-a8ff-443c-a75c-2fe8c4bcb635",
+        "role_name": "Owner",
+        "scope": "/subscriptions/00000000-0000-4000-8000-000000000001",
+        "scope_level": "subscription"
+      },
+      "provider": "azure",
+      "refs": [
+        {
+          "kind": "assigned_role",
+          "target": "azure:role_definition:8e3af657-a8ff-443c-a75c-2fe8c4bcb635"
+        }
+      ],
+      "region": "global",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+        "line": 2,
+        "pointer": "/0"
+      },
+      "type": "role_assignment"
+    },
+    {
+      "id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000702",
+      "name": "00000000-0000-4000-9000-000000000702",
+      "native_type": "Microsoft.Authorization/roleAssignments",
+      "properties": {
+        "has_condition": false,
+        "principal_id": "00000000-0000-4000-9000-000000000802",
+        "principal_name": "dana.lab@fernhollow.example",
+        "principal_type": "User",
+        "raw": {
+          "condition": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/1/Condition",
+          "principal": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/1/ObjectId",
+          "role": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/1/RoleDefinitionId",
+          "scope": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/1/Scope"
+        },
+        "role_definition_id": "8e3af657-a8ff-443c-a75c-2fe8c4bcb635",
+        "role_name": "Owner",
+        "scope": "/subscriptions/00000000-0000-4000-8000-000000000001",
+        "scope_level": "subscription"
+      },
+      "provider": "azure",
+      "refs": [
+        {
+          "kind": "assigned_role",
+          "target": "azure:role_definition:8e3af657-a8ff-443c-a75c-2fe8c4bcb635"
+        }
+      ],
+      "region": "global",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+        "line": 17,
+        "pointer": "/1"
+      },
+      "type": "role_assignment"
+    },
+    {
+      "id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000703",
+      "name": "00000000-0000-4000-9000-000000000703",
+      "native_type": "Microsoft.Authorization/roleAssignments",
+      "properties": {
+        "has_condition": false,
+        "principal_id": "00000000-0000-4000-9000-000000000601",
+        "principal_name": "vm-fh-ops",
+        "principal_type": "ServicePrincipal",
+        "raw": {
+          "condition": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/2/Condition",
+          "principal": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/2/ObjectId",
+          "role": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/2/RoleDefinitionId",
+          "scope": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/2/Scope"
+        },
+        "role_definition_id": "8e3af657-a8ff-443c-a75c-2fe8c4bcb635",
+        "role_name": "Owner",
+        "scope": "/subscriptions/00000000-0000-4000-8000-000000000001",
+        "scope_level": "subscription"
+      },
+      "provider": "azure",
+      "refs": [
+        {
+          "kind": "assigned_role",
+          "target": "azure:role_definition:8e3af657-a8ff-443c-a75c-2fe8c4bcb635"
+        },
+        {
+          "kind": "assigned_to",
+          "target": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-ops"
+        }
+      ],
+      "region": "global",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+        "line": 32,
+        "pointer": "/2"
+      },
+      "type": "role_assignment"
+    },
+    {
+      "id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000704",
+      "name": "00000000-0000-4000-9000-000000000704",
+      "native_type": "Microsoft.Authorization/roleAssignments",
+      "properties": {
+        "has_condition": false,
+        "principal_id": "00000000-0000-4000-9000-000000000803",
+        "principal_name": "lab-engineers",
+        "principal_type": "Group",
+        "raw": {
+          "condition": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/3/Condition",
+          "principal": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/3/ObjectId",
+          "role": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/3/RoleDefinitionId",
+          "scope": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/3/Scope"
+        },
+        "role_definition_id": "b24988ac-6180-42a0-ab88-20f7382dd24c",
+        "role_name": "Contributor",
+        "scope": "/subscriptions/00000000-0000-4000-8000-000000000001",
+        "scope_level": "subscription"
+      },
+      "provider": "azure",
+      "refs": [
+        {
+          "kind": "assigned_role",
+          "target": "azure:role_definition:b24988ac-6180-42a0-ab88-20f7382dd24c"
+        }
+      ],
+      "region": "global",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+        "line": 47,
+        "pointer": "/3"
+      },
+      "type": "role_assignment"
+    },
+    {
+      "id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000705",
+      "name": "00000000-0000-4000-9000-000000000705",
+      "native_type": "Microsoft.Authorization/roleAssignments",
+      "properties": {
+        "has_condition": false,
+        "principal_id": "00000000-0000-4000-9000-000000000603",
+        "principal_name": "vm-fh-rdp",
+        "principal_type": "ServicePrincipal",
+        "raw": {
+          "condition": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/4/Condition",
+          "principal": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/4/ObjectId",
+          "role": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/4/RoleDefinitionId",
+          "scope": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/4/Scope"
+        },
+        "role_definition_id": "acdd72a7-3385-48ef-bd42-f606fba81ae7",
+        "role_name": "Reader",
+        "scope": "/subscriptions/00000000-0000-4000-8000-000000000001",
+        "scope_level": "subscription"
+      },
+      "provider": "azure",
+      "refs": [
+        {
+          "kind": "assigned_role",
+          "target": "azure:role_definition:acdd72a7-3385-48ef-bd42-f606fba81ae7"
+        },
+        {
+          "kind": "assigned_to",
+          "target": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-rdp"
+        }
+      ],
+      "region": "global",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+        "line": 62,
+        "pointer": "/4"
+      },
+      "type": "role_assignment"
+    },
+    {
+      "id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000707",
+      "name": "00000000-0000-4000-9000-000000000707",
+      "native_type": "Microsoft.Authorization/roleAssignments",
+      "properties": {
+        "has_condition": true,
+        "principal_id": "00000000-0000-4000-9000-000000000805",
+        "principal_name": "ira.lab@fernhollow.example",
+        "principal_type": "User",
+        "raw": {
+          "condition": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/6/Condition",
+          "principal": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/6/ObjectId",
+          "role": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/6/RoleDefinitionId",
+          "scope": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/6/Scope"
+        },
+        "role_definition_id": "18d7d88d-d35e-4fb5-a5c3-7773c20a72d9",
+        "role_name": "User Access Administrator",
+        "scope": "/subscriptions/00000000-0000-4000-8000-000000000001",
+        "scope_level": "subscription"
+      },
+      "provider": "azure",
+      "refs": [
+        {
+          "kind": "assigned_role",
+          "target": "azure:role_definition:18d7d88d-d35e-4fb5-a5c3-7773c20a72d9"
+        }
+      ],
+      "region": "global",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+        "line": 92,
+        "pointer": "/6"
+      },
+      "type": "role_assignment"
+    },
+    {
+      "id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000708",
+      "name": "00000000-0000-4000-9000-000000000708",
+      "native_type": "Microsoft.Authorization/roleAssignments",
+      "properties": {
+        "has_condition": false,
+        "principal_id": "00000000-0000-4000-9000-000000000602",
+        "principal_name": "vm-fh-worker",
+        "principal_type": "ServicePrincipal",
+        "raw": {
+          "condition": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/7/Condition",
+          "principal": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/7/ObjectId",
+          "role": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/7/RoleDefinitionId",
+          "scope": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/7/Scope"
+        },
+        "role_definition_id": "b24988ac-6180-42a0-ab88-20f7382dd24c",
+        "role_name": "Contributor",
+        "scope": "/subscriptions/00000000-0000-4000-8000-000000000001",
+        "scope_level": "subscription"
+      },
+      "provider": "azure",
+      "refs": [
+        {
+          "kind": "assigned_role",
+          "target": "azure:role_definition:b24988ac-6180-42a0-ab88-20f7382dd24c"
+        },
+        {
+          "kind": "assigned_to",
+          "target": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-worker"
+        }
+      ],
+      "region": "global",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+        "line": 107,
+        "pointer": "/7"
+      },
+      "type": "role_assignment"
+    },
+    {
+      "id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000709",
+      "name": "00000000-0000-4000-9000-000000000709",
+      "native_type": "Microsoft.Authorization/roleAssignments",
+      "properties": {
+        "has_condition": false,
+        "principal_id": "00000000-0000-4000-9000-000000000806",
+        "principal_name": "former.contractor@fernhollow.example",
+        "principal_type": "User",
+        "raw": {
+          "condition": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/8/Condition",
+          "principal": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/8/ObjectId",
+          "role": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/8/RoleDefinitionId",
+          "scope": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/8/Scope"
+        },
+        "role_definition_id": "00000000-0000-4000-9000-0000000009ff",
+        "role_name": null,
+        "scope": "/subscriptions/00000000-0000-4000-8000-000000000001",
+        "scope_level": "subscription"
+      },
+      "provider": "azure",
+      "refs": [
+        {
+          "kind": "assigned_role",
+          "target": "azure:role_definition:00000000-0000-4000-9000-0000000009ff"
+        }
+      ],
+      "region": "global",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+        "line": 122,
+        "pointer": "/8"
+      },
+      "type": "role_assignment"
+    },
+    {
+      "id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-00000000070a",
+      "name": "00000000-0000-4000-9000-00000000070a",
+      "native_type": "Microsoft.Authorization/roleAssignments",
+      "properties": {
+        "has_condition": false,
+        "principal_id": "00000000-0000-4000-9000-000000000807",
+        "principal_name": "sam.lab@fernhollow.example",
+        "principal_type": "User",
+        "raw": {
+          "condition": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/9/Condition",
+          "principal": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/9/ObjectId",
+          "role": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/9/RoleDefinitionId",
+          "scope": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/9/Scope"
+        },
+        "role_definition_id": "00000000-0000-4000-9000-000000000901",
+        "role_name": "FH Lab Operator",
+        "scope": "/subscriptions/00000000-0000-4000-8000-000000000001",
+        "scope_level": "subscription"
+      },
+      "provider": "azure",
+      "refs": [
+        {
+          "kind": "assigned_role",
+          "target": "azure:role_definition:00000000-0000-4000-9000-000000000901"
+        }
+      ],
+      "region": "global",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+        "line": 137,
+        "pointer": "/9"
+      },
+      "type": "role_assignment"
+    },
+    {
+      "id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Authorization/roleAssignments/00000000-0000-4000-9000-000000000706",
+      "name": "00000000-0000-4000-9000-000000000706",
+      "native_type": "Microsoft.Authorization/roleAssignments",
+      "properties": {
+        "has_condition": false,
+        "principal_id": "00000000-0000-4000-9000-000000000804",
+        "principal_name": "rui.lab@fernhollow.example",
+        "principal_type": "User",
+        "raw": {
+          "condition": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/5/Condition",
+          "principal": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/5/ObjectId",
+          "role": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/5/RoleDefinitionId",
+          "scope": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json#/5/Scope"
+        },
+        "role_definition_id": "8e3af657-a8ff-443c-a75c-2fe8c4bcb635",
+        "role_name": "Owner",
+        "scope": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab",
+        "scope_level": "resource_group"
+      },
+      "provider": "azure",
+      "refs": [
+        {
+          "kind": "assigned_role",
+          "target": "azure:role_definition:8e3af657-a8ff-443c-a75c-2fe8c4bcb635"
+        }
+      ],
+      "region": "global",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+        "line": 77,
+        "pointer": "/5"
+      },
+      "type": "role_assignment"
+    },
+    {
+      "id": "azure:role_definition:00000000-0000-4000-9000-000000000901",
+      "name": "FH Lab Operator",
+      "native_type": "Microsoft.Authorization/roleDefinitions",
+      "properties": {
+        "assignable_scopes": [
+          "/subscriptions/00000000-0000-4000-8000-000000000001"
+        ],
+        "data_actions": [],
+        "is_custom": true,
+        "permissions": {
+          "parse_error": false,
+          "statements": [
+            {
+              "actions": [
+                "*"
+              ],
+              "effect": "Allow",
+              "has_condition": false,
+              "not_actions": null,
+              "not_principals": null,
+              "not_resources": null,
+              "policy": "role-definition",
+              "principals": null,
+              "raw": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json#/1/Actions",
+              "resources": [
+                "/subscriptions/00000000-0000-4000-8000-000000000001"
+              ],
+              "sid": null
+            }
+          ]
+        },
+        "role_name": "FH Lab Operator"
+      },
+      "provider": "azure",
+      "refs": [],
+      "region": "global",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json",
+        "line": 23,
+        "pointer": "/1"
+      },
+      "type": "role_definition"
+    },
+    {
+      "id": "azure:role_definition:00000000-0000-4000-9000-000000000902",
+      "name": "FH Network Reader",
+      "native_type": "Microsoft.Authorization/roleDefinitions",
+      "properties": {
+        "assignable_scopes": [
+          "/subscriptions/00000000-0000-4000-8000-000000000001"
+        ],
+        "data_actions": [],
+        "is_custom": true,
+        "permissions": {
+          "parse_error": false,
+          "statements": [
+            {
+              "actions": [
+                "Microsoft.Network/*/read"
+              ],
+              "effect": "Allow",
+              "has_condition": false,
+              "not_actions": null,
+              "not_principals": null,
+              "not_resources": null,
+              "policy": "role-definition",
+              "principals": null,
+              "raw": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json#/2/Actions",
+              "resources": [
+                "/subscriptions/00000000-0000-4000-8000-000000000001"
+              ],
+              "sid": null
+            }
+          ]
+        },
+        "role_name": "FH Network Reader"
+      },
+      "provider": "azure",
+      "refs": [],
+      "region": "global",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json",
+        "line": 40,
+        "pointer": "/2"
+      },
+      "type": "role_definition"
+    },
+    {
+      "id": "azure:role_definition:00000000-0000-4000-9000-000000000903",
+      "name": "FH Restricted Ops",
+      "native_type": "Microsoft.Authorization/roleDefinitions",
+      "properties": {
+        "assignable_scopes": [
+          "/subscriptions/00000000-0000-4000-8000-000000000001"
+        ],
+        "data_actions": [],
+        "is_custom": true,
+        "permissions": {
+          "parse_error": false,
+          "statements": [
+            {
+              "actions": [
+                "*"
+              ],
+              "effect": "Allow",
+              "has_condition": false,
+              "not_actions": [
+                "Microsoft.Authorization/*"
+              ],
+              "not_principals": null,
+              "not_resources": null,
+              "policy": "role-definition",
+              "principals": null,
+              "raw": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json#/3/Actions",
+              "resources": [
+                "/subscriptions/00000000-0000-4000-8000-000000000001"
+              ],
+              "sid": null
+            }
+          ]
+        },
+        "role_name": "FH Restricted Ops"
+      },
+      "provider": "azure",
+      "refs": [],
+      "region": "global",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json",
+        "line": 57,
+        "pointer": "/3"
+      },
+      "type": "role_definition"
+    },
+    {
+      "id": "azure:role_definition:00000000-0000-4000-9000-000000000904",
+      "name": "FH Storage Admin",
+      "native_type": "Microsoft.Authorization/roleDefinitions",
+      "properties": {
+        "assignable_scopes": [
+          "/subscriptions/00000000-0000-4000-8000-000000000001"
+        ],
+        "data_actions": [],
+        "is_custom": true,
+        "permissions": {
+          "parse_error": false,
+          "statements": [
+            {
+              "actions": [
+                "Microsoft.Storage/*"
+              ],
+              "effect": "Allow",
+              "has_condition": false,
+              "not_actions": null,
+              "not_principals": null,
+              "not_resources": null,
+              "policy": "role-definition",
+              "principals": null,
+              "raw": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json#/4/Actions",
+              "resources": [
+                "/subscriptions/00000000-0000-4000-8000-000000000001"
+              ],
+              "sid": null
+            }
+          ]
+        },
+        "role_name": "FH Storage Admin"
+      },
+      "provider": "azure",
+      "refs": [],
+      "region": "global",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json",
+        "line": 76,
+        "pointer": "/4"
+      },
+      "type": "role_definition"
+    },
+    {
+      "id": "azure:role_definition:18d7d88d-d35e-4fb5-a5c3-7773c20a72d9",
+      "name": "User Access Administrator",
+      "native_type": "Microsoft.Authorization/roleDefinitions",
+      "properties": {
+        "assignable_scopes": [
+          "/"
+        ],
+        "data_actions": [],
+        "is_custom": false,
+        "permissions": {
+          "parse_error": false,
+          "statements": [
+            {
+              "actions": [
+                "*/read",
+                "Microsoft.Authorization/*",
+                "Microsoft.Support/*"
+              ],
+              "effect": "Allow",
+              "has_condition": false,
+              "not_actions": null,
+              "not_principals": null,
+              "not_resources": null,
+              "policy": "role-definition",
+              "principals": null,
+              "raw": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json#/7/Actions",
+              "resources": [
+                "/"
+              ],
+              "sid": null
+            }
+          ]
+        },
+        "role_name": "User Access Administrator"
+      },
+      "provider": "azure",
+      "refs": [],
+      "region": "global",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json",
+        "line": 127,
+        "pointer": "/7"
+      },
+      "type": "role_definition"
+    },
+    {
+      "id": "azure:role_definition:8e3af657-a8ff-443c-a75c-2fe8c4bcb635",
+      "name": "Owner",
+      "native_type": "Microsoft.Authorization/roleDefinitions",
+      "properties": {
+        "assignable_scopes": [
+          "/"
+        ],
+        "data_actions": [],
+        "is_custom": false,
+        "permissions": {
+          "parse_error": false,
+          "statements": [
+            {
+              "actions": [
+                "*"
+              ],
+              "effect": "Allow",
+              "has_condition": false,
+              "not_actions": null,
+              "not_principals": null,
+              "not_resources": null,
+              "policy": "role-definition",
+              "principals": null,
+              "raw": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json#/5/Actions",
+              "resources": [
+                "/"
+              ],
+              "sid": null
+            }
+          ]
+        },
+        "role_name": "Owner"
+      },
+      "provider": "azure",
+      "refs": [],
+      "region": "global",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json",
+        "line": 93,
+        "pointer": "/5"
+      },
+      "type": "role_definition"
+    },
+    {
+      "id": "azure:role_definition:acdd72a7-3385-48ef-bd42-f606fba81ae7",
+      "name": "Reader",
+      "native_type": "Microsoft.Authorization/roleDefinitions",
+      "properties": {
+        "assignable_scopes": [
+          "/"
+        ],
+        "data_actions": [],
+        "is_custom": false,
+        "permissions": {
+          "parse_error": false,
+          "statements": [
+            {
+              "actions": [
+                "*/read"
+              ],
+              "effect": "Allow",
+              "has_condition": false,
+              "not_actions": null,
+              "not_principals": null,
+              "not_resources": null,
+              "policy": "role-definition",
+              "principals": null,
+              "raw": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json#/6/Actions",
+              "resources": [
+                "/"
+              ],
+              "sid": null
+            }
+          ]
+        },
+        "role_name": "Reader"
+      },
+      "provider": "azure",
+      "refs": [],
+      "region": "global",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json",
+        "line": 110,
+        "pointer": "/6"
+      },
+      "type": "role_definition"
+    },
+    {
+      "id": "azure:role_definition:b24988ac-6180-42a0-ab88-20f7382dd24c",
+      "name": "Contributor",
+      "native_type": "Microsoft.Authorization/roleDefinitions",
+      "properties": {
+        "assignable_scopes": [
+          "/"
+        ],
+        "data_actions": [],
+        "is_custom": false,
+        "permissions": {
+          "parse_error": false,
+          "statements": [
+            {
+              "actions": [
+                "*"
+              ],
+              "effect": "Allow",
+              "has_condition": false,
+              "not_actions": [
+                "Microsoft.Authorization/*/Delete",
+                "Microsoft.Authorization/*/Write",
+                "Microsoft.Authorization/elevateAccess/Action"
+              ],
+              "not_principals": null,
+              "not_resources": null,
+              "policy": "role-definition",
+              "principals": null,
+              "raw": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json#/0/Actions",
+              "resources": [
+                "/"
+              ],
+              "sid": null
+            }
+          ]
+        },
+        "role_name": "Contributor"
+      },
+      "provider": "azure",
+      "refs": [],
+      "region": "global",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json",
+        "line": 2,
+        "pointer": "/0"
+      },
+      "type": "role_definition"
+    },
+    {
+      "id": "azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlabaudit",
+      "name": "stfhlabaudit",
+      "native_type": "Microsoft.Storage/storageAccounts",
+      "properties": {
+        "network": {
+          "default_action": "Allow",
+          "public_network_access": "Enabled"
+        },
+        "public_access": {
+          "anonymous_grants": [],
+          "anonymous_grants_blocked": true,
+          "guard": {
+            "allow_blob_public_access": false
+          },
+          "policy": null,
+          "public_policy_blocked": null
+        },
+        "raw": {
+          "guard": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json#/0/AllowBlobPublicAccess"
+        },
+        "tags": {
+          "env": "lab"
+        }
+      },
+      "provider": "azure",
+      "refs": [],
+      "region": "eastus2",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json",
+        "line": 2,
+        "pointer": "/0"
+      },
+      "type": "storage_bucket"
+    },
+    {
+      "id": "azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlabblocked",
+      "name": "stfhlabblocked",
+      "native_type": "Microsoft.Storage/storageAccounts",
+      "properties": {
+        "network": {
+          "default_action": "Allow",
+          "public_network_access": "Enabled"
+        },
+        "public_access": {
+          "anonymous_grants": [
+            {
+              "grantee": "web",
+              "permission": "Blob",
+              "raw": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json#/1/Containers/0",
+              "via": "container"
+            }
+          ],
+          "anonymous_grants_blocked": true,
+          "guard": {
+            "allow_blob_public_access": false
+          },
+          "policy": null,
+          "public_policy_blocked": null
+        },
+        "raw": {
+          "guard": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json#/1/AllowBlobPublicAccess"
+        },
+        "tags": {
+          "env": "lab"
+        }
+      },
+      "provider": "azure",
+      "refs": [],
+      "region": "eastus2",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json",
+        "line": 32,
+        "pointer": "/1"
+      },
+      "type": "storage_bucket"
+    },
+    {
+      "id": "azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlabdata",
+      "name": "stfhlabdata",
+      "native_type": "Microsoft.Storage/storageAccounts",
+      "properties": {
+        "network": {
+          "default_action": "Allow",
+          "public_network_access": "Enabled"
+        },
+        "public_access": {
+          "anonymous_grants": [],
+          "anonymous_grants_blocked": false,
+          "guard": {
+            "allow_blob_public_access": true
+          },
+          "policy": null,
+          "public_policy_blocked": null
+        },
+        "raw": {
+          "guard": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json#/2/AllowBlobPublicAccess"
+        },
+        "tags": {
+          "env": "lab"
+        }
+      },
+      "provider": "azure",
+      "refs": [],
+      "region": "eastus2",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json",
+        "line": 62,
+        "pointer": "/2"
+      },
+      "type": "storage_bucket"
+    },
+    {
+      "id": "azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlablegacy",
+      "name": "stfhlablegacy",
+      "native_type": "Microsoft.Storage/storageAccounts",
+      "properties": {
+        "network": {
+          "default_action": "Allow",
+          "public_network_access": "Enabled"
+        },
+        "public_access": {
+          "anonymous_grants": [
+            {
+              "grantee": "archive",
+              "permission": "Container",
+              "raw": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json#/3/Containers/0",
+              "via": "container"
+            }
+          ],
+          "anonymous_grants_blocked": null,
+          "guard": {
+            "allow_blob_public_access": null
+          },
+          "policy": null,
+          "public_policy_blocked": null
+        },
+        "raw": {
+          "guard": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json#/3/AllowBlobPublicAccess"
+        },
+        "tags": {
+          "created": "2019",
+          "env": "lab"
+        }
+      },
+      "provider": "azure",
+      "refs": [],
+      "region": "eastus2",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json",
+        "line": 96,
+        "pointer": "/3"
+      },
+      "type": "storage_bucket"
+    },
+    {
+      "id": "azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlabpublic",
+      "name": "stfhlabpublic",
+      "native_type": "Microsoft.Storage/storageAccounts",
+      "properties": {
+        "network": {
+          "default_action": "Allow",
+          "public_network_access": "Enabled"
+        },
+        "public_access": {
+          "anonymous_grants": [
+            {
+              "grantee": "downloads",
+              "permission": "Blob",
+              "raw": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json#/4/Containers/0",
+              "via": "container"
+            }
+          ],
+          "anonymous_grants_blocked": false,
+          "guard": {
+            "allow_blob_public_access": true
+          },
+          "policy": null,
+          "public_policy_blocked": null
+        },
+        "raw": {
+          "guard": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json#/4/AllowBlobPublicAccess"
+        },
+        "tags": {
+          "env": "lab"
+        }
+      },
+      "provider": "azure",
+      "refs": [],
+      "region": "eastus2",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json",
+        "line": 127,
+        "pointer": "/4"
+      },
+      "type": "storage_bucket"
+    },
+    {
+      "id": "azure:unsupported:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.KeyVault/vaults/kv-fh-lab",
+      "name": "kv-fh-lab",
+      "native_type": "Microsoft.KeyVault/vaults",
+      "properties": {},
+      "provider": "azure",
+      "refs": [],
+      "region": "eastus2",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzKeyVault.json",
+        "line": 2,
+        "pointer": "/0"
+      },
+      "type": "unsupported"
+    },
+    {
+      "id": "azure:unsupported:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Web/sites/app-fh-portal",
+      "name": "app-fh-portal",
+      "native_type": "Microsoft.Web/sites",
+      "properties": {},
+      "provider": "azure",
+      "refs": [],
+      "region": "eastus2",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzWebApp.json",
+        "line": 2,
+        "pointer": "/0"
+      },
+      "type": "unsupported"
+    },
+    {
+      "id": "azure:unsupported:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-jump",
+      "name": "nic-fh-jump",
+      "native_type": "Microsoft.Network/networkInterfaces",
+      "properties": {},
+      "provider": "azure",
+      "refs": [],
+      "region": "eastus2",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzNetworkInterface.json",
+        "line": 2,
+        "pointer": "/0"
+      },
+      "type": "unsupported"
+    },
+    {
+      "id": "azure:unsupported:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-ops",
+      "name": "nic-fh-ops",
+      "native_type": "Microsoft.Network/networkInterfaces",
+      "properties": {},
+      "provider": "azure",
+      "refs": [],
+      "region": "eastus2",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzNetworkInterface.json",
+        "line": 30,
+        "pointer": "/1"
+      },
+      "type": "unsupported"
+    },
+    {
+      "id": "azure:unsupported:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-rdp",
+      "name": "nic-fh-rdp",
+      "native_type": "Microsoft.Network/networkInterfaces",
+      "properties": {},
+      "provider": "azure",
+      "refs": [],
+      "region": "eastus2",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzNetworkInterface.json",
+        "line": 58,
+        "pointer": "/2"
+      },
+      "type": "unsupported"
+    },
+    {
+      "id": "azure:unsupported:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-worker",
+      "name": "nic-fh-worker",
+      "native_type": "Microsoft.Network/networkInterfaces",
+      "properties": {},
+      "provider": "azure",
+      "refs": [],
+      "region": "eastus2",
+      "source": {
+        "file": "snapshots/azure-lab-2026-10/Get-AzNetworkInterface.json",
+        "line": 86,
+        "pointer": "/3"
+      },
+      "type": "unsupported"
+    }
+  ],
+  "snapshot": "azure-lab-2026-10"
+}

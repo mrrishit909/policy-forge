@@ -1,10 +1,12 @@
 {
   "attempt": 1,
-  "completed_at": null,
+  "completed_at": "2026-10-22T04:16:41Z",
   "created_at": "2026-10-22T04:15:46Z",
   "error_summary": null,
-  "evidence_paths": [],
-  "input_manifest_hash": null,
+  "evidence_paths": [
+    "https://github.com/mrrishit909/policy-forge/actions/runs/39721375573"
+  ],
+  "input_manifest_hash": "sha256:2f7c76113b4dd5f7057b208e1dbcd478ef6a23219ca1501b1dc9ffefee5cb756",
   "parent_run_id": null,
   "project": "policy-forge",
   "request_id": "b622e9e4f853cbef",
@@ -18,14 +20,29 @@
       "usd": null,
       "used": false
     },
-    "output_bytes": null,
-    "wall_seconds": null
+    "output_bytes": 290775,
+    "wall_seconds": 55.0
   },
-  "result_paths": [],
+  "result_paths": [
+    "runs/policy-forge-20261022T041546Z-b622e9e4-a1/catalog.json",
+    "runs/policy-forge-20261022T041546Z-b622e9e4-a1/checks.json",
+    "runs/policy-forge-20261022T041546Z-b622e9e4-a1/conftest.json",
+    "runs/policy-forge-20261022T041546Z-b622e9e4-a1/coverage.json",
+    "runs/policy-forge-20261022T041546Z-b622e9e4-a1/exceptions.json",
+    "runs/policy-forge-20261022T041546Z-b622e9e4-a1/findings.json",
+    "runs/policy-forge-20261022T041546Z-b622e9e4-a1/inventory.json",
+    "runs/policy-forge-20261022T041546Z-b622e9e4-a1/manifest.json",
+    "runs/policy-forge-20261022T041546Z-b622e9e4-a1/relationships.json",
+    "runs/policy-forge-20261022T041546Z-b622e9e4-a1/remediation.json",
+    "runs/policy-forge-20261022T041546Z-b622e9e4-a1/remediation.patch",
+    "runs/policy-forge-20261022T041546Z-b622e9e4-a1/report.md",
+    "runs/policy-forge-20261022T041546Z-b622e9e4-a1/rule_tests.json",
+    "runs/policy-forge-20261022T041546Z-b622e9e4-a1/summary.json"
+  ],
   "run_id": "policy-forge-20261022T041546Z-b622e9e4-a1",
   "schema_version": "1.0",
   "source_commit": "84d8b872ebe73079550f5fa74302683784a50bda",
   "started_at": "2026-10-22T04:15:46Z",
-  "status": "running",
+  "status": "completed",
   "workflow_run_id": 39721375573
 }

@@ -1,0 +1,101 @@
+{
+  "input_manifest_hash": "sha256:2f7c76113b4dd5f7057b208e1dbcd478ef6a23219ca1501b1dc9ffefee5cb756",
+  "outputs": {
+    "catalog.json": "1606aebb8d19c9ecbee4362c46f9ac89d2404cb853808e5010fe7e4f74158120",
+    "conftest.json": "894fd45de72ff951b5e1c7dbf67033d7621002ae4056b7cbf6ce11aefcff7eca",
+    "coverage.json": "b20d7c7a0dd5bcde6ff8a6a86036364ed8d0a2fb261ee235048c79baf8728570",
+    "exceptions.json": "43723169a8a9c72300047eeed87889d5730a600710f2e8e75bf2aecb259104b4",
+    "findings.json": "7975d1a7d9030c51ea9d2fbe2b4ee75c6f8c778de800536f9e50cf8835d51a36",
+    "inventory.json": "97421bbc69e26a7a43ee6f889fb154fad8fb27634c6a30ac169012b82cc6d9ba",
+    "relationships.json": "c5b92b41d9ca4f53f84eb5f90f8724491f5ea821a3c163e72983e133d4e762dd",
+    "remediation.json": "e991b7fb38a36a700564c076bdd4f390f5ece4c1f43345712e64842dc23b8674",
+    "remediation.patch": "9a9d7882cca9ce3531fe46f198c05303812f785f5302a80cc1e48acd9065c704",
+    "report.md": "f011bddd95baf2104890f71803fa17a7414a0688d6fa64126e102c91154b8e55",
+    "rule_tests.json": "6782f11f8bf7cd3a5a001c831995569ec310a9181d6c2600c8708e9036ce916d",
+    "summary.json": "c7337bef1627d0203d433564e07b8a780b21c87b89477eba2cbd36b356aa018e"
+  },
+  "package": "policyforge",
+  "package_version": "1.0.0",
+  "params": {
+    "as_of": "2026-10-22",
+    "remediation": "propose",
+    "rule_packs": [
+      "storage",
+      "iam",
+      "network",
+      "audit",
+      "relationships"
+    ],
+    "snapshot": "azure-lab-2026-10"
+  },
+  "snapshot": {
+    "captured_at": "2026-10-19T14:00:00Z",
+    "files": [
+      {
+        "bytes": 2808,
+        "path": "snapshots/azure-lab-2026-10/Get-AzDiagnosticSetting.json",
+        "sha256": "a648db64eb366966b8fb067f90c70611870c39fe8c33c0e5b9ff82210aad5673"
+      },
+      {
+        "bytes": 391,
+        "path": "snapshots/azure-lab-2026-10/Get-AzKeyVault.json",
+        "sha256": "c6e3ae3064cb103e9a107df3e85c027c8a88d743f1205625929a60fdfa173be7"
+      },
+      {
+        "bytes": 4940,
+        "path": "snapshots/azure-lab-2026-10/Get-AzNetworkInterface.json",
+        "sha256": "d9e82f918cafcdf35fda9da6089b218e715d185411f82ecca57ac05b484f0840"
+      },
+      {
+        "bytes": 25477,
+        "path": "snapshots/azure-lab-2026-10/Get-AzNetworkSecurityGroup.json",
+        "sha256": "53ab3dac7f236a04f0a23249992f0354597ff4a5d6d866c41489905d4064c93d"
+      },
+      {
+        "bytes": 6996,
+        "path": "snapshots/azure-lab-2026-10/Get-AzRoleAssignment.json",
+        "sha256": "9f41bf6ee801b7eb10c75aa354f362a35090fd4428229aa1fbc470b1fc7dbae8"
+      },
+      {
+        "bytes": 3390,
+        "path": "snapshots/azure-lab-2026-10/Get-AzRoleDefinition.json",
+        "sha256": "dc668658f1a2909b649b17a2b61ea4486a64c0997b3c42659cb224738e7c7001"
+      },
+      {
+        "bytes": 4180,
+        "path": "snapshots/azure-lab-2026-10/Get-AzStorageAccount.json",
+        "sha256": "c8f6b1819b7496c828e500cfdfb6d8a9fc43e3362e58d668213c8d4cb52d2642"
+      },
+      {
+        "bytes": 4995,
+        "path": "snapshots/azure-lab-2026-10/Get-AzVM.json",
+        "sha256": "2d12491f0020b6f83cee6be2f78e92f021500efc6b25bffd370e097a0d6cbe3f"
+      },
+      {
+        "bytes": 627,
+        "path": "snapshots/azure-lab-2026-10/Get-AzWebApp.json",
+        "sha256": "27183c4a59d8cf9537a0e66b50b8f8987f53f9c7f47c3fcb5cfbeea321bbaf30"
+      },
+      {
+        "bytes": 847,
+        "path": "snapshots/azure-lab-2026-10/context.json",
+        "sha256": "df75a5e5286e434a2d94fb6146215b0b045de2900531dd9c0706ebc5865ae0d5"
+      },
+      {
+        "bytes": 621,
+        "path": "snapshots/azure-lab-2026-10/manifest.json",
+        "sha256": "eeeb973bb9d3d79230e7440c13defdad06ecda487d1a96f2e2a332ecc5c9900e"
+      }
+    ],
+    "name": "azure-lab-2026-10",
+    "provider": "azure",
+    "synthetic": true
+  },
+  "tools": {
+    "bash": "5.2.21(1)-release",
+    "conftest": "0.71.1",
+    "jq": "1.7",
+    "opa": "1.21.1",
+    "pwsh": "7.6.7"
+  }
+}
