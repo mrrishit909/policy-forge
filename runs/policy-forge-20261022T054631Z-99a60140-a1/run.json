@@ -1,0 +1,31 @@
+{
+  "attempt": 1,
+  "completed_at": null,
+  "created_at": "2026-10-22T05:46:31Z",
+  "error_summary": null,
+  "evidence_paths": [],
+  "input_manifest_hash": null,
+  "parent_run_id": null,
+  "project": "policy-forge",
+  "request_id": "99a6014060aa779e",
+  "request_source": {
+    "actor": "mrrishit909",
+    "issue_number": null,
+    "type": "manual"
+  },
+  "resource_usage_summary": {
+    "inference": {
+      "usd": null,
+      "used": false
+    },
+    "output_bytes": null,
+    "wall_seconds": null
+  },
+  "result_paths": [],
+  "run_id": "policy-forge-20261022T054631Z-99a60140-a1",
+  "schema_version": "1.0",
+  "source_commit": "57da8ead4e36162f29036fcb3421251e074dd1a7",
+  "started_at": "2026-10-22T05:46:31Z",
+  "status": "running",
+  "workflow_run_id": 39729932651
+}

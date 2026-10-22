@@ -2,6 +2,17 @@
   "runs": [
     {
       "attempt": 1,
+      "completed_at": null,
+      "created_at": "2026-10-22T05:46:31Z",
+      "headline": null,
+      "issue": null,
+      "request_id": "99a6014060aa779e",
+      "run_id": "policy-forge-20261022T054631Z-99a60140-a1",
+      "source": "manual",
+      "status": "running"
+    },
+    {
+      "attempt": 1,
       "completed_at": "2026-10-22T04:16:41Z",
       "created_at": "2026-10-22T04:15:46Z",
       "headline": "azure-lab-2026-10 as of 2026-10-22: 12 failed, 10 not evaluated, 0 excepted, 21 passed; partial coverage.",
