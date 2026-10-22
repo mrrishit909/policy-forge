@@ -57,8 +57,8 @@ pwsh -NoProfile -NonInteractive -Command "
   Save-Module -Name PSScriptAnalyzer -RequiredVersion '${PSSA_VERSION}' -Repository PSGallery -Path '${dest}/psmodules'
 "
 
-"$dest/bin/opa" version | head -n 1
-"$dest/bin/conftest" --version | head -n 1
+"$dest/bin/opa" version | sed -n 1p
+"$dest/bin/conftest" --version | sed -n 1p
 "$dest/bin/shellcheck" --version | sed -n 2p
 "$dest/bats/bin/bats" --version
 # shellcheck disable=SC2016 # the expression is PowerShell, expanded by pwsh, not by bash
