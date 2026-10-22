@@ -1,0 +1,161 @@
+[
+  {
+    "ResourceGroupName": "rg-fh-lab",
+    "StorageAccountName": "stfhlabaudit",
+    "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlabaudit",
+    "Location": "eastus2",
+    "Sku": {
+      "Name": "Standard_LRS",
+      "Tier": "Standard"
+    },
+    "Kind": "StorageV2",
+    "AllowBlobPublicAccess": false,
+    "EnableHttpsTrafficOnly": true,
+    "MinimumTlsVersion": "TLS1_2",
+    "PublicNetworkAccess": "Enabled",
+    "NetworkRuleSet": {
+      "Bypass": "AzureServices",
+      "DefaultAction": "Allow",
+      "IpRules": [],
+      "VirtualNetworkRules": []
+    },
+    "Tags": {
+      "env": "lab"
+    },
+    "Containers": [
+      {
+        "Name": "insights-activity-logs",
+        "PublicAccess": "None"
+      }
+    ]
+  },
+  {
+    "ResourceGroupName": "rg-fh-lab",
+    "StorageAccountName": "stfhlabblocked",
+    "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlabblocked",
+    "Location": "eastus2",
+    "Sku": {
+      "Name": "Standard_LRS",
+      "Tier": "Standard"
+    },
+    "Kind": "StorageV2",
+    "AllowBlobPublicAccess": false,
+    "EnableHttpsTrafficOnly": true,
+    "MinimumTlsVersion": "TLS1_2",
+    "PublicNetworkAccess": "Enabled",
+    "NetworkRuleSet": {
+      "Bypass": "AzureServices",
+      "DefaultAction": "Allow",
+      "IpRules": [],
+      "VirtualNetworkRules": []
+    },
+    "Tags": {
+      "env": "lab"
+    },
+    "Containers": [
+      {
+        "Name": "web",
+        "PublicAccess": "Blob"
+      }
+    ]
+  },
+  {
+    "ResourceGroupName": "rg-fh-lab",
+    "StorageAccountName": "stfhlabdata",
+    "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlabdata",
+    "Location": "eastus2",
+    "Sku": {
+      "Name": "Standard_LRS",
+      "Tier": "Standard"
+    },
+    "Kind": "StorageV2",
+    "AllowBlobPublicAccess": true,
+    "EnableHttpsTrafficOnly": true,
+    "MinimumTlsVersion": "TLS1_2",
+    "PublicNetworkAccess": "Enabled",
+    "NetworkRuleSet": {
+      "Bypass": "AzureServices",
+      "DefaultAction": "Allow",
+      "IpRules": [],
+      "VirtualNetworkRules": []
+    },
+    "Tags": {
+      "env": "lab"
+    },
+    "Containers": [
+      {
+        "Name": "raw",
+        "PublicAccess": "None"
+      },
+      {
+        "Name": "curated",
+        "PublicAccess": "None"
+      }
+    ]
+  },
+  {
+    "ResourceGroupName": "rg-fh-lab",
+    "StorageAccountName": "stfhlablegacy",
+    "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlablegacy",
+    "Location": "eastus2",
+    "Sku": {
+      "Name": "Standard_LRS",
+      "Tier": "Standard"
+    },
+    "Kind": "StorageV2",
+    "AllowBlobPublicAccess": null,
+    "EnableHttpsTrafficOnly": true,
+    "MinimumTlsVersion": "TLS1_2",
+    "PublicNetworkAccess": "Enabled",
+    "NetworkRuleSet": {
+      "Bypass": "AzureServices",
+      "DefaultAction": "Allow",
+      "IpRules": [],
+      "VirtualNetworkRules": []
+    },
+    "Tags": {
+      "env": "lab",
+      "created": "2019"
+    },
+    "Containers": [
+      {
+        "Name": "archive",
+        "PublicAccess": "Container"
+      }
+    ]
+  },
+  {
+    "ResourceGroupName": "rg-fh-lab",
+    "StorageAccountName": "stfhlabpublic",
+    "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlabpublic",
+    "Location": "eastus2",
+    "Sku": {
+      "Name": "Standard_LRS",
+      "Tier": "Standard"
+    },
+    "Kind": "StorageV2",
+    "AllowBlobPublicAccess": true,
+    "EnableHttpsTrafficOnly": true,
+    "MinimumTlsVersion": "TLS1_2",
+    "PublicNetworkAccess": "Enabled",
+    "NetworkRuleSet": {
+      "Bypass": "AzureServices",
+      "DefaultAction": "Allow",
+      "IpRules": [],
+      "VirtualNetworkRules": []
+    },
+    "Tags": {
+      "env": "lab"
+    },
+    "Containers": [
+      {
+        "Name": "downloads",
+        "PublicAccess": "Blob"
+      },
+      {
+        "Name": "private",
+        "PublicAccess": "None"
+      }
+    ]
+  }
+]

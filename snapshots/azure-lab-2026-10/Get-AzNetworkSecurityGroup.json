@@ -1,0 +1,793 @@
+[
+  {
+    "Name": "nsg-fh-data",
+    "ResourceGroupName": "rg-fh-net",
+    "Location": "eastus2",
+    "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-data",
+    "ProvisioningState": "Succeeded",
+    "SecurityRules": [
+      {
+        "Name": "AllowSqlFromVnet",
+        "Protocol": "Tcp",
+        "SourcePortRange": [
+          "*"
+        ],
+        "DestinationPortRange": [
+          "1433"
+        ],
+        "SourceAddressPrefix": [
+          "VirtualNetwork"
+        ],
+        "DestinationAddressPrefix": [
+          "*"
+        ],
+        "SourceApplicationSecurityGroups": [],
+        "DestinationApplicationSecurityGroups": [],
+        "Access": "Allow",
+        "Priority": 100,
+        "Direction": "Inbound",
+        "ProvisioningState": "Succeeded",
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-data/securityRules/AllowSqlFromVnet"
+      },
+      {
+        "Name": "AllowPostgresPrivate",
+        "Protocol": "Tcp",
+        "SourcePortRange": [
+          "*"
+        ],
+        "DestinationPortRange": [
+          "5432"
+        ],
+        "SourceAddressPrefix": [
+          "10.0.0.0/8"
+        ],
+        "DestinationAddressPrefix": [
+          "*"
+        ],
+        "SourceApplicationSecurityGroups": [],
+        "DestinationApplicationSecurityGroups": [],
+        "Access": "Allow",
+        "Priority": 110,
+        "Direction": "Inbound",
+        "ProvisioningState": "Succeeded",
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-data/securityRules/AllowPostgresPrivate"
+      },
+      {
+        "Name": "AllowVendorDatabases",
+        "Protocol": "Tcp",
+        "SourcePortRange": [
+          "*"
+        ],
+        "DestinationPortRange": [
+          "3306",
+          "27017"
+        ],
+        "SourceAddressPrefix": [
+          "Internet"
+        ],
+        "DestinationAddressPrefix": [
+          "*"
+        ],
+        "SourceApplicationSecurityGroups": [],
+        "DestinationApplicationSecurityGroups": [],
+        "Access": "Allow",
+        "Priority": 150,
+        "Direction": "Inbound",
+        "ProvisioningState": "Succeeded",
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-data/securityRules/AllowVendorDatabases"
+      }
+    ],
+    "DefaultSecurityRules": [
+      {
+        "Name": "AllowVnetInBound",
+        "Protocol": "*",
+        "SourcePortRange": [
+          "*"
+        ],
+        "DestinationPortRange": [
+          "*"
+        ],
+        "SourceAddressPrefix": [
+          "VirtualNetwork"
+        ],
+        "DestinationAddressPrefix": [
+          "*"
+        ],
+        "SourceApplicationSecurityGroups": [],
+        "DestinationApplicationSecurityGroups": [],
+        "Access": "Allow",
+        "Priority": 65000,
+        "Direction": "Inbound",
+        "ProvisioningState": "Succeeded",
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-data/defaultSecurityRules/AllowVnetInBound"
+      },
+      {
+        "Name": "AllowAzureLoadBalancerInBound",
+        "Protocol": "*",
+        "SourcePortRange": [
+          "*"
+        ],
+        "DestinationPortRange": [
+          "*"
+        ],
+        "SourceAddressPrefix": [
+          "AzureLoadBalancer"
+        ],
+        "DestinationAddressPrefix": [
+          "*"
+        ],
+        "SourceApplicationSecurityGroups": [],
+        "DestinationApplicationSecurityGroups": [],
+        "Access": "Allow",
+        "Priority": 65001,
+        "Direction": "Inbound",
+        "ProvisioningState": "Succeeded",
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-data/defaultSecurityRules/AllowAzureLoadBalancerInBound"
+      },
+      {
+        "Name": "DenyAllInBound",
+        "Protocol": "*",
+        "SourcePortRange": [
+          "*"
+        ],
+        "DestinationPortRange": [
+          "*"
+        ],
+        "SourceAddressPrefix": [
+          "*"
+        ],
+        "DestinationAddressPrefix": [
+          "*"
+        ],
+        "SourceApplicationSecurityGroups": [],
+        "DestinationApplicationSecurityGroups": [],
+        "Access": "Deny",
+        "Priority": 65500,
+        "Direction": "Inbound",
+        "ProvisioningState": "Succeeded",
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-data/defaultSecurityRules/DenyAllInBound"
+      }
+    ],
+    "NetworkInterfaces": [
+      {
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-worker"
+      }
+    ],
+    "Subnets": [],
+    "Tags": {}
+  },
+  {
+    "Name": "nsg-fh-edge",
+    "ResourceGroupName": "rg-fh-net",
+    "Location": "eastus2",
+    "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-edge",
+    "ProvisioningState": "Succeeded",
+    "SecurityRules": [
+      {
+        "Name": "AllowRdpBand",
+        "Protocol": "Tcp",
+        "SourcePortRange": [
+          "*"
+        ],
+        "DestinationPortRange": [
+          "3380-3389"
+        ],
+        "SourceAddressPrefix": [
+          "*"
+        ],
+        "DestinationAddressPrefix": [
+          "*"
+        ],
+        "SourceApplicationSecurityGroups": [],
+        "DestinationApplicationSecurityGroups": [],
+        "Access": "Allow",
+        "Priority": 100,
+        "Direction": "Inbound",
+        "ProvisioningState": "Succeeded",
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-edge/securityRules/AllowRdpBand"
+      },
+      {
+        "Name": "AllowAppBand",
+        "Protocol": "Tcp",
+        "SourcePortRange": [
+          "*"
+        ],
+        "DestinationPortRange": [
+          "3390-3400"
+        ],
+        "SourceAddressPrefix": [
+          "*"
+        ],
+        "DestinationAddressPrefix": [
+          "*"
+        ],
+        "SourceApplicationSecurityGroups": [],
+        "DestinationApplicationSecurityGroups": [],
+        "Access": "Allow",
+        "Priority": 110,
+        "Direction": "Inbound",
+        "ProvisioningState": "Succeeded",
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-edge/securityRules/AllowAppBand"
+      }
+    ],
+    "DefaultSecurityRules": [
+      {
+        "Name": "AllowVnetInBound",
+        "Protocol": "*",
+        "SourcePortRange": [
+          "*"
+        ],
+        "DestinationPortRange": [
+          "*"
+        ],
+        "SourceAddressPrefix": [
+          "VirtualNetwork"
+        ],
+        "DestinationAddressPrefix": [
+          "*"
+        ],
+        "SourceApplicationSecurityGroups": [],
+        "DestinationApplicationSecurityGroups": [],
+        "Access": "Allow",
+        "Priority": 65000,
+        "Direction": "Inbound",
+        "ProvisioningState": "Succeeded",
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-edge/defaultSecurityRules/AllowVnetInBound"
+      },
+      {
+        "Name": "AllowAzureLoadBalancerInBound",
+        "Protocol": "*",
+        "SourcePortRange": [
+          "*"
+        ],
+        "DestinationPortRange": [
+          "*"
+        ],
+        "SourceAddressPrefix": [
+          "AzureLoadBalancer"
+        ],
+        "DestinationAddressPrefix": [
+          "*"
+        ],
+        "SourceApplicationSecurityGroups": [],
+        "DestinationApplicationSecurityGroups": [],
+        "Access": "Allow",
+        "Priority": 65001,
+        "Direction": "Inbound",
+        "ProvisioningState": "Succeeded",
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-edge/defaultSecurityRules/AllowAzureLoadBalancerInBound"
+      },
+      {
+        "Name": "DenyAllInBound",
+        "Protocol": "*",
+        "SourcePortRange": [
+          "*"
+        ],
+        "DestinationPortRange": [
+          "*"
+        ],
+        "SourceAddressPrefix": [
+          "*"
+        ],
+        "DestinationAddressPrefix": [
+          "*"
+        ],
+        "SourceApplicationSecurityGroups": [],
+        "DestinationApplicationSecurityGroups": [],
+        "Access": "Deny",
+        "Priority": 65500,
+        "Direction": "Inbound",
+        "ProvisioningState": "Succeeded",
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-edge/defaultSecurityRules/DenyAllInBound"
+      }
+    ],
+    "NetworkInterfaces": [],
+    "Subnets": [],
+    "Tags": {}
+  },
+  {
+    "Name": "nsg-fh-jump",
+    "ResourceGroupName": "rg-fh-net",
+    "Location": "eastus2",
+    "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-jump",
+    "ProvisioningState": "Succeeded",
+    "SecurityRules": [
+      {
+        "Name": "AllowSshAnywhere",
+        "Protocol": "Tcp",
+        "SourcePortRange": [
+          "*"
+        ],
+        "DestinationPortRange": [
+          "22"
+        ],
+        "SourceAddressPrefix": [
+          "*"
+        ],
+        "DestinationAddressPrefix": [
+          "*"
+        ],
+        "SourceApplicationSecurityGroups": [],
+        "DestinationApplicationSecurityGroups": [],
+        "Access": "Allow",
+        "Priority": 100,
+        "Direction": "Inbound",
+        "ProvisioningState": "Succeeded",
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-jump/securityRules/AllowSshAnywhere"
+      }
+    ],
+    "DefaultSecurityRules": [
+      {
+        "Name": "AllowVnetInBound",
+        "Protocol": "*",
+        "SourcePortRange": [
+          "*"
+        ],
+        "DestinationPortRange": [
+          "*"
+        ],
+        "SourceAddressPrefix": [
+          "VirtualNetwork"
+        ],
+        "DestinationAddressPrefix": [
+          "*"
+        ],
+        "SourceApplicationSecurityGroups": [],
+        "DestinationApplicationSecurityGroups": [],
+        "Access": "Allow",
+        "Priority": 65000,
+        "Direction": "Inbound",
+        "ProvisioningState": "Succeeded",
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-jump/defaultSecurityRules/AllowVnetInBound"
+      },
+      {
+        "Name": "AllowAzureLoadBalancerInBound",
+        "Protocol": "*",
+        "SourcePortRange": [
+          "*"
+        ],
+        "DestinationPortRange": [
+          "*"
+        ],
+        "SourceAddressPrefix": [
+          "AzureLoadBalancer"
+        ],
+        "DestinationAddressPrefix": [
+          "*"
+        ],
+        "SourceApplicationSecurityGroups": [],
+        "DestinationApplicationSecurityGroups": [],
+        "Access": "Allow",
+        "Priority": 65001,
+        "Direction": "Inbound",
+        "ProvisioningState": "Succeeded",
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-jump/defaultSecurityRules/AllowAzureLoadBalancerInBound"
+      },
+      {
+        "Name": "DenyAllInBound",
+        "Protocol": "*",
+        "SourcePortRange": [
+          "*"
+        ],
+        "DestinationPortRange": [
+          "*"
+        ],
+        "SourceAddressPrefix": [
+          "*"
+        ],
+        "DestinationAddressPrefix": [
+          "*"
+        ],
+        "SourceApplicationSecurityGroups": [],
+        "DestinationApplicationSecurityGroups": [],
+        "Access": "Deny",
+        "Priority": 65500,
+        "Direction": "Inbound",
+        "ProvisioningState": "Succeeded",
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-jump/defaultSecurityRules/DenyAllInBound"
+      }
+    ],
+    "NetworkInterfaces": [
+      {
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-jump"
+      }
+    ],
+    "Subnets": [],
+    "Tags": {}
+  },
+  {
+    "Name": "nsg-fh-rdp",
+    "ResourceGroupName": "rg-fh-net",
+    "Location": "eastus2",
+    "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-rdp",
+    "ProvisioningState": "Succeeded",
+    "SecurityRules": [
+      {
+        "Name": "AllowRdp",
+        "Protocol": "*",
+        "SourcePortRange": [
+          "*"
+        ],
+        "DestinationPortRange": [
+          "3389"
+        ],
+        "SourceAddressPrefix": [
+          "0.0.0.0/0"
+        ],
+        "DestinationAddressPrefix": [
+          "*"
+        ],
+        "SourceApplicationSecurityGroups": [],
+        "DestinationApplicationSecurityGroups": [],
+        "Access": "Allow",
+        "Priority": 110,
+        "Direction": "Inbound",
+        "ProvisioningState": "Succeeded",
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-rdp/securityRules/AllowRdp"
+      }
+    ],
+    "DefaultSecurityRules": [
+      {
+        "Name": "AllowVnetInBound",
+        "Protocol": "*",
+        "SourcePortRange": [
+          "*"
+        ],
+        "DestinationPortRange": [
+          "*"
+        ],
+        "SourceAddressPrefix": [
+          "VirtualNetwork"
+        ],
+        "DestinationAddressPrefix": [
+          "*"
+        ],
+        "SourceApplicationSecurityGroups": [],
+        "DestinationApplicationSecurityGroups": [],
+        "Access": "Allow",
+        "Priority": 65000,
+        "Direction": "Inbound",
+        "ProvisioningState": "Succeeded",
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-rdp/defaultSecurityRules/AllowVnetInBound"
+      },
+      {
+        "Name": "AllowAzureLoadBalancerInBound",
+        "Protocol": "*",
+        "SourcePortRange": [
+          "*"
+        ],
+        "DestinationPortRange": [
+          "*"
+        ],
+        "SourceAddressPrefix": [
+          "AzureLoadBalancer"
+        ],
+        "DestinationAddressPrefix": [
+          "*"
+        ],
+        "SourceApplicationSecurityGroups": [],
+        "DestinationApplicationSecurityGroups": [],
+        "Access": "Allow",
+        "Priority": 65001,
+        "Direction": "Inbound",
+        "ProvisioningState": "Succeeded",
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-rdp/defaultSecurityRules/AllowAzureLoadBalancerInBound"
+      },
+      {
+        "Name": "DenyAllInBound",
+        "Protocol": "*",
+        "SourcePortRange": [
+          "*"
+        ],
+        "DestinationPortRange": [
+          "*"
+        ],
+        "SourceAddressPrefix": [
+          "*"
+        ],
+        "DestinationAddressPrefix": [
+          "*"
+        ],
+        "SourceApplicationSecurityGroups": [],
+        "DestinationApplicationSecurityGroups": [],
+        "Access": "Deny",
+        "Priority": 65500,
+        "Direction": "Inbound",
+        "ProvisioningState": "Succeeded",
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-rdp/defaultSecurityRules/DenyAllInBound"
+      }
+    ],
+    "NetworkInterfaces": [
+      {
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-rdp"
+      }
+    ],
+    "Subnets": [],
+    "Tags": {}
+  },
+  {
+    "Name": "nsg-fh-vpn",
+    "ResourceGroupName": "rg-fh-net",
+    "Location": "eastus2",
+    "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-vpn",
+    "ProvisioningState": "Succeeded",
+    "SecurityRules": [
+      {
+        "Name": "AllowEspFromInternet",
+        "Protocol": "Esp",
+        "SourcePortRange": [
+          "*"
+        ],
+        "DestinationPortRange": [
+          "*"
+        ],
+        "SourceAddressPrefix": [
+          "Internet"
+        ],
+        "DestinationAddressPrefix": [
+          "*"
+        ],
+        "SourceApplicationSecurityGroups": [],
+        "DestinationApplicationSecurityGroups": [],
+        "Access": "Allow",
+        "Priority": 100,
+        "Direction": "Inbound",
+        "ProvisioningState": "Succeeded",
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-vpn/securityRules/AllowEspFromInternet"
+      },
+      {
+        "Name": "AllowCacheFromAzure",
+        "Protocol": "Tcp",
+        "SourcePortRange": [
+          "*"
+        ],
+        "DestinationPortRange": [
+          "6379"
+        ],
+        "SourceAddressPrefix": [
+          "AzureCloud"
+        ],
+        "DestinationAddressPrefix": [
+          "*"
+        ],
+        "SourceApplicationSecurityGroups": [],
+        "DestinationApplicationSecurityGroups": [],
+        "Access": "Allow",
+        "Priority": 120,
+        "Direction": "Inbound",
+        "ProvisioningState": "Succeeded",
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-vpn/securityRules/AllowCacheFromAzure"
+      }
+    ],
+    "DefaultSecurityRules": [
+      {
+        "Name": "AllowVnetInBound",
+        "Protocol": "*",
+        "SourcePortRange": [
+          "*"
+        ],
+        "DestinationPortRange": [
+          "*"
+        ],
+        "SourceAddressPrefix": [
+          "VirtualNetwork"
+        ],
+        "DestinationAddressPrefix": [
+          "*"
+        ],
+        "SourceApplicationSecurityGroups": [],
+        "DestinationApplicationSecurityGroups": [],
+        "Access": "Allow",
+        "Priority": 65000,
+        "Direction": "Inbound",
+        "ProvisioningState": "Succeeded",
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-vpn/defaultSecurityRules/AllowVnetInBound"
+      },
+      {
+        "Name": "AllowAzureLoadBalancerInBound",
+        "Protocol": "*",
+        "SourcePortRange": [
+          "*"
+        ],
+        "DestinationPortRange": [
+          "*"
+        ],
+        "SourceAddressPrefix": [
+          "AzureLoadBalancer"
+        ],
+        "DestinationAddressPrefix": [
+          "*"
+        ],
+        "SourceApplicationSecurityGroups": [],
+        "DestinationApplicationSecurityGroups": [],
+        "Access": "Allow",
+        "Priority": 65001,
+        "Direction": "Inbound",
+        "ProvisioningState": "Succeeded",
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-vpn/defaultSecurityRules/AllowAzureLoadBalancerInBound"
+      },
+      {
+        "Name": "DenyAllInBound",
+        "Protocol": "*",
+        "SourcePortRange": [
+          "*"
+        ],
+        "DestinationPortRange": [
+          "*"
+        ],
+        "SourceAddressPrefix": [
+          "*"
+        ],
+        "DestinationAddressPrefix": [
+          "*"
+        ],
+        "SourceApplicationSecurityGroups": [],
+        "DestinationApplicationSecurityGroups": [],
+        "Access": "Deny",
+        "Priority": 65500,
+        "Direction": "Inbound",
+        "ProvisioningState": "Succeeded",
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-vpn/defaultSecurityRules/DenyAllInBound"
+      }
+    ],
+    "NetworkInterfaces": [],
+    "Subnets": [],
+    "Tags": {}
+  },
+  {
+    "Name": "nsg-fh-web",
+    "ResourceGroupName": "rg-fh-net",
+    "Location": "eastus2",
+    "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-web",
+    "ProvisioningState": "Succeeded",
+    "SecurityRules": [
+      {
+        "Name": "AllowHttpsInbound",
+        "Protocol": "Tcp",
+        "SourcePortRange": [
+          "*"
+        ],
+        "DestinationPortRange": [
+          "443"
+        ],
+        "SourceAddressPrefix": [
+          "Internet"
+        ],
+        "DestinationAddressPrefix": [
+          "*"
+        ],
+        "SourceApplicationSecurityGroups": [],
+        "DestinationApplicationSecurityGroups": [],
+        "Access": "Allow",
+        "Priority": 100,
+        "Direction": "Inbound",
+        "ProvisioningState": "Succeeded",
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-web/securityRules/AllowHttpsInbound"
+      },
+      {
+        "Name": "DenyRdpInternet",
+        "Protocol": "Tcp",
+        "SourcePortRange": [
+          "*"
+        ],
+        "DestinationPortRange": [
+          "3389"
+        ],
+        "SourceAddressPrefix": [
+          "*"
+        ],
+        "DestinationAddressPrefix": [
+          "*"
+        ],
+        "SourceApplicationSecurityGroups": [],
+        "DestinationApplicationSecurityGroups": [],
+        "Access": "Deny",
+        "Priority": 200,
+        "Direction": "Inbound",
+        "ProvisioningState": "Succeeded",
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-web/securityRules/DenyRdpInternet"
+      },
+      {
+        "Name": "AllowRdpLegacy",
+        "Protocol": "Tcp",
+        "SourcePortRange": [
+          "*"
+        ],
+        "DestinationPortRange": [
+          "3389"
+        ],
+        "SourceAddressPrefix": [
+          "Internet"
+        ],
+        "DestinationAddressPrefix": [
+          "*"
+        ],
+        "SourceApplicationSecurityGroups": [],
+        "DestinationApplicationSecurityGroups": [],
+        "Access": "Allow",
+        "Priority": 300,
+        "Direction": "Inbound",
+        "ProvisioningState": "Succeeded",
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-web/securityRules/AllowRdpLegacy"
+      }
+    ],
+    "DefaultSecurityRules": [
+      {
+        "Name": "AllowVnetInBound",
+        "Protocol": "*",
+        "SourcePortRange": [
+          "*"
+        ],
+        "DestinationPortRange": [
+          "*"
+        ],
+        "SourceAddressPrefix": [
+          "VirtualNetwork"
+        ],
+        "DestinationAddressPrefix": [
+          "*"
+        ],
+        "SourceApplicationSecurityGroups": [],
+        "DestinationApplicationSecurityGroups": [],
+        "Access": "Allow",
+        "Priority": 65000,
+        "Direction": "Inbound",
+        "ProvisioningState": "Succeeded",
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-web/defaultSecurityRules/AllowVnetInBound"
+      },
+      {
+        "Name": "AllowAzureLoadBalancerInBound",
+        "Protocol": "*",
+        "SourcePortRange": [
+          "*"
+        ],
+        "DestinationPortRange": [
+          "*"
+        ],
+        "SourceAddressPrefix": [
+          "AzureLoadBalancer"
+        ],
+        "DestinationAddressPrefix": [
+          "*"
+        ],
+        "SourceApplicationSecurityGroups": [],
+        "DestinationApplicationSecurityGroups": [],
+        "Access": "Allow",
+        "Priority": 65001,
+        "Direction": "Inbound",
+        "ProvisioningState": "Succeeded",
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-web/defaultSecurityRules/AllowAzureLoadBalancerInBound"
+      },
+      {
+        "Name": "DenyAllInBound",
+        "Protocol": "*",
+        "SourcePortRange": [
+          "*"
+        ],
+        "DestinationPortRange": [
+          "*"
+        ],
+        "SourceAddressPrefix": [
+          "*"
+        ],
+        "DestinationAddressPrefix": [
+          "*"
+        ],
+        "SourceApplicationSecurityGroups": [],
+        "DestinationApplicationSecurityGroups": [],
+        "Access": "Deny",
+        "Priority": 65500,
+        "Direction": "Inbound",
+        "ProvisioningState": "Succeeded",
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-web/defaultSecurityRules/DenyAllInBound"
+      }
+    ],
+    "NetworkInterfaces": [
+      {
+        "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-ops"
+      }
+    ],
+    "Subnets": [],
+    "Tags": {}
+  }
+]

@@ -1,0 +1,443 @@
+{
+  "Buckets": [
+    {
+      "Name": "fh-app-artifacts",
+      "CreationDate": "2025-03-02T09:00:00+00:00",
+      "BucketRegion": "us-east-2",
+      "GetBucketAcl": {
+        "Owner": {
+          "DisplayName": "fh-platform",
+          "ID": "examplecanonicaluserid-fernhollow-platform-0001"
+        },
+        "Grants": [
+          {
+            "Grantee": {
+              "DisplayName": "fh-platform",
+              "ID": "examplecanonicaluserid-fernhollow-platform-0001",
+              "Type": "CanonicalUser"
+            },
+            "Permission": "FULL_CONTROL"
+          }
+        ]
+      },
+      "GetBucketPolicy": null,
+      "GetPublicAccessBlock": {
+        "PublicAccessBlockConfiguration": {
+          "BlockPublicAcls": true,
+          "IgnorePublicAcls": true,
+          "BlockPublicPolicy": true,
+          "RestrictPublicBuckets": true
+        }
+      },
+      "GetBucketLogging": {
+        "LoggingEnabled": {
+          "TargetBucket": "fh-logs-access",
+          "TargetPrefix": "fh-app-artifacts/"
+        }
+      },
+      "GetBucketTagging": {
+        "TagSet": [
+          {
+            "Key": "owner",
+            "Value": "platform"
+          }
+        ]
+      }
+    },
+    {
+      "Name": "fh-audit-logs",
+      "CreationDate": "2025-03-02T09:00:00+00:00",
+      "BucketRegion": "us-east-2",
+      "GetBucketAcl": {
+        "Owner": {
+          "DisplayName": "fh-platform",
+          "ID": "examplecanonicaluserid-fernhollow-platform-0001"
+        },
+        "Grants": [
+          {
+            "Grantee": {
+              "DisplayName": "fh-platform",
+              "ID": "examplecanonicaluserid-fernhollow-platform-0001",
+              "Type": "CanonicalUser"
+            },
+            "Permission": "FULL_CONTROL"
+          }
+        ]
+      },
+      "GetBucketPolicy": {
+        "Policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"AWSCloudTrailAclCheck\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"cloudtrail.amazonaws.com\"},\"Action\":\"s3:GetBucketAcl\",\"Resource\":\"arn:aws:s3:::fh-audit-logs\"},{\"Sid\":\"AWSCloudTrailWrite\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"cloudtrail.amazonaws.com\"},\"Action\":\"s3:PutObject\",\"Resource\":\"arn:aws:s3:::fh-audit-logs/AWSLogs/111122223333/*\",\"Condition\":{\"StringEquals\":{\"s3:x-amz-acl\":\"bucket-owner-full-control\"}}},{\"Sid\":\"TempDebugRead\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Action\":\"s3:GetObject\",\"Resource\":\"arn:aws:s3:::fh-audit-logs/*\"}]}"
+      },
+      "GetPublicAccessBlock": {
+        "PublicAccessBlockConfiguration": {
+          "BlockPublicAcls": true,
+          "IgnorePublicAcls": true,
+          "BlockPublicPolicy": false,
+          "RestrictPublicBuckets": false
+        }
+      },
+      "GetBucketLogging": {
+        "LoggingEnabled": {
+          "TargetBucket": "fh-logs-access",
+          "TargetPrefix": "fh-audit-logs/"
+        }
+      },
+      "GetBucketTagging": {
+        "TagSet": [
+          {
+            "Key": "owner",
+            "Value": "platform"
+          }
+        ]
+      }
+    },
+    {
+      "Name": "fh-data-lake",
+      "CreationDate": "2025-03-02T09:00:00+00:00",
+      "BucketRegion": "us-east-2",
+      "GetBucketAcl": {
+        "Owner": {
+          "DisplayName": "fh-platform",
+          "ID": "examplecanonicaluserid-fernhollow-platform-0001"
+        },
+        "Grants": [
+          {
+            "Grantee": {
+              "DisplayName": "fh-platform",
+              "ID": "examplecanonicaluserid-fernhollow-platform-0001",
+              "Type": "CanonicalUser"
+            },
+            "Permission": "FULL_CONTROL"
+          }
+        ]
+      },
+      "GetBucketPolicy": {
+        "Policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"DenyInsecureTransport\",\"Effect\":\"Deny\",\"Principal\":\"*\",\"Action\":\"s3:*\",\"Resource\":[\"arn:aws:s3:::fh-data-lake\",\"arn:aws:s3:::fh-data-lake/*\"],\"Condition\":{\"Bool\":{\"aws:SecureTransport\":\"false\"}}}]}"
+      },
+      "GetPublicAccessBlock": {
+        "PublicAccessBlockConfiguration": {
+          "BlockPublicAcls": true,
+          "IgnorePublicAcls": true,
+          "BlockPublicPolicy": true,
+          "RestrictPublicBuckets": true
+        }
+      },
+      "GetBucketLogging": {
+        "LoggingEnabled": {
+          "TargetBucket": "fh-logs-access",
+          "TargetPrefix": "fh-data-lake/"
+        }
+      },
+      "GetBucketTagging": {
+        "TagSet": [
+          {
+            "Key": "owner",
+            "Value": "platform"
+          }
+        ]
+      }
+    },
+    {
+      "Name": "fh-legacy-reports",
+      "CreationDate": "2021-06-11T08:00:00+00:00",
+      "BucketRegion": "us-east-2",
+      "GetBucketAcl": {
+        "Owner": {
+          "DisplayName": "fh-platform",
+          "ID": "examplecanonicaluserid-fernhollow-platform-0001"
+        },
+        "Grants": [
+          {
+            "Grantee": {
+              "DisplayName": "fh-platform",
+              "ID": "examplecanonicaluserid-fernhollow-platform-0001",
+              "Type": "CanonicalUser"
+            },
+            "Permission": "FULL_CONTROL"
+          }
+        ]
+      },
+      "GetBucketPolicy": {
+        "Policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"LegacyRead\",\"Effect\":\"Allow\",\"Principal\":\"*\",\"Action\":\"s3:GetObject\",\"Resource\":\"arn:aws:s3:::fh-legacy-reports/*\""
+      },
+      "GetPublicAccessBlock": null,
+      "GetBucketLogging": {},
+      "GetBucketTagging": {
+        "TagSet": [
+          {
+            "Key": "owner",
+            "Value": "platform"
+          }
+        ]
+      }
+    },
+    {
+      "Name": "fh-logs-access",
+      "CreationDate": "2025-03-02T09:00:00+00:00",
+      "BucketRegion": "us-east-2",
+      "GetBucketAcl": {
+        "Owner": {
+          "DisplayName": "fh-platform",
+          "ID": "examplecanonicaluserid-fernhollow-platform-0001"
+        },
+        "Grants": [
+          {
+            "Grantee": {
+              "DisplayName": "fh-platform",
+              "ID": "examplecanonicaluserid-fernhollow-platform-0001",
+              "Type": "CanonicalUser"
+            },
+            "Permission": "FULL_CONTROL"
+          },
+          {
+            "Grantee": {
+              "Type": "Group",
+              "URI": "http://acs.amazonaws.com/groups/s3/LogDelivery"
+            },
+            "Permission": "WRITE"
+          },
+          {
+            "Grantee": {
+              "Type": "Group",
+              "URI": "http://acs.amazonaws.com/groups/s3/LogDelivery"
+            },
+            "Permission": "READ_ACP"
+          }
+        ]
+      },
+      "GetBucketPolicy": null,
+      "GetPublicAccessBlock": {
+        "PublicAccessBlockConfiguration": {
+          "BlockPublicAcls": true,
+          "IgnorePublicAcls": true,
+          "BlockPublicPolicy": true,
+          "RestrictPublicBuckets": false
+        }
+      },
+      "GetBucketLogging": {},
+      "GetBucketTagging": {
+        "TagSet": [
+          {
+            "Key": "owner",
+            "Value": "platform"
+          }
+        ]
+      }
+    },
+    {
+      "Name": "fh-marketing-assets",
+      "CreationDate": "2025-03-02T09:00:00+00:00",
+      "BucketRegion": "us-east-2",
+      "GetBucketAcl": {
+        "Owner": {
+          "DisplayName": "fh-platform",
+          "ID": "examplecanonicaluserid-fernhollow-platform-0001"
+        },
+        "Grants": [
+          {
+            "Grantee": {
+              "DisplayName": "fh-platform",
+              "ID": "examplecanonicaluserid-fernhollow-platform-0001",
+              "Type": "CanonicalUser"
+            },
+            "Permission": "FULL_CONTROL"
+          },
+          {
+            "Grantee": {
+              "Type": "Group",
+              "URI": "http://acs.amazonaws.com/groups/global/AllUsers"
+            },
+            "Permission": "READ"
+          }
+        ]
+      },
+      "GetBucketPolicy": null,
+      "GetPublicAccessBlock": null,
+      "GetBucketLogging": {},
+      "GetBucketTagging": {
+        "TagSet": [
+          {
+            "Key": "owner",
+            "Value": "marketing"
+          }
+        ]
+      }
+    },
+    {
+      "Name": "fh-partner-exchange",
+      "CreationDate": "2025-03-02T09:00:00+00:00",
+      "BucketRegion": "us-east-2",
+      "GetBucketAcl": {
+        "Owner": {
+          "DisplayName": "fh-platform",
+          "ID": "examplecanonicaluserid-fernhollow-platform-0001"
+        },
+        "Grants": [
+          {
+            "Grantee": {
+              "DisplayName": "fh-platform",
+              "ID": "examplecanonicaluserid-fernhollow-platform-0001",
+              "Type": "CanonicalUser"
+            },
+            "Permission": "FULL_CONTROL"
+          },
+          {
+            "Grantee": {
+              "Type": "Group",
+              "URI": "http://acs.amazonaws.com/groups/global/AuthenticatedUsers"
+            },
+            "Permission": "READ"
+          }
+        ]
+      },
+      "GetBucketPolicy": null,
+      "GetPublicAccessBlock": {
+        "PublicAccessBlockConfiguration": {
+          "BlockPublicAcls": true,
+          "IgnorePublicAcls": true,
+          "BlockPublicPolicy": false,
+          "RestrictPublicBuckets": false
+        }
+      },
+      "GetBucketLogging": {},
+      "GetBucketTagging": {
+        "TagSet": [
+          {
+            "Key": "owner",
+            "Value": "platform"
+          }
+        ]
+      }
+    },
+    {
+      "Name": "fh-public-docs",
+      "CreationDate": "2025-03-02T09:00:00+00:00",
+      "BucketRegion": "us-east-2",
+      "GetBucketAcl": {
+        "Owner": {
+          "DisplayName": "fh-platform",
+          "ID": "examplecanonicaluserid-fernhollow-platform-0001"
+        },
+        "Grants": [
+          {
+            "Grantee": {
+              "DisplayName": "fh-platform",
+              "ID": "examplecanonicaluserid-fernhollow-platform-0001",
+              "Type": "CanonicalUser"
+            },
+            "Permission": "FULL_CONTROL"
+          }
+        ]
+      },
+      "GetBucketPolicy": {
+        "Policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"PublicReadDocs\",\"Effect\":\"Allow\",\"Principal\":\"*\",\"Action\":\"s3:GetObject\",\"Resource\":\"arn:aws:s3:::fh-public-docs/*\"}]}"
+      },
+      "GetPublicAccessBlock": {
+        "PublicAccessBlockConfiguration": {
+          "BlockPublicAcls": true,
+          "IgnorePublicAcls": true,
+          "BlockPublicPolicy": false,
+          "RestrictPublicBuckets": false
+        }
+      },
+      "GetBucketLogging": {},
+      "GetBucketTagging": {
+        "TagSet": [
+          {
+            "Key": "owner",
+            "Value": "docs-team"
+          },
+          {
+            "Key": "purpose",
+            "Value": "static-site"
+          }
+        ]
+      }
+    },
+    {
+      "Name": "fh-shared-research",
+      "CreationDate": "2025-03-02T09:00:00+00:00",
+      "BucketRegion": "us-east-2",
+      "GetBucketAcl": {
+        "Owner": {
+          "DisplayName": "fh-platform",
+          "ID": "examplecanonicaluserid-fernhollow-platform-0001"
+        },
+        "Grants": [
+          {
+            "Grantee": {
+              "DisplayName": "fh-platform",
+              "ID": "examplecanonicaluserid-fernhollow-platform-0001",
+              "Type": "CanonicalUser"
+            },
+            "Permission": "FULL_CONTROL"
+          }
+        ]
+      },
+      "GetBucketPolicy": {
+        "Policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"PartnerNetworkRead\",\"Effect\":\"Allow\",\"Principal\":\"*\",\"Action\":\"s3:GetObject\",\"Resource\":\"arn:aws:s3:::fh-shared-research/*\",\"Condition\":{\"IpAddress\":{\"aws:SourceIp\":\"198.51.100.0/24\"}}}]}"
+      },
+      "GetPublicAccessBlock": {
+        "PublicAccessBlockConfiguration": {
+          "BlockPublicAcls": true,
+          "IgnorePublicAcls": true,
+          "BlockPublicPolicy": false,
+          "RestrictPublicBuckets": false
+        }
+      },
+      "GetBucketLogging": {},
+      "GetBucketTagging": {
+        "TagSet": [
+          {
+            "Key": "owner",
+            "Value": "platform"
+          }
+        ]
+      }
+    },
+    {
+      "Name": "fh-vendor-drop",
+      "CreationDate": "2025-03-02T09:00:00+00:00",
+      "BucketRegion": "us-east-2",
+      "GetBucketAcl": {
+        "Owner": {
+          "DisplayName": "fh-platform",
+          "ID": "examplecanonicaluserid-fernhollow-platform-0001"
+        },
+        "Grants": [
+          {
+            "Grantee": {
+              "DisplayName": "fh-platform",
+              "ID": "examplecanonicaluserid-fernhollow-platform-0001",
+              "Type": "CanonicalUser"
+            },
+            "Permission": "FULL_CONTROL"
+          }
+        ]
+      },
+      "GetBucketPolicy": {
+        "Policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"EveryoneButOwnerMayWrite\",\"Effect\":\"Allow\",\"NotPrincipal\":{\"AWS\":\"arn:aws:iam::111122223333:root\"},\"Action\":\"s3:PutObject\",\"Resource\":\"arn:aws:s3:::fh-vendor-drop/*\"}]}"
+      },
+      "GetPublicAccessBlock": {
+        "PublicAccessBlockConfiguration": {
+          "BlockPublicAcls": true,
+          "IgnorePublicAcls": true,
+          "BlockPublicPolicy": false,
+          "RestrictPublicBuckets": false
+        }
+      },
+      "GetBucketLogging": {},
+      "GetBucketTagging": {
+        "TagSet": [
+          {
+            "Key": "owner",
+            "Value": "platform"
+          }
+        ]
+      }
+    }
+  ],
+  "Owner": {
+    "DisplayName": "fh-platform",
+    "ID": "examplecanonicaluserid-fernhollow-platform-0001"
+  }
+}

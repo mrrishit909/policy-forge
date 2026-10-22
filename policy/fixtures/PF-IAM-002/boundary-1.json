@@ -1,0 +1,210 @@
+{
+  "boundary-1": {
+    "description": "NotAction and conditional service wildcards are unknown; the full * is left to PF-IAM-001; resource-group scope passes",
+    "input": {
+      "resources": [
+        {
+          "id": "aws:iam_role:arn:aws:iam::111122223333:role/fx-notaction",
+          "provider": "aws",
+          "type": "iam_role",
+          "native_type": "AWS::IAM::Role",
+          "name": "fx-notaction",
+          "region": "fixture-region",
+          "properties": {
+            "arn": "arn:aws:iam::111122223333:role/fx-notaction",
+            "permissions": {
+              "parse_error": false,
+              "statements": [
+                {
+                  "sid": null,
+                  "effect": "Allow",
+                  "actions": null,
+                  "not_actions": [
+                    "iam:*"
+                  ],
+                  "resources": [
+                    "*"
+                  ],
+                  "not_resources": null,
+                  "principals": null,
+                  "not_principals": null,
+                  "has_condition": false,
+                  "raw": "snapshots/fixtures/fixture.json#/36/Statement/0",
+                  "policy": "fixture"
+                }
+              ]
+            },
+            "attached_policy_arns": [],
+            "instance_profile_arns": []
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/37"
+          }
+        },
+        {
+          "id": "aws:iam_policy:arn:aws:iam::111122223333:policy/fx-s3-conditional",
+          "provider": "aws",
+          "type": "iam_policy",
+          "native_type": "AWS::IAM::ManagedPolicy",
+          "name": "fx-s3-conditional",
+          "region": "fixture-region",
+          "properties": {
+            "managed_by": "customer",
+            "arn": "arn:aws:iam::111122223333:policy/fx-s3-conditional",
+            "attachment_count": 1,
+            "permissions": {
+              "parse_error": false,
+              "statements": [
+                {
+                  "sid": null,
+                  "effect": "Allow",
+                  "actions": [
+                    "s3:*"
+                  ],
+                  "not_actions": null,
+                  "resources": [
+                    "*"
+                  ],
+                  "not_resources": null,
+                  "principals": null,
+                  "not_principals": null,
+                  "has_condition": true,
+                  "raw": "snapshots/fixtures/fixture.json#/37/Statement/0",
+                  "policy": "fixture"
+                }
+              ]
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/38"
+          }
+        },
+        {
+          "id": "aws:iam_policy:arn:aws:iam::111122223333:policy/fx-full-star",
+          "provider": "aws",
+          "type": "iam_policy",
+          "native_type": "AWS::IAM::ManagedPolicy",
+          "name": "fx-full-star",
+          "region": "fixture-region",
+          "properties": {
+            "managed_by": "customer",
+            "arn": "arn:aws:iam::111122223333:policy/fx-full-star",
+            "attachment_count": 1,
+            "permissions": {
+              "parse_error": false,
+              "statements": [
+                {
+                  "sid": null,
+                  "effect": "Allow",
+                  "actions": [
+                    "*"
+                  ],
+                  "not_actions": null,
+                  "resources": [
+                    "*"
+                  ],
+                  "not_resources": null,
+                  "principals": null,
+                  "not_principals": null,
+                  "has_condition": false,
+                  "raw": "snapshots/fixtures/fixture.json#/38/Statement/0",
+                  "policy": "fixture"
+                }
+              ]
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/39"
+          }
+        },
+        {
+          "id": "azure:role_definition:fx-rg-storage",
+          "provider": "azure",
+          "type": "role_definition",
+          "native_type": "Microsoft.Authorization/roleDefinitions",
+          "name": "FX RG Storage",
+          "region": "fixture-region",
+          "properties": {
+            "role_name": "FX RG Storage",
+            "is_custom": true,
+            "assignable_scopes": [
+              "/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg"
+            ],
+            "data_actions": [],
+            "permissions": {
+              "parse_error": false,
+              "statements": [
+                {
+                  "sid": null,
+                  "effect": "Allow",
+                  "actions": [
+                    "Microsoft.Storage/*"
+                  ],
+                  "not_actions": null,
+                  "resources": [
+                    "/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg"
+                  ],
+                  "not_resources": null,
+                  "principals": null,
+                  "not_principals": null,
+                  "has_condition": false,
+                  "raw": "snapshots/fixtures/fixture.json#/39/Statement/0",
+                  "policy": "fixture"
+                }
+              ]
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/40"
+          }
+        }
+      ],
+      "edges": [],
+      "unresolved": [],
+      "context": {
+        "admin_cidrs": [
+          "203.0.113.0/26"
+        ],
+        "remote_admin_ports": [
+          22,
+          3389
+        ],
+        "sensitive_ports": [
+          22,
+          3389,
+          1433,
+          3306,
+          5432,
+          6379,
+          9200,
+          27017
+        ],
+        "break_glass_principals": [
+          "arn:aws:iam::111122223333:user/breakglass",
+          "breakglass@fixture.example",
+          "00000000-0000-4000-9000-0000000000bb"
+        ],
+        "audit_log_targets": [],
+        "required_activity_log_categories": [
+          "Administrative",
+          "Security",
+          "Policy"
+        ]
+      }
+    },
+    "expected": {
+      "aws:iam_role:arn:aws:iam::111122223333:role/fx-notaction": "unknown",
+      "aws:iam_policy:arn:aws:iam::111122223333:policy/fx-s3-conditional": "unknown",
+      "aws:iam_policy:arn:aws:iam::111122223333:policy/fx-full-star": "pass",
+      "azure:role_definition:fx-rg-storage": "pass"
+    }
+  }
+}

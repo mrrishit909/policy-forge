@@ -1,0 +1,315 @@
+{
+  "boundary-1": {
+    "description": "Port range ending at 22 fails, starting at 23 passes; 0.0.0.0/1 is internet-wide, 10.0.0.0/8 is private; ::/0, all-traffic and UDP RDP fail; ICMP passes",
+    "input": {
+      "resources": [
+        {
+          "id": "aws:security_group:sg-fx-range-ends-22",
+          "provider": "aws",
+          "type": "security_group",
+          "native_type": "AWS::EC2::SecurityGroup",
+          "name": "sg-fx-range-ends-22",
+          "region": "fixture-region",
+          "properties": {
+            "ingress": [
+              {
+                "protocol": "tcp",
+                "port_from": 20,
+                "port_to": 22,
+                "cidrs": [
+                  "0.0.0.0/0"
+                ],
+                "source_tags": [],
+                "source_groups": [],
+                "prefix_lists": [],
+                "action": "allow",
+                "priority": null,
+                "raw": "snapshots/fixtures/fixture.json#/64/IpPermissions/0"
+              }
+            ],
+            "vpc_id": "vpc-fixture",
+            "tags": {}
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/65"
+          }
+        },
+        {
+          "id": "aws:security_group:sg-fx-range-starts-23",
+          "provider": "aws",
+          "type": "security_group",
+          "native_type": "AWS::EC2::SecurityGroup",
+          "name": "sg-fx-range-starts-23",
+          "region": "fixture-region",
+          "properties": {
+            "ingress": [
+              {
+                "protocol": "tcp",
+                "port_from": 23,
+                "port_to": 25,
+                "cidrs": [
+                  "0.0.0.0/0"
+                ],
+                "source_tags": [],
+                "source_groups": [],
+                "prefix_lists": [],
+                "action": "allow",
+                "priority": null,
+                "raw": "snapshots/fixtures/fixture.json#/65/IpPermissions/0"
+              }
+            ],
+            "vpc_id": "vpc-fixture",
+            "tags": {}
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/66"
+          }
+        },
+        {
+          "id": "aws:security_group:sg-fx-half-internet",
+          "provider": "aws",
+          "type": "security_group",
+          "native_type": "AWS::EC2::SecurityGroup",
+          "name": "sg-fx-half-internet",
+          "region": "fixture-region",
+          "properties": {
+            "ingress": [
+              {
+                "protocol": "tcp",
+                "port_from": 22,
+                "port_to": 22,
+                "cidrs": [
+                  "0.0.0.0/1"
+                ],
+                "source_tags": [],
+                "source_groups": [],
+                "prefix_lists": [],
+                "action": "allow",
+                "priority": null,
+                "raw": "snapshots/fixtures/fixture.json#/66/IpPermissions/0"
+              }
+            ],
+            "vpc_id": "vpc-fixture",
+            "tags": {}
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/67"
+          }
+        },
+        {
+          "id": "aws:security_group:sg-fx-private-slash8",
+          "provider": "aws",
+          "type": "security_group",
+          "native_type": "AWS::EC2::SecurityGroup",
+          "name": "sg-fx-private-slash8",
+          "region": "fixture-region",
+          "properties": {
+            "ingress": [
+              {
+                "protocol": "tcp",
+                "port_from": 22,
+                "port_to": 22,
+                "cidrs": [
+                  "10.0.0.0/8"
+                ],
+                "source_tags": [],
+                "source_groups": [],
+                "prefix_lists": [],
+                "action": "allow",
+                "priority": null,
+                "raw": "snapshots/fixtures/fixture.json#/67/IpPermissions/0"
+              }
+            ],
+            "vpc_id": "vpc-fixture",
+            "tags": {}
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/68"
+          }
+        },
+        {
+          "id": "aws:security_group:sg-fx-ipv6-rdp",
+          "provider": "aws",
+          "type": "security_group",
+          "native_type": "AWS::EC2::SecurityGroup",
+          "name": "sg-fx-ipv6-rdp",
+          "region": "fixture-region",
+          "properties": {
+            "ingress": [
+              {
+                "protocol": "tcp",
+                "port_from": 3389,
+                "port_to": 3389,
+                "cidrs": [
+                  "::/0"
+                ],
+                "source_tags": [],
+                "source_groups": [],
+                "prefix_lists": [],
+                "action": "allow",
+                "priority": null,
+                "raw": "snapshots/fixtures/fixture.json#/68/IpPermissions/0"
+              }
+            ],
+            "vpc_id": "vpc-fixture",
+            "tags": {}
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/69"
+          }
+        },
+        {
+          "id": "aws:security_group:sg-fx-all-traffic",
+          "provider": "aws",
+          "type": "security_group",
+          "native_type": "AWS::EC2::SecurityGroup",
+          "name": "sg-fx-all-traffic",
+          "region": "fixture-region",
+          "properties": {
+            "ingress": [
+              {
+                "protocol": "all",
+                "port_from": 0,
+                "port_to": 65535,
+                "cidrs": [
+                  "0.0.0.0/0"
+                ],
+                "source_tags": [],
+                "source_groups": [],
+                "prefix_lists": [],
+                "action": "allow",
+                "priority": null,
+                "raw": "snapshots/fixtures/fixture.json#/69/IpPermissions/0"
+              }
+            ],
+            "vpc_id": "vpc-fixture",
+            "tags": {}
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/70"
+          }
+        },
+        {
+          "id": "aws:security_group:sg-fx-udp-rdp",
+          "provider": "aws",
+          "type": "security_group",
+          "native_type": "AWS::EC2::SecurityGroup",
+          "name": "sg-fx-udp-rdp",
+          "region": "fixture-region",
+          "properties": {
+            "ingress": [
+              {
+                "protocol": "udp",
+                "port_from": 3389,
+                "port_to": 3389,
+                "cidrs": [
+                  "0.0.0.0/0"
+                ],
+                "source_tags": [],
+                "source_groups": [],
+                "prefix_lists": [],
+                "action": "allow",
+                "priority": null,
+                "raw": "snapshots/fixtures/fixture.json#/70/IpPermissions/0"
+              }
+            ],
+            "vpc_id": "vpc-fixture",
+            "tags": {}
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/71"
+          }
+        },
+        {
+          "id": "aws:security_group:sg-fx-icmp",
+          "provider": "aws",
+          "type": "security_group",
+          "native_type": "AWS::EC2::SecurityGroup",
+          "name": "sg-fx-icmp",
+          "region": "fixture-region",
+          "properties": {
+            "ingress": [
+              {
+                "protocol": "icmp",
+                "port_from": null,
+                "port_to": null,
+                "cidrs": [
+                  "0.0.0.0/0"
+                ],
+                "source_tags": [],
+                "source_groups": [],
+                "prefix_lists": [],
+                "action": "allow",
+                "priority": null,
+                "raw": "snapshots/fixtures/fixture.json#/71/IpPermissions/0"
+              }
+            ],
+            "vpc_id": "vpc-fixture",
+            "tags": {}
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/72"
+          }
+        }
+      ],
+      "edges": [],
+      "unresolved": [],
+      "context": {
+        "admin_cidrs": [
+          "203.0.113.0/26"
+        ],
+        "remote_admin_ports": [
+          22,
+          3389
+        ],
+        "sensitive_ports": [
+          22,
+          3389,
+          1433,
+          3306,
+          5432,
+          6379,
+          9200,
+          27017
+        ],
+        "break_glass_principals": [
+          "arn:aws:iam::111122223333:user/breakglass",
+          "breakglass@fixture.example",
+          "00000000-0000-4000-9000-0000000000bb"
+        ],
+        "audit_log_targets": [],
+        "required_activity_log_categories": [
+          "Administrative",
+          "Security",
+          "Policy"
+        ]
+      }
+    },
+    "expected": {
+      "aws:security_group:sg-fx-range-ends-22": "fail",
+      "aws:security_group:sg-fx-range-starts-23": "pass",
+      "aws:security_group:sg-fx-half-internet": "fail",
+      "aws:security_group:sg-fx-private-slash8": "pass",
+      "aws:security_group:sg-fx-ipv6-rdp": "fail",
+      "aws:security_group:sg-fx-all-traffic": "fail",
+      "aws:security_group:sg-fx-udp-rdp": "fail",
+      "aws:security_group:sg-fx-icmp": "pass"
+    }
+  }
+}

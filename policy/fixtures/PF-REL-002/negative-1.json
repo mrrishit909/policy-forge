@@ -1,0 +1,149 @@
+{
+  "negative-1": {
+    "description": "Private audit bucket passes; a public bucket that receives no audit logs is not applicable",
+    "input": {
+      "resources": [
+        {
+          "id": "aws:storage_bucket:fixture-audit",
+          "provider": "aws",
+          "type": "storage_bucket",
+          "native_type": "AWS::S3::Bucket",
+          "name": "fixture-audit",
+          "region": "fixture-region",
+          "properties": {
+            "public_access": {
+              "anonymous_grants": [],
+              "anonymous_grants_blocked": false,
+              "policy": null,
+              "public_policy_blocked": false,
+              "guard": {
+                "configured": true,
+                "ignore_public_acls": false,
+                "restrict_public_buckets": false
+              }
+            },
+            "raw": {
+              "guard": "snapshots/fixtures/fixture.json#/132/GetPublicAccessBlock",
+              "policy": "snapshots/fixtures/fixture.json#/132/GetBucketPolicy"
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/133"
+          }
+        },
+        {
+          "id": "aws:audit_trail:arn:aws:cloudtrail:fixture-region:111122223333:trail/fx-trail",
+          "provider": "aws",
+          "type": "audit_trail",
+          "native_type": "AWS::CloudTrail::Trail",
+          "name": "fx-trail",
+          "region": "fixture-region",
+          "properties": {
+            "is_logging": true,
+            "multi_region": true,
+            "log_file_validation": true,
+            "include_global_service_events": true,
+            "organization_trail": false,
+            "destination": "fixture-audit",
+            "raw": {
+              "is_logging": "snapshots/fixtures/fixture.json#/133/IsLogging",
+              "multi_region": "snapshots/fixtures/fixture.json#/133/IsMultiRegionTrail",
+              "log_file_validation": "snapshots/fixtures/fixture.json#/133/LogFileValidationEnabled",
+              "destination": "snapshots/fixtures/fixture.json#/133/S3BucketName"
+            }
+          },
+          "refs": [
+            {
+              "kind": "delivers_logs_to",
+              "target": "aws:storage_bucket:fixture-audit"
+            }
+          ],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/134"
+          }
+        },
+        {
+          "id": "aws:storage_bucket:fx-public-not-audit",
+          "provider": "aws",
+          "type": "storage_bucket",
+          "native_type": "AWS::S3::Bucket",
+          "name": "fx-public-not-audit",
+          "region": "fixture-region",
+          "properties": {
+            "public_access": {
+              "anonymous_grants": [
+                {
+                  "via": "acl",
+                  "grantee": "AllUsers",
+                  "permission": "READ",
+                  "raw": "snapshots/fixtures/fixture.json#/134/GetBucketAcl/Grants/1"
+                }
+              ],
+              "anonymous_grants_blocked": false,
+              "policy": null,
+              "public_policy_blocked": false,
+              "guard": {
+                "configured": true,
+                "ignore_public_acls": false,
+                "restrict_public_buckets": false
+              }
+            },
+            "raw": {
+              "guard": "snapshots/fixtures/fixture.json#/134/GetPublicAccessBlock",
+              "policy": "snapshots/fixtures/fixture.json#/134/GetBucketPolicy"
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/135"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "from": "aws:audit_trail:arn:aws:cloudtrail:fixture-region:111122223333:trail/fx-trail",
+          "to": "aws:storage_bucket:fixture-audit",
+          "kind": "delivers_logs_to"
+        }
+      ],
+      "unresolved": [],
+      "context": {
+        "admin_cidrs": [
+          "203.0.113.0/26"
+        ],
+        "remote_admin_ports": [
+          22,
+          3389
+        ],
+        "sensitive_ports": [
+          22,
+          3389,
+          1433,
+          3306,
+          5432,
+          6379,
+          9200,
+          27017
+        ],
+        "break_glass_principals": [
+          "arn:aws:iam::111122223333:user/breakglass",
+          "breakglass@fixture.example",
+          "00000000-0000-4000-9000-0000000000bb"
+        ],
+        "audit_log_targets": [],
+        "required_activity_log_categories": [
+          "Administrative",
+          "Security",
+          "Policy"
+        ]
+      }
+    },
+    "expected": {
+      "aws:storage_bucket:fixture-audit": "pass"
+    }
+  }
+}

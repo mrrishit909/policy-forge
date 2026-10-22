@@ -1,0 +1,18 @@
+{
+  "TrailStatus": [
+    {
+      "Name": "data-events-trail",
+      "TrailARN": "arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+      "IsLogging": true,
+      "LatestDeliveryTime": "2026-10-20T23:55:00+00:00",
+      "StartLoggingTime": "2025-03-02T09:05:00+00:00"
+    },
+    {
+      "Name": "org-management-trail",
+      "TrailARN": "arn:aws:cloudtrail:us-east-2:111122223333:trail/org-management-trail",
+      "IsLogging": false,
+      "LatestDeliveryTime": "2026-10-20T23:55:00+00:00",
+      "StartLoggingTime": "2025-03-02T09:05:00+00:00"
+    }
+  ]
+}

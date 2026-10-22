@@ -1,0 +1,41 @@
+[project]
+name = "policy-forge"
+version = "1.0.0"
+description = "Offline cloud-security configuration analysis: Bash and PowerShell adapters, OPA/Rego findings, verified local-file remediation and expiring exceptions on synthetic snapshots."
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "jsonschema==4.26.0",
+]
+
+[dependency-groups]
+dev = [
+  "pytest==9.1.1",
+  "ruff==0.16.10",
+]
+
+[tool.uv]
+package = true
+
+[build-system]
+requires = ["hatchling==1.32.4"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/policyforge", "harness"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["gate: hard release gate (Outcome Verification Loop runs these)"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+src = ["src", "harness"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "S"]
+ignore = ["S101", "S603", "S607", "S311", "S310"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S", "B", "E501"]

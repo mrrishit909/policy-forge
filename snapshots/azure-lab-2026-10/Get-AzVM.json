@@ -1,0 +1,167 @@
+[
+  {
+    "Name": "vm-fh-jump",
+    "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-jump",
+    "ResourceGroupName": "rg-fh-lab",
+    "Location": "eastus2",
+    "VmId": "00000000-0000-4000-9000-00000000050a",
+    "HardwareProfile": {
+      "VmSize": "Standard_B2s"
+    },
+    "Identity": null,
+    "NetworkProfile": {
+      "NetworkInterfaces": [
+        {
+          "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-jump",
+          "Primary": true
+        }
+      ]
+    },
+    "OSProfile": {
+      "ComputerName": "vm-fh-jump",
+      "AdminUsername": "fhadmin",
+      "AdminPassword": "pf-canary-00000000000000b1-not-a-secret",
+      "LinuxConfiguration": {
+        "DisablePasswordAuthentication": false
+      },
+      "Secrets": []
+    },
+    "StorageProfile": {
+      "OsDisk": {
+        "OsType": "Linux",
+        "Name": "vm-fh-jump-osdisk",
+        "Caching": "ReadWrite"
+      }
+    },
+    "Tags": {
+      "owner": "lab-team"
+    }
+  },
+  {
+    "Name": "vm-fh-ops",
+    "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-ops",
+    "ResourceGroupName": "rg-fh-lab",
+    "Location": "eastus2",
+    "VmId": "00000000-0000-4000-9000-000000000509",
+    "HardwareProfile": {
+      "VmSize": "Standard_B2s"
+    },
+    "Identity": {
+      "Type": "SystemAssigned",
+      "PrincipalId": "00000000-0000-4000-9000-000000000601",
+      "TenantId": "00000000-0000-4000-8000-0000000000aa"
+    },
+    "NetworkProfile": {
+      "NetworkInterfaces": [
+        {
+          "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-ops",
+          "Primary": true
+        }
+      ]
+    },
+    "OSProfile": {
+      "ComputerName": "vm-fh-ops",
+      "AdminUsername": "fhadmin",
+      "AdminPassword": "pf-canary-00000000000000b2-not-a-secret",
+      "LinuxConfiguration": {
+        "DisablePasswordAuthentication": false
+      },
+      "Secrets": []
+    },
+    "StorageProfile": {
+      "OsDisk": {
+        "OsType": "Linux",
+        "Name": "vm-fh-ops-osdisk",
+        "Caching": "ReadWrite"
+      }
+    },
+    "Tags": {
+      "owner": "lab-team",
+      "notes": "bootstrap pf-canary-00000000000000b3-not-a-secret"
+    }
+  },
+  {
+    "Name": "vm-fh-rdp",
+    "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-rdp",
+    "ResourceGroupName": "rg-fh-lab",
+    "Location": "eastus2",
+    "VmId": "00000000-0000-4000-9000-000000000509",
+    "HardwareProfile": {
+      "VmSize": "Standard_B2s"
+    },
+    "Identity": {
+      "Type": "SystemAssigned",
+      "PrincipalId": "00000000-0000-4000-9000-000000000603",
+      "TenantId": "00000000-0000-4000-8000-0000000000aa"
+    },
+    "NetworkProfile": {
+      "NetworkInterfaces": [
+        {
+          "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-rdp",
+          "Primary": true
+        }
+      ]
+    },
+    "OSProfile": {
+      "ComputerName": "vm-fh-rdp",
+      "AdminUsername": "fhadmin",
+      "AdminPassword": "pf-canary-00000000000000b4-not-a-secret",
+      "LinuxConfiguration": {
+        "DisablePasswordAuthentication": false
+      },
+      "Secrets": []
+    },
+    "StorageProfile": {
+      "OsDisk": {
+        "OsType": "Linux",
+        "Name": "vm-fh-rdp-osdisk",
+        "Caching": "ReadWrite"
+      }
+    },
+    "Tags": {
+      "owner": "lab-team"
+    }
+  },
+  {
+    "Name": "vm-fh-worker",
+    "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-worker",
+    "ResourceGroupName": "rg-fh-lab",
+    "Location": "eastus2",
+    "VmId": "00000000-0000-4000-9000-00000000050c",
+    "HardwareProfile": {
+      "VmSize": "Standard_B2s"
+    },
+    "Identity": {
+      "Type": "SystemAssigned",
+      "PrincipalId": "00000000-0000-4000-9000-000000000602",
+      "TenantId": "00000000-0000-4000-8000-0000000000aa"
+    },
+    "NetworkProfile": {
+      "NetworkInterfaces": [
+        {
+          "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-worker",
+          "Primary": true
+        }
+      ]
+    },
+    "OSProfile": {
+      "ComputerName": "vm-fh-worker",
+      "AdminUsername": "fhadmin",
+      "AdminPassword": "pf-canary-00000000000000b5-not-a-secret",
+      "LinuxConfiguration": {
+        "DisablePasswordAuthentication": false
+      },
+      "Secrets": []
+    },
+    "StorageProfile": {
+      "OsDisk": {
+        "OsType": "Linux",
+        "Name": "vm-fh-worker-osdisk",
+        "Caching": "ReadWrite"
+      }
+    },
+    "Tags": {
+      "owner": "data-team"
+    }
+  }
+]

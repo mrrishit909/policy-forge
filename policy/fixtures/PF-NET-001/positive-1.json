@@ -1,0 +1,110 @@
+{
+  "positive-1": {
+    "description": "SSH from 0.0.0.0/0; RDP from the Internet tag",
+    "input": {
+      "resources": [
+        {
+          "id": "aws:security_group:sg-fx-ssh-world",
+          "provider": "aws",
+          "type": "security_group",
+          "native_type": "AWS::EC2::SecurityGroup",
+          "name": "sg-fx-ssh-world",
+          "region": "fixture-region",
+          "properties": {
+            "ingress": [
+              {
+                "protocol": "tcp",
+                "port_from": 22,
+                "port_to": 22,
+                "cidrs": [
+                  "0.0.0.0/0"
+                ],
+                "source_tags": [],
+                "source_groups": [],
+                "prefix_lists": [],
+                "action": "allow",
+                "priority": null,
+                "raw": "snapshots/fixtures/fixture.json#/58/IpPermissions/0"
+              }
+            ],
+            "vpc_id": "vpc-fixture",
+            "tags": {}
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/59"
+          }
+        },
+        {
+          "id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Network/networkSecurityGroups/nsg-fx-rdp-internet",
+          "provider": "azure",
+          "type": "network_security_group",
+          "native_type": "Microsoft.Network/networkSecurityGroups",
+          "name": "nsg-fx-rdp-internet",
+          "region": "fixture-region",
+          "properties": {
+            "ingress": [
+              {
+                "protocol": "tcp",
+                "port_from": 3389,
+                "port_to": 3389,
+                "cidrs": [],
+                "source_tags": [
+                  "Internet"
+                ],
+                "source_groups": [],
+                "prefix_lists": [],
+                "action": "allow",
+                "priority": 100,
+                "raw": "snapshots/fixtures/fixture.json#/59/IpPermissions/0"
+              }
+            ],
+            "tags": {}
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/60"
+          }
+        }
+      ],
+      "edges": [],
+      "unresolved": [],
+      "context": {
+        "admin_cidrs": [
+          "203.0.113.0/26"
+        ],
+        "remote_admin_ports": [
+          22,
+          3389
+        ],
+        "sensitive_ports": [
+          22,
+          3389,
+          1433,
+          3306,
+          5432,
+          6379,
+          9200,
+          27017
+        ],
+        "break_glass_principals": [
+          "arn:aws:iam::111122223333:user/breakglass",
+          "breakglass@fixture.example",
+          "00000000-0000-4000-9000-0000000000bb"
+        ],
+        "audit_log_targets": [],
+        "required_activity_log_categories": [
+          "Administrative",
+          "Security",
+          "Policy"
+        ]
+      }
+    },
+    "expected": {
+      "aws:security_group:sg-fx-ssh-world": "fail",
+      "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Network/networkSecurityGroups/nsg-fx-rdp-internet": "fail"
+    }
+  }
+}

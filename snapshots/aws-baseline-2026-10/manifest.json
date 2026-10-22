@@ -1,0 +1,16 @@
+{
+  "name": "aws-baseline-2026-10",
+  "provider": "aws",
+  "captured_at": "2026-10-05T09:00:00Z",
+  "description": "Synthetic AWS account 111122223333 for Fernhollow Labs (fictional), early October: mostly sound, a few findings, one unsupported resource type (Lambda functions).",
+  "synthetic": true,
+  "files": [
+    "s3-buckets.json",
+    "iam-account-authorization-details.json",
+    "ec2-describe-security-groups.json",
+    "ec2-describe-instances.json",
+    "cloudtrail-describe-trails.json",
+    "cloudtrail-get-trail-status.json",
+    "lambda-list-functions.json"
+  ]
+}

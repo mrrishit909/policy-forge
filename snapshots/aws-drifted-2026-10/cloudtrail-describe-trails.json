@@ -1,0 +1,43 @@
+{
+  "trailList": [
+    {
+      "Name": "data-events-trail",
+      "S3BucketName": "fh-audit-logs",
+      "S3KeyPrefix": "",
+      "IncludeGlobalServiceEvents": true,
+      "IsMultiRegionTrail": false,
+      "HomeRegion": "us-east-2",
+      "TrailARN": "arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+      "LogFileValidationEnabled": false,
+      "HasCustomEventSelectors": false,
+      "HasInsightSelectors": false,
+      "IsOrganizationTrail": false
+    },
+    {
+      "Name": "org-management-trail",
+      "S3BucketName": "fh-audit-logs",
+      "S3KeyPrefix": "",
+      "IncludeGlobalServiceEvents": true,
+      "IsMultiRegionTrail": true,
+      "HomeRegion": "us-east-2",
+      "TrailARN": "arn:aws:cloudtrail:us-east-2:111122223333:trail/org-management-trail",
+      "LogFileValidationEnabled": true,
+      "HasCustomEventSelectors": false,
+      "HasInsightSelectors": false,
+      "IsOrganizationTrail": false
+    },
+    {
+      "Name": "partner-trail",
+      "S3BucketName": "fh-external-archive-444455556666",
+      "S3KeyPrefix": "",
+      "IncludeGlobalServiceEvents": true,
+      "IsMultiRegionTrail": true,
+      "HomeRegion": "us-east-2",
+      "TrailARN": "arn:aws:cloudtrail:us-east-2:111122223333:trail/partner-trail",
+      "LogFileValidationEnabled": true,
+      "HasCustomEventSelectors": false,
+      "HasInsightSelectors": false,
+      "IsOrganizationTrail": false
+    }
+  ]
+}

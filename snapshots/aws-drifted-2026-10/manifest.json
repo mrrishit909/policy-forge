@@ -1,0 +1,16 @@
+{
+  "name": "aws-drifted-2026-10",
+  "provider": "aws",
+  "captured_at": "2026-10-19T09:00:00Z",
+  "description": "The same synthetic AWS account 111122223333 two weeks later, after configuration drift: public storage, wildcard IAM, internet-open admin ports, weakened audit trails, risky relationships and boundary cases.",
+  "synthetic": true,
+  "files": [
+    "s3-buckets.json",
+    "iam-account-authorization-details.json",
+    "ec2-describe-security-groups.json",
+    "ec2-describe-instances.json",
+    "cloudtrail-describe-trails.json",
+    "cloudtrail-get-trail-status.json",
+    "lambda-list-functions.json"
+  ]
+}

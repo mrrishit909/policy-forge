@@ -1,0 +1,239 @@
+{
+  "boundary-1": {
+    "description": "Condition, NotPrincipal and unparseable policies are unknown; a public policy neutralized by RestrictPublicBuckets passes",
+    "input": {
+      "resources": [
+        {
+          "id": "aws:storage_bucket:fx-policy-conditional",
+          "provider": "aws",
+          "type": "storage_bucket",
+          "native_type": "AWS::S3::Bucket",
+          "name": "fx-policy-conditional",
+          "region": "fixture-region",
+          "properties": {
+            "public_access": {
+              "anonymous_grants": [],
+              "anonymous_grants_blocked": false,
+              "policy": {
+                "parse_error": false,
+                "statements": [
+                  {
+                    "sid": null,
+                    "effect": "Allow",
+                    "actions": [
+                      "s3:GetObject"
+                    ],
+                    "not_actions": null,
+                    "resources": [
+                      "arn:aws:s3:::fx/*"
+                    ],
+                    "not_resources": null,
+                    "principals": [
+                      "*"
+                    ],
+                    "not_principals": null,
+                    "has_condition": true,
+                    "raw": "snapshots/fixtures/fixture.json#/7/Statement/0",
+                    "policy": "fixture"
+                  }
+                ]
+              },
+              "public_policy_blocked": false,
+              "guard": {
+                "configured": true,
+                "ignore_public_acls": false,
+                "restrict_public_buckets": false
+              }
+            },
+            "raw": {
+              "guard": "snapshots/fixtures/fixture.json#/12/GetPublicAccessBlock",
+              "policy": "snapshots/fixtures/fixture.json#/12/GetBucketPolicy"
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/13"
+          }
+        },
+        {
+          "id": "aws:storage_bucket:fx-policy-notprincipal",
+          "provider": "aws",
+          "type": "storage_bucket",
+          "native_type": "AWS::S3::Bucket",
+          "name": "fx-policy-notprincipal",
+          "region": "fixture-region",
+          "properties": {
+            "public_access": {
+              "anonymous_grants": [],
+              "anonymous_grants_blocked": false,
+              "policy": {
+                "parse_error": false,
+                "statements": [
+                  {
+                    "sid": null,
+                    "effect": "Allow",
+                    "actions": [
+                      "s3:PutObject"
+                    ],
+                    "not_actions": null,
+                    "resources": [
+                      "*"
+                    ],
+                    "not_resources": null,
+                    "principals": null,
+                    "not_principals": [
+                      "AWS:arn:aws:iam::1:root"
+                    ],
+                    "has_condition": false,
+                    "raw": "snapshots/fixtures/fixture.json#/13/Statement/0",
+                    "policy": "fixture"
+                  }
+                ]
+              },
+              "public_policy_blocked": false,
+              "guard": {
+                "configured": true,
+                "ignore_public_acls": false,
+                "restrict_public_buckets": false
+              }
+            },
+            "raw": {
+              "guard": "snapshots/fixtures/fixture.json#/13/GetPublicAccessBlock",
+              "policy": "snapshots/fixtures/fixture.json#/13/GetBucketPolicy"
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/14"
+          }
+        },
+        {
+          "id": "aws:storage_bucket:fx-policy-unparseable",
+          "provider": "aws",
+          "type": "storage_bucket",
+          "native_type": "AWS::S3::Bucket",
+          "name": "fx-policy-unparseable",
+          "region": "fixture-region",
+          "properties": {
+            "public_access": {
+              "anonymous_grants": [],
+              "anonymous_grants_blocked": false,
+              "policy": {
+                "parse_error": true,
+                "statements": []
+              },
+              "public_policy_blocked": false,
+              "guard": {
+                "configured": true,
+                "ignore_public_acls": false,
+                "restrict_public_buckets": false
+              }
+            },
+            "raw": {
+              "guard": "snapshots/fixtures/fixture.json#/14/GetPublicAccessBlock",
+              "policy": "snapshots/fixtures/fixture.json#/14/GetBucketPolicy"
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/15"
+          }
+        },
+        {
+          "id": "aws:storage_bucket:fx-policy-restricted",
+          "provider": "aws",
+          "type": "storage_bucket",
+          "native_type": "AWS::S3::Bucket",
+          "name": "fx-policy-restricted",
+          "region": "fixture-region",
+          "properties": {
+            "public_access": {
+              "anonymous_grants": [],
+              "anonymous_grants_blocked": false,
+              "policy": {
+                "parse_error": false,
+                "statements": [
+                  {
+                    "sid": null,
+                    "effect": "Allow",
+                    "actions": [
+                      "s3:GetObject"
+                    ],
+                    "not_actions": null,
+                    "resources": [
+                      "arn:aws:s3:::fx/*"
+                    ],
+                    "not_resources": null,
+                    "principals": [
+                      "*"
+                    ],
+                    "not_principals": null,
+                    "has_condition": false,
+                    "raw": "snapshots/fixtures/fixture.json#/7/Statement/0",
+                    "policy": "fixture"
+                  }
+                ]
+              },
+              "public_policy_blocked": true,
+              "guard": {
+                "configured": true,
+                "ignore_public_acls": false,
+                "restrict_public_buckets": true
+              }
+            },
+            "raw": {
+              "guard": "snapshots/fixtures/fixture.json#/15/GetPublicAccessBlock",
+              "policy": "snapshots/fixtures/fixture.json#/15/GetBucketPolicy"
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/16"
+          }
+        }
+      ],
+      "edges": [],
+      "unresolved": [],
+      "context": {
+        "admin_cidrs": [
+          "203.0.113.0/26"
+        ],
+        "remote_admin_ports": [
+          22,
+          3389
+        ],
+        "sensitive_ports": [
+          22,
+          3389,
+          1433,
+          3306,
+          5432,
+          6379,
+          9200,
+          27017
+        ],
+        "break_glass_principals": [
+          "arn:aws:iam::111122223333:user/breakglass",
+          "breakglass@fixture.example",
+          "00000000-0000-4000-9000-0000000000bb"
+        ],
+        "audit_log_targets": [],
+        "required_activity_log_categories": [
+          "Administrative",
+          "Security",
+          "Policy"
+        ]
+      }
+    },
+    "expected": {
+      "aws:storage_bucket:fx-policy-conditional": "unknown",
+      "aws:storage_bucket:fx-policy-notprincipal": "unknown",
+      "aws:storage_bucket:fx-policy-unparseable": "unknown",
+      "aws:storage_bucket:fx-policy-restricted": "pass"
+    }
+  }
+}

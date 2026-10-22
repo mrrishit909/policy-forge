@@ -1,0 +1,481 @@
+{
+  "SecurityGroups": [
+    {
+      "Description": "Public web tier",
+      "GroupName": "web-public",
+      "IpPermissions": [
+        {
+          "IpProtocol": "tcp",
+          "FromPort": 443,
+          "ToPort": 443,
+          "IpRanges": [
+            {
+              "CidrIp": "0.0.0.0/0",
+              "Description": "HTTPS"
+            }
+          ],
+          "Ipv6Ranges": [
+            {
+              "CidrIpv6": "::/0"
+            }
+          ],
+          "PrefixListIds": [],
+          "UserIdGroupPairs": []
+        },
+        {
+          "IpProtocol": "tcp",
+          "FromPort": 80,
+          "ToPort": 80,
+          "IpRanges": [
+            {
+              "CidrIp": "0.0.0.0/0",
+              "Description": "HTTP redirect"
+            }
+          ],
+          "Ipv6Ranges": [],
+          "PrefixListIds": [],
+          "UserIdGroupPairs": []
+        }
+      ],
+      "OwnerId": "111122223333",
+      "GroupId": "sg-0fe00000000000001",
+      "IpPermissionsEgress": [
+        {
+          "IpProtocol": "-1",
+          "IpRanges": [
+            {
+              "CidrIp": "0.0.0.0/0"
+            }
+          ],
+          "Ipv6Ranges": [],
+          "PrefixListIds": [],
+          "UserIdGroupPairs": []
+        }
+      ],
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "web-public"
+        }
+      ],
+      "VpcId": "vpc-0fe0000000000c001"
+    },
+    {
+      "Description": "SSH for administrators",
+      "GroupName": "bastion-admin",
+      "IpPermissions": [
+        {
+          "IpProtocol": "tcp",
+          "FromPort": 22,
+          "ToPort": 22,
+          "IpRanges": [
+            {
+              "CidrIp": "0.0.0.0/0",
+              "Description": "Temporary vendor access"
+            }
+          ],
+          "Ipv6Ranges": [
+            {
+              "CidrIpv6": "::/0"
+            }
+          ],
+          "PrefixListIds": [],
+          "UserIdGroupPairs": []
+        }
+      ],
+      "OwnerId": "111122223333",
+      "GroupId": "sg-0fe00000000000002",
+      "IpPermissionsEgress": [
+        {
+          "IpProtocol": "-1",
+          "IpRanges": [
+            {
+              "CidrIp": "0.0.0.0/0"
+            }
+          ],
+          "Ipv6Ranges": [],
+          "PrefixListIds": [],
+          "UserIdGroupPairs": []
+        }
+      ],
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "bastion-admin"
+        }
+      ],
+      "VpcId": "vpc-0fe0000000000c001"
+    },
+    {
+      "Description": "Application tier",
+      "GroupName": "app-internal",
+      "IpPermissions": [
+        {
+          "IpProtocol": "tcp",
+          "FromPort": 8080,
+          "ToPort": 8080,
+          "IpRanges": [],
+          "Ipv6Ranges": [],
+          "PrefixListIds": [],
+          "UserIdGroupPairs": [
+            {
+              "GroupId": "sg-0fe00000000000001",
+              "UserId": "111122223333"
+            }
+          ]
+        },
+        {
+          "IpProtocol": "tcp",
+          "FromPort": 5432,
+          "ToPort": 5432,
+          "IpRanges": [
+            {
+              "CidrIp": "10.20.0.0/16",
+              "Description": "VPC"
+            }
+          ],
+          "Ipv6Ranges": [],
+          "PrefixListIds": [],
+          "UserIdGroupPairs": []
+        }
+      ],
+      "OwnerId": "111122223333",
+      "GroupId": "sg-0fe00000000000003",
+      "IpPermissionsEgress": [
+        {
+          "IpProtocol": "-1",
+          "IpRanges": [
+            {
+              "CidrIp": "0.0.0.0/0"
+            }
+          ],
+          "Ipv6Ranges": [],
+          "PrefixListIds": [],
+          "UserIdGroupPairs": []
+        }
+      ],
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "app-internal"
+        }
+      ],
+      "VpcId": "vpc-0fe0000000000c001"
+    },
+    {
+      "Description": "Database tier",
+      "GroupName": "db-private",
+      "IpPermissions": [
+        {
+          "IpProtocol": "tcp",
+          "FromPort": 5432,
+          "ToPort": 5432,
+          "IpRanges": [],
+          "Ipv6Ranges": [],
+          "PrefixListIds": [],
+          "UserIdGroupPairs": [
+            {
+              "GroupId": "sg-0fe00000000000003",
+              "UserId": "111122223333"
+            }
+          ]
+        }
+      ],
+      "OwnerId": "111122223333",
+      "GroupId": "sg-0fe00000000000004",
+      "IpPermissionsEgress": [
+        {
+          "IpProtocol": "-1",
+          "IpRanges": [
+            {
+              "CidrIp": "0.0.0.0/0"
+            }
+          ],
+          "Ipv6Ranges": [],
+          "PrefixListIds": [],
+          "UserIdGroupPairs": []
+        }
+      ],
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "db-private"
+        }
+      ],
+      "VpcId": "vpc-0fe0000000000c001"
+    },
+    {
+      "Description": "Legacy operations host",
+      "GroupName": "legacy-ops",
+      "IpPermissions": [
+        {
+          "IpProtocol": "tcp",
+          "FromPort": 0,
+          "ToPort": 65535,
+          "IpRanges": [
+            {
+              "CidrIp": "0.0.0.0/0"
+            }
+          ],
+          "Ipv6Ranges": [],
+          "PrefixListIds": [],
+          "UserIdGroupPairs": []
+        }
+      ],
+      "OwnerId": "111122223333",
+      "GroupId": "sg-0fe00000000000005",
+      "IpPermissionsEgress": [
+        {
+          "IpProtocol": "-1",
+          "IpRanges": [
+            {
+              "CidrIp": "0.0.0.0/0"
+            }
+          ],
+          "Ipv6Ranges": [],
+          "PrefixListIds": [],
+          "UserIdGroupPairs": []
+        }
+      ],
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "legacy-ops"
+        }
+      ],
+      "VpcId": "vpc-0fe0000000000c001"
+    },
+    {
+      "Description": "Windows jump host",
+      "GroupName": "rdp-jump",
+      "IpPermissions": [
+        {
+          "IpProtocol": "tcp",
+          "FromPort": 3389,
+          "ToPort": 3389,
+          "IpRanges": [
+            {
+              "CidrIp": "0.0.0.0/1",
+              "Description": "Half the internet"
+            }
+          ],
+          "Ipv6Ranges": [],
+          "PrefixListIds": [],
+          "UserIdGroupPairs": []
+        }
+      ],
+      "OwnerId": "111122223333",
+      "GroupId": "sg-0fe00000000000006",
+      "IpPermissionsEgress": [
+        {
+          "IpProtocol": "-1",
+          "IpRanges": [
+            {
+              "CidrIp": "0.0.0.0/0"
+            }
+          ],
+          "Ipv6Ranges": [],
+          "PrefixListIds": [],
+          "UserIdGroupPairs": []
+        }
+      ],
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "rdp-jump"
+        }
+      ],
+      "VpcId": "vpc-0fe0000000000c001"
+    },
+    {
+      "Description": "Legacy file transfer",
+      "GroupName": "ftp-legacy",
+      "IpPermissions": [
+        {
+          "IpProtocol": "tcp",
+          "FromPort": 20,
+          "ToPort": 22,
+          "IpRanges": [
+            {
+              "CidrIp": "0.0.0.0/0"
+            }
+          ],
+          "Ipv6Ranges": [],
+          "PrefixListIds": [],
+          "UserIdGroupPairs": []
+        },
+        {
+          "IpProtocol": "tcp",
+          "FromPort": 23,
+          "ToPort": 25,
+          "IpRanges": [
+            {
+              "CidrIp": "0.0.0.0/0"
+            }
+          ],
+          "Ipv6Ranges": [],
+          "PrefixListIds": [],
+          "UserIdGroupPairs": []
+        }
+      ],
+      "OwnerId": "111122223333",
+      "GroupId": "sg-0fe00000000000007",
+      "IpPermissionsEgress": [
+        {
+          "IpProtocol": "-1",
+          "IpRanges": [
+            {
+              "CidrIp": "0.0.0.0/0"
+            }
+          ],
+          "Ipv6Ranges": [],
+          "PrefixListIds": [],
+          "UserIdGroupPairs": []
+        }
+      ],
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "ftp-legacy"
+        }
+      ],
+      "VpcId": "vpc-0fe0000000000c001"
+    },
+    {
+      "Description": "Reporting database",
+      "GroupName": "db-exposed",
+      "IpPermissions": [
+        {
+          "IpProtocol": "tcp",
+          "FromPort": 5432,
+          "ToPort": 5432,
+          "IpRanges": [
+            {
+              "CidrIp": "10.0.0.0/8",
+              "Description": "Private networks"
+            }
+          ],
+          "Ipv6Ranges": [],
+          "PrefixListIds": [],
+          "UserIdGroupPairs": []
+        },
+        {
+          "IpProtocol": "tcp",
+          "FromPort": 3306,
+          "ToPort": 3306,
+          "IpRanges": [
+            {
+              "CidrIp": "0.0.0.0/0",
+              "Description": "BI vendor"
+            }
+          ],
+          "Ipv6Ranges": [],
+          "PrefixListIds": [],
+          "UserIdGroupPairs": []
+        }
+      ],
+      "OwnerId": "111122223333",
+      "GroupId": "sg-0fe00000000000008",
+      "IpPermissionsEgress": [
+        {
+          "IpProtocol": "-1",
+          "IpRanges": [
+            {
+              "CidrIp": "0.0.0.0/0"
+            }
+          ],
+          "Ipv6Ranges": [],
+          "PrefixListIds": [],
+          "UserIdGroupPairs": []
+        }
+      ],
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "db-exposed"
+        }
+      ],
+      "VpcId": "vpc-0fe0000000000c001"
+    },
+    {
+      "Description": "Partner cache access",
+      "GroupName": "cache-partner",
+      "IpPermissions": [
+        {
+          "IpProtocol": "tcp",
+          "FromPort": 6379,
+          "ToPort": 6379,
+          "IpRanges": [],
+          "Ipv6Ranges": [],
+          "PrefixListIds": [
+            {
+              "PrefixListId": "pl-0fe0000000000d001"
+            }
+          ],
+          "UserIdGroupPairs": []
+        }
+      ],
+      "OwnerId": "111122223333",
+      "GroupId": "sg-0fe00000000000009",
+      "IpPermissionsEgress": [
+        {
+          "IpProtocol": "-1",
+          "IpRanges": [
+            {
+              "CidrIp": "0.0.0.0/0"
+            }
+          ],
+          "Ipv6Ranges": [],
+          "PrefixListIds": [],
+          "UserIdGroupPairs": []
+        }
+      ],
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "cache-partner"
+        }
+      ],
+      "VpcId": "vpc-0fe0000000000c001"
+    },
+    {
+      "Description": "IPsec tunnel endpoint",
+      "GroupName": "esp-tunnel",
+      "IpPermissions": [
+        {
+          "IpProtocol": "50",
+          "IpRanges": [
+            {
+              "CidrIp": "0.0.0.0/0"
+            }
+          ],
+          "Ipv6Ranges": [],
+          "PrefixListIds": [],
+          "UserIdGroupPairs": []
+        }
+      ],
+      "OwnerId": "111122223333",
+      "GroupId": "sg-0fe00000000000010",
+      "IpPermissionsEgress": [
+        {
+          "IpProtocol": "-1",
+          "IpRanges": [
+            {
+              "CidrIp": "0.0.0.0/0"
+            }
+          ],
+          "Ipv6Ranges": [],
+          "PrefixListIds": [],
+          "UserIdGroupPairs": []
+        }
+      ],
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "esp-tunnel"
+        }
+      ],
+      "VpcId": "vpc-0fe0000000000c001"
+    }
+  ]
+}

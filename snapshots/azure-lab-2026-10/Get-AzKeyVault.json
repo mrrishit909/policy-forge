@@ -1,0 +1,13 @@
+[
+  {
+    "VaultName": "kv-fh-lab",
+    "ResourceId": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.KeyVault/vaults/kv-fh-lab",
+    "ResourceGroupName": "rg-fh-lab",
+    "Location": "eastus2",
+    "Sku": "Standard",
+    "EnableRbacAuthorization": true,
+    "EnableSoftDelete": true,
+    "EnablePurgeProtection": null,
+    "Tags": {}
+  }
+]

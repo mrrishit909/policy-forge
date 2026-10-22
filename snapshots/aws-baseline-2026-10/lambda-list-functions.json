@@ -1,0 +1,33 @@
+{
+  "Functions": [
+    {
+      "FunctionName": "fh-thumbnailer",
+      "FunctionArn": "arn:aws:lambda:us-east-2:111122223333:function:fh-thumbnailer",
+      "Runtime": "python3.12",
+      "Role": "arn:aws:iam::111122223333:role/app-server-role",
+      "Handler": "app.handler",
+      "MemorySize": 256,
+      "Timeout": 30,
+      "Environment": {
+        "Variables": {
+          "LOG_LEVEL": "info"
+        }
+      }
+    },
+    {
+      "FunctionName": "fh-report-export",
+      "FunctionArn": "arn:aws:lambda:us-east-2:111122223333:function:fh-report-export",
+      "Runtime": "nodejs22.x",
+      "Role": "arn:aws:iam::111122223333:role/app-server-role",
+      "Handler": "index.handler",
+      "MemorySize": 512,
+      "Timeout": 60,
+      "Environment": {
+        "Variables": {
+          "LOG_LEVEL": "warn",
+          "DB_CONNECTION_STRING": "Server=reports.db.fernhollow.example;User Id=reporter;Password=pf-canary-00000000000000a5-not-a-secret;"
+        }
+      }
+    }
+  ]
+}

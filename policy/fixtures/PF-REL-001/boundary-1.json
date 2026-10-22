@@ -1,0 +1,638 @@
+{
+  "boundary-1": {
+    "description": "Unresolved security group or NotAction role is unknown; an attached AdministratorAccess fails; admin-range-only and fully shadowed exposure pass",
+    "input": {
+      "resources": [
+        {
+          "id": "aws:security_group:sg-fx-web",
+          "provider": "aws",
+          "type": "security_group",
+          "native_type": "AWS::EC2::SecurityGroup",
+          "name": "sg-fx-web",
+          "region": "fixture-region",
+          "properties": {
+            "ingress": [
+              {
+                "protocol": "tcp",
+                "port_from": 443,
+                "port_to": 443,
+                "cidrs": [
+                  "0.0.0.0/0"
+                ],
+                "source_tags": [],
+                "source_groups": [],
+                "prefix_lists": [],
+                "action": "allow",
+                "priority": null,
+                "raw": "snapshots/fixtures/fixture.json#/104/IpPermissions/0"
+              }
+            ],
+            "vpc_id": "vpc-fixture",
+            "tags": {}
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/105"
+          }
+        },
+        {
+          "id": "aws:iam_role:arn:aws:iam::111122223333:role/fx-admin-role",
+          "provider": "aws",
+          "type": "iam_role",
+          "native_type": "AWS::IAM::Role",
+          "name": "fx-admin-role",
+          "region": "fixture-region",
+          "properties": {
+            "arn": "arn:aws:iam::111122223333:role/fx-admin-role",
+            "permissions": {
+              "parse_error": false,
+              "statements": [
+                {
+                  "sid": null,
+                  "effect": "Allow",
+                  "actions": [
+                    "*"
+                  ],
+                  "not_actions": null,
+                  "resources": [
+                    "*"
+                  ],
+                  "not_resources": null,
+                  "principals": null,
+                  "not_principals": null,
+                  "has_condition": false,
+                  "raw": "snapshots/fixtures/fixture.json#/105/Statement/0",
+                  "policy": "fixture"
+                }
+              ]
+            },
+            "attached_policy_arns": [],
+            "instance_profile_arns": []
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/106"
+          }
+        },
+        {
+          "id": "aws:iam_role:arn:aws:iam::111122223333:role/fx-notaction-role",
+          "provider": "aws",
+          "type": "iam_role",
+          "native_type": "AWS::IAM::Role",
+          "name": "fx-notaction-role",
+          "region": "fixture-region",
+          "properties": {
+            "arn": "arn:aws:iam::111122223333:role/fx-notaction-role",
+            "permissions": {
+              "parse_error": false,
+              "statements": [
+                {
+                  "sid": null,
+                  "effect": "Allow",
+                  "actions": null,
+                  "not_actions": [
+                    "iam:*"
+                  ],
+                  "resources": [
+                    "*"
+                  ],
+                  "not_resources": null,
+                  "principals": null,
+                  "not_principals": null,
+                  "has_condition": false,
+                  "raw": "snapshots/fixtures/fixture.json#/117/Statement/0",
+                  "policy": "fixture"
+                }
+              ]
+            },
+            "attached_policy_arns": [],
+            "instance_profile_arns": []
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/118"
+          }
+        },
+        {
+          "id": "aws:iam_policy:arn:aws:iam::aws:policy/AdministratorAccess",
+          "provider": "aws",
+          "type": "iam_policy",
+          "native_type": "AWS::IAM::ManagedPolicy",
+          "name": "AdministratorAccess",
+          "region": "fixture-region",
+          "properties": {
+            "managed_by": "aws",
+            "arn": "arn:aws:iam::aws:policy/AdministratorAccess",
+            "attachment_count": 1,
+            "permissions": {
+              "parse_error": false,
+              "statements": [
+                {
+                  "sid": null,
+                  "effect": "Allow",
+                  "actions": [
+                    "*"
+                  ],
+                  "not_actions": null,
+                  "resources": [
+                    "*"
+                  ],
+                  "not_resources": null,
+                  "principals": null,
+                  "not_principals": null,
+                  "has_condition": false,
+                  "raw": "snapshots/fixtures/fixture.json#/118/Statement/0",
+                  "policy": "fixture"
+                }
+              ]
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/119"
+          }
+        },
+        {
+          "id": "aws:iam_role:arn:aws:iam::111122223333:role/fx-attached-admin",
+          "provider": "aws",
+          "type": "iam_role",
+          "native_type": "AWS::IAM::Role",
+          "name": "fx-attached-admin",
+          "region": "fixture-region",
+          "properties": {
+            "arn": "arn:aws:iam::111122223333:role/fx-attached-admin",
+            "permissions": {
+              "parse_error": false,
+              "statements": []
+            },
+            "attached_policy_arns": [
+              "arn:aws:iam::aws:policy/AdministratorAccess"
+            ],
+            "instance_profile_arns": []
+          },
+          "refs": [
+            {
+              "kind": "attached_policy",
+              "target": "aws:iam_policy:arn:aws:iam::aws:policy/AdministratorAccess"
+            }
+          ],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/120"
+          }
+        },
+        {
+          "id": "aws:security_group:sg-fx-admin-only",
+          "provider": "aws",
+          "type": "security_group",
+          "native_type": "AWS::EC2::SecurityGroup",
+          "name": "sg-fx-admin-only",
+          "region": "fixture-region",
+          "properties": {
+            "ingress": [
+              {
+                "protocol": "tcp",
+                "port_from": 22,
+                "port_to": 22,
+                "cidrs": [
+                  "203.0.113.0/26"
+                ],
+                "source_tags": [],
+                "source_groups": [],
+                "prefix_lists": [],
+                "action": "allow",
+                "priority": null,
+                "raw": "snapshots/fixtures/fixture.json#/120/IpPermissions/0"
+              }
+            ],
+            "vpc_id": "vpc-fixture",
+            "tags": {}
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/121"
+          }
+        },
+        {
+          "id": "aws:compute_instance:i-fx-missing-sg",
+          "provider": "aws",
+          "type": "compute_instance",
+          "native_type": "AWS::EC2::Instance",
+          "name": "i-fx-missing-sg",
+          "region": "fixture-region",
+          "properties": {
+            "public_ips": [
+              "203.0.113.12"
+            ],
+            "network_groups": [
+              "aws:security_group:sg-not-in-snapshot"
+            ],
+            "raw": {
+              "public_ips": "snapshots/fixtures/fixture.json#/121/PublicIpAddress",
+              "network_groups": "snapshots/fixtures/fixture.json#/121/SecurityGroups",
+              "instance_profile": "snapshots/fixtures/fixture.json#/121/IamInstanceProfile"
+            },
+            "instance_profile": "fixture-profile",
+            "state": "running",
+            "tags": {}
+          },
+          "refs": [
+            {
+              "kind": "uses_network_group",
+              "target": "aws:security_group:sg-not-in-snapshot"
+            },
+            {
+              "kind": "instance_role",
+              "target": "aws:iam_role:arn:aws:iam::111122223333:role/fx-admin-role"
+            }
+          ],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/122"
+          }
+        },
+        {
+          "id": "aws:compute_instance:i-fx-notaction",
+          "provider": "aws",
+          "type": "compute_instance",
+          "native_type": "AWS::EC2::Instance",
+          "name": "i-fx-notaction",
+          "region": "fixture-region",
+          "properties": {
+            "public_ips": [
+              "203.0.113.13"
+            ],
+            "network_groups": [
+              "aws:security_group:sg-fx-web"
+            ],
+            "raw": {
+              "public_ips": "snapshots/fixtures/fixture.json#/122/PublicIpAddress",
+              "network_groups": "snapshots/fixtures/fixture.json#/122/SecurityGroups",
+              "instance_profile": "snapshots/fixtures/fixture.json#/122/IamInstanceProfile"
+            },
+            "instance_profile": "fixture-profile",
+            "state": "running",
+            "tags": {}
+          },
+          "refs": [
+            {
+              "kind": "uses_network_group",
+              "target": "aws:security_group:sg-fx-web"
+            },
+            {
+              "kind": "instance_role",
+              "target": "aws:iam_role:arn:aws:iam::111122223333:role/fx-notaction-role"
+            }
+          ],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/123"
+          }
+        },
+        {
+          "id": "aws:compute_instance:i-fx-attached-admin",
+          "provider": "aws",
+          "type": "compute_instance",
+          "native_type": "AWS::EC2::Instance",
+          "name": "i-fx-attached-admin",
+          "region": "fixture-region",
+          "properties": {
+            "public_ips": [
+              "203.0.113.14"
+            ],
+            "network_groups": [
+              "aws:security_group:sg-fx-web"
+            ],
+            "raw": {
+              "public_ips": "snapshots/fixtures/fixture.json#/123/PublicIpAddress",
+              "network_groups": "snapshots/fixtures/fixture.json#/123/SecurityGroups",
+              "instance_profile": "snapshots/fixtures/fixture.json#/123/IamInstanceProfile"
+            },
+            "instance_profile": "fixture-profile",
+            "state": "running",
+            "tags": {}
+          },
+          "refs": [
+            {
+              "kind": "uses_network_group",
+              "target": "aws:security_group:sg-fx-web"
+            },
+            {
+              "kind": "instance_role",
+              "target": "aws:iam_role:arn:aws:iam::111122223333:role/fx-attached-admin"
+            }
+          ],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/124"
+          }
+        },
+        {
+          "id": "aws:compute_instance:i-fx-admin-cidr-only",
+          "provider": "aws",
+          "type": "compute_instance",
+          "native_type": "AWS::EC2::Instance",
+          "name": "i-fx-admin-cidr-only",
+          "region": "fixture-region",
+          "properties": {
+            "public_ips": [
+              "203.0.113.15"
+            ],
+            "network_groups": [
+              "aws:security_group:sg-fx-admin-only"
+            ],
+            "raw": {
+              "public_ips": "snapshots/fixtures/fixture.json#/124/PublicIpAddress",
+              "network_groups": "snapshots/fixtures/fixture.json#/124/SecurityGroups",
+              "instance_profile": "snapshots/fixtures/fixture.json#/124/IamInstanceProfile"
+            },
+            "instance_profile": "fixture-profile",
+            "state": "running",
+            "tags": {}
+          },
+          "refs": [
+            {
+              "kind": "uses_network_group",
+              "target": "aws:security_group:sg-fx-admin-only"
+            },
+            {
+              "kind": "instance_role",
+              "target": "aws:iam_role:arn:aws:iam::111122223333:role/fx-admin-role"
+            }
+          ],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/125"
+          }
+        },
+        {
+          "id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Network/networkSecurityGroups/nsg-fx-deny-first",
+          "provider": "azure",
+          "type": "network_security_group",
+          "native_type": "Microsoft.Network/networkSecurityGroups",
+          "name": "nsg-fx-deny-first",
+          "region": "fixture-region",
+          "properties": {
+            "ingress": [
+              {
+                "protocol": "all",
+                "port_from": 0,
+                "port_to": 65535,
+                "cidrs": [],
+                "source_tags": [
+                  "*"
+                ],
+                "source_groups": [],
+                "prefix_lists": [],
+                "action": "deny",
+                "priority": 100,
+                "raw": "snapshots/fixtures/fixture.json#/125/IpPermissions/0"
+              },
+              {
+                "protocol": "tcp",
+                "port_from": 443,
+                "port_to": 443,
+                "cidrs": [],
+                "source_tags": [
+                  "Internet"
+                ],
+                "source_groups": [],
+                "prefix_lists": [],
+                "action": "allow",
+                "priority": 300,
+                "raw": "snapshots/fixtures/fixture.json#/125/IpPermissions/0"
+              }
+            ],
+            "tags": {}
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/126"
+          }
+        },
+        {
+          "id": "azure:role_definition:owner-id",
+          "provider": "azure",
+          "type": "role_definition",
+          "native_type": "Microsoft.Authorization/roleDefinitions",
+          "name": "Owner",
+          "region": "fixture-region",
+          "properties": {
+            "role_name": "Owner",
+            "is_custom": false,
+            "assignable_scopes": [
+              "/"
+            ],
+            "data_actions": [],
+            "permissions": {
+              "parse_error": false,
+              "statements": [
+                {
+                  "sid": null,
+                  "effect": "Allow",
+                  "actions": [
+                    "*"
+                  ],
+                  "not_actions": null,
+                  "resources": [
+                    "/"
+                  ],
+                  "not_resources": null,
+                  "principals": null,
+                  "not_principals": null,
+                  "has_condition": false,
+                  "raw": "snapshots/fixtures/fixture.json#/108/Statement/0",
+                  "policy": "fixture"
+                }
+              ]
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/109"
+          }
+        },
+        {
+          "id": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Compute/virtualMachines/vm-fx-shadowed",
+          "provider": "azure",
+          "type": "compute_instance",
+          "native_type": "Microsoft.Compute/virtualMachines",
+          "name": "vm-fx-shadowed",
+          "region": "fixture-region",
+          "properties": {
+            "public_ips": [
+              "203.0.113.42"
+            ],
+            "network_groups": [
+              "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Network/networkSecurityGroups/nsg-fx-deny-first"
+            ],
+            "raw": {
+              "public_ips": "snapshots/fixtures/fixture.json#/126/PublicIpAddress",
+              "network_groups": "snapshots/fixtures/fixture.json#/126/SecurityGroups",
+              "instance_profile": "snapshots/fixtures/fixture.json#/126/IamInstanceProfile"
+            },
+            "identity_type": "SystemAssigned",
+            "identity_principal_id": "principal-vm-fx-shadowed",
+            "tags": {}
+          },
+          "refs": [
+            {
+              "kind": "uses_network_group",
+              "target": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Network/networkSecurityGroups/nsg-fx-deny-first"
+            }
+          ],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/127"
+          }
+        },
+        {
+          "id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-0000000000f1/providers/Microsoft.Authorization/roleAssignments/fixture-12",
+          "provider": "azure",
+          "type": "role_assignment",
+          "native_type": "Microsoft.Authorization/roleAssignments",
+          "name": "fixture-12",
+          "region": "fixture-region",
+          "properties": {
+            "scope": "/subscriptions/00000000-0000-4000-8000-0000000000f1",
+            "scope_level": "subscription",
+            "principal_id": "principal-vm-fx-shadowed",
+            "principal_type": "User",
+            "principal_name": "principal-vm-fx-shadowed",
+            "role_definition_id": "owner-id",
+            "role_name": "Owner",
+            "has_condition": false,
+            "raw": {
+              "scope": "snapshots/fixtures/fixture.json#/127/Scope",
+              "role": "snapshots/fixtures/fixture.json#/127/RoleDefinitionId",
+              "principal": "snapshots/fixtures/fixture.json#/127/ObjectId",
+              "condition": "snapshots/fixtures/fixture.json#/127/Condition"
+            }
+          },
+          "refs": [
+            {
+              "kind": "assigned_role",
+              "target": "azure:role_definition:owner-id"
+            },
+            {
+              "kind": "assigned_to",
+              "target": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Compute/virtualMachines/vm-fx-shadowed"
+            }
+          ],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/128"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "from": "aws:compute_instance:i-fx-admin-cidr-only",
+          "to": "aws:iam_role:arn:aws:iam::111122223333:role/fx-admin-role",
+          "kind": "instance_role"
+        },
+        {
+          "from": "aws:compute_instance:i-fx-admin-cidr-only",
+          "to": "aws:security_group:sg-fx-admin-only",
+          "kind": "uses_network_group"
+        },
+        {
+          "from": "aws:compute_instance:i-fx-attached-admin",
+          "to": "aws:iam_role:arn:aws:iam::111122223333:role/fx-attached-admin",
+          "kind": "instance_role"
+        },
+        {
+          "from": "aws:compute_instance:i-fx-attached-admin",
+          "to": "aws:security_group:sg-fx-web",
+          "kind": "uses_network_group"
+        },
+        {
+          "from": "aws:compute_instance:i-fx-missing-sg",
+          "to": "aws:iam_role:arn:aws:iam::111122223333:role/fx-admin-role",
+          "kind": "instance_role"
+        },
+        {
+          "from": "aws:compute_instance:i-fx-notaction",
+          "to": "aws:iam_role:arn:aws:iam::111122223333:role/fx-notaction-role",
+          "kind": "instance_role"
+        },
+        {
+          "from": "aws:compute_instance:i-fx-notaction",
+          "to": "aws:security_group:sg-fx-web",
+          "kind": "uses_network_group"
+        },
+        {
+          "from": "aws:iam_role:arn:aws:iam::111122223333:role/fx-attached-admin",
+          "to": "aws:iam_policy:arn:aws:iam::aws:policy/AdministratorAccess",
+          "kind": "attached_policy"
+        },
+        {
+          "from": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Compute/virtualMachines/vm-fx-shadowed",
+          "to": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Network/networkSecurityGroups/nsg-fx-deny-first",
+          "kind": "uses_network_group"
+        },
+        {
+          "from": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-0000000000f1/providers/Microsoft.Authorization/roleAssignments/fixture-12",
+          "to": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Compute/virtualMachines/vm-fx-shadowed",
+          "kind": "assigned_to"
+        },
+        {
+          "from": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-0000000000f1/providers/Microsoft.Authorization/roleAssignments/fixture-12",
+          "to": "azure:role_definition:owner-id",
+          "kind": "assigned_role"
+        }
+      ],
+      "unresolved": [
+        {
+          "from": "aws:compute_instance:i-fx-missing-sg",
+          "kind": "uses_network_group",
+          "target": "aws:security_group:sg-not-in-snapshot"
+        }
+      ],
+      "context": {
+        "admin_cidrs": [
+          "203.0.113.0/26"
+        ],
+        "remote_admin_ports": [
+          22,
+          3389
+        ],
+        "sensitive_ports": [
+          22,
+          3389,
+          1433,
+          3306,
+          5432,
+          6379,
+          9200,
+          27017
+        ],
+        "break_glass_principals": [
+          "arn:aws:iam::111122223333:user/breakglass",
+          "breakglass@fixture.example",
+          "00000000-0000-4000-9000-0000000000bb"
+        ],
+        "audit_log_targets": [],
+        "required_activity_log_categories": [
+          "Administrative",
+          "Security",
+          "Policy"
+        ]
+      }
+    },
+    "expected": {
+      "aws:compute_instance:i-fx-missing-sg": "unknown",
+      "aws:compute_instance:i-fx-notaction": "unknown",
+      "aws:compute_instance:i-fx-attached-admin": "fail",
+      "aws:compute_instance:i-fx-admin-cidr-only": "pass",
+      "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Compute/virtualMachines/vm-fx-shadowed": "pass"
+    }
+  }
+}

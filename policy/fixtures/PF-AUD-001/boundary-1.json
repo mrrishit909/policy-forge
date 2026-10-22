@@ -1,0 +1,120 @@
+{
+  "boundary-1": {
+    "description": "Missing trail status is unknown; other trail weaknesses do not affect this rule",
+    "input": {
+      "resources": [
+        {
+          "id": "aws:audit_trail:arn:aws:cloudtrail:fixture-region:111122223333:trail/fx-no-status",
+          "provider": "aws",
+          "type": "audit_trail",
+          "native_type": "AWS::CloudTrail::Trail",
+          "name": "fx-no-status",
+          "region": "fixture-region",
+          "properties": {
+            "is_logging": null,
+            "multi_region": true,
+            "log_file_validation": true,
+            "include_global_service_events": true,
+            "organization_trail": false,
+            "destination": "fixture-audit",
+            "raw": {
+              "is_logging": "snapshots/fixtures/fixture.json#/90/IsLogging",
+              "multi_region": "snapshots/fixtures/fixture.json#/90/IsMultiRegionTrail",
+              "log_file_validation": "snapshots/fixtures/fixture.json#/90/LogFileValidationEnabled",
+              "destination": "snapshots/fixtures/fixture.json#/90/S3BucketName"
+            }
+          },
+          "refs": [
+            {
+              "kind": "delivers_logs_to",
+              "target": "aws:storage_bucket:fixture-audit"
+            }
+          ],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/91"
+          }
+        },
+        {
+          "id": "aws:audit_trail:arn:aws:cloudtrail:fixture-region:111122223333:trail/fx-logging-single-region",
+          "provider": "aws",
+          "type": "audit_trail",
+          "native_type": "AWS::CloudTrail::Trail",
+          "name": "fx-logging-single-region",
+          "region": "fixture-region",
+          "properties": {
+            "is_logging": true,
+            "multi_region": false,
+            "log_file_validation": true,
+            "include_global_service_events": true,
+            "organization_trail": false,
+            "destination": "fixture-audit",
+            "raw": {
+              "is_logging": "snapshots/fixtures/fixture.json#/91/IsLogging",
+              "multi_region": "snapshots/fixtures/fixture.json#/91/IsMultiRegionTrail",
+              "log_file_validation": "snapshots/fixtures/fixture.json#/91/LogFileValidationEnabled",
+              "destination": "snapshots/fixtures/fixture.json#/91/S3BucketName"
+            }
+          },
+          "refs": [
+            {
+              "kind": "delivers_logs_to",
+              "target": "aws:storage_bucket:fixture-audit"
+            }
+          ],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/92"
+          }
+        }
+      ],
+      "edges": [],
+      "unresolved": [
+        {
+          "from": "aws:audit_trail:arn:aws:cloudtrail:fixture-region:111122223333:trail/fx-logging-single-region",
+          "kind": "delivers_logs_to",
+          "target": "aws:storage_bucket:fixture-audit"
+        },
+        {
+          "from": "aws:audit_trail:arn:aws:cloudtrail:fixture-region:111122223333:trail/fx-no-status",
+          "kind": "delivers_logs_to",
+          "target": "aws:storage_bucket:fixture-audit"
+        }
+      ],
+      "context": {
+        "admin_cidrs": [
+          "203.0.113.0/26"
+        ],
+        "remote_admin_ports": [
+          22,
+          3389
+        ],
+        "sensitive_ports": [
+          22,
+          3389,
+          1433,
+          3306,
+          5432,
+          6379,
+          9200,
+          27017
+        ],
+        "break_glass_principals": [
+          "arn:aws:iam::111122223333:user/breakglass",
+          "breakglass@fixture.example",
+          "00000000-0000-4000-9000-0000000000bb"
+        ],
+        "audit_log_targets": [],
+        "required_activity_log_categories": [
+          "Administrative",
+          "Security",
+          "Policy"
+        ]
+      }
+    },
+    "expected": {
+      "aws:audit_trail:arn:aws:cloudtrail:fixture-region:111122223333:trail/fx-no-status": "unknown",
+      "aws:audit_trail:arn:aws:cloudtrail:fixture-region:111122223333:trail/fx-logging-single-region": "pass"
+    }
+  }
+}

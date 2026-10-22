@@ -1,0 +1,111 @@
+[
+  {
+    "Name": "nic-fh-jump",
+    "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-jump",
+    "ResourceGroupName": "rg-fh-net",
+    "Location": "eastus2",
+    "VirtualMachine": {
+      "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-jump"
+    },
+    "NetworkSecurityGroup": {
+      "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-jump"
+    },
+    "IpConfigurations": [
+      {
+        "Name": "ipconfig1",
+        "PrivateIpAddress": "10.40.1.5",
+        "PrivateIpAllocationMethod": "Dynamic",
+        "PublicIpAddress": {
+          "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/publicIPAddresses/pip-nic-fh-jump",
+          "IpAddress": "203.0.113.41"
+        },
+        "Subnet": {
+          "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/virtualNetworks/vnet-fh-lab/subnets/lab"
+        }
+      }
+    ],
+    "EnableIPForwarding": false,
+    "EnableAcceleratedNetworking": false
+  },
+  {
+    "Name": "nic-fh-ops",
+    "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-ops",
+    "ResourceGroupName": "rg-fh-net",
+    "Location": "eastus2",
+    "VirtualMachine": {
+      "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-ops"
+    },
+    "NetworkSecurityGroup": {
+      "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-web"
+    },
+    "IpConfigurations": [
+      {
+        "Name": "ipconfig1",
+        "PrivateIpAddress": "10.40.1.4",
+        "PrivateIpAllocationMethod": "Dynamic",
+        "PublicIpAddress": {
+          "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/publicIPAddresses/pip-nic-fh-ops",
+          "IpAddress": "203.0.113.40"
+        },
+        "Subnet": {
+          "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/virtualNetworks/vnet-fh-lab/subnets/lab"
+        }
+      }
+    ],
+    "EnableIPForwarding": false,
+    "EnableAcceleratedNetworking": false
+  },
+  {
+    "Name": "nic-fh-rdp",
+    "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-rdp",
+    "ResourceGroupName": "rg-fh-net",
+    "Location": "eastus2",
+    "VirtualMachine": {
+      "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-rdp"
+    },
+    "NetworkSecurityGroup": {
+      "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-rdp"
+    },
+    "IpConfigurations": [
+      {
+        "Name": "ipconfig1",
+        "PrivateIpAddress": "10.40.1.6",
+        "PrivateIpAllocationMethod": "Dynamic",
+        "PublicIpAddress": {
+          "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/publicIPAddresses/pip-nic-fh-rdp",
+          "IpAddress": "203.0.113.42"
+        },
+        "Subnet": {
+          "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/virtualNetworks/vnet-fh-lab/subnets/lab"
+        }
+      }
+    ],
+    "EnableIPForwarding": false,
+    "EnableAcceleratedNetworking": false
+  },
+  {
+    "Name": "nic-fh-worker",
+    "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkInterfaces/nic-fh-worker",
+    "ResourceGroupName": "rg-fh-net",
+    "Location": "eastus2",
+    "VirtualMachine": {
+      "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Compute/virtualMachines/vm-fh-worker"
+    },
+    "NetworkSecurityGroup": {
+      "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-data"
+    },
+    "IpConfigurations": [
+      {
+        "Name": "ipconfig1",
+        "PrivateIpAddress": "10.40.2.4",
+        "PrivateIpAllocationMethod": "Dynamic",
+        "PublicIpAddress": null,
+        "Subnet": {
+          "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/virtualNetworks/vnet-fh-lab/subnets/lab"
+        }
+      }
+    ],
+    "EnableIPForwarding": false,
+    "EnableAcceleratedNetworking": false
+  }
+]

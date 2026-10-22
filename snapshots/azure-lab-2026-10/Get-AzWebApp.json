@@ -1,0 +1,20 @@
+[
+  {
+    "Name": "app-fh-portal",
+    "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Web/sites/app-fh-portal",
+    "ResourceGroup": "rg-fh-lab",
+    "Location": "eastus2",
+    "State": "Running",
+    "HttpsOnly": true,
+    "SiteConfig": {
+      "MinTlsVersion": "1.2",
+      "ConnectionStrings": [
+        {
+          "Name": "MainStorage",
+          "Type": "Custom",
+          "ConnectionString": "DefaultEndpointsProtocol=https;AccountName=stfhlabdata;AccountKey=pf-canary-00000000000000b6-not-a-secret;EndpointSuffix=core.windows.net"
+        }
+      ]
+    }
+  }
+]

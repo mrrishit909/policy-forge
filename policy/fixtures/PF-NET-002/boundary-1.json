@@ -1,0 +1,226 @@
+{
+  "boundary-1": {
+    "description": "Range ending at 3306 fails, starting at 3307 passes; prefix lists and ESP are unknown; multi-port NSG rule fails",
+    "input": {
+      "resources": [
+        {
+          "id": "aws:security_group:sg-fx-range-ends-3306",
+          "provider": "aws",
+          "type": "security_group",
+          "native_type": "AWS::EC2::SecurityGroup",
+          "name": "sg-fx-range-ends-3306",
+          "region": "fixture-region",
+          "properties": {
+            "ingress": [
+              {
+                "protocol": "tcp",
+                "port_from": 3300,
+                "port_to": 3306,
+                "cidrs": [
+                  "0.0.0.0/0"
+                ],
+                "source_tags": [],
+                "source_groups": [],
+                "prefix_lists": [],
+                "action": "allow",
+                "priority": null,
+                "raw": "snapshots/fixtures/fixture.json#/83/IpPermissions/0"
+              }
+            ],
+            "vpc_id": "vpc-fixture",
+            "tags": {}
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/84"
+          }
+        },
+        {
+          "id": "aws:security_group:sg-fx-range-starts-3307",
+          "provider": "aws",
+          "type": "security_group",
+          "native_type": "AWS::EC2::SecurityGroup",
+          "name": "sg-fx-range-starts-3307",
+          "region": "fixture-region",
+          "properties": {
+            "ingress": [
+              {
+                "protocol": "tcp",
+                "port_from": 3307,
+                "port_to": 3310,
+                "cidrs": [
+                  "0.0.0.0/0"
+                ],
+                "source_tags": [],
+                "source_groups": [],
+                "prefix_lists": [],
+                "action": "allow",
+                "priority": null,
+                "raw": "snapshots/fixtures/fixture.json#/84/IpPermissions/0"
+              }
+            ],
+            "vpc_id": "vpc-fixture",
+            "tags": {}
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/85"
+          }
+        },
+        {
+          "id": "aws:security_group:sg-fx-redis-prefix",
+          "provider": "aws",
+          "type": "security_group",
+          "native_type": "AWS::EC2::SecurityGroup",
+          "name": "sg-fx-redis-prefix",
+          "region": "fixture-region",
+          "properties": {
+            "ingress": [
+              {
+                "protocol": "tcp",
+                "port_from": 6379,
+                "port_to": 6379,
+                "cidrs": [],
+                "source_tags": [],
+                "source_groups": [],
+                "prefix_lists": [
+                  "pl-fixture"
+                ],
+                "action": "allow",
+                "priority": null,
+                "raw": "snapshots/fixtures/fixture.json#/85/IpPermissions/0"
+              }
+            ],
+            "vpc_id": "vpc-fixture",
+            "tags": {}
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/86"
+          }
+        },
+        {
+          "id": "aws:security_group:sg-fx-esp",
+          "provider": "aws",
+          "type": "security_group",
+          "native_type": "AWS::EC2::SecurityGroup",
+          "name": "sg-fx-esp",
+          "region": "fixture-region",
+          "properties": {
+            "ingress": [
+              {
+                "protocol": "50",
+                "port_from": null,
+                "port_to": null,
+                "cidrs": [
+                  "0.0.0.0/0"
+                ],
+                "source_tags": [],
+                "source_groups": [],
+                "prefix_lists": [],
+                "action": "allow",
+                "priority": null,
+                "raw": "snapshots/fixtures/fixture.json#/86/IpPermissions/0"
+              }
+            ],
+            "vpc_id": "vpc-fixture",
+            "tags": {}
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/87"
+          }
+        },
+        {
+          "id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Network/networkSecurityGroups/nsg-fx-mongo",
+          "provider": "azure",
+          "type": "network_security_group",
+          "native_type": "Microsoft.Network/networkSecurityGroups",
+          "name": "nsg-fx-mongo",
+          "region": "fixture-region",
+          "properties": {
+            "ingress": [
+              {
+                "protocol": "tcp",
+                "port_from": 3306,
+                "port_to": 3306,
+                "cidrs": [],
+                "source_tags": [
+                  "Internet"
+                ],
+                "source_groups": [],
+                "prefix_lists": [],
+                "action": "allow",
+                "priority": 150,
+                "raw": "snapshots/fixtures/fixture.json#/87/IpPermissions/0"
+              },
+              {
+                "protocol": "tcp",
+                "port_from": 27017,
+                "port_to": 27017,
+                "cidrs": [],
+                "source_tags": [
+                  "Internet"
+                ],
+                "source_groups": [],
+                "prefix_lists": [],
+                "action": "allow",
+                "priority": 150,
+                "raw": "snapshots/fixtures/fixture.json#/87/IpPermissions/0"
+              }
+            ],
+            "tags": {}
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/88"
+          }
+        }
+      ],
+      "edges": [],
+      "unresolved": [],
+      "context": {
+        "admin_cidrs": [
+          "203.0.113.0/26"
+        ],
+        "remote_admin_ports": [
+          22,
+          3389
+        ],
+        "sensitive_ports": [
+          22,
+          3389,
+          1433,
+          3306,
+          5432,
+          6379,
+          9200,
+          27017
+        ],
+        "break_glass_principals": [
+          "arn:aws:iam::111122223333:user/breakglass",
+          "breakglass@fixture.example",
+          "00000000-0000-4000-9000-0000000000bb"
+        ],
+        "audit_log_targets": [],
+        "required_activity_log_categories": [
+          "Administrative",
+          "Security",
+          "Policy"
+        ]
+      }
+    },
+    "expected": {
+      "aws:security_group:sg-fx-range-ends-3306": "fail",
+      "aws:security_group:sg-fx-range-starts-3307": "pass",
+      "aws:security_group:sg-fx-redis-prefix": "unknown",
+      "aws:security_group:sg-fx-esp": "unknown",
+      "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Network/networkSecurityGroups/nsg-fx-mongo": "fail"
+    }
+  }
+}

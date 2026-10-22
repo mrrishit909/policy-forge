@@ -1,0 +1,489 @@
+{
+  "UserDetailList": [
+    {
+      "Path": "/",
+      "UserName": "alice.ops",
+      "UserId": "PFUSEREXAMPLE0001",
+      "Arn": "arn:aws:iam::111122223333:user/alice.ops",
+      "CreateDate": "2025-02-01T09:30:00+00:00",
+      "GroupList": [
+        "ops-readers"
+      ],
+      "AttachedManagedPolicies": [
+        {
+          "PolicyName": "ReadOnlyAccess",
+          "PolicyArn": "arn:aws:iam::aws:policy/ReadOnlyAccess"
+        }
+      ],
+      "UserPolicyList": [],
+      "Tags": [],
+      "AccessKeys": []
+    },
+    {
+      "Path": "/",
+      "UserName": "breakglass.admin",
+      "UserId": "PFUSEREXAMPLE0002",
+      "Arn": "arn:aws:iam::111122223333:user/breakglass.admin",
+      "CreateDate": "2025-02-01T09:30:00+00:00",
+      "GroupList": [],
+      "AttachedManagedPolicies": [
+        {
+          "PolicyName": "AdministratorAccess",
+          "PolicyArn": "arn:aws:iam::aws:policy/AdministratorAccess"
+        }
+      ],
+      "UserPolicyList": [],
+      "Tags": [],
+      "AccessKeys": []
+    },
+    {
+      "Path": "/",
+      "UserName": "ci.deployer",
+      "UserId": "PFUSEREXAMPLE0003",
+      "Arn": "arn:aws:iam::111122223333:user/ci.deployer",
+      "CreateDate": "2025-02-01T09:30:00+00:00",
+      "GroupList": [],
+      "AttachedManagedPolicies": [],
+      "UserPolicyList": [
+        {
+          "PolicyName": "artifact-upload",
+          "PolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Action": "s3:*",
+                "Resource": "*"
+              }
+            ]
+          }
+        }
+      ],
+      "Tags": [],
+      "AccessKeys": [
+        {
+          "AccessKeyId": "PF-EXAMPLE-KEY-0001",
+          "Status": "Active",
+          "CreateDate": "2025-02-01T10:00:00+00:00",
+          "SecretAccessKey": "pf-canary-00000000000000a1-not-a-secret"
+        }
+      ]
+    },
+    {
+      "Path": "/",
+      "UserName": "contractor.temp",
+      "UserId": "PFUSEREXAMPLE0004",
+      "Arn": "arn:aws:iam::111122223333:user/contractor.temp",
+      "CreateDate": "2025-02-01T09:30:00+00:00",
+      "GroupList": [],
+      "AttachedManagedPolicies": [
+        {
+          "PolicyName": "AdministratorAccess",
+          "PolicyArn": "arn:aws:iam::aws:policy/AdministratorAccess"
+        }
+      ],
+      "UserPolicyList": [],
+      "Tags": [],
+      "AccessKeys": [
+        {
+          "AccessKeyId": "PF-EXAMPLE-KEY-0002",
+          "Status": "Active",
+          "CreateDate": "2026-10-02T10:00:00+00:00",
+          "SecretAccessKey": "pf-canary-00000000000000a2-not-a-secret"
+        }
+      ]
+    }
+  ],
+  "GroupDetailList": [
+    {
+      "Path": "/",
+      "GroupName": "ops-readers",
+      "GroupId": "PFGROUPEXAMPLE0001",
+      "Arn": "arn:aws:iam::111122223333:group/ops-readers",
+      "CreateDate": "2025-02-01T09:00:00+00:00",
+      "GroupPolicyList": [],
+      "AttachedManagedPolicies": [
+        {
+          "PolicyName": "ReadOnlyAccess",
+          "PolicyArn": "arn:aws:iam::aws:policy/ReadOnlyAccess"
+        }
+      ]
+    }
+  ],
+  "RoleDetailList": [
+    {
+      "Path": "/",
+      "RoleName": "app-server-role",
+      "RoleId": "PFROLEEXAMPLE0001",
+      "Arn": "arn:aws:iam::111122223333:role/app-server-role",
+      "CreateDate": "2025-02-03T09:30:00+00:00",
+      "AssumeRolePolicyDocument": {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "ec2.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      },
+      "InstanceProfileList": [
+        {
+          "InstanceProfileName": "app-server-profile",
+          "InstanceProfileId": "PFIPEXAMPLE0001",
+          "Arn": "arn:aws:iam::111122223333:instance-profile/app-server-profile",
+          "Path": "/"
+        }
+      ],
+      "RolePolicyList": [
+        {
+          "PolicyName": "debug-all",
+          "PolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Action": "*",
+                "Resource": "*"
+              }
+            ]
+          }
+        }
+      ],
+      "AttachedManagedPolicies": [
+        {
+          "PolicyName": "fh-app-read",
+          "PolicyArn": "arn:aws:iam::111122223333:policy/fh-app-read"
+        }
+      ],
+      "Tags": [],
+      "RoleLastUsed": {}
+    },
+    {
+      "Path": "/",
+      "RoleName": "legacy-etl-role",
+      "RoleId": "PFROLEEXAMPLE0002",
+      "Arn": "arn:aws:iam::111122223333:role/legacy-etl-role",
+      "CreateDate": "2025-02-03T09:30:00+00:00",
+      "AssumeRolePolicyDocument": {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "ec2.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      },
+      "InstanceProfileList": [],
+      "RolePolicyList": [
+        {
+          "PolicyName": "etl-access",
+          "PolicyDocument": "%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22"
+        }
+      ],
+      "AttachedManagedPolicies": [],
+      "Tags": [],
+      "RoleLastUsed": {}
+    },
+    {
+      "Path": "/",
+      "RoleName": "ops-automation-role",
+      "RoleId": "PFROLEEXAMPLE0003",
+      "Arn": "arn:aws:iam::111122223333:role/ops-automation-role",
+      "CreateDate": "2025-02-03T09:30:00+00:00",
+      "AssumeRolePolicyDocument": {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "ec2.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      },
+      "InstanceProfileList": [
+        {
+          "InstanceProfileName": "ops-automation-profile",
+          "InstanceProfileId": "PFIPEXAMPLE0003",
+          "Arn": "arn:aws:iam::111122223333:instance-profile/ops-automation-profile",
+          "Path": "/"
+        }
+      ],
+      "RolePolicyList": [
+        {
+          "PolicyName": "everything-but-iam",
+          "PolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "NotAction": [
+                  "iam:*",
+                  "organizations:*"
+                ],
+                "Resource": "*"
+              }
+            ]
+          }
+        }
+      ],
+      "AttachedManagedPolicies": [],
+      "Tags": [],
+      "RoleLastUsed": {}
+    },
+    {
+      "Path": "/",
+      "RoleName": "scoped-admin-role",
+      "RoleId": "PFROLEEXAMPLE0004",
+      "Arn": "arn:aws:iam::111122223333:role/scoped-admin-role",
+      "CreateDate": "2025-02-03T09:30:00+00:00",
+      "AssumeRolePolicyDocument": {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "ec2.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      },
+      "InstanceProfileList": [],
+      "RolePolicyList": [
+        {
+          "PolicyName": "mfa-admin",
+          "PolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Action": "*",
+                "Resource": "*",
+                "Condition": {
+                  "Bool": {
+                    "aws:MultiFactorAuthPresent": "true"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "AttachedManagedPolicies": [],
+      "Tags": [],
+      "RoleLastUsed": {}
+    }
+  ],
+  "Policies": [
+    {
+      "PolicyName": "AdministratorAccess",
+      "PolicyId": "PFPOLEXAMPLE6067",
+      "Arn": "arn:aws:iam::aws:policy/AdministratorAccess",
+      "Path": "/",
+      "DefaultVersionId": "v1",
+      "AttachmentCount": 1,
+      "PermissionsBoundaryUsageCount": 0,
+      "IsAttachable": true,
+      "CreateDate": "2025-01-10T12:00:00+00:00",
+      "UpdateDate": "2025-01-10T12:00:00+00:00",
+      "PolicyVersionList": [
+        {
+          "Document": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Action": "*",
+                "Resource": "*"
+              }
+            ]
+          },
+          "VersionId": "v1",
+          "IsDefaultVersion": true,
+          "CreateDate": "2025-01-10T12:00:00+00:00"
+        }
+      ]
+    },
+    {
+      "PolicyName": "ReadOnlyAccess",
+      "PolicyId": "PFPOLEXAMPLE4209",
+      "Arn": "arn:aws:iam::aws:policy/ReadOnlyAccess",
+      "Path": "/",
+      "DefaultVersionId": "v1",
+      "AttachmentCount": 2,
+      "PermissionsBoundaryUsageCount": 0,
+      "IsAttachable": true,
+      "CreateDate": "2025-01-10T12:00:00+00:00",
+      "UpdateDate": "2025-01-10T12:00:00+00:00",
+      "PolicyVersionList": [
+        {
+          "Document": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Action": [
+                  "s3:Get*",
+                  "s3:List*",
+                  "ec2:Describe*",
+                  "iam:Get*",
+                  "iam:List*",
+                  "cloudtrail:Describe*",
+                  "cloudtrail:Get*"
+                ],
+                "Resource": "*"
+              }
+            ]
+          },
+          "VersionId": "v1",
+          "IsDefaultVersion": true,
+          "CreateDate": "2025-01-10T12:00:00+00:00"
+        }
+      ]
+    },
+    {
+      "PolicyName": "fh-app-read",
+      "PolicyId": "PFPOLEXAMPLE3494",
+      "Arn": "arn:aws:iam::111122223333:policy/fh-app-read",
+      "Path": "/",
+      "DefaultVersionId": "v1",
+      "AttachmentCount": 1,
+      "PermissionsBoundaryUsageCount": 0,
+      "IsAttachable": true,
+      "CreateDate": "2025-01-10T12:00:00+00:00",
+      "UpdateDate": "2025-01-10T12:00:00+00:00",
+      "PolicyVersionList": [
+        {
+          "Document": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Sid": "ReadArtifacts",
+                "Effect": "Allow",
+                "Action": [
+                  "s3:GetObject",
+                  "s3:ListBucket"
+                ],
+                "Resource": [
+                  "arn:aws:s3:::fh-app-artifacts",
+                  "arn:aws:s3:::fh-app-artifacts/*"
+                ]
+              }
+            ]
+          },
+          "VersionId": "v1",
+          "IsDefaultVersion": true,
+          "CreateDate": "2025-01-10T12:00:00+00:00"
+        }
+      ]
+    },
+    {
+      "PolicyName": "fh-ci-deploy",
+      "PolicyId": "PFPOLEXAMPLE9278",
+      "Arn": "arn:aws:iam::111122223333:policy/fh-ci-deploy",
+      "Path": "/",
+      "DefaultVersionId": "v1",
+      "AttachmentCount": 0,
+      "PermissionsBoundaryUsageCount": 0,
+      "IsAttachable": true,
+      "CreateDate": "2025-01-10T12:00:00+00:00",
+      "UpdateDate": "2025-01-10T12:00:00+00:00",
+      "PolicyVersionList": [
+        {
+          "Document": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Sid": "DeployEverywhere",
+                "Effect": "Allow",
+                "Action": "s3:*",
+                "Resource": "*"
+              }
+            ]
+          },
+          "VersionId": "v1",
+          "IsDefaultVersion": true,
+          "CreateDate": "2025-01-10T12:00:00+00:00"
+        }
+      ]
+    },
+    {
+      "PolicyName": "fh-quarantine",
+      "PolicyId": "PFPOLEXAMPLE1509",
+      "Arn": "arn:aws:iam::111122223333:policy/fh-quarantine",
+      "Path": "/",
+      "DefaultVersionId": "v1",
+      "AttachmentCount": 0,
+      "PermissionsBoundaryUsageCount": 0,
+      "IsAttachable": true,
+      "CreateDate": "2025-01-10T12:00:00+00:00",
+      "UpdateDate": "2025-01-10T12:00:00+00:00",
+      "PolicyVersionList": [
+        {
+          "Document": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Sid": "DenyEverything",
+                "Effect": "Deny",
+                "Action": "*",
+                "Resource": "*"
+              }
+            ]
+          },
+          "VersionId": "v1",
+          "IsDefaultVersion": true,
+          "CreateDate": "2025-01-10T12:00:00+00:00"
+        }
+      ]
+    },
+    {
+      "PolicyName": "fh-wildcard-admin",
+      "PolicyId": "PFPOLEXAMPLE5005",
+      "Arn": "arn:aws:iam::111122223333:policy/fh-wildcard-admin",
+      "Path": "/",
+      "DefaultVersionId": "v1",
+      "AttachmentCount": 0,
+      "PermissionsBoundaryUsageCount": 0,
+      "IsAttachable": true,
+      "CreateDate": "2025-01-10T12:00:00+00:00",
+      "UpdateDate": "2025-01-10T12:00:00+00:00",
+      "PolicyVersionList": [
+        {
+          "Document": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Sid": "AllowAll",
+                "Effect": "Allow",
+                "Action": [
+                  "*"
+                ],
+                "Resource": [
+                  "*"
+                ]
+              },
+              {
+                "Sid": "NoBilling",
+                "Effect": "Deny",
+                "Action": "aws-portal:*",
+                "Resource": "*"
+              }
+            ]
+          },
+          "VersionId": "v1",
+          "IsDefaultVersion": true,
+          "CreateDate": "2025-01-10T12:00:00+00:00"
+        }
+      ]
+    }
+  ]
+}

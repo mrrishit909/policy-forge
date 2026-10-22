@@ -1,0 +1,38 @@
+{
+  "organization": "Fernhollow Labs (fictional)",
+  "provider": "azure",
+  "subscription_id": "00000000-0000-4000-8000-000000000001",
+  "tenant_id": "00000000-0000-4000-8000-0000000000aa",
+  "default_region": "eastus2",
+  "admin_cidrs": [
+    "203.0.113.0/26",
+    "198.51.100.16/28"
+  ],
+  "audit_log_targets": [
+    "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlabaudit"
+  ],
+  "break_glass_principals": [
+    "breakglass@fernhollow.example",
+    "00000000-0000-4000-9000-000000000801"
+  ],
+  "remote_admin_ports": [
+    22,
+    3389
+  ],
+  "sensitive_ports": [
+    22,
+    3389,
+    1433,
+    3306,
+    5432,
+    6379,
+    9200,
+    27017
+  ],
+  "required_activity_log_categories": [
+    "Administrative",
+    "Security",
+    "Policy"
+  ],
+  "synthetic": true
+}

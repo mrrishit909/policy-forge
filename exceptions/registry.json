@@ -1,0 +1,74 @@
+{
+  "exceptions": [
+    {
+      "id": "EXC-001",
+      "rule_id": "PF-STOR-002",
+      "resource_id": "aws:storage_bucket:fh-public-docs",
+      "reason": "Public documentation site served from this bucket; only rendered docs are uploaded.",
+      "owner": "docs-team@fernhollow.example",
+      "ticket": "SEC-1042",
+      "created": "2026-09-15",
+      "expires": "2026-12-01"
+    },
+    {
+      "id": "EXC-002",
+      "rule_id": "PF-NET-002",
+      "resource_id": "aws:security_group:sg-0fe00000000000005",
+      "reason": "Legacy operations host during the summer migration window.",
+      "owner": "ops@fernhollow.example",
+      "ticket": "SEC-0988",
+      "created": "2026-06-15",
+      "expires": "2026-09-12"
+    },
+    {
+      "id": "EXC-003",
+      "rule_id": "PF-STOR-001",
+      "resource_id": "aws:storage_bucket:fh-*",
+      "reason": "All Fernhollow buckets are reviewed separately.",
+      "owner": "platform@fernhollow.example",
+      "ticket": "SEC-1050",
+      "created": "2026-10-01",
+      "expires": "2026-12-01"
+    },
+    {
+      "id": "EXC-004",
+      "rule_id": "PF-NET-001",
+      "resource_id": "aws:security_group:sg-0fe00000000000002",
+      "reason": "Vendor needs SSH to the bastion until the contract ends.",
+      "owner": "ops@fernhollow.example",
+      "ticket": "SEC-1061",
+      "created": "2026-10-01",
+      "expires": "2027-03-31"
+    },
+    {
+      "id": "EXC-005",
+      "rule_id": "PF-NET-001",
+      "resource_id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-net/providers/Microsoft.Network/networkSecurityGroups/nsg-fh-jump",
+      "reason": "Lab jump host open for the October training cohort; closes when the cohort ends.",
+      "owner": "lab-team@fernhollow.example",
+      "ticket": "SEC-1013",
+      "created": "2026-08-01",
+      "expires": "2026-10-21"
+    },
+    {
+      "id": "EXC-006",
+      "rule_id": "PF-STOR-099",
+      "resource_id": "aws:storage_bucket:fh-app-artifacts",
+      "reason": "Placeholder entry.",
+      "owner": "platform@fernhollow.example",
+      "ticket": "",
+      "created": "2026-10-01",
+      "expires": "2026-11-01"
+    },
+    {
+      "id": "EXC-007",
+      "rule_id": "PF-AUD-003",
+      "resource_id": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+      "reason": "Validation will be enabled with the trail rebuild.",
+      "owner": "security@fernhollow.example",
+      "ticket": "SEC-1070",
+      "created": "2026-10-10",
+      "expires": "2026-10-01"
+    }
+  ]
+}

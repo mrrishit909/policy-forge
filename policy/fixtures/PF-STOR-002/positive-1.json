@@ -1,0 +1,97 @@
+{
+  "positive-1": {
+    "description": "Allow to Principal * without Condition, RestrictPublicBuckets off",
+    "input": {
+      "resources": [
+        {
+          "id": "aws:storage_bucket:fx-policy-public",
+          "provider": "aws",
+          "type": "storage_bucket",
+          "native_type": "AWS::S3::Bucket",
+          "name": "fx-policy-public",
+          "region": "fixture-region",
+          "properties": {
+            "public_access": {
+              "anonymous_grants": [],
+              "anonymous_grants_blocked": false,
+              "policy": {
+                "parse_error": false,
+                "statements": [
+                  {
+                    "sid": null,
+                    "effect": "Allow",
+                    "actions": [
+                      "s3:GetObject"
+                    ],
+                    "not_actions": null,
+                    "resources": [
+                      "arn:aws:s3:::fx/*"
+                    ],
+                    "not_resources": null,
+                    "principals": [
+                      "*"
+                    ],
+                    "not_principals": null,
+                    "has_condition": false,
+                    "raw": "snapshots/fixtures/fixture.json#/7/Statement/0",
+                    "policy": "fixture"
+                  }
+                ]
+              },
+              "public_policy_blocked": false,
+              "guard": {
+                "configured": true,
+                "ignore_public_acls": false,
+                "restrict_public_buckets": false
+              }
+            },
+            "raw": {
+              "guard": "snapshots/fixtures/fixture.json#/7/GetPublicAccessBlock",
+              "policy": "snapshots/fixtures/fixture.json#/7/GetBucketPolicy"
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/8"
+          }
+        }
+      ],
+      "edges": [],
+      "unresolved": [],
+      "context": {
+        "admin_cidrs": [
+          "203.0.113.0/26"
+        ],
+        "remote_admin_ports": [
+          22,
+          3389
+        ],
+        "sensitive_ports": [
+          22,
+          3389,
+          1433,
+          3306,
+          5432,
+          6379,
+          9200,
+          27017
+        ],
+        "break_glass_principals": [
+          "arn:aws:iam::111122223333:user/breakglass",
+          "breakglass@fixture.example",
+          "00000000-0000-4000-9000-0000000000bb"
+        ],
+        "audit_log_targets": [],
+        "required_activity_log_categories": [
+          "Administrative",
+          "Security",
+          "Policy"
+        ]
+      }
+    },
+    "expected": {
+      "aws:storage_bucket:fx-policy-public": "fail"
+    }
+  }
+}

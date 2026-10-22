@@ -1,0 +1,33 @@
+{
+  "rubric_version": "1.0",
+  "project": "policy-forge",
+  "note": "Fixed rubric for the Outcome Verification Loop. Changing any byte requires updating rubric/rubric.lock in a reviewed commit; the loop refuses to run gates against an unlocked rubric. Graders read this file; they never write it.",
+  "max_repair_rounds": 3,
+  "hard_gates": [
+    {"id": "policy-gates", "title": "Positive, negative and boundary fixtures for every rule; unsupported resources marked unknown; patches resolve their finding; unrelated behaviour unchanged; no cloud mutation commands execute; sensitive configuration not published; partial coverage never presented as complete; deterministic outputs",
+     "kind": "pytest", "args": "-m gate tests/policyforge", "timeout": 900},
+    {"id": "shell-checks", "title": "ShellCheck, Bats, Pester and PSScriptAnalyzer pass for the Bash and PowerShell adapters",
+     "kind": "command", "argv": ["bash", "scripts/shell_checks.sh"], "timeout": 600},
+    {"id": "harness", "title": "State machine, idempotency, concurrency, intake authorization, outcome and memory guards",
+     "kind": "pytest", "args": "tests/harness", "timeout": 600},
+    {"id": "secret-scan", "title": "No credentials in the repository or in the live site's shipped assets",
+     "kind": "command", "argv": ["python", "scripts/secret_scan.py", "--live"], "timeout": 300},
+    {"id": "live-site", "title": "Live Pages site loads and its data snapshot points at the state branch's latest run",
+     "kind": "live", "marker": "data-app=\"policy-forge\""},
+    {"id": "published-matches-state", "title": "Published result files are byte-identical to the accepted computation",
+     "kind": "command", "argv": ["python", "-m", "harness", "verify-published", "--state-dir", "state"], "timeout": 300},
+    {"id": "browser", "title": "Live-site browser checks at 390, 768 and 1440 px (coverage statement, findings and evidence, tabs, diffs, exceptions, rule tests, states, keyboard, reduced motion, dark theme, axe, overflow, console)",
+     "kind": "evidence-file", "file": "e2e/summary.json", "min_passed": 42}
+  ],
+  "subjective": [
+    {"id": "hierarchy", "title": "Clear order of attention on every view"},
+    {"id": "typography", "title": "Deliberate type choices and scale"},
+    {"id": "spacing", "title": "Purposeful negative space and rhythm"},
+    {"id": "palette", "title": "Restrained warm palette with clear roles; meaning never by colour alone"},
+    {"id": "motion", "title": "Motion explains change; reduced-motion alternative intact"},
+    {"id": "responsive", "title": "Deliberate mobile, tablet and desktop compositions"},
+    {"id": "distinctiveness", "title": "Reads as a structured policy and evidence desk, not a generic dashboard"},
+    {"id": "coverage-honesty", "title": "What was not evaluated is as visible as what failed; nothing reads as a clean bill of health"},
+    {"id": "contract-fidelity", "title": "Follows docs/DESIGN_CONTRACT.md"}
+  ]
+}

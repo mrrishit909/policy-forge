@@ -1,0 +1,207 @@
+{
+  "positive-1": {
+    "description": "Trail delivers to a bucket with a public ACL; Activity Log export delivers to a storage account with a public container",
+    "input": {
+      "resources": [
+        {
+          "id": "aws:storage_bucket:fixture-audit",
+          "provider": "aws",
+          "type": "storage_bucket",
+          "native_type": "AWS::S3::Bucket",
+          "name": "fixture-audit",
+          "region": "fixture-region",
+          "properties": {
+            "public_access": {
+              "anonymous_grants": [
+                {
+                  "via": "acl",
+                  "grantee": "AllUsers",
+                  "permission": "READ",
+                  "raw": "snapshots/fixtures/fixture.json#/128/GetBucketAcl/Grants/1"
+                }
+              ],
+              "anonymous_grants_blocked": false,
+              "policy": null,
+              "public_policy_blocked": false,
+              "guard": {
+                "configured": true,
+                "ignore_public_acls": false,
+                "restrict_public_buckets": false
+              }
+            },
+            "raw": {
+              "guard": "snapshots/fixtures/fixture.json#/128/GetPublicAccessBlock",
+              "policy": "snapshots/fixtures/fixture.json#/128/GetBucketPolicy"
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/129"
+          }
+        },
+        {
+          "id": "aws:audit_trail:arn:aws:cloudtrail:fixture-region:111122223333:trail/fx-trail",
+          "provider": "aws",
+          "type": "audit_trail",
+          "native_type": "AWS::CloudTrail::Trail",
+          "name": "fx-trail",
+          "region": "fixture-region",
+          "properties": {
+            "is_logging": true,
+            "multi_region": true,
+            "log_file_validation": true,
+            "include_global_service_events": true,
+            "organization_trail": false,
+            "destination": "fixture-audit",
+            "raw": {
+              "is_logging": "snapshots/fixtures/fixture.json#/129/IsLogging",
+              "multi_region": "snapshots/fixtures/fixture.json#/129/IsMultiRegionTrail",
+              "log_file_validation": "snapshots/fixtures/fixture.json#/129/LogFileValidationEnabled",
+              "destination": "snapshots/fixtures/fixture.json#/129/S3BucketName"
+            }
+          },
+          "refs": [
+            {
+              "kind": "delivers_logs_to",
+              "target": "aws:storage_bucket:fixture-audit"
+            }
+          ],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/130"
+          }
+        },
+        {
+          "id": "azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Storage/storageAccounts/staudit",
+          "provider": "azure",
+          "type": "storage_bucket",
+          "native_type": "Microsoft.Storage/storageAccounts",
+          "name": "staudit",
+          "region": "fixture-region",
+          "properties": {
+            "public_access": {
+              "anonymous_grants": [
+                {
+                  "via": "container",
+                  "grantee": "insights",
+                  "permission": "Blob",
+                  "raw": "snapshots/fixtures/fixture.json#/130/Containers/0"
+                }
+              ],
+              "anonymous_grants_blocked": false,
+              "policy": null,
+              "public_policy_blocked": null,
+              "guard": {
+                "allow_blob_public_access": true
+              }
+            },
+            "raw": {
+              "guard": "snapshots/fixtures/fixture.json#/130/AllowBlobPublicAccess"
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/131"
+          }
+        },
+        {
+          "id": "azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-0000000000f1/providers/microsoft.insights/diagnosticSettings/fx-activity",
+          "provider": "azure",
+          "type": "diagnostic_setting",
+          "native_type": "Microsoft.Insights/diagnosticSettings",
+          "name": "fx-activity",
+          "region": "fixture-region",
+          "properties": {
+            "scope_kind": "subscription",
+            "target_resource_id": "/subscriptions/00000000-0000-4000-8000-0000000000f1",
+            "categories": [
+              {
+                "category": "Administrative",
+                "enabled": true,
+                "raw": "snapshots/fixtures/fixture.json#/131/Log/0"
+              },
+              {
+                "category": "Security",
+                "enabled": true,
+                "raw": "snapshots/fixtures/fixture.json#/131/Log/1"
+              },
+              {
+                "category": "Policy",
+                "enabled": true,
+                "raw": "snapshots/fixtures/fixture.json#/131/Log/2"
+              }
+            ],
+            "destinations": {
+              "storage_account_id": "/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Storage/storageAccounts/staudit",
+              "workspace_id": null,
+              "event_hub_rule_id": null
+            },
+            "raw": {
+              "categories": "snapshots/fixtures/fixture.json#/131/Log",
+              "destinations": "snapshots/fixtures/fixture.json#/131/StorageAccountId"
+            }
+          },
+          "refs": [
+            {
+              "kind": "delivers_logs_to",
+              "target": "azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Storage/storageAccounts/staudit"
+            }
+          ],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/132"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "from": "aws:audit_trail:arn:aws:cloudtrail:fixture-region:111122223333:trail/fx-trail",
+          "to": "aws:storage_bucket:fixture-audit",
+          "kind": "delivers_logs_to"
+        },
+        {
+          "from": "azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-0000000000f1/providers/microsoft.insights/diagnosticSettings/fx-activity",
+          "to": "azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Storage/storageAccounts/staudit",
+          "kind": "delivers_logs_to"
+        }
+      ],
+      "unresolved": [],
+      "context": {
+        "admin_cidrs": [
+          "203.0.113.0/26"
+        ],
+        "remote_admin_ports": [
+          22,
+          3389
+        ],
+        "sensitive_ports": [
+          22,
+          3389,
+          1433,
+          3306,
+          5432,
+          6379,
+          9200,
+          27017
+        ],
+        "break_glass_principals": [
+          "arn:aws:iam::111122223333:user/breakglass",
+          "breakglass@fixture.example",
+          "00000000-0000-4000-9000-0000000000bb"
+        ],
+        "audit_log_targets": [],
+        "required_activity_log_categories": [
+          "Administrative",
+          "Security",
+          "Policy"
+        ]
+      }
+    },
+    "expected": {
+      "aws:storage_bucket:fixture-audit": "fail",
+      "azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Storage/storageAccounts/staudit": "fail"
+    }
+  }
+}

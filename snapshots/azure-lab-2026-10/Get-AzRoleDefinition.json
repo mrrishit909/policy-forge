@@ -1,0 +1,146 @@
+[
+  {
+    "Name": "Contributor",
+    "Id": "b24988ac-6180-42a0-ab88-20f7382dd24c",
+    "IsCustom": false,
+    "Description": "Grants full access to manage all resources, but does not allow you to assign roles.",
+    "Actions": [
+      "*"
+    ],
+    "NotActions": [
+      "Microsoft.Authorization/*/Delete",
+      "Microsoft.Authorization/*/Write",
+      "Microsoft.Authorization/elevateAccess/Action"
+    ],
+    "DataActions": [],
+    "NotDataActions": [],
+    "AssignableScopes": [
+      "/"
+    ],
+    "Condition": null,
+    "ConditionVersion": null
+  },
+  {
+    "Name": "FH Lab Operator",
+    "Id": "00000000-0000-4000-9000-000000000901",
+    "IsCustom": true,
+    "Description": "Custom lab operator role",
+    "Actions": [
+      "*"
+    ],
+    "NotActions": [],
+    "DataActions": [],
+    "NotDataActions": [],
+    "AssignableScopes": [
+      "/subscriptions/00000000-0000-4000-8000-000000000001"
+    ],
+    "Condition": null,
+    "ConditionVersion": null
+  },
+  {
+    "Name": "FH Network Reader",
+    "Id": "00000000-0000-4000-9000-000000000902",
+    "IsCustom": true,
+    "Description": "",
+    "Actions": [
+      "Microsoft.Network/*/read"
+    ],
+    "NotActions": [],
+    "DataActions": [],
+    "NotDataActions": [],
+    "AssignableScopes": [
+      "/subscriptions/00000000-0000-4000-8000-000000000001"
+    ],
+    "Condition": null,
+    "ConditionVersion": null
+  },
+  {
+    "Name": "FH Restricted Ops",
+    "Id": "00000000-0000-4000-9000-000000000903",
+    "IsCustom": true,
+    "Description": "",
+    "Actions": [
+      "*"
+    ],
+    "NotActions": [
+      "Microsoft.Authorization/*"
+    ],
+    "DataActions": [],
+    "NotDataActions": [],
+    "AssignableScopes": [
+      "/subscriptions/00000000-0000-4000-8000-000000000001"
+    ],
+    "Condition": null,
+    "ConditionVersion": null
+  },
+  {
+    "Name": "FH Storage Admin",
+    "Id": "00000000-0000-4000-9000-000000000904",
+    "IsCustom": true,
+    "Description": "",
+    "Actions": [
+      "Microsoft.Storage/*"
+    ],
+    "NotActions": [],
+    "DataActions": [],
+    "NotDataActions": [],
+    "AssignableScopes": [
+      "/subscriptions/00000000-0000-4000-8000-000000000001"
+    ],
+    "Condition": null,
+    "ConditionVersion": null
+  },
+  {
+    "Name": "Owner",
+    "Id": "8e3af657-a8ff-443c-a75c-2fe8c4bcb635",
+    "IsCustom": false,
+    "Description": "Grants full access to manage all resources.",
+    "Actions": [
+      "*"
+    ],
+    "NotActions": [],
+    "DataActions": [],
+    "NotDataActions": [],
+    "AssignableScopes": [
+      "/"
+    ],
+    "Condition": null,
+    "ConditionVersion": null
+  },
+  {
+    "Name": "Reader",
+    "Id": "acdd72a7-3385-48ef-bd42-f606fba81ae7",
+    "IsCustom": false,
+    "Description": "View all resources.",
+    "Actions": [
+      "*/read"
+    ],
+    "NotActions": [],
+    "DataActions": [],
+    "NotDataActions": [],
+    "AssignableScopes": [
+      "/"
+    ],
+    "Condition": null,
+    "ConditionVersion": null
+  },
+  {
+    "Name": "User Access Administrator",
+    "Id": "18d7d88d-d35e-4fb5-a5c3-7773c20a72d9",
+    "IsCustom": false,
+    "Description": "Lets you manage user access to Azure resources.",
+    "Actions": [
+      "*/read",
+      "Microsoft.Authorization/*",
+      "Microsoft.Support/*"
+    ],
+    "NotActions": [],
+    "DataActions": [],
+    "NotDataActions": [],
+    "AssignableScopes": [
+      "/"
+    ],
+    "Condition": null,
+    "ConditionVersion": null
+  }
+]

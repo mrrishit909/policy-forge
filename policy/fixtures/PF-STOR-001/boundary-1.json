@@ -1,0 +1,151 @@
+{
+  "boundary-1": {
+    "description": "Public via ACL/container but neutralized by the guard (pass); Azure guard unset (unknown)",
+    "input": {
+      "resources": [
+        {
+          "id": "aws:storage_bucket:fx-acl-but-blocked",
+          "provider": "aws",
+          "type": "storage_bucket",
+          "native_type": "AWS::S3::Bucket",
+          "name": "fx-acl-but-blocked",
+          "region": "fixture-region",
+          "properties": {
+            "public_access": {
+              "anonymous_grants": [
+                {
+                  "via": "acl",
+                  "grantee": "AuthenticatedUsers",
+                  "permission": "READ",
+                  "raw": "snapshots/fixtures/fixture.json#/4/GetBucketAcl/Grants/1"
+                }
+              ],
+              "anonymous_grants_blocked": true,
+              "policy": null,
+              "public_policy_blocked": false,
+              "guard": {
+                "configured": true,
+                "ignore_public_acls": true,
+                "restrict_public_buckets": false
+              }
+            },
+            "raw": {
+              "guard": "snapshots/fixtures/fixture.json#/4/GetPublicAccessBlock",
+              "policy": "snapshots/fixtures/fixture.json#/4/GetBucketPolicy"
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/5"
+          }
+        },
+        {
+          "id": "azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Storage/storageAccounts/fx-container-but-blocked",
+          "provider": "azure",
+          "type": "storage_bucket",
+          "native_type": "Microsoft.Storage/storageAccounts",
+          "name": "fx-container-but-blocked",
+          "region": "fixture-region",
+          "properties": {
+            "public_access": {
+              "anonymous_grants": [
+                {
+                  "via": "container",
+                  "grantee": "web",
+                  "permission": "Blob",
+                  "raw": "snapshots/fixtures/fixture.json#/5/Containers/0"
+                }
+              ],
+              "anonymous_grants_blocked": true,
+              "policy": null,
+              "public_policy_blocked": null,
+              "guard": {
+                "allow_blob_public_access": false
+              }
+            },
+            "raw": {
+              "guard": "snapshots/fixtures/fixture.json#/5/AllowBlobPublicAccess"
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/6"
+          }
+        },
+        {
+          "id": "azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Storage/storageAccounts/fx-container-legacy",
+          "provider": "azure",
+          "type": "storage_bucket",
+          "native_type": "Microsoft.Storage/storageAccounts",
+          "name": "fx-container-legacy",
+          "region": "fixture-region",
+          "properties": {
+            "public_access": {
+              "anonymous_grants": [
+                {
+                  "via": "container",
+                  "grantee": "archive",
+                  "permission": "Blob",
+                  "raw": "snapshots/fixtures/fixture.json#/6/Containers/0"
+                }
+              ],
+              "anonymous_grants_blocked": null,
+              "policy": null,
+              "public_policy_blocked": null,
+              "guard": {
+                "allow_blob_public_access": null
+              }
+            },
+            "raw": {
+              "guard": "snapshots/fixtures/fixture.json#/6/AllowBlobPublicAccess"
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/7"
+          }
+        }
+      ],
+      "edges": [],
+      "unresolved": [],
+      "context": {
+        "admin_cidrs": [
+          "203.0.113.0/26"
+        ],
+        "remote_admin_ports": [
+          22,
+          3389
+        ],
+        "sensitive_ports": [
+          22,
+          3389,
+          1433,
+          3306,
+          5432,
+          6379,
+          9200,
+          27017
+        ],
+        "break_glass_principals": [
+          "arn:aws:iam::111122223333:user/breakglass",
+          "breakglass@fixture.example",
+          "00000000-0000-4000-9000-0000000000bb"
+        ],
+        "audit_log_targets": [],
+        "required_activity_log_categories": [
+          "Administrative",
+          "Security",
+          "Policy"
+        ]
+      }
+    },
+    "expected": {
+      "aws:storage_bucket:fx-acl-but-blocked": "pass",
+      "azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Storage/storageAccounts/fx-container-but-blocked": "pass",
+      "azure:storage_bucket:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Storage/storageAccounts/fx-container-legacy": "unknown"
+    }
+  }
+}

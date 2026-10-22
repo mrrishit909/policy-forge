@@ -1,0 +1,1481 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mrrishit909/policy-forge/schemas/outputs.schema.json",
+  "title": "Policy Forge run outputs",
+  "description": "One $defs entry per JSON output file of a run directory (named after the file without .json). policyforge.outputs.validate checks every file against its definition plus cross-file consistency.",
+  "$defs": {
+    "status": {
+      "enum": [
+        "pass",
+        "fail",
+        "unknown"
+      ]
+    },
+    "severity": {
+      "enum": [
+        "critical",
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "rule_id": {
+      "type": "string",
+      "pattern": "^PF-[A-Z]+-[0-9]{3}$"
+    },
+    "resource_id": {
+      "type": "string",
+      "pattern": "^(aws|azure):[a-z_]+:.+$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "date": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "location": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "file",
+        "pointer",
+        "line"
+      ],
+      "properties": {
+        "file": {
+          "type": "string",
+          "pattern": "^snapshots/"
+        },
+        "pointer": {
+          "type": "string"
+        },
+        "line": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "excerpt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "first_line",
+        "lines",
+        "cited_lines"
+      ],
+      "properties": {
+        "first_line": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "lines": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "string"
+          }
+        },
+        "cited_lines": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      }
+    },
+    "cited_source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "file",
+        "pointer",
+        "line",
+        "excerpt"
+      ],
+      "properties": {
+        "file": {
+          "type": "string",
+          "pattern": "^snapshots/"
+        },
+        "pointer": {
+          "type": "string"
+        },
+        "line": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "excerpt": {
+          "$ref": "#/$defs/excerpt"
+        }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "value",
+          "raw"
+        ],
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "raw": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "hygiene": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "input",
+        "successes",
+        "failures",
+        "warnings",
+        "passed"
+      ],
+      "properties": {
+        "input": {
+          "type": "string"
+        },
+        "successes": {
+          "type": "integer"
+        },
+        "failures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "passed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "regression": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ok",
+        "targets",
+        "changed_results",
+        "changed_findings",
+        "changed_resources",
+        "touched_resources",
+        "checked_results",
+        "checked_resources",
+        "reasons"
+      ],
+      "properties": {
+        "ok": {
+          "type": "boolean"
+        },
+        "targets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "rule_id",
+              "resource_id",
+              "before",
+              "after"
+            ]
+          }
+        },
+        "changed_results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "rule_id",
+              "resource_id",
+              "before",
+              "after"
+            ]
+          }
+        },
+        "changed_findings": {
+          "type": "array"
+        },
+        "changed_resources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "touched_resources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "checked_results": {
+          "type": "integer"
+        },
+        "checked_resources": {
+          "type": "integer"
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "package",
+        "package_version",
+        "params",
+        "snapshot",
+        "tools",
+        "input_manifest_hash",
+        "outputs"
+      ],
+      "properties": {
+        "package": {
+          "const": "policyforge"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "params": {
+          "type": "object",
+          "required": [
+            "snapshot",
+            "rule_packs",
+            "remediation",
+            "as_of"
+          ]
+        },
+        "snapshot": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "provider",
+            "captured_at",
+            "synthetic",
+            "files"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "provider": {
+              "enum": [
+                "aws",
+                "azure"
+              ]
+            },
+            "captured_at": {
+              "type": "string"
+            },
+            "synthetic": {
+              "const": true
+            },
+            "files": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "path",
+                  "sha256",
+                  "bytes"
+                ],
+                "properties": {
+                  "path": {
+                    "type": "string"
+                  },
+                  "sha256": {
+                    "$ref": "#/$defs/sha256"
+                  },
+                  "bytes": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tools": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "opa",
+            "conftest",
+            "bash",
+            "jq",
+            "pwsh"
+          ],
+          "properties": {
+            "opa": {
+              "type": "string"
+            },
+            "conftest": {
+              "type": "string"
+            },
+            "bash": {
+              "type": "string"
+            },
+            "jq": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "pwsh": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "input_manifest_hash": {
+          "$ref": "#/$defs/sha256"
+        },
+        "outputs": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/sha256"
+          }
+        }
+      }
+    },
+    "inventory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "snapshot",
+        "provider",
+        "resources",
+        "redactions"
+      ],
+      "properties": {
+        "snapshot": {
+          "type": "string"
+        },
+        "provider": {
+          "enum": [
+            "aws",
+            "azure"
+          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "provider",
+              "type",
+              "native_type",
+              "name",
+              "region",
+              "properties",
+              "refs",
+              "source"
+            ],
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/resource_id"
+              },
+              "source": {
+                "$ref": "#/$defs/location"
+              }
+            }
+          }
+        },
+        "redactions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "resource_id",
+              "path",
+              "reason",
+              "action"
+            ],
+            "properties": {
+              "resource_id": {
+                "type": "string"
+              },
+              "path": {
+                "type": "string"
+              },
+              "reason": {
+                "enum": [
+                  "sensitive-name",
+                  "sensitive-value"
+                ]
+              },
+              "action": {
+                "enum": [
+                  "dropped",
+                  "masked"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "relationships": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "edges",
+        "unresolved"
+      ],
+      "properties": {
+        "edges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "from",
+              "to",
+              "kind"
+            ],
+            "properties": {
+              "from": {
+                "$ref": "#/$defs/resource_id"
+              },
+              "to": {
+                "$ref": "#/$defs/resource_id"
+              },
+              "kind": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "unresolved": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "from",
+              "kind",
+              "target"
+            ],
+            "properties": {
+              "from": {
+                "$ref": "#/$defs/resource_id"
+              },
+              "kind": {
+                "type": "string"
+              },
+              "target": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rules",
+        "results",
+        "resource_types",
+        "resources",
+        "unsupported",
+        "totals",
+        "packs_without_rules_for_provider"
+      ],
+      "properties": {
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "rule_id",
+              "title",
+              "pack",
+              "severity",
+              "resource_types",
+              "evaluated",
+              "pass",
+              "fail",
+              "unknown"
+            ],
+            "properties": {
+              "rule_id": {
+                "$ref": "#/$defs/rule_id"
+              },
+              "severity": {
+                "$ref": "#/$defs/severity"
+              },
+              "evaluated": {
+                "type": "integer"
+              },
+              "pass": {
+                "type": "integer"
+              },
+              "fail": {
+                "type": "integer"
+              },
+              "unknown": {
+                "type": "integer"
+              },
+              "title": {},
+              "pack": {},
+              "resource_types": {}
+            }
+          }
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "rule_id",
+              "resource_id",
+              "resource_type",
+              "status",
+              "reason",
+              "evidence"
+            ],
+            "properties": {
+              "rule_id": {
+                "$ref": "#/$defs/rule_id"
+              },
+              "resource_id": {
+                "$ref": "#/$defs/resource_id"
+              },
+              "resource_type": {
+                "type": "string"
+              },
+              "status": {
+                "$ref": "#/$defs/status"
+              },
+              "reason": {
+                "type": "string"
+              },
+              "evidence": {
+                "$ref": "#/$defs/evidence"
+              },
+              "source": {
+                "$ref": "#/$defs/cited_source"
+              },
+              "cited": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/location"
+                }
+              }
+            },
+            "if": {
+              "properties": {
+                "status": {
+                  "const": "unknown"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "source",
+                "cited"
+              ]
+            }
+          }
+        },
+        "resource_types": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "type",
+              "count",
+              "covered",
+              "rules",
+              "native_types"
+            ],
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "count": {
+                "type": "integer"
+              },
+              "covered": {
+                "type": "boolean"
+              },
+              "rules": {
+                "type": "array"
+              },
+              "native_types": {
+                "type": "array"
+              }
+            }
+          }
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "type",
+              "native_type",
+              "name",
+              "status",
+              "evaluated_rules",
+              "note"
+            ],
+            "properties": {
+              "status": {
+                "enum": [
+                  "pass",
+                  "fail",
+                  "unknown",
+                  "not_evaluated"
+                ]
+              },
+              "note": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "id": {},
+              "type": {},
+              "native_type": {},
+              "name": {},
+              "evaluated_rules": {}
+            }
+          }
+        },
+        "unsupported": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "native_type",
+              "name",
+              "status",
+              "reason",
+              "source",
+              "cited"
+            ],
+            "properties": {
+              "status": {
+                "const": "unknown"
+              },
+              "source": {
+                "$ref": "#/$defs/cited_source"
+              },
+              "cited": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/location"
+                }
+              },
+              "id": {},
+              "native_type": {},
+              "name": {},
+              "reason": {}
+            }
+          }
+        },
+        "totals": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "checks",
+            "pass",
+            "fail",
+            "unknown",
+            "resources",
+            "resources_unsupported",
+            "resources_not_evaluated",
+            "resources_by_status"
+          ],
+          "properties": {
+            "checks": {
+              "type": "integer"
+            },
+            "pass": {
+              "type": "integer"
+            },
+            "fail": {
+              "type": "integer"
+            },
+            "unknown": {
+              "type": "integer"
+            },
+            "resources": {
+              "type": "integer"
+            },
+            "resources_unsupported": {
+              "type": "integer"
+            },
+            "resources_not_evaluated": {
+              "type": "integer"
+            },
+            "resources_by_status": {
+              "type": "object"
+            }
+          }
+        },
+        "packs_without_rules_for_provider": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "findings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "findings"
+      ],
+      "properties": {
+        "findings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "rule_id",
+              "title",
+              "pack",
+              "severity",
+              "resource_id",
+              "resource_type",
+              "resource_name",
+              "provider",
+              "status",
+              "exception_id",
+              "reason",
+              "evidence",
+              "source",
+              "cited",
+              "remediation"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "rule_id": {
+                "$ref": "#/$defs/rule_id"
+              },
+              "title": {
+                "type": "string"
+              },
+              "pack": {
+                "enum": [
+                  "storage",
+                  "iam",
+                  "network",
+                  "audit",
+                  "relationships"
+                ]
+              },
+              "severity": {
+                "$ref": "#/$defs/severity"
+              },
+              "resource_id": {
+                "$ref": "#/$defs/resource_id"
+              },
+              "resource_type": {
+                "type": "string"
+              },
+              "resource_name": {
+                "type": "string"
+              },
+              "provider": {
+                "enum": [
+                  "aws",
+                  "azure"
+                ]
+              },
+              "status": {
+                "enum": [
+                  "active",
+                  "excepted"
+                ]
+              },
+              "exception_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "reason": {
+                "type": "string"
+              },
+              "evidence": {
+                "$ref": "#/$defs/evidence"
+              },
+              "source": {
+                "$ref": "#/$defs/cited_source"
+              },
+              "cited": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/$defs/location"
+                }
+              },
+              "remediation": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "kind",
+                  "patch_id",
+                  "patch_status"
+                ],
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "auto",
+                      "manual"
+                    ]
+                  },
+                  "patch_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "patch_status": {
+                    "enum": [
+                      null,
+                      "accepted",
+                      "rejected",
+                      "withheld",
+                      "not_proposed"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "exceptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "as_of",
+        "registry",
+        "entries",
+        "counts"
+      ],
+      "properties": {
+        "as_of": {
+          "$ref": "#/$defs/date"
+        },
+        "registry": {
+          "type": "string"
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "rule_id",
+              "resource_id",
+              "reason",
+              "owner",
+              "ticket",
+              "created",
+              "expires",
+              "state",
+              "problems",
+              "effect",
+              "in_scope",
+              "matches_failing_result"
+            ],
+            "properties": {
+              "state": {
+                "enum": [
+                  "active",
+                  "expired",
+                  "rejected",
+                  "not_yet_active"
+                ]
+              },
+              "problems": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "effect": {
+                "type": "string"
+              },
+              "in_scope": {
+                "type": "boolean"
+              },
+              "matches_failing_result": {
+                "type": "boolean"
+              },
+              "id": {},
+              "rule_id": {},
+              "resource_id": {},
+              "reason": {},
+              "owner": {},
+              "ticket": {},
+              "created": {},
+              "expires": {}
+            }
+          }
+        },
+        "counts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "active",
+            "expired",
+            "rejected",
+            "not_yet_active"
+          ],
+          "properties": {
+            "active": {
+              "type": "integer"
+            },
+            "expired": {
+              "type": "integer"
+            },
+            "rejected": {
+              "type": "integer"
+            },
+            "not_yet_active": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "conftest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tool",
+        "inventory",
+        "exceptions_registry"
+      ],
+      "properties": {
+        "tool": {
+          "type": "string"
+        },
+        "inventory": {
+          "$ref": "#/$defs/hygiene"
+        },
+        "exceptions_registry": {
+          "$ref": "#/$defs/hygiene"
+        }
+      }
+    },
+    "rule_tests": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tool",
+        "rules",
+        "other_tests",
+        "totals",
+        "passed"
+      ],
+      "properties": {
+        "tool": {
+          "type": "string"
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "rule_id",
+              "kinds",
+              "passed"
+            ],
+            "properties": {
+              "rule_id": {
+                "$ref": "#/$defs/rule_id"
+              },
+              "passed": {
+                "type": "boolean"
+              },
+              "kinds": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "positive",
+                  "negative",
+                  "boundary"
+                ],
+                "patternProperties": {
+                  "^(positive|negative|boundary)$": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "fixtures",
+                      "files",
+                      "passed"
+                    ],
+                    "properties": {
+                      "fixtures": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "files": {
+                        "type": "array"
+                      },
+                      "passed": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                },
+                "properties": {
+                  "positive": {},
+                  "negative": {},
+                  "boundary": {}
+                }
+              }
+            }
+          }
+        },
+        "other_tests": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "passed"
+            ]
+          }
+        },
+        "totals": {
+          "type": "object"
+        },
+        "passed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "remediation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "explanation",
+        "patches",
+        "not_proposed",
+        "combined",
+        "counts"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "none",
+            "propose"
+          ]
+        },
+        "explanation": {
+          "type": "string"
+        },
+        "patches": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "finding_id",
+              "rule_id",
+              "resource_id",
+              "strategy",
+              "files",
+              "json_patch",
+              "status",
+              "diff",
+              "regression",
+              "reason"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^P-[0-9]{2,}$"
+              },
+              "status": {
+                "enum": [
+                  "accepted",
+                  "rejected",
+                  "withheld"
+                ]
+              },
+              "files": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "json_patch": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "file",
+                    "ops"
+                  ],
+                  "properties": {
+                    "ops": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "op",
+                          "path"
+                        ],
+                        "properties": {
+                          "op": {
+                            "enum": [
+                              "add",
+                              "replace",
+                              "remove",
+                              "test"
+                            ]
+                          },
+                          "path": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "diff": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "regression": {
+                "oneOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "$ref": "#/$defs/regression"
+                  }
+                ]
+              },
+              "reason": {
+                "type": "string"
+              },
+              "finding_id": {},
+              "rule_id": {},
+              "resource_id": {},
+              "strategy": {}
+            },
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "status": {
+                      "const": "accepted"
+                    }
+                  }
+                },
+                "then": {
+                  "properties": {
+                    "diff": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "regression": {
+                      "$ref": "#/$defs/regression"
+                    }
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "status": {
+                      "const": "withheld"
+                    }
+                  }
+                },
+                "then": {
+                  "properties": {
+                    "diff": {
+                      "type": "null"
+                    },
+                    "json_patch": {
+                      "type": "null"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "not_proposed": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "finding_id",
+              "rule_id",
+              "resource_id",
+              "reason"
+            ],
+            "properties": {
+              "finding_id": {},
+              "rule_id": {},
+              "resource_id": {},
+              "reason": {}
+            }
+          }
+        },
+        "combined": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "patch_file",
+                "patch_ids",
+                "files",
+                "regression",
+                "ok",
+                "withheld_reason"
+              ],
+              "properties": {
+                "patch_file": {
+                  "const": "remediation.patch"
+                },
+                "ok": {
+                  "type": "boolean"
+                },
+                "regression": {
+                  "$ref": "#/$defs/regression"
+                },
+                "withheld_reason": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "patch_ids": {},
+                "files": {}
+              }
+            }
+          ]
+        },
+        "counts": {
+          "type": "object",
+          "required": [
+            "accepted",
+            "rejected",
+            "withheld",
+            "proposed",
+            "not_proposed"
+          ],
+          "additionalProperties": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "catalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "catalog_version",
+        "rules"
+      ],
+      "properties": {
+        "catalog_version": {
+          "type": "string"
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "pack",
+              "title",
+              "severity",
+              "providers",
+              "resource_types",
+              "checks",
+              "unknown_when",
+              "does_not_evaluate",
+              "remediation",
+              "fixtures"
+            ],
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/rule_id"
+              },
+              "severity": {
+                "$ref": "#/$defs/severity"
+              },
+              "remediation": {
+                "type": "object",
+                "required": [
+                  "kind"
+                ],
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "auto",
+                      "manual"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "snapshot",
+        "provider",
+        "as_of",
+        "rule_packs",
+        "remediation_mode",
+        "checks",
+        "findings",
+        "resources",
+        "resource_types",
+        "rules",
+        "exceptions",
+        "remediation",
+        "relationships",
+        "complete_coverage",
+        "coverage_statement"
+      ],
+      "properties": {
+        "checks": {
+          "type": "object",
+          "required": [
+            "evaluated",
+            "passed",
+            "failed",
+            "unknown"
+          ],
+          "additionalProperties": {
+            "type": "integer"
+          }
+        },
+        "complete_coverage": {
+          "type": "boolean"
+        },
+        "coverage_statement": {
+          "type": "string",
+          "minLength": 40
+        },
+        "snapshot": {},
+        "provider": {},
+        "as_of": {},
+        "rule_packs": {},
+        "remediation_mode": {},
+        "findings": {},
+        "resources": {},
+        "resource_types": {},
+        "rules": {},
+        "exceptions": {},
+        "remediation": {},
+        "relationships": {}
+      }
+    },
+    "checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "checks",
+        "passed"
+      ],
+      "properties": {
+        "checks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "ok",
+              "detail"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "ok": {
+                "type": "boolean"
+              },
+              "detail": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "passed": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

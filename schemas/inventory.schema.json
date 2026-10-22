@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mrrishit909/policy-forge/schemas/inventory.schema.json",
+  "title": "Policy Forge normalized resource (one adapter output line)",
+  "description": "Cross-provider shapes: storage public access, permission statements and ingress rules have the same structure for AWS and Azure where the meaning is the same. `raw` strings are 'snapshots/<name>/<file>#<JSON pointer>' locations of the raw values a property came from. source.line is added by the engine after adapter output is validated.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "provider", "type", "native_type", "name", "region", "properties", "refs", "source"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^(aws|azure):[a-z_]+:.+$"},
+    "provider": {"enum": ["aws", "azure"]},
+    "type": {"enum": ["storage_bucket", "iam_policy", "iam_role", "iam_user", "security_group", "compute_instance",
+                      "audit_trail", "role_definition", "role_assignment", "network_security_group",
+                      "diagnostic_setting", "unsupported"]},
+    "native_type": {"type": "string", "minLength": 1},
+    "name": {"type": "string", "minLength": 1},
+    "region": {"type": "string", "minLength": 1},
+    "properties": {"type": "object"},
+    "refs": {"type": "array", "items": {
+      "type": "object", "additionalProperties": false, "required": ["kind", "target"],
+      "properties": {"kind": {"type": "string", "minLength": 1}, "target": {"type": "string", "minLength": 1}}}},
+    "source": {"type": "object", "additionalProperties": false, "required": ["file", "pointer"],
+      "properties": {
+        "file": {"type": "string", "pattern": "^snapshots/[a-z0-9-]+/[A-Za-z0-9._-]+\\.json$"},
+        "pointer": {"type": "string", "pattern": "^(/.*)?$"},
+        "line": {"type": "integer", "minimum": 1}}}
+  },
+  "allOf": [
+    {"if": {"properties": {"type": {"const": "storage_bucket"}}},
+     "then": {"properties": {"properties": {"required": ["public_access", "raw"],
+       "properties": {"public_access": {"$ref": "#/$defs/public_access"}}}}}},
+    {"if": {"properties": {"type": {"enum": ["iam_policy", "iam_role", "iam_user", "role_definition"]}}},
+     "then": {"properties": {"properties": {"required": ["permissions"],
+       "properties": {"permissions": {"$ref": "#/$defs/permissions"}}}}}},
+    {"if": {"properties": {"type": {"enum": ["security_group", "network_security_group"]}}},
+     "then": {"properties": {"properties": {"required": ["ingress"],
+       "properties": {"ingress": {"type": "array", "items": {"$ref": "#/$defs/ingress"}}}}}}},
+    {"if": {"properties": {"type": {"const": "compute_instance"}}},
+     "then": {"properties": {"properties": {"required": ["public_ips", "network_groups", "raw"],
+       "properties": {"public_ips": {"type": "array", "items": {"type": "string"}},
+                      "network_groups": {"type": "array", "items": {"type": "string"}}}}}}},
+    {"if": {"properties": {"type": {"const": "audit_trail"}}},
+     "then": {"properties": {"properties": {"required": ["is_logging", "multi_region", "log_file_validation", "raw"],
+       "properties": {"is_logging": {"type": ["boolean", "null"]}, "multi_region": {"type": "boolean"},
+                      "log_file_validation": {"type": "boolean"}}}}}},
+    {"if": {"properties": {"type": {"const": "role_assignment"}}},
+     "then": {"properties": {"properties": {"required": ["scope", "scope_level", "principal_id", "role_definition_id",
+                                                          "has_condition", "raw"],
+       "properties": {"scope_level": {"enum": ["root", "management_group", "subscription", "resource_group", "resource"]},
+                      "has_condition": {"type": "boolean"}}}}}},
+    {"if": {"properties": {"type": {"const": "diagnostic_setting"}}},
+     "then": {"properties": {"properties": {"required": ["scope_kind", "categories", "destinations", "raw"],
+       "properties": {"scope_kind": {"enum": ["subscription", "resource"]},
+                      "categories": {"type": "array", "items": {"type": "object", "required": ["category", "enabled", "raw"]}}}}}}},
+    {"if": {"properties": {"type": {"const": "unsupported"}}},
+     "then": {"properties": {"properties": {"maxProperties": 0}}}}
+  ],
+  "$defs": {
+    "raw": {"type": ["string", "null"], "pattern": "^snapshots/[a-z0-9-]+/[A-Za-z0-9._-]+\\.json#(/.*)?$"},
+    "public_access": {
+      "type": "object",
+      "required": ["anonymous_grants", "anonymous_grants_blocked", "policy", "public_policy_blocked", "guard"],
+      "properties": {
+        "anonymous_grants": {"type": "array", "items": {"type": "object", "required": ["via", "grantee", "permission", "raw"],
+          "properties": {"via": {"enum": ["acl", "container"]}, "raw": {"$ref": "#/$defs/raw"}}}},
+        "anonymous_grants_blocked": {"type": ["boolean", "null"]},
+        "policy": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/permissions"}]},
+        "public_policy_blocked": {"type": ["boolean", "null"]},
+        "guard": {"type": "object"}
+      }
+    },
+    "permissions": {
+      "type": "object", "additionalProperties": false, "required": ["parse_error", "statements"],
+      "properties": {
+        "parse_error": {"type": "boolean"},
+        "statements": {"type": "array", "items": {"$ref": "#/$defs/statement"}}
+      }
+    },
+    "statement": {
+      "type": "object",
+      "required": ["effect", "actions", "not_actions", "resources", "not_resources", "principals", "not_principals",
+                   "has_condition", "raw"],
+      "properties": {
+        "effect": {"type": ["string", "null"]},
+        "actions": {"type": ["array", "null"], "items": {"type": "string"}},
+        "not_actions": {"type": ["array", "null"], "items": {"type": "string"}},
+        "resources": {"type": ["array", "null"], "items": {"type": "string"}},
+        "not_resources": {"type": ["array", "null"], "items": {"type": "string"}},
+        "principals": {"type": ["array", "null"], "items": {"type": "string"}},
+        "not_principals": {"type": ["array", "null"], "items": {"type": "string"}},
+        "has_condition": {"type": "boolean"},
+        "raw": {"$ref": "#/$defs/raw"}
+      }
+    },
+    "ingress": {
+      "type": "object", "additionalProperties": false,
+      "required": ["protocol", "port_from", "port_to", "cidrs", "source_tags", "source_groups", "prefix_lists", "action",
+                   "priority", "raw"],
+      "properties": {
+        "protocol": {"type": "string"},
+        "port_from": {"type": ["integer", "null"], "minimum": 0, "maximum": 65535},
+        "port_to": {"type": ["integer", "null"], "minimum": 0, "maximum": 65535},
+        "cidrs": {"type": "array", "items": {"type": "string"}},
+        "source_tags": {"type": "array", "items": {"type": "string"}},
+        "source_groups": {"type": "array", "items": {"type": "string"}},
+        "prefix_lists": {"type": "array", "items": {"type": "string"}},
+        "action": {"enum": ["allow", "deny"]},
+        "priority": {"type": ["integer", "null"]},
+        "raw": {"$ref": "#/$defs/raw"}
+      }
+    }
+  }
+}

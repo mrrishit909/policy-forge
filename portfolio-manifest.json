@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "name": "Policy Forge",
+  "short_description": "An offline cloud-security configuration review desk: Bash and PowerShell adapters, OPA/Rego findings cited to the exact source line, expiring exceptions, and remediation patches verified before they are offered.",
+  "repository_url": "https://github.com/mrrishit909/policy-forge",
+  "live_url": "https://mrrishit909.github.io/policy-forge/",
+  "preview_image": "https://mrrishit909.github.io/policy-forge/preview.jpg",
+  "tags": ["cloud-security", "opa", "rego", "conftest", "bash", "jq", "powershell", "pester", "bats", "python", "github-actions", "react", "typescript"],
+  "capabilities": [
+    "Bash + jq adapter for AWS-CLI-shaped exports and PowerShell 7 adapter for Azure-PowerShell-shaped exports, one normalized inventory",
+    "Exact source file and line for every cited value; redacted excerpts; sensitive fields never published",
+    "13 Rego rules for public storage, broad IAM, unrestricted ingress, missing audit settings and risky relationships, each with positive, negative and boundary fixtures",
+    "Unevaluable semantics and unsupported resource types reported as unknown, never as passed",
+    "Narrowly scoped, expiring exceptions validated with Conftest",
+    "Local-file remediation patches re-verified by re-running the whole review; one git-appliable bundle",
+    "GitHub-native run ledger, outcome loop and memory curation; no cloud credentials anywhere"
+  ],
+  "data_limitations": [
+    "All snapshots are synthetic exports of a fictional organisation",
+    "A deliberately bounded rule set; each rule lists what it does not evaluate",
+    "Patches edit captured JSON only; nothing is applied to any cloud account",
+    "The site shows a snapshot of the state branch, not live data"
+  ],
+  "integration": {
+    "standalone": "https://mrrishit909.github.io/policy-forge/",
+    "iframe": "https://mrrishit909.github.io/policy-forge/#/",
+    "module": "https://mrrishit909.github.io/policy-forge/lib/policy-forge.js",
+    "stylesheet": "https://mrrishit909.github.io/policy-forge/lib/policy-forge.css",
+    "entry_point": "PolicyForgeApp (React component) or mount(element, config)",
+    "data_url": "https://mrrishit909.github.io/policy-forge/data/",
+    "docs": "https://github.com/mrrishit909/policy-forge/blob/main/docs/PORTFOLIO_INTEGRATION.md"
+  },
+  "build_version": "1.0.0"
+}

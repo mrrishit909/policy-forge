@@ -1,0 +1,42 @@
+name: Policy review request
+description: Review a committed synthetic configuration snapshot. Runs start automatically only for the repository owner; other requests wait for owner approval.
+title: "[review] "
+labels: ["type:run"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Reviews read committed synthetic snapshots only (no uploads, no real cloud accounts), are validated against `schemas/request.schema.json`, and never run a cloud CLI or change any infrastructure. A GitHub sign-in is required to open an issue. Nothing here can trigger paid AI inference.
+  - type: dropdown
+    attributes:
+      label: Configuration snapshot
+      description: Synthetic exports of a fictional organisation.
+      options: ["aws-drifted-2026-10", "aws-baseline-2026-10", "azure-lab-2026-10"]
+      default: 0
+    validations:
+      required: true
+  - type: checkboxes
+    attributes:
+      label: Rule packs
+      description: The review states which resource types and checks were not evaluated, whatever you pick.
+      options:
+        - label: "Storage: public access"
+        - label: "IAM: overly broad permissions"
+        - label: "Network: unrestricted ingress"
+        - label: "Audit: missing supported audit settings"
+        - label: "Relationships: risky resource combinations"
+  - type: dropdown
+    attributes:
+      label: Remediation
+      description: propose writes local-file patches against a copy of the snapshot and re-verifies each one; none only evaluates.
+      options: ["propose", "none"]
+      default: 0
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Evaluate exceptions as of
+      description: A date in YYYY-MM-DD form. Exceptions that expired before it are reported as expired.
+      placeholder: "2026-10-21"
+    validations:
+      required: true

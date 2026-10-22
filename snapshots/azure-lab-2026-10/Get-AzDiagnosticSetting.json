@@ -1,0 +1,106 @@
+[
+  {
+    "Name": "activity-to-storage",
+    "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/providers/microsoft.insights/diagnosticSettings/activity-to-storage",
+    "StorageAccountId": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.Storage/storageAccounts/stfhlabaudit",
+    "WorkspaceId": null,
+    "EventHubAuthorizationRuleId": null,
+    "EventHubName": null,
+    "Log": [
+      {
+        "Category": "Administrative",
+        "Enabled": true
+      },
+      {
+        "Category": "Security",
+        "Enabled": false
+      },
+      {
+        "Category": "ServiceHealth",
+        "Enabled": true
+      },
+      {
+        "Category": "Alert",
+        "Enabled": true
+      },
+      {
+        "Category": "Recommendation",
+        "Enabled": false
+      },
+      {
+        "Category": "Policy",
+        "Enabled": true
+      },
+      {
+        "Category": "Autoscale",
+        "Enabled": false
+      },
+      {
+        "Category": "ResourceHealth",
+        "Enabled": false
+      }
+    ]
+  },
+  {
+    "Name": "activity-to-workspace",
+    "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/providers/microsoft.insights/diagnosticSettings/activity-to-workspace",
+    "StorageAccountId": null,
+    "WorkspaceId": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.OperationalInsights/workspaces/law-fh-lab",
+    "EventHubAuthorizationRuleId": null,
+    "EventHubName": null,
+    "Log": [
+      {
+        "Category": "Administrative",
+        "Enabled": true
+      },
+      {
+        "Category": "Security",
+        "Enabled": true
+      },
+      {
+        "Category": "ServiceHealth",
+        "Enabled": false
+      },
+      {
+        "Category": "Alert",
+        "Enabled": true
+      },
+      {
+        "Category": "Recommendation",
+        "Enabled": false
+      },
+      {
+        "Category": "Policy",
+        "Enabled": true
+      },
+      {
+        "Category": "Autoscale",
+        "Enabled": false
+      },
+      {
+        "Category": "ResourceHealth",
+        "Enabled": false
+      }
+    ]
+  },
+  {
+    "Name": "kv-diagnostics",
+    "Id": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.KeyVault/vaults/kv-fh-lab/providers/microsoft.insights/diagnosticSettings/kv-diagnostics",
+    "StorageAccountId": null,
+    "WorkspaceId": "/subscriptions/00000000-0000-4000-8000-000000000001/resourceGroups/rg-fh-lab/providers/Microsoft.OperationalInsights/workspaces/law-fh-lab",
+    "EventHubAuthorizationRuleId": null,
+    "EventHubName": null,
+    "Log": [
+      {
+        "Category": "AuditEvent",
+        "Enabled": true
+      }
+    ],
+    "Metric": [
+      {
+        "Category": "AllMetrics",
+        "Enabled": true
+      }
+    ]
+  }
+]

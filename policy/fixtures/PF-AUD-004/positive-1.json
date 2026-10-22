@@ -1,0 +1,141 @@
+{
+  "positive-1": {
+    "description": "Security category disabled; no destination",
+    "input": {
+      "resources": [
+        {
+          "id": "azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-0000000000f1/providers/microsoft.insights/diagnosticSettings/fx-security-off",
+          "provider": "azure",
+          "type": "diagnostic_setting",
+          "native_type": "Microsoft.Insights/diagnosticSettings",
+          "name": "fx-security-off",
+          "region": "fixture-region",
+          "properties": {
+            "scope_kind": "subscription",
+            "target_resource_id": "/subscriptions/00000000-0000-4000-8000-0000000000f1",
+            "categories": [
+              {
+                "category": "Administrative",
+                "enabled": true,
+                "raw": "snapshots/fixtures/fixture.json#/98/Log/0"
+              },
+              {
+                "category": "Security",
+                "enabled": false,
+                "raw": "snapshots/fixtures/fixture.json#/98/Log/1"
+              },
+              {
+                "category": "Policy",
+                "enabled": true,
+                "raw": "snapshots/fixtures/fixture.json#/98/Log/2"
+              },
+              {
+                "category": "Alert",
+                "enabled": false,
+                "raw": "snapshots/fixtures/fixture.json#/98/Log/3"
+              }
+            ],
+            "destinations": {
+              "storage_account_id": null,
+              "workspace_id": "ws",
+              "event_hub_rule_id": null
+            },
+            "raw": {
+              "categories": "snapshots/fixtures/fixture.json#/98/Log",
+              "destinations": "snapshots/fixtures/fixture.json#/98/StorageAccountId"
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/99"
+          }
+        },
+        {
+          "id": "azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-0000000000f1/providers/microsoft.insights/diagnosticSettings/fx-no-destination",
+          "provider": "azure",
+          "type": "diagnostic_setting",
+          "native_type": "Microsoft.Insights/diagnosticSettings",
+          "name": "fx-no-destination",
+          "region": "fixture-region",
+          "properties": {
+            "scope_kind": "subscription",
+            "target_resource_id": "/subscriptions/00000000-0000-4000-8000-0000000000f1",
+            "categories": [
+              {
+                "category": "Administrative",
+                "enabled": true,
+                "raw": "snapshots/fixtures/fixture.json#/99/Log/0"
+              },
+              {
+                "category": "Security",
+                "enabled": true,
+                "raw": "snapshots/fixtures/fixture.json#/99/Log/1"
+              },
+              {
+                "category": "Policy",
+                "enabled": true,
+                "raw": "snapshots/fixtures/fixture.json#/99/Log/2"
+              },
+              {
+                "category": "Alert",
+                "enabled": false,
+                "raw": "snapshots/fixtures/fixture.json#/99/Log/3"
+              }
+            ],
+            "destinations": {
+              "storage_account_id": null,
+              "workspace_id": null,
+              "event_hub_rule_id": null
+            },
+            "raw": {
+              "categories": "snapshots/fixtures/fixture.json#/99/Log",
+              "destinations": "snapshots/fixtures/fixture.json#/99/StorageAccountId"
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/100"
+          }
+        }
+      ],
+      "edges": [],
+      "unresolved": [],
+      "context": {
+        "admin_cidrs": [
+          "203.0.113.0/26"
+        ],
+        "remote_admin_ports": [
+          22,
+          3389
+        ],
+        "sensitive_ports": [
+          22,
+          3389,
+          1433,
+          3306,
+          5432,
+          6379,
+          9200,
+          27017
+        ],
+        "break_glass_principals": [
+          "arn:aws:iam::111122223333:user/breakglass",
+          "breakglass@fixture.example",
+          "00000000-0000-4000-9000-0000000000bb"
+        ],
+        "audit_log_targets": [],
+        "required_activity_log_categories": [
+          "Administrative",
+          "Security",
+          "Policy"
+        ]
+      }
+    },
+    "expected": {
+      "azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-0000000000f1/providers/microsoft.insights/diagnosticSettings/fx-security-off": "fail",
+      "azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-0000000000f1/providers/microsoft.insights/diagnosticSettings/fx-no-destination": "fail"
+    }
+  }
+}

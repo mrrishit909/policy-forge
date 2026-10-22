@@ -1,0 +1,128 @@
+{
+  "positive-1": {
+    "description": "s3:* on * and Microsoft.Storage/* at subscription scope",
+    "input": {
+      "resources": [
+        {
+          "id": "aws:iam_policy:arn:aws:iam::111122223333:policy/fx-s3-all",
+          "provider": "aws",
+          "type": "iam_policy",
+          "native_type": "AWS::IAM::ManagedPolicy",
+          "name": "fx-s3-all",
+          "region": "fixture-region",
+          "properties": {
+            "managed_by": "customer",
+            "arn": "arn:aws:iam::111122223333:policy/fx-s3-all",
+            "attachment_count": 1,
+            "permissions": {
+              "parse_error": false,
+              "statements": [
+                {
+                  "sid": null,
+                  "effect": "Allow",
+                  "actions": [
+                    "s3:*"
+                  ],
+                  "not_actions": null,
+                  "resources": [
+                    "*"
+                  ],
+                  "not_resources": null,
+                  "principals": null,
+                  "not_principals": null,
+                  "has_condition": false,
+                  "raw": "snapshots/fixtures/fixture.json#/31/Statement/0",
+                  "policy": "fixture"
+                }
+              ]
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/32"
+          }
+        },
+        {
+          "id": "azure:role_definition:fx-storage-admin",
+          "provider": "azure",
+          "type": "role_definition",
+          "native_type": "Microsoft.Authorization/roleDefinitions",
+          "name": "FX Storage Admin",
+          "region": "fixture-region",
+          "properties": {
+            "role_name": "FX Storage Admin",
+            "is_custom": true,
+            "assignable_scopes": [
+              "/subscriptions/00000000-0000-4000-8000-0000000000f1"
+            ],
+            "data_actions": [],
+            "permissions": {
+              "parse_error": false,
+              "statements": [
+                {
+                  "sid": null,
+                  "effect": "Allow",
+                  "actions": [
+                    "Microsoft.Storage/*"
+                  ],
+                  "not_actions": null,
+                  "resources": [
+                    "/subscriptions/00000000-0000-4000-8000-0000000000f1"
+                  ],
+                  "not_resources": null,
+                  "principals": null,
+                  "not_principals": null,
+                  "has_condition": false,
+                  "raw": "snapshots/fixtures/fixture.json#/32/Statement/0",
+                  "policy": "fixture"
+                }
+              ]
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/33"
+          }
+        }
+      ],
+      "edges": [],
+      "unresolved": [],
+      "context": {
+        "admin_cidrs": [
+          "203.0.113.0/26"
+        ],
+        "remote_admin_ports": [
+          22,
+          3389
+        ],
+        "sensitive_ports": [
+          22,
+          3389,
+          1433,
+          3306,
+          5432,
+          6379,
+          9200,
+          27017
+        ],
+        "break_glass_principals": [
+          "arn:aws:iam::111122223333:user/breakglass",
+          "breakglass@fixture.example",
+          "00000000-0000-4000-9000-0000000000bb"
+        ],
+        "audit_log_targets": [],
+        "required_activity_log_categories": [
+          "Administrative",
+          "Security",
+          "Policy"
+        ]
+      }
+    },
+    "expected": {
+      "aws:iam_policy:arn:aws:iam::111122223333:policy/fx-s3-all": "fail",
+      "azure:role_definition:fx-storage-admin": "fail"
+    }
+  }
+}

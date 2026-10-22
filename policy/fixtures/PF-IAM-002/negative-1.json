@@ -1,0 +1,170 @@
+{
+  "negative-1": {
+    "description": "Partial wildcards and service wildcards on specific resources pass",
+    "input": {
+      "resources": [
+        {
+          "id": "aws:iam_policy:arn:aws:iam::111122223333:policy/fx-s3-get",
+          "provider": "aws",
+          "type": "iam_policy",
+          "native_type": "AWS::IAM::ManagedPolicy",
+          "name": "fx-s3-get",
+          "region": "fixture-region",
+          "properties": {
+            "managed_by": "customer",
+            "arn": "arn:aws:iam::111122223333:policy/fx-s3-get",
+            "attachment_count": 1,
+            "permissions": {
+              "parse_error": false,
+              "statements": [
+                {
+                  "sid": null,
+                  "effect": "Allow",
+                  "actions": [
+                    "s3:Get*"
+                  ],
+                  "not_actions": null,
+                  "resources": [
+                    "*"
+                  ],
+                  "not_resources": null,
+                  "principals": null,
+                  "not_principals": null,
+                  "has_condition": false,
+                  "raw": "snapshots/fixtures/fixture.json#/33/Statement/0",
+                  "policy": "fixture"
+                }
+              ]
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/34"
+          }
+        },
+        {
+          "id": "aws:iam_policy:arn:aws:iam::111122223333:policy/fx-s3-one-bucket",
+          "provider": "aws",
+          "type": "iam_policy",
+          "native_type": "AWS::IAM::ManagedPolicy",
+          "name": "fx-s3-one-bucket",
+          "region": "fixture-region",
+          "properties": {
+            "managed_by": "customer",
+            "arn": "arn:aws:iam::111122223333:policy/fx-s3-one-bucket",
+            "attachment_count": 1,
+            "permissions": {
+              "parse_error": false,
+              "statements": [
+                {
+                  "sid": null,
+                  "effect": "Allow",
+                  "actions": [
+                    "s3:*"
+                  ],
+                  "not_actions": null,
+                  "resources": [
+                    "arn:aws:s3:::fx",
+                    "arn:aws:s3:::fx/*"
+                  ],
+                  "not_resources": null,
+                  "principals": null,
+                  "not_principals": null,
+                  "has_condition": false,
+                  "raw": "snapshots/fixtures/fixture.json#/34/Statement/0",
+                  "policy": "fixture"
+                }
+              ]
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/35"
+          }
+        },
+        {
+          "id": "azure:role_definition:fx-net-reader",
+          "provider": "azure",
+          "type": "role_definition",
+          "native_type": "Microsoft.Authorization/roleDefinitions",
+          "name": "FX Net Reader",
+          "region": "fixture-region",
+          "properties": {
+            "role_name": "FX Net Reader",
+            "is_custom": true,
+            "assignable_scopes": [
+              "/subscriptions/00000000-0000-4000-8000-0000000000f1"
+            ],
+            "data_actions": [],
+            "permissions": {
+              "parse_error": false,
+              "statements": [
+                {
+                  "sid": null,
+                  "effect": "Allow",
+                  "actions": [
+                    "Microsoft.Network/*/read"
+                  ],
+                  "not_actions": null,
+                  "resources": [
+                    "/subscriptions/00000000-0000-4000-8000-0000000000f1"
+                  ],
+                  "not_resources": null,
+                  "principals": null,
+                  "not_principals": null,
+                  "has_condition": false,
+                  "raw": "snapshots/fixtures/fixture.json#/35/Statement/0",
+                  "policy": "fixture"
+                }
+              ]
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/36"
+          }
+        }
+      ],
+      "edges": [],
+      "unresolved": [],
+      "context": {
+        "admin_cidrs": [
+          "203.0.113.0/26"
+        ],
+        "remote_admin_ports": [
+          22,
+          3389
+        ],
+        "sensitive_ports": [
+          22,
+          3389,
+          1433,
+          3306,
+          5432,
+          6379,
+          9200,
+          27017
+        ],
+        "break_glass_principals": [
+          "arn:aws:iam::111122223333:user/breakglass",
+          "breakglass@fixture.example",
+          "00000000-0000-4000-9000-0000000000bb"
+        ],
+        "audit_log_targets": [],
+        "required_activity_log_categories": [
+          "Administrative",
+          "Security",
+          "Policy"
+        ]
+      }
+    },
+    "expected": {
+      "aws:iam_policy:arn:aws:iam::111122223333:policy/fx-s3-get": "pass",
+      "aws:iam_policy:arn:aws:iam::111122223333:policy/fx-s3-one-bucket": "pass",
+      "azure:role_definition:fx-net-reader": "pass"
+    }
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "boundary-1": {
+    "description": "Resource-level setting is unknown; an absent required category fails",
+    "input": {
+      "resources": [
+        {
+          "id": "azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-0000000000f1/providers/microsoft.insights/diagnosticSettings/fx-resource-level",
+          "provider": "azure",
+          "type": "diagnostic_setting",
+          "native_type": "Microsoft.Insights/diagnosticSettings",
+          "name": "fx-resource-level",
+          "region": "fixture-region",
+          "properties": {
+            "scope_kind": "resource",
+            "target_resource_id": "/subscriptions/00000000-0000-4000-8000-0000000000f1/rg/kv",
+            "categories": [
+              {
+                "category": "AuditEvent",
+                "enabled": true,
+                "raw": "snapshots/fixtures/fixture.json#/101/Log/0"
+              }
+            ],
+            "destinations": {
+              "storage_account_id": null,
+              "workspace_id": "ws",
+              "event_hub_rule_id": null
+            },
+            "raw": {
+              "categories": "snapshots/fixtures/fixture.json#/101/Log",
+              "destinations": "snapshots/fixtures/fixture.json#/101/StorageAccountId"
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/102"
+          }
+        },
+        {
+          "id": "azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-0000000000f1/providers/microsoft.insights/diagnosticSettings/fx-category-absent",
+          "provider": "azure",
+          "type": "diagnostic_setting",
+          "native_type": "Microsoft.Insights/diagnosticSettings",
+          "name": "fx-category-absent",
+          "region": "fixture-region",
+          "properties": {
+            "scope_kind": "subscription",
+            "target_resource_id": "/subscriptions/00000000-0000-4000-8000-0000000000f1",
+            "categories": [
+              {
+                "category": "Administrative",
+                "enabled": true,
+                "raw": "snapshots/fixtures/fixture.json#/102/Log/0"
+              },
+              {
+                "category": "Security",
+                "enabled": true,
+                "raw": "snapshots/fixtures/fixture.json#/102/Log/1"
+              }
+            ],
+            "destinations": {
+              "storage_account_id": "st",
+              "workspace_id": null,
+              "event_hub_rule_id": null
+            },
+            "raw": {
+              "categories": "snapshots/fixtures/fixture.json#/102/Log",
+              "destinations": "snapshots/fixtures/fixture.json#/102/StorageAccountId"
+            }
+          },
+          "refs": [
+            {
+              "kind": "delivers_logs_to",
+              "target": "azure:storage_bucket:st"
+            }
+          ],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/103"
+          }
+        }
+      ],
+      "edges": [],
+      "unresolved": [
+        {
+          "from": "azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-0000000000f1/providers/microsoft.insights/diagnosticSettings/fx-category-absent",
+          "kind": "delivers_logs_to",
+          "target": "azure:storage_bucket:st"
+        }
+      ],
+      "context": {
+        "admin_cidrs": [
+          "203.0.113.0/26"
+        ],
+        "remote_admin_ports": [
+          22,
+          3389
+        ],
+        "sensitive_ports": [
+          22,
+          3389,
+          1433,
+          3306,
+          5432,
+          6379,
+          9200,
+          27017
+        ],
+        "break_glass_principals": [
+          "arn:aws:iam::111122223333:user/breakglass",
+          "breakglass@fixture.example",
+          "00000000-0000-4000-9000-0000000000bb"
+        ],
+        "audit_log_targets": [],
+        "required_activity_log_categories": [
+          "Administrative",
+          "Security",
+          "Policy"
+        ]
+      }
+    },
+    "expected": {
+      "azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-0000000000f1/providers/microsoft.insights/diagnosticSettings/fx-resource-level": "unknown",
+      "azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-0000000000f1/providers/microsoft.insights/diagnosticSettings/fx-category-absent": "fail"
+    }
+  }
+}

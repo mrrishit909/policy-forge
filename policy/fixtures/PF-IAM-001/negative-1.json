@@ -1,0 +1,194 @@
+{
+  "negative-1": {
+    "description": "Scoped grant passes, a user with no inline policy passes; provider-managed policies and built-in roles are not applicable",
+    "input": {
+      "resources": [
+        {
+          "id": "aws:iam_policy:arn:aws:iam::111122223333:policy/fx-read",
+          "provider": "aws",
+          "type": "iam_policy",
+          "native_type": "AWS::IAM::ManagedPolicy",
+          "name": "fx-read",
+          "region": "fixture-region",
+          "properties": {
+            "managed_by": "customer",
+            "arn": "arn:aws:iam::111122223333:policy/fx-read",
+            "attachment_count": 1,
+            "permissions": {
+              "parse_error": false,
+              "statements": [
+                {
+                  "sid": null,
+                  "effect": "Allow",
+                  "actions": [
+                    "s3:GetObject"
+                  ],
+                  "not_actions": null,
+                  "resources": [
+                    "arn:aws:s3:::fx/*"
+                  ],
+                  "not_resources": null,
+                  "principals": null,
+                  "not_principals": null,
+                  "has_condition": false,
+                  "raw": "snapshots/fixtures/fixture.json#/19/Statement/0",
+                  "policy": "fixture"
+                }
+              ]
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/20"
+          }
+        },
+        {
+          "id": "aws:iam_policy:arn:aws:iam::aws:policy/AdministratorAccess",
+          "provider": "aws",
+          "type": "iam_policy",
+          "native_type": "AWS::IAM::ManagedPolicy",
+          "name": "AdministratorAccess",
+          "region": "fixture-region",
+          "properties": {
+            "managed_by": "aws",
+            "arn": "arn:aws:iam::aws:policy/AdministratorAccess",
+            "attachment_count": 1,
+            "permissions": {
+              "parse_error": false,
+              "statements": [
+                {
+                  "sid": null,
+                  "effect": "Allow",
+                  "actions": [
+                    "*"
+                  ],
+                  "not_actions": null,
+                  "resources": [
+                    "*"
+                  ],
+                  "not_resources": null,
+                  "principals": null,
+                  "not_principals": null,
+                  "has_condition": false,
+                  "raw": "snapshots/fixtures/fixture.json#/20/Statement/0",
+                  "policy": "fixture"
+                }
+              ]
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/21"
+          }
+        },
+        {
+          "id": "azure:role_definition:8e3af657-a8ff-443c-a75c-2fe8c4bcb635",
+          "provider": "azure",
+          "type": "role_definition",
+          "native_type": "Microsoft.Authorization/roleDefinitions",
+          "name": "Owner",
+          "region": "fixture-region",
+          "properties": {
+            "role_name": "Owner",
+            "is_custom": false,
+            "assignable_scopes": [
+              "/"
+            ],
+            "data_actions": [],
+            "permissions": {
+              "parse_error": false,
+              "statements": [
+                {
+                  "sid": null,
+                  "effect": "Allow",
+                  "actions": [
+                    "*"
+                  ],
+                  "not_actions": null,
+                  "resources": [
+                    "/"
+                  ],
+                  "not_resources": null,
+                  "principals": null,
+                  "not_principals": null,
+                  "has_condition": false,
+                  "raw": "snapshots/fixtures/fixture.json#/21/Statement/0",
+                  "policy": "fixture"
+                }
+              ]
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/22"
+          }
+        },
+        {
+          "id": "aws:iam_user:arn:aws:iam::111122223333:user/fx-plain-user",
+          "provider": "aws",
+          "type": "iam_user",
+          "native_type": "AWS::IAM::User",
+          "name": "fx-plain-user",
+          "region": "fixture-region",
+          "properties": {
+            "arn": "arn:aws:iam::111122223333:user/fx-plain-user",
+            "permissions": {
+              "parse_error": false,
+              "statements": []
+            },
+            "attached_policy_arns": [],
+            "group_names": [],
+            "raw": {
+              "group_names": "snapshots/fixtures/fixture.json#/22/GroupList",
+              "attached_policy_arns": "snapshots/fixtures/fixture.json#/22/AttachedManagedPolicies"
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/23"
+          }
+        }
+      ],
+      "edges": [],
+      "unresolved": [],
+      "context": {
+        "admin_cidrs": [
+          "203.0.113.0/26"
+        ],
+        "remote_admin_ports": [
+          22,
+          3389
+        ],
+        "sensitive_ports": [
+          22,
+          3389,
+          1433,
+          3306,
+          5432,
+          6379,
+          9200,
+          27017
+        ],
+        "break_glass_principals": [
+          "arn:aws:iam::111122223333:user/breakglass",
+          "breakglass@fixture.example",
+          "00000000-0000-4000-9000-0000000000bb"
+        ],
+        "audit_log_targets": [],
+        "required_activity_log_categories": [
+          "Administrative",
+          "Security",
+          "Policy"
+        ]
+      }
+    },
+    "expected": {
+      "aws:iam_policy:arn:aws:iam::111122223333:policy/fx-read": "pass",
+      "aws:iam_user:arn:aws:iam::111122223333:user/fx-plain-user": "pass"
+    }
+  }
+}

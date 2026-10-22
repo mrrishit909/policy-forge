@@ -1,0 +1,446 @@
+{
+  "boundary-1": {
+    "description": "Group membership, conditional assignment, missing role and NotActions are unknown; User Access Administrator and root scope fail; break-glass by object id passes",
+    "input": {
+      "resources": [
+        {
+          "id": "azure:role_definition:owner-id",
+          "provider": "azure",
+          "type": "role_definition",
+          "native_type": "Microsoft.Authorization/roleDefinitions",
+          "name": "Owner",
+          "region": "fixture-region",
+          "properties": {
+            "role_name": "Owner",
+            "is_custom": false,
+            "assignable_scopes": [
+              "/"
+            ],
+            "data_actions": [],
+            "permissions": {
+              "parse_error": false,
+              "statements": [
+                {
+                  "sid": null,
+                  "effect": "Allow",
+                  "actions": [
+                    "*"
+                  ],
+                  "not_actions": null,
+                  "resources": [
+                    "/"
+                  ],
+                  "not_resources": null,
+                  "principals": null,
+                  "not_principals": null,
+                  "has_condition": false,
+                  "raw": "snapshots/fixtures/fixture.json#/40/Statement/0",
+                  "policy": "fixture"
+                }
+              ]
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/41"
+          }
+        },
+        {
+          "id": "azure:role_definition:contrib-id",
+          "provider": "azure",
+          "type": "role_definition",
+          "native_type": "Microsoft.Authorization/roleDefinitions",
+          "name": "Contributor",
+          "region": "fixture-region",
+          "properties": {
+            "role_name": "Contributor",
+            "is_custom": false,
+            "assignable_scopes": [
+              "/"
+            ],
+            "data_actions": [],
+            "permissions": {
+              "parse_error": false,
+              "statements": [
+                {
+                  "sid": null,
+                  "effect": "Allow",
+                  "actions": [
+                    "*"
+                  ],
+                  "not_actions": [
+                    "Microsoft.Authorization/*/Write"
+                  ],
+                  "resources": [
+                    "/"
+                  ],
+                  "not_resources": null,
+                  "principals": null,
+                  "not_principals": null,
+                  "has_condition": false,
+                  "raw": "snapshots/fixtures/fixture.json#/49/Statement/0",
+                  "policy": "fixture"
+                }
+              ]
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/50"
+          }
+        },
+        {
+          "id": "azure:role_definition:uaa-id",
+          "provider": "azure",
+          "type": "role_definition",
+          "native_type": "Microsoft.Authorization/roleDefinitions",
+          "name": "User Access Administrator",
+          "region": "fixture-region",
+          "properties": {
+            "role_name": "User Access Administrator",
+            "is_custom": false,
+            "assignable_scopes": [
+              "/"
+            ],
+            "data_actions": [],
+            "permissions": {
+              "parse_error": false,
+              "statements": [
+                {
+                  "sid": null,
+                  "effect": "Allow",
+                  "actions": [
+                    "*/read",
+                    "Microsoft.Authorization/*"
+                  ],
+                  "not_actions": null,
+                  "resources": [
+                    "/"
+                  ],
+                  "not_resources": null,
+                  "principals": null,
+                  "not_principals": null,
+                  "has_condition": false,
+                  "raw": "snapshots/fixtures/fixture.json#/50/Statement/0",
+                  "policy": "fixture"
+                }
+              ]
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/51"
+          }
+        },
+        {
+          "id": "aws:iam_user:arn:aws:iam::111122223333:user/fx-grouped",
+          "provider": "aws",
+          "type": "iam_user",
+          "native_type": "AWS::IAM::User",
+          "name": "fx-grouped",
+          "region": "fixture-region",
+          "properties": {
+            "arn": "arn:aws:iam::111122223333:user/fx-grouped",
+            "permissions": {
+              "parse_error": false,
+              "statements": []
+            },
+            "attached_policy_arns": [],
+            "group_names": [
+              "ops"
+            ],
+            "raw": {
+              "group_names": "snapshots/fixtures/fixture.json#/51/GroupList",
+              "attached_policy_arns": "snapshots/fixtures/fixture.json#/51/AttachedManagedPolicies"
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/52"
+          }
+        },
+        {
+          "id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-0000000000f1/providers/Microsoft.Authorization/roleAssignments/fixture-4",
+          "provider": "azure",
+          "type": "role_assignment",
+          "native_type": "Microsoft.Authorization/roleAssignments",
+          "name": "fixture-4",
+          "region": "fixture-region",
+          "properties": {
+            "scope": "/subscriptions/00000000-0000-4000-8000-0000000000f1",
+            "scope_level": "subscription",
+            "principal_id": "p-4",
+            "principal_type": "User",
+            "principal_name": "p-4",
+            "role_definition_id": "owner-id",
+            "role_name": "Owner",
+            "has_condition": true,
+            "raw": {
+              "scope": "snapshots/fixtures/fixture.json#/52/Scope",
+              "role": "snapshots/fixtures/fixture.json#/52/RoleDefinitionId",
+              "principal": "snapshots/fixtures/fixture.json#/52/ObjectId",
+              "condition": "snapshots/fixtures/fixture.json#/52/Condition"
+            }
+          },
+          "refs": [
+            {
+              "kind": "assigned_role",
+              "target": "azure:role_definition:owner-id"
+            }
+          ],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/53"
+          }
+        },
+        {
+          "id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-0000000000f1/providers/Microsoft.Authorization/roleAssignments/fixture-5",
+          "provider": "azure",
+          "type": "role_assignment",
+          "native_type": "Microsoft.Authorization/roleAssignments",
+          "name": "fixture-5",
+          "region": "fixture-region",
+          "properties": {
+            "scope": "/subscriptions/00000000-0000-4000-8000-0000000000f1",
+            "scope_level": "subscription",
+            "principal_id": "p-5",
+            "principal_type": "User",
+            "principal_name": "p-5",
+            "role_definition_id": "missing-id",
+            "role_name": null,
+            "has_condition": false,
+            "raw": {
+              "scope": "snapshots/fixtures/fixture.json#/53/Scope",
+              "role": "snapshots/fixtures/fixture.json#/53/RoleDefinitionId",
+              "principal": "snapshots/fixtures/fixture.json#/53/ObjectId",
+              "condition": "snapshots/fixtures/fixture.json#/53/Condition"
+            }
+          },
+          "refs": [
+            {
+              "kind": "assigned_role",
+              "target": "azure:role_definition:missing-id"
+            }
+          ],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/54"
+          }
+        },
+        {
+          "id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-0000000000f1/providers/Microsoft.Authorization/roleAssignments/fixture-6",
+          "provider": "azure",
+          "type": "role_assignment",
+          "native_type": "Microsoft.Authorization/roleAssignments",
+          "name": "fixture-6",
+          "region": "fixture-region",
+          "properties": {
+            "scope": "/subscriptions/00000000-0000-4000-8000-0000000000f1",
+            "scope_level": "subscription",
+            "principal_id": "p-6",
+            "principal_type": "User",
+            "principal_name": "p-6",
+            "role_definition_id": "contrib-id",
+            "role_name": "Contributor",
+            "has_condition": false,
+            "raw": {
+              "scope": "snapshots/fixtures/fixture.json#/54/Scope",
+              "role": "snapshots/fixtures/fixture.json#/54/RoleDefinitionId",
+              "principal": "snapshots/fixtures/fixture.json#/54/ObjectId",
+              "condition": "snapshots/fixtures/fixture.json#/54/Condition"
+            }
+          },
+          "refs": [
+            {
+              "kind": "assigned_role",
+              "target": "azure:role_definition:contrib-id"
+            }
+          ],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/55"
+          }
+        },
+        {
+          "id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-0000000000f1/providers/Microsoft.Authorization/roleAssignments/fixture-7",
+          "provider": "azure",
+          "type": "role_assignment",
+          "native_type": "Microsoft.Authorization/roleAssignments",
+          "name": "fixture-7",
+          "region": "fixture-region",
+          "properties": {
+            "scope": "/subscriptions/00000000-0000-4000-8000-0000000000f1",
+            "scope_level": "subscription",
+            "principal_id": "p-7",
+            "principal_type": "User",
+            "principal_name": "p-7",
+            "role_definition_id": "uaa-id",
+            "role_name": "User Access Administrator",
+            "has_condition": false,
+            "raw": {
+              "scope": "snapshots/fixtures/fixture.json#/55/Scope",
+              "role": "snapshots/fixtures/fixture.json#/55/RoleDefinitionId",
+              "principal": "snapshots/fixtures/fixture.json#/55/ObjectId",
+              "condition": "snapshots/fixtures/fixture.json#/55/Condition"
+            }
+          },
+          "refs": [
+            {
+              "kind": "assigned_role",
+              "target": "azure:role_definition:uaa-id"
+            }
+          ],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/56"
+          }
+        },
+        {
+          "id": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-0000000000f1/providers/Microsoft.Authorization/roleAssignments/fixture-8",
+          "provider": "azure",
+          "type": "role_assignment",
+          "native_type": "Microsoft.Authorization/roleAssignments",
+          "name": "fixture-8",
+          "region": "fixture-region",
+          "properties": {
+            "scope": "/subscriptions/00000000-0000-4000-8000-0000000000f1",
+            "scope_level": "subscription",
+            "principal_id": "00000000-0000-4000-9000-0000000000bb",
+            "principal_type": "User",
+            "principal_name": "00000000-0000-4000-9000-0000000000bb",
+            "role_definition_id": "owner-id",
+            "role_name": "Owner",
+            "has_condition": false,
+            "raw": {
+              "scope": "snapshots/fixtures/fixture.json#/56/Scope",
+              "role": "snapshots/fixtures/fixture.json#/56/RoleDefinitionId",
+              "principal": "snapshots/fixtures/fixture.json#/56/ObjectId",
+              "condition": "snapshots/fixtures/fixture.json#/56/Condition"
+            }
+          },
+          "refs": [
+            {
+              "kind": "assigned_role",
+              "target": "azure:role_definition:owner-id"
+            }
+          ],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/57"
+          }
+        },
+        {
+          "id": "azure:role_assignment://providers/Microsoft.Authorization/roleAssignments/fixture-9",
+          "provider": "azure",
+          "type": "role_assignment",
+          "native_type": "Microsoft.Authorization/roleAssignments",
+          "name": "fixture-9",
+          "region": "fixture-region",
+          "properties": {
+            "scope": "/",
+            "scope_level": "root",
+            "principal_id": "p-9",
+            "principal_type": "User",
+            "principal_name": "p-9",
+            "role_definition_id": "owner-id",
+            "role_name": "Owner",
+            "has_condition": false,
+            "raw": {
+              "scope": "snapshots/fixtures/fixture.json#/57/Scope",
+              "role": "snapshots/fixtures/fixture.json#/57/RoleDefinitionId",
+              "principal": "snapshots/fixtures/fixture.json#/57/ObjectId",
+              "condition": "snapshots/fixtures/fixture.json#/57/Condition"
+            }
+          },
+          "refs": [
+            {
+              "kind": "assigned_role",
+              "target": "azure:role_definition:owner-id"
+            }
+          ],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/58"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "from": "azure:role_assignment://providers/Microsoft.Authorization/roleAssignments/fixture-9",
+          "to": "azure:role_definition:owner-id",
+          "kind": "assigned_role"
+        },
+        {
+          "from": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-0000000000f1/providers/Microsoft.Authorization/roleAssignments/fixture-4",
+          "to": "azure:role_definition:owner-id",
+          "kind": "assigned_role"
+        },
+        {
+          "from": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-0000000000f1/providers/Microsoft.Authorization/roleAssignments/fixture-6",
+          "to": "azure:role_definition:contrib-id",
+          "kind": "assigned_role"
+        },
+        {
+          "from": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-0000000000f1/providers/Microsoft.Authorization/roleAssignments/fixture-7",
+          "to": "azure:role_definition:uaa-id",
+          "kind": "assigned_role"
+        },
+        {
+          "from": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-0000000000f1/providers/Microsoft.Authorization/roleAssignments/fixture-8",
+          "to": "azure:role_definition:owner-id",
+          "kind": "assigned_role"
+        }
+      ],
+      "unresolved": [
+        {
+          "from": "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-0000000000f1/providers/Microsoft.Authorization/roleAssignments/fixture-5",
+          "kind": "assigned_role",
+          "target": "azure:role_definition:missing-id"
+        }
+      ],
+      "context": {
+        "admin_cidrs": [
+          "203.0.113.0/26"
+        ],
+        "remote_admin_ports": [
+          22,
+          3389
+        ],
+        "sensitive_ports": [
+          22,
+          3389,
+          1433,
+          3306,
+          5432,
+          6379,
+          9200,
+          27017
+        ],
+        "break_glass_principals": [
+          "arn:aws:iam::111122223333:user/breakglass",
+          "breakglass@fixture.example",
+          "00000000-0000-4000-9000-0000000000bb"
+        ],
+        "audit_log_targets": [],
+        "required_activity_log_categories": [
+          "Administrative",
+          "Security",
+          "Policy"
+        ]
+      }
+    },
+    "expected": {
+      "aws:iam_user:arn:aws:iam::111122223333:user/fx-grouped": "unknown",
+      "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-0000000000f1/providers/Microsoft.Authorization/roleAssignments/fixture-4": "unknown",
+      "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-0000000000f1/providers/Microsoft.Authorization/roleAssignments/fixture-5": "unknown",
+      "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-0000000000f1/providers/Microsoft.Authorization/roleAssignments/fixture-6": "unknown",
+      "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-0000000000f1/providers/Microsoft.Authorization/roleAssignments/fixture-7": "fail",
+      "azure:role_assignment:/subscriptions/00000000-0000-4000-8000-0000000000f1/providers/Microsoft.Authorization/roleAssignments/fixture-8": "pass",
+      "azure:role_assignment://providers/Microsoft.Authorization/roleAssignments/fixture-9": "fail"
+    }
+  }
+}

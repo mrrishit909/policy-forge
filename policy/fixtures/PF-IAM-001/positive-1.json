@@ -1,0 +1,169 @@
+{
+  "positive-1": {
+    "description": "Allow * on * in a customer policy and an inline role policy; Azure custom role Actions * at subscription scope",
+    "input": {
+      "resources": [
+        {
+          "id": "aws:iam_policy:arn:aws:iam::111122223333:policy/fx-admin",
+          "provider": "aws",
+          "type": "iam_policy",
+          "native_type": "AWS::IAM::ManagedPolicy",
+          "name": "fx-admin",
+          "region": "fixture-region",
+          "properties": {
+            "managed_by": "customer",
+            "arn": "arn:aws:iam::111122223333:policy/fx-admin",
+            "attachment_count": 1,
+            "permissions": {
+              "parse_error": false,
+              "statements": [
+                {
+                  "sid": null,
+                  "effect": "Allow",
+                  "actions": [
+                    "*"
+                  ],
+                  "not_actions": null,
+                  "resources": [
+                    "*"
+                  ],
+                  "not_resources": null,
+                  "principals": null,
+                  "not_principals": null,
+                  "has_condition": false,
+                  "raw": "snapshots/fixtures/fixture.json#/16/Statement/0",
+                  "policy": "fixture"
+                }
+              ]
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/17"
+          }
+        },
+        {
+          "id": "azure:role_definition:fx-operator",
+          "provider": "azure",
+          "type": "role_definition",
+          "native_type": "Microsoft.Authorization/roleDefinitions",
+          "name": "FX Operator",
+          "region": "fixture-region",
+          "properties": {
+            "role_name": "FX Operator",
+            "is_custom": true,
+            "assignable_scopes": [
+              "/subscriptions/00000000-0000-4000-8000-0000000000f1"
+            ],
+            "data_actions": [],
+            "permissions": {
+              "parse_error": false,
+              "statements": [
+                {
+                  "sid": null,
+                  "effect": "Allow",
+                  "actions": [
+                    "*"
+                  ],
+                  "not_actions": null,
+                  "resources": [
+                    "/subscriptions/00000000-0000-4000-8000-0000000000f1"
+                  ],
+                  "not_resources": null,
+                  "principals": null,
+                  "not_principals": null,
+                  "has_condition": false,
+                  "raw": "snapshots/fixtures/fixture.json#/17/Statement/0",
+                  "policy": "fixture"
+                }
+              ]
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/18"
+          }
+        },
+        {
+          "id": "aws:iam_role:arn:aws:iam::111122223333:role/fx-debug-role",
+          "provider": "aws",
+          "type": "iam_role",
+          "native_type": "AWS::IAM::Role",
+          "name": "fx-debug-role",
+          "region": "fixture-region",
+          "properties": {
+            "arn": "arn:aws:iam::111122223333:role/fx-debug-role",
+            "permissions": {
+              "parse_error": false,
+              "statements": [
+                {
+                  "sid": null,
+                  "effect": "Allow",
+                  "actions": [
+                    "*"
+                  ],
+                  "not_actions": null,
+                  "resources": [
+                    "*"
+                  ],
+                  "not_resources": null,
+                  "principals": null,
+                  "not_principals": null,
+                  "has_condition": false,
+                  "raw": "snapshots/fixtures/fixture.json#/18/Statement/0",
+                  "policy": "fixture"
+                }
+              ]
+            },
+            "attached_policy_arns": [],
+            "instance_profile_arns": []
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/19"
+          }
+        }
+      ],
+      "edges": [],
+      "unresolved": [],
+      "context": {
+        "admin_cidrs": [
+          "203.0.113.0/26"
+        ],
+        "remote_admin_ports": [
+          22,
+          3389
+        ],
+        "sensitive_ports": [
+          22,
+          3389,
+          1433,
+          3306,
+          5432,
+          6379,
+          9200,
+          27017
+        ],
+        "break_glass_principals": [
+          "arn:aws:iam::111122223333:user/breakglass",
+          "breakglass@fixture.example",
+          "00000000-0000-4000-9000-0000000000bb"
+        ],
+        "audit_log_targets": [],
+        "required_activity_log_categories": [
+          "Administrative",
+          "Security",
+          "Policy"
+        ]
+      }
+    },
+    "expected": {
+      "aws:iam_policy:arn:aws:iam::111122223333:policy/fx-admin": "fail",
+      "azure:role_definition:fx-operator": "fail",
+      "aws:iam_role:arn:aws:iam::111122223333:role/fx-debug-role": "fail"
+    }
+  }
+}

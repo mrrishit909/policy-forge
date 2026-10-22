@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Explore published policy reviews
+    url: https://mrrishit909.github.io/policy-forge/
+    about: Every finding, its cited source line, the exceptions and the verified patches are browsable without signing in.

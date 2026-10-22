@@ -1,0 +1,74 @@
+{
+  "project": "policy-forge",
+  "display_name": "Policy Forge",
+  "owner": "mrrishit909",
+  "repo": "policy-forge",
+  "pages_url": "https://mrrishit909.github.io/policy-forge/",
+  "schema_version": "1.0",
+  "package": "policyforge",
+  "state_branch": "state",
+  "engine_paths": [
+    "src",
+    "adapters",
+    "policy",
+    "snapshots",
+    "exceptions",
+    "uv.lock"
+  ],
+  "default_branch": "main",
+  "limits": {
+    "max_runs_per_month": 40,
+    "max_open_requests": 5,
+    "max_run_bytes": 2000000,
+    "max_retained_run_dirs": 30,
+    "max_index_entries": 500,
+    "max_snapshot_runs": 8,
+    "compute_timeout_minutes": 15,
+    "stale_running_minutes": 90,
+    "max_repair_rounds": 3,
+    "inference_budget_usd": 1.0,
+    "max_reconcile_actions": 5
+  },
+  "form": [
+    {
+      "label": "Configuration snapshot",
+      "param": "snapshot",
+      "type": "str"
+    },
+    {
+      "label": "Rule packs",
+      "param": "rule_packs",
+      "type": "checkbox_list",
+      "choices": {
+        "Storage: public access": "storage",
+        "IAM: overly broad permissions": "iam",
+        "Network: unrestricted ingress": "network",
+        "Audit: missing supported audit settings": "audit",
+        "Relationships: risky resource combinations": "relationships"
+      }
+    },
+    {
+      "label": "Remediation",
+      "param": "remediation",
+      "type": "str"
+    },
+    {
+      "label": "Evaluate exceptions as of",
+      "param": "as_of",
+      "type": "str"
+    }
+  ],
+  "constants": {},
+  "scheduled_request": {
+    "snapshot": "aws-drifted-2026-10",
+    "rule_packs": [
+      "storage",
+      "iam",
+      "network",
+      "audit",
+      "relationships"
+    ],
+    "remediation": "propose",
+    "as_of": "{today}"
+  }
+}

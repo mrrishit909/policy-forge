@@ -1,0 +1,80 @@
+{
+  "boundary-2": {
+    "description": "The context narrows the required categories to Administrative",
+    "input": {
+      "resources": [
+        {
+          "id": "azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-0000000000f1/providers/microsoft.insights/diagnosticSettings/fx-custom-required",
+          "provider": "azure",
+          "type": "diagnostic_setting",
+          "native_type": "Microsoft.Insights/diagnosticSettings",
+          "name": "fx-custom-required",
+          "region": "fixture-region",
+          "properties": {
+            "scope_kind": "subscription",
+            "target_resource_id": "/subscriptions/00000000-0000-4000-8000-0000000000f1",
+            "categories": [
+              {
+                "category": "Administrative",
+                "enabled": true,
+                "raw": "snapshots/fixtures/fixture.json#/103/Log/0"
+              },
+              {
+                "category": "Security",
+                "enabled": false,
+                "raw": "snapshots/fixtures/fixture.json#/103/Log/1"
+              }
+            ],
+            "destinations": {
+              "storage_account_id": null,
+              "workspace_id": "ws",
+              "event_hub_rule_id": null
+            },
+            "raw": {
+              "categories": "snapshots/fixtures/fixture.json#/103/Log",
+              "destinations": "snapshots/fixtures/fixture.json#/103/StorageAccountId"
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/104"
+          }
+        }
+      ],
+      "edges": [],
+      "unresolved": [],
+      "context": {
+        "admin_cidrs": [
+          "203.0.113.0/26"
+        ],
+        "remote_admin_ports": [
+          22,
+          3389
+        ],
+        "sensitive_ports": [
+          22,
+          3389,
+          1433,
+          3306,
+          5432,
+          6379,
+          9200,
+          27017
+        ],
+        "break_glass_principals": [
+          "arn:aws:iam::111122223333:user/breakglass",
+          "breakglass@fixture.example",
+          "00000000-0000-4000-9000-0000000000bb"
+        ],
+        "audit_log_targets": [],
+        "required_activity_log_categories": [
+          "Administrative"
+        ]
+      }
+    },
+    "expected": {
+      "azure:diagnostic_setting:/subscriptions/00000000-0000-4000-8000-0000000000f1/providers/microsoft.insights/diagnosticSettings/fx-custom-required": "pass"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "azure-lab-2026-10",
+  "provider": "azure",
+  "captured_at": "2026-10-19T14:00:00Z",
+  "description": "Synthetic Azure lab subscription for Fernhollow Labs (fictional): Azure PowerShell-shaped exports with deliberate positives, negatives, boundary cases and unsupported resource types.",
+  "synthetic": true,
+  "files": [
+    "Get-AzStorageAccount.json",
+    "Get-AzNetworkSecurityGroup.json",
+    "Get-AzNetworkInterface.json",
+    "Get-AzVM.json",
+    "Get-AzRoleDefinition.json",
+    "Get-AzRoleAssignment.json",
+    "Get-AzDiagnosticSetting.json",
+    "Get-AzKeyVault.json",
+    "Get-AzWebApp.json"
+  ]
+}
