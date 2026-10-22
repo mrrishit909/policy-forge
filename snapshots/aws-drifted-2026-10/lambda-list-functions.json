@@ -31,17 +31,18 @@
     },
     {
       "FunctionName": "fh-ops-hook",
+      "Environment": {
+        "Variables": {
+          "APP_CONFIG": "{\"pool\": 5, \"db_password\": \"pf-canary-00000000000000a8-not-a-secret\"}",
+          "DB_PASSWORD": "pf-canary-00000000000000a6-not-a-secret"
+        }
+      },
       "FunctionArn": "arn:aws:lambda:us-east-2:111122223333:function:fh-ops-hook",
       "Runtime": "python3.12",
       "Role": "arn:aws:iam::111122223333:role/ops-automation-role",
       "Handler": "hook.main",
       "MemorySize": 128,
-      "Timeout": 10,
-      "Environment": {
-        "Variables": {
-          "DB_PASSWORD": "pf-canary-00000000000000a6-not-a-secret"
-        }
-      }
+      "Timeout": 10
     }
   ]
 }

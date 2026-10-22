@@ -1,0 +1,298 @@
+{
+  "boundary-3": {
+    "description": "A deny limited to one destination or one source port does not shadow the allow; a deny for every destination and source port does; missing ports or source are unknown",
+    "input": {
+      "resources": [
+        {
+          "id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Network/networkSecurityGroups/nsg-fx-deny-one-host",
+          "provider": "azure",
+          "type": "network_security_group",
+          "native_type": "Microsoft.Network/networkSecurityGroups",
+          "name": "nsg-fx-deny-one-host",
+          "region": "fixture-region",
+          "properties": {
+            "ingress": [
+              {
+                "protocol": "tcp",
+                "port_from": 22,
+                "port_to": 22,
+                "cidrs": [],
+                "source_tags": [
+                  "*"
+                ],
+                "source_groups": [],
+                "prefix_lists": [],
+                "destination_prefixes": [
+                  "10.0.0.5/32"
+                ],
+                "source_port_ranges": [
+                  "*"
+                ],
+                "action": "deny",
+                "priority": 100,
+                "raw": "snapshots/fixtures/fixture.json#/149/IpPermissions/0"
+              },
+              {
+                "protocol": "tcp",
+                "port_from": 22,
+                "port_to": 22,
+                "cidrs": [],
+                "source_tags": [
+                  "Internet"
+                ],
+                "source_groups": [],
+                "prefix_lists": [],
+                "destination_prefixes": [
+                  "*"
+                ],
+                "source_port_ranges": [
+                  "*"
+                ],
+                "action": "allow",
+                "priority": 200,
+                "raw": "snapshots/fixtures/fixture.json#/149/IpPermissions/0"
+              }
+            ],
+            "tags": {}
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/150"
+          }
+        },
+        {
+          "id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Network/networkSecurityGroups/nsg-fx-deny-one-src-port",
+          "provider": "azure",
+          "type": "network_security_group",
+          "native_type": "Microsoft.Network/networkSecurityGroups",
+          "name": "nsg-fx-deny-one-src-port",
+          "region": "fixture-region",
+          "properties": {
+            "ingress": [
+              {
+                "protocol": "tcp",
+                "port_from": 22,
+                "port_to": 22,
+                "cidrs": [],
+                "source_tags": [
+                  "*"
+                ],
+                "source_groups": [],
+                "prefix_lists": [],
+                "destination_prefixes": [
+                  "*"
+                ],
+                "source_port_ranges": [
+                  "1024-65535"
+                ],
+                "action": "deny",
+                "priority": 100,
+                "raw": "snapshots/fixtures/fixture.json#/150/IpPermissions/0"
+              },
+              {
+                "protocol": "tcp",
+                "port_from": 22,
+                "port_to": 22,
+                "cidrs": [],
+                "source_tags": [
+                  "Internet"
+                ],
+                "source_groups": [],
+                "prefix_lists": [],
+                "destination_prefixes": [
+                  "*"
+                ],
+                "source_port_ranges": [
+                  "*"
+                ],
+                "action": "allow",
+                "priority": 200,
+                "raw": "snapshots/fixtures/fixture.json#/150/IpPermissions/0"
+              }
+            ],
+            "tags": {}
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/151"
+          }
+        },
+        {
+          "id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Network/networkSecurityGroups/nsg-fx-deny-everything-first",
+          "provider": "azure",
+          "type": "network_security_group",
+          "native_type": "Microsoft.Network/networkSecurityGroups",
+          "name": "nsg-fx-deny-everything-first",
+          "region": "fixture-region",
+          "properties": {
+            "ingress": [
+              {
+                "protocol": "tcp",
+                "port_from": 22,
+                "port_to": 22,
+                "cidrs": [],
+                "source_tags": [
+                  "*"
+                ],
+                "source_groups": [],
+                "prefix_lists": [],
+                "destination_prefixes": [
+                  "*"
+                ],
+                "source_port_ranges": [
+                  "0-65535"
+                ],
+                "action": "deny",
+                "priority": 100,
+                "raw": "snapshots/fixtures/fixture.json#/151/IpPermissions/0"
+              },
+              {
+                "protocol": "tcp",
+                "port_from": 22,
+                "port_to": 22,
+                "cidrs": [],
+                "source_tags": [
+                  "Internet"
+                ],
+                "source_groups": [],
+                "prefix_lists": [],
+                "destination_prefixes": [
+                  "*"
+                ],
+                "source_port_ranges": [
+                  "*"
+                ],
+                "action": "allow",
+                "priority": 200,
+                "raw": "snapshots/fixtures/fixture.json#/151/IpPermissions/0"
+              }
+            ],
+            "tags": {}
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/152"
+          }
+        },
+        {
+          "id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Network/networkSecurityGroups/nsg-fx-no-ports",
+          "provider": "azure",
+          "type": "network_security_group",
+          "native_type": "Microsoft.Network/networkSecurityGroups",
+          "name": "nsg-fx-no-ports",
+          "region": "fixture-region",
+          "properties": {
+            "ingress": [
+              {
+                "protocol": "tcp",
+                "port_from": null,
+                "port_to": null,
+                "cidrs": [],
+                "source_tags": [
+                  "Internet"
+                ],
+                "source_groups": [],
+                "prefix_lists": [],
+                "destination_prefixes": [
+                  "*"
+                ],
+                "source_port_ranges": [
+                  "*"
+                ],
+                "action": "allow",
+                "priority": 200,
+                "raw": "snapshots/fixtures/fixture.json#/152/IpPermissions/0"
+              }
+            ],
+            "tags": {}
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/153"
+          }
+        },
+        {
+          "id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Network/networkSecurityGroups/nsg-fx-no-source",
+          "provider": "azure",
+          "type": "network_security_group",
+          "native_type": "Microsoft.Network/networkSecurityGroups",
+          "name": "nsg-fx-no-source",
+          "region": "fixture-region",
+          "properties": {
+            "ingress": [
+              {
+                "protocol": "tcp",
+                "port_from": 22,
+                "port_to": 22,
+                "cidrs": [],
+                "source_tags": [
+                  "<missing>"
+                ],
+                "source_groups": [],
+                "prefix_lists": [],
+                "destination_prefixes": [
+                  "*"
+                ],
+                "source_port_ranges": [
+                  "*"
+                ],
+                "action": "allow",
+                "priority": 200,
+                "raw": "snapshots/fixtures/fixture.json#/153/IpPermissions/0"
+              }
+            ],
+            "tags": {}
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/154"
+          }
+        }
+      ],
+      "edges": [],
+      "unresolved": [],
+      "context": {
+        "admin_cidrs": [
+          "203.0.113.0/26"
+        ],
+        "remote_admin_ports": [
+          22,
+          3389
+        ],
+        "sensitive_ports": [
+          22,
+          3389,
+          1433,
+          3306,
+          5432,
+          6379,
+          9200,
+          27017
+        ],
+        "break_glass_principals": [
+          "arn:aws:iam::111122223333:user/breakglass",
+          "breakglass@fixture.example",
+          "00000000-0000-4000-9000-0000000000bb"
+        ],
+        "audit_log_targets": [],
+        "required_activity_log_categories": [
+          "Administrative",
+          "Security",
+          "Policy"
+        ]
+      }
+    },
+    "expected": {
+      "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Network/networkSecurityGroups/nsg-fx-deny-one-host": "fail",
+      "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Network/networkSecurityGroups/nsg-fx-deny-one-src-port": "fail",
+      "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Network/networkSecurityGroups/nsg-fx-deny-everything-first": "pass",
+      "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Network/networkSecurityGroups/nsg-fx-no-ports": "unknown",
+      "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Network/networkSecurityGroups/nsg-fx-no-source": "unknown"
+    }
+  }
+}

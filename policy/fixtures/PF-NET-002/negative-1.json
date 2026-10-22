@@ -22,6 +22,12 @@
                 "source_tags": [],
                 "source_groups": [],
                 "prefix_lists": [],
+                "destination_prefixes": [
+                  "*"
+                ],
+                "source_port_ranges": [
+                  "*"
+                ],
                 "action": "allow",
                 "priority": null,
                 "raw": "snapshots/fixtures/fixture.json#/80/IpPermissions/0"
@@ -55,6 +61,12 @@
                 "source_tags": [],
                 "source_groups": [],
                 "prefix_lists": [],
+                "destination_prefixes": [
+                  "*"
+                ],
+                "source_port_ranges": [
+                  "*"
+                ],
                 "action": "allow",
                 "priority": null,
                 "raw": "snapshots/fixtures/fixture.json#/81/IpPermissions/0"
@@ -88,6 +100,12 @@
                   "aws:security_group:sg-fx-app"
                 ],
                 "prefix_lists": [],
+                "destination_prefixes": [
+                  "*"
+                ],
+                "source_port_ranges": [
+                  "*"
+                ],
                 "action": "allow",
                 "priority": null,
                 "raw": "snapshots/fixtures/fixture.json#/82/IpPermissions/0"

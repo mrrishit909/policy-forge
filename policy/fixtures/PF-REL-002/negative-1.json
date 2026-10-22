@@ -23,14 +23,14 @@
               }
             },
             "raw": {
-              "guard": "snapshots/fixtures/fixture.json#/132/GetPublicAccessBlock",
-              "policy": "snapshots/fixtures/fixture.json#/132/GetBucketPolicy"
+              "guard": "snapshots/fixtures/fixture.json#/171/GetPublicAccessBlock",
+              "policy": "snapshots/fixtures/fixture.json#/171/GetBucketPolicy"
             }
           },
           "refs": [],
           "source": {
             "file": "snapshots/fixtures/fixture.json",
-            "pointer": "/133"
+            "pointer": "/172"
           }
         },
         {
@@ -48,10 +48,10 @@
             "organization_trail": false,
             "destination": "fixture-audit",
             "raw": {
-              "is_logging": "snapshots/fixtures/fixture.json#/133/IsLogging",
-              "multi_region": "snapshots/fixtures/fixture.json#/133/IsMultiRegionTrail",
-              "log_file_validation": "snapshots/fixtures/fixture.json#/133/LogFileValidationEnabled",
-              "destination": "snapshots/fixtures/fixture.json#/133/S3BucketName"
+              "is_logging": "snapshots/fixtures/fixture.json#/172/IsLogging",
+              "multi_region": "snapshots/fixtures/fixture.json#/172/IsMultiRegionTrail",
+              "log_file_validation": "snapshots/fixtures/fixture.json#/172/LogFileValidationEnabled",
+              "destination": "snapshots/fixtures/fixture.json#/172/S3BucketName"
             }
           },
           "refs": [
@@ -62,7 +62,7 @@
           ],
           "source": {
             "file": "snapshots/fixtures/fixture.json",
-            "pointer": "/134"
+            "pointer": "/173"
           }
         },
         {
@@ -79,7 +79,7 @@
                   "via": "acl",
                   "grantee": "AllUsers",
                   "permission": "READ",
-                  "raw": "snapshots/fixtures/fixture.json#/134/GetBucketAcl/Grants/1"
+                  "raw": "snapshots/fixtures/fixture.json#/173/GetBucketAcl/Grants/1"
                 }
               ],
               "anonymous_grants_blocked": false,
@@ -92,14 +92,14 @@
               }
             },
             "raw": {
-              "guard": "snapshots/fixtures/fixture.json#/134/GetPublicAccessBlock",
-              "policy": "snapshots/fixtures/fixture.json#/134/GetBucketPolicy"
+              "guard": "snapshots/fixtures/fixture.json#/173/GetPublicAccessBlock",
+              "policy": "snapshots/fixtures/fixture.json#/173/GetBucketPolicy"
             }
           },
           "refs": [],
           "source": {
             "file": "snapshots/fixtures/fixture.json",
-            "pointer": "/135"
+            "pointer": "/174"
           }
         }
       ],

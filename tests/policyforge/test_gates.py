@@ -15,8 +15,18 @@ from policyforge import pipeline
 from tests.policyforge.conftest import ROOT, full_request, load
 
 KINDS = ("positive", "negative", "boundary")
-SENSITIVE_KEY = re.compile(r"(?i)secret|passw(or)?d|connection_?string|user_?data|account_?key|token|credential|"
-                           r"private_?key")
+VOCAB = json.loads((ROOT / "policy" / "sensitive-names.json").read_text())["sensitive_names"]
+
+
+def sensitive_key(name) -> bool:
+    """Independent re-implementation of the documented word rule (policy/sensitive-names.json)."""
+    if not isinstance(name, str):
+        return False
+    s = re.sub(r"([A-Za-z])([0-9])", r"\1_\2", re.sub(r"([A-Z]+)([A-Z][a-z])", r"\1_\2",
+                                                     re.sub(r"([a-z0-9])([A-Z])", r"\1_\2", name)))
+    words = [w for w in re.split(r"[^a-z0-9]+", s.encode().lower().decode()) if w and not w.isdigit()]
+    return bool(words) and (words[-1] in VOCAB["words"] or "_".join(words[-2:]) in VOCAB["pairs"])
+
 CANARY = re.compile(r"pf-canary-[0-9a-f]+-not-a-secret")
 
 
@@ -251,30 +261,38 @@ def test_gate5_no_cloud_mutation_commands(runs, patched, stub_log):
 
 
 def sensitive_raw_values(snapshot_dir: Path) -> set[str]:
-    """Every planted canary plus the full value of every sensitive-named raw field (each must hold a canary)."""
+    """Every planted canary, the value of every sensitive-named raw field, every Value of a Key/Name pair whose
+    name is sensitive, and every sensitive member inside a JSON-encoded string. Each must hold a canary."""
     found: set[str] = set()
 
-    def walk(node, key=""):
+    def walk(node, hot, where):
         if isinstance(node, dict):
+            name_key = next((k for k in node if k.lower() in VOCAB["name_members"]), None)
+            pair = name_key is not None and sensitive_key(node[name_key])
             for k, v in node.items():
-                walk(v, k)
+                walk(v, sensitive_key(k) or (pair and k.lower() in VOCAB["value_members"]), f"{where}/{k}")
         elif isinstance(node, list):
             for v in node:
-                walk(v, key)
+                walk(v, hot, where)
         elif isinstance(node, str):
-            if SENSITIVE_KEY.search(key):
-                assert CANARY.search(node), f"{snapshot_dir.name}: sensitive-named field {key} holds no canary"
+            if hot:
+                assert CANARY.search(node), f"{snapshot_dir.name}: sensitive field {where} holds no canary"
                 found.add(node)
             found.update(CANARY.findall(node))
+            if node.strip()[:1] in "{[":
+                try:
+                    walk(json.loads(node), False, where + "(json)")
+                except ValueError:
+                    pass
 
     for f in sorted(snapshot_dir.glob("*.json")):
-        walk(json.loads(f.read_text()))
+        walk(json.loads(f.read_text()), False, f.name)
     return found
 
 
 @pytest.mark.gate
 def test_gate6_sensitive_configuration_not_published(runs):
-    redacted_lines = 0
+    redacted_lines, excerpt_text = 0, []
     for snap, run_dir in runs.items():
         values = sensitive_raw_values(ROOT / "snapshots" / snap)
         canaries = {v for v in values if CANARY.fullmatch(v)}
@@ -293,10 +311,15 @@ def test_gate6_sensitive_configuration_not_published(runs):
         excerpts = [u["source"]["excerpt"] for u in cov["unsupported"]]
         excerpts += [r["source"]["excerpt"] for r in cov["results"] if r["status"] == "unknown"]
         redacted_lines += sum('"[redacted]"' in line for ex in excerpts for line in ex["lines"])
+        excerpt_text += [line.strip() for ex in excerpts for line in ex["lines"]]
         for item in load(run_dir, "findings.json")["findings"] + [r for r in cov["results"] if r["status"] == "unknown"]:
             ex = item["source"]["excerpt"]
             assert ex["lines"] and set(ex["cited_lines"]) <= set(range(ex["first_line"], ex["first_line"] + len(ex["lines"])))
     assert redacted_lines > 0, "the excerpt redaction path must be exercised by the committed snapshots"
+    # The committed drifted snapshot plants a Key/Value tag whose Key is sensitive and a secret inside a JSON-encoded
+    # environment variable, both inside cited excerpt windows: each must be published only as "[redacted]".
+    assert '"Value": "[redacted]"' in excerpt_text
+    assert '"APP_CONFIG": "[redacted]",' in excerpt_text
 
 
 BANNED = re.compile(r"(?i)compliant|compliance achieved")
@@ -314,6 +337,7 @@ def test_gate7_partial_coverage_never_presented_as_complete(runs, stub_log, tmp_
         t = cov["totals"]
         assert s["complete_coverage"] is False, name
         assert s["complete_coverage"] == (t["unknown"] == 0 and t["resources_unsupported"] == 0
+                                          and t["resources_not_evaluated"] == 0
                                           and not s["resource_types"]["not_covered"])
         assert "partial" in s["coverage_statement"]
         assert "unknown" in s["coverage_statement"]

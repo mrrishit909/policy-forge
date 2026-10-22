@@ -1,7 +1,11 @@
 # Conftest input hygiene (package main, deny/warn). Run against two inputs:
 #   (a) the normalized inventory, wrapped as {"resources": [...]}
-#   (b) exceptions/registry.json, {"exceptions": [...]}, with the rule catalog loaded as data (--data policy/catalog.json)
-# Each message starts with the resource or exception id it concerns and never quotes a checked value.
+#   (b) exceptions/registry.json, {"exceptions": [...]}
+# with the rule catalog and the sensitive-name vocabulary loaded as data (--data policy/catalog.json
+# --data policy/sensitive-names.json). Inventory messages start with the resource id. Registry denials are
+# structured {msg, index, reason}: the engine maps a rejection back to its registry entry by index, never by
+# parsing the message, so an id containing ": " (or a missing id) cannot escape rejection. No message quotes a
+# checked value.
 package main
 
 import rego.v1
@@ -46,7 +50,33 @@ deny contains msg if {
 	msg := sprintf("%s: property name looks sensitive (path %s)", [r.id, concat("/", [sprintf("%v", [p]) | some p in path])])
 }
 
-sensitive_key(k) if regex.match(`(?i)passw(or)?d|secret|token|credential|connection_?string|private_?key|account_?key|user_?data|sas_?token`, k)
+# The word rule documented in policy/sensitive-names.json (the engine and the adapters implement the same rule).
+key_words(k) := [w |
+	some w in regex.split(`[^a-z0-9]+`, ascii_lower(regex.replace(
+		regex.replace(regex.replace(k, `([a-z0-9])([A-Z])`, "${1}_${2}"), `([A-Z]+)([A-Z][a-z])`, "${1}_${2}"),
+		`([A-Za-z])([0-9])`, "${1}_${2}",
+	)))
+	w != ""
+	not regex.match(`^[0-9]+$`, w)
+]
+
+ascii_lower(s) := concat("", [c | some ch in split(s, ""); c := lower_ascii_char(ch)])
+
+lower_ascii_char(ch) := lower(ch) if regex.match(`^[A-Z]$`, ch)
+
+lower_ascii_char(ch) := ch if not regex.match(`^[A-Z]$`, ch)
+
+sensitive_key(k) if {
+	w := key_words(k)
+	count(w) > 0
+	w[count(w) - 1] in data.sensitive_names.words
+}
+
+sensitive_key(k) if {
+	w := key_words(k)
+	count(w) > 1
+	concat("_", [w[count(w) - 2], w[count(w) - 1]]) in data.sensitive_names.pairs
+}
 
 credential_like(v) if regex.match(`pf-canary-[0-9a-f]+-not-a-secret`, v)
 
@@ -73,38 +103,50 @@ exception_fields := ["id", "rule_id", "resource_id", "reason", "owner", "ticket"
 
 known_rule_ids := {r.id | some r in data.rules}
 
-exc_id(e) := object.get(e, "id", "unidentified")
+exc_id(e) := sprintf("%v", [object.get(e, "id", "unidentified")]) if is_object(e)
+
+else := "unidentified"
+
+reject(i, e, reason) := {"msg": sprintf("%s: %s", [exc_id(e), reason]), "index": i, "reason": reason}
 
 blank(v) if not is_string(v)
 
 blank(v) if trim_space(v) == ""
 
 deny contains msg if {
-	some e in input.exceptions
+	"exceptions" in object.keys(input)
+	not is_array(input.exceptions)
+	msg := "registry: exceptions must be a list"
+}
+
+deny contains reject(i, e, "entry is not an object") if {
+	some i, e in input.exceptions
+	not is_object(e)
+}
+
+deny contains reject(i, e, sprintf("missing %s", [f])) if {
+	some i, e in input.exceptions
+	is_object(e)
 	some f in exception_fields
 	blank(object.get(e, f, null))
-	msg := sprintf("%s: missing %s", [exc_id(e), f])
 }
 
-deny contains msg if {
-	some e in input.exceptions
+deny contains reject(i, e, "resource_id must be one exact resource id, not a wildcard or pattern") if {
+	some i, e in input.exceptions
 	is_string(e.resource_id)
 	regex.match(`[*?\[\]{}|^$]`, e.resource_id)
-	msg := sprintf("%s: resource_id must be one exact resource id, not a wildcard or pattern", [exc_id(e)])
 }
 
-deny contains msg if {
-	some e in input.exceptions
+deny contains reject(i, e, "resource_id is not a normalized resource id") if {
+	some i, e in input.exceptions
 	is_string(e.resource_id)
 	not regex.match(`^(aws|azure):[a-z_]+:.+$`, e.resource_id)
-	msg := sprintf("%s: resource_id is not a normalized resource id", [exc_id(e)])
 }
 
-deny contains msg if {
-	some e in input.exceptions
+deny contains reject(i, e, "unknown rule id") if {
+	some i, e in input.exceptions
 	is_string(e.rule_id)
 	not e.rule_id in known_rule_ids
-	msg := sprintf("%s: unknown rule id", [exc_id(e)])
 }
 
 valid_date(s) if {
@@ -113,34 +155,32 @@ valid_date(s) if {
 	time.parse_ns("2006-01-02", s)
 }
 
-deny contains msg if {
-	some e in input.exceptions
+deny contains reject(i, e, sprintf("%s is not a YYYY-MM-DD date", [f])) if {
+	some i, e in input.exceptions
+	is_object(e)
 	some f in ["created", "expires"]
 	not blank(object.get(e, f, null))
 	not valid_date(e[f])
-	msg := sprintf("%s: %s is not a YYYY-MM-DD date", [exc_id(e), f])
 }
 
 days_between(a, b) := (time.parse_ns("2006-01-02", b) - time.parse_ns("2006-01-02", a)) / 86400000000000
 
-deny contains msg if {
-	some e in input.exceptions
+deny contains reject(i, e, "expires before it was created") if {
+	some i, e in input.exceptions
 	valid_date(e.created)
 	valid_date(e.expires)
 	days_between(e.created, e.expires) < 0
-	msg := sprintf("%s: expires before it was created", [exc_id(e)])
 }
 
-deny contains msg if {
-	some e in input.exceptions
+deny contains reject(i, e, "expiry is more than 90 days after created") if {
+	some i, e in input.exceptions
 	valid_date(e.created)
 	valid_date(e.expires)
 	days_between(e.created, e.expires) > 90
-	msg := sprintf("%s: expiry is more than 90 days after created", [exc_id(e)])
 }
 
-deny contains msg if {
-	some e in input.exceptions
-	count([x | some x in input.exceptions; x.id == e.id]) > 1
-	msg := sprintf("%s: duplicate exception id", [exc_id(e)])
+deny contains reject(i, e, "duplicate exception id") if {
+	some i, e in input.exceptions
+	is_object(e)
+	count([x | some x in input.exceptions; is_object(x); x.id == e.id]) > 1
 }

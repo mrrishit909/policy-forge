@@ -17,7 +17,7 @@
                   "via": "acl",
                   "grantee": "AllUsers",
                   "permission": "READ",
-                  "raw": "snapshots/fixtures/fixture.json#/128/GetBucketAcl/Grants/1"
+                  "raw": "snapshots/fixtures/fixture.json#/167/GetBucketAcl/Grants/1"
                 }
               ],
               "anonymous_grants_blocked": false,
@@ -30,14 +30,14 @@
               }
             },
             "raw": {
-              "guard": "snapshots/fixtures/fixture.json#/128/GetPublicAccessBlock",
-              "policy": "snapshots/fixtures/fixture.json#/128/GetBucketPolicy"
+              "guard": "snapshots/fixtures/fixture.json#/167/GetPublicAccessBlock",
+              "policy": "snapshots/fixtures/fixture.json#/167/GetBucketPolicy"
             }
           },
           "refs": [],
           "source": {
             "file": "snapshots/fixtures/fixture.json",
-            "pointer": "/129"
+            "pointer": "/168"
           }
         },
         {
@@ -55,10 +55,10 @@
             "organization_trail": false,
             "destination": "fixture-audit",
             "raw": {
-              "is_logging": "snapshots/fixtures/fixture.json#/129/IsLogging",
-              "multi_region": "snapshots/fixtures/fixture.json#/129/IsMultiRegionTrail",
-              "log_file_validation": "snapshots/fixtures/fixture.json#/129/LogFileValidationEnabled",
-              "destination": "snapshots/fixtures/fixture.json#/129/S3BucketName"
+              "is_logging": "snapshots/fixtures/fixture.json#/168/IsLogging",
+              "multi_region": "snapshots/fixtures/fixture.json#/168/IsMultiRegionTrail",
+              "log_file_validation": "snapshots/fixtures/fixture.json#/168/LogFileValidationEnabled",
+              "destination": "snapshots/fixtures/fixture.json#/168/S3BucketName"
             }
           },
           "refs": [
@@ -69,7 +69,7 @@
           ],
           "source": {
             "file": "snapshots/fixtures/fixture.json",
-            "pointer": "/130"
+            "pointer": "/169"
           }
         },
         {
@@ -86,7 +86,7 @@
                   "via": "container",
                   "grantee": "insights",
                   "permission": "Blob",
-                  "raw": "snapshots/fixtures/fixture.json#/130/Containers/0"
+                  "raw": "snapshots/fixtures/fixture.json#/169/Containers/0"
                 }
               ],
               "anonymous_grants_blocked": false,
@@ -97,13 +97,13 @@
               }
             },
             "raw": {
-              "guard": "snapshots/fixtures/fixture.json#/130/AllowBlobPublicAccess"
+              "guard": "snapshots/fixtures/fixture.json#/169/AllowBlobPublicAccess"
             }
           },
           "refs": [],
           "source": {
             "file": "snapshots/fixtures/fixture.json",
-            "pointer": "/131"
+            "pointer": "/170"
           }
         },
         {
@@ -120,17 +120,17 @@
               {
                 "category": "Administrative",
                 "enabled": true,
-                "raw": "snapshots/fixtures/fixture.json#/131/Log/0"
+                "raw": "snapshots/fixtures/fixture.json#/170/Log/0"
               },
               {
                 "category": "Security",
                 "enabled": true,
-                "raw": "snapshots/fixtures/fixture.json#/131/Log/1"
+                "raw": "snapshots/fixtures/fixture.json#/170/Log/1"
               },
               {
                 "category": "Policy",
                 "enabled": true,
-                "raw": "snapshots/fixtures/fixture.json#/131/Log/2"
+                "raw": "snapshots/fixtures/fixture.json#/170/Log/2"
               }
             ],
             "destinations": {
@@ -139,8 +139,8 @@
               "event_hub_rule_id": null
             },
             "raw": {
-              "categories": "snapshots/fixtures/fixture.json#/131/Log",
-              "destinations": "snapshots/fixtures/fixture.json#/131/StorageAccountId"
+              "categories": "snapshots/fixtures/fixture.json#/170/Log",
+              "destinations": "snapshots/fixtures/fixture.json#/170/StorageAccountId"
             }
           },
           "refs": [
@@ -151,7 +151,7 @@
           ],
           "source": {
             "file": "snapshots/fixtures/fixture.json",
-            "pointer": "/132"
+            "pointer": "/171"
           }
         }
       ],

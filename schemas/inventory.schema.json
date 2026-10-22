@@ -46,7 +46,8 @@
     {"if": {"properties": {"type": {"const": "role_assignment"}}},
      "then": {"properties": {"properties": {"required": ["scope", "scope_level", "principal_id", "role_definition_id",
                                                           "has_condition", "raw"],
-       "properties": {"scope_level": {"enum": ["root", "management_group", "subscription", "resource_group", "resource"]},
+       "properties": {"scope_level": {"enum": ["root", "management_group", "subscription", "resource_group", "resource",
+                                               "unknown"]},
                       "has_condition": {"type": "boolean"}}}}}},
     {"if": {"properties": {"type": {"const": "diagnostic_setting"}}},
      "then": {"properties": {"properties": {"required": ["scope_kind", "categories", "destinations", "raw"],
@@ -94,8 +95,8 @@
     },
     "ingress": {
       "type": "object", "additionalProperties": false,
-      "required": ["protocol", "port_from", "port_to", "cidrs", "source_tags", "source_groups", "prefix_lists", "action",
-                   "priority", "raw"],
+      "required": ["protocol", "port_from", "port_to", "cidrs", "source_tags", "source_groups", "prefix_lists",
+                   "destination_prefixes", "source_port_ranges", "action", "priority", "raw"],
       "properties": {
         "protocol": {"type": "string"},
         "port_from": {"type": ["integer", "null"], "minimum": 0, "maximum": 65535},
@@ -104,6 +105,8 @@
         "source_tags": {"type": "array", "items": {"type": "string"}},
         "source_groups": {"type": "array", "items": {"type": "string"}},
         "prefix_lists": {"type": "array", "items": {"type": "string"}},
+        "destination_prefixes": {"type": "array", "items": {"type": "string"}},
+        "source_port_ranges": {"type": "array", "items": {"type": "string"}},
         "action": {"enum": ["allow", "deny"]},
         "priority": {"type": ["integer", "null"]},
         "raw": {"$ref": "#/$defs/raw"}

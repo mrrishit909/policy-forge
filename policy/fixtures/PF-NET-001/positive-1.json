@@ -22,6 +22,12 @@
                 "source_tags": [],
                 "source_groups": [],
                 "prefix_lists": [],
+                "destination_prefixes": [
+                  "*"
+                ],
+                "source_port_ranges": [
+                  "*"
+                ],
                 "action": "allow",
                 "priority": null,
                 "raw": "snapshots/fixtures/fixture.json#/58/IpPermissions/0"
@@ -55,6 +61,12 @@
                 ],
                 "source_groups": [],
                 "prefix_lists": [],
+                "destination_prefixes": [
+                  "*"
+                ],
+                "source_port_ranges": [
+                  "*"
+                ],
                 "action": "allow",
                 "priority": 100,
                 "raw": "snapshots/fixtures/fixture.json#/59/IpPermissions/0"

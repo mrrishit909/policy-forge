@@ -43,6 +43,19 @@ unevaluable_stmt(s) if {
 	lib.all_resources(s)
 }
 
+unevaluable_stmt(s) if {
+	lib.allows(s)
+	count(lib.service_wildcards(s)) > 0
+	lib.maybe_all_resources(s)
+}
+
+unevaluable_stmt(s) if {
+	lib.odd_effect(s)
+	count(lib.service_wildcards(s)) > 0
+}
+
+unevaluable_stmt(s) if lib.unreadable_actions(s)
+
 verdict(perms) := lib.verdict(
 	"fail",
 	sprintf("%d Allow statement(s) grant a whole service on every resource.", [count(broad(perms))]),
@@ -58,7 +71,7 @@ verdict(perms) := lib.verdict(
 	lib.negated(perms.statements)
 } else := lib.verdict(
 	"unknown",
-	"A statement uses NotAction, NotResource or a Condition alongside service-level actions; not evaluated.",
+	"A statement uses NotAction, NotResource, a Condition, a wildcard resource pattern or an unreadable Effect or action alongside service-level actions; not evaluated.",
 	unevaluable(perms),
 ) if {
 	count(unevaluable(perms)) > 0

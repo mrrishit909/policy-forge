@@ -2,12 +2,14 @@
 # Inputs: manifest.json, context.json, then the manifest's data files in manifest order (see normalize.sh).
 # Properties are an explicit allowlist: raw fields that are not listed here (secrets, user data, environment
 # variables, access keys) are never copied. Tags whose key looks sensitive are dropped as well.
-# Portable to jq 1.6+.
+# Portable to jq 1.6+. Run with -L <this directory> and --slurpfile vocab policy/sensitive-names.json.
+include "names";
 
-def sensitive_name: test("passw(or)?d|secret|token|credential|connection_?string|private_?key|account_?key|user_?data|sas_?token"; "i");
+def sensitive_name: sensitive_name($vocab[0].sensitive_names);
 def ptr($path): if ($path | length) == 0 then "" else "/" + ($path | map(tostring | gsub("~"; "~0") | gsub("/"; "~1")) | join("/")) end;
 def arr: if . == null then [] elif type == "array" then . else [.] end;
-def tagmap: (. // []) | map(select((.Key | sensitive_name) | not) | {(.Key): .Value}) | add // {};
+def tagmap: (. // []) | map(select((.Key | type) == "string" and ((.Key | sensitive_name) | not)) | {(.Key): .Value})
+  | add // {};
 
 def principals:
   if . == null then null
@@ -72,6 +74,7 @@ def ingress($file; $path):
      source_tags: [],
      source_groups: [(.UserIdGroupPairs // [])[] | "aws:security_group:\(.GroupId)"],
      prefix_lists: [(.PrefixListIds // [])[] | .PrefixListId],
+     destination_prefixes: ["*"], source_port_ranges: ["*"],
      action: "allow", priority: null, raw: "\($file)#\(ptr($path))"};
 
 (reduce inputs as $doc ({}; .[input_filename | split("/") | last] = $doc)) as $in

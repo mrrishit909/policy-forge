@@ -1,20 +1,23 @@
 """Local-file remediation: RFC 6902 patches against the raw snapshot files, applied to a temporary copy and
 re-verified by re-running the whole evaluation. A patch is accepted only if its target finding resolves to pass,
-every other rule result keeps its status, every other finding keeps its reason and evidence, and no resource
-outside the patched raw paths changes in the normalized inventory. Committed snapshots are never modified."""
+every other result of every rule that applies to the provider (not only the requested packs) keeps its status, every
+other finding keeps its reason and evidence, and no resource outside the patched raw paths changes in the normalized
+inventory. A diff is published only if it applies exactly as text (lines split on "\n" only, as git does) and none
+of its context or changed lines holds a sensitive raw value. Committed snapshots are never modified."""
 
 from __future__ import annotations
 
 import copy
 import difflib
 import json
+import re
 import shutil
 import tempfile
 from pathlib import Path
 from typing import Any
 
 from policyforge import redact
-from policyforge.jsonpos import resolve, split_pointer
+from policyforge.jsonpos import resolve, split_lines, split_pointer
 
 PATCH_NOTE = "Restricted to admin_cidrs (Policy Forge proposal)"
 
@@ -65,9 +68,72 @@ def apply_patch(doc: Any, ops: list[dict[str, Any]]) -> Any:
     return doc
 
 
+def _keep_lines(text: str) -> list[str]:
+    """Lines with their "\n" terminators, split on "\n" only (never on U+2028 and friends, as splitlines does)."""
+    parts = text.split("\n")
+    return [p + "\n" for p in parts[:-1]] + ([parts[-1]] if parts[-1] else [])
+
+
 def unified_diff(path: str, before: str, after: str) -> str:
-    body = "".join(difflib.unified_diff(before.splitlines(True), after.splitlines(True), f"a/{path}", f"b/{path}"))
+    body = "".join(difflib.unified_diff(_keep_lines(before), _keep_lines(after), f"a/{path}", f"b/{path}"))
     return f"diff --git a/{path} b/{path}\n{body}" if body else ""
+
+
+def diff_guard(path: str, before: str, after: str) -> list[str]:
+    """Positions (never values) of sensitive raw lines that a diff of before -> after would publish as context or
+    changed lines. Uses the same line selection as unified_diff (difflib grouped opcodes, 3 lines of context)."""
+    sens_a, sens_b = redact.sensitive_lines(before), redact.sensitive_lines(after)
+    hits = set()
+    matcher = difflib.SequenceMatcher(None, _keep_lines(before), _keep_lines(after))
+    for group in matcher.get_grouped_opcodes(3):
+        for _, i1, i2, j1, j2 in group:
+            hits |= {f"{path} line {n + 1}" for n in range(i1, i2) if n + 1 in sens_a}
+            hits |= {f"{path} new line {n + 1}" for n in range(j1, j2) if n + 1 in sens_b}
+    return sorted(hits)
+
+
+_HUNK = re.compile(r"@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))? @@")
+
+
+def apply_unified(files: dict[str, str], patch: str) -> dict[str, str]:
+    """Strictly apply a unified diff made by unified_diff (exact context, no fuzz, no offset) to texts keyed by
+    repo-relative path. Raises ValueError when the patch does not apply as text."""
+    out = dict(files)
+    lines = patch.split("\n")
+    if lines and lines[-1] == "":
+        lines.pop()
+    i = 0
+    while i < len(lines):
+        if not lines[i].startswith("diff --git ") or i + 2 >= len(lines):
+            raise ValueError(f"unexpected patch line {i + 1}")
+        if not (lines[i + 1].startswith("--- a/") and lines[i + 2].startswith("+++ b/")):
+            raise ValueError(f"missing file header at patch line {i + 2}")
+        path = lines[i + 1][6:]
+        if lines[i + 2][6:] != path or path not in out:
+            raise ValueError(f"patch names an unknown file: {path}")
+        src, result, pos = split_lines(out[path]), [], 0
+        i += 3
+        while i < len(lines) and lines[i].startswith("@@"):
+            m = _HUNK.fullmatch(lines[i])
+            if not m:
+                raise ValueError(f"bad hunk header at patch line {i + 1}")
+            start = int(m.group(1)) - (1 if int(m.group(2) or 1) > 0 else 0)
+            if start < pos:
+                raise ValueError(f"overlapping hunk at patch line {i + 1}")
+            result += src[pos:start]
+            pos = start
+            i += 1
+            while i < len(lines) and lines[i][:1] in (" ", "-", "+"):
+                tag, body = lines[i][0], lines[i][1:]
+                if tag != "+":
+                    if pos >= len(src) or src[pos] != body:
+                        raise ValueError(f"{path}: context does not match at line {pos + 1}")
+                    pos += 1
+                if tag != "-":
+                    result.append(body)
+                i += 1
+        out[path] = "\n".join(result + src[pos:]) + "\n"
+    return out
 
 
 # ------------------------------------------------------------------ strategies
@@ -217,7 +283,9 @@ def _touched(resource: dict[str, Any], patched: dict[str, list[str]]) -> bool:
 
 
 def compare(before, after, targets: set[tuple[str, str]], rule_ids: set[str],
-            patched: dict[str, list[str]]) -> dict[str, Any]:
+            patched: dict[str, list[str]], requested: set[str] | None = None) -> dict[str, Any]:
+    """Regression comparison over every rule in rule_ids (all rules for the provider, so a narrow request cannot
+    accept a patch that changes a rule it did not ask for); requested only labels such rules in the reasons."""
     b = {_key(r): r for r in before.results if r["rule_id"] in rule_ids}
     a = {_key(r): r for r in after.results if r["rule_id"] in rule_ids}
     target_status = [{"rule_id": k[0], "resource_id": k[1], "before": b.get(k, {}).get("status"),
@@ -244,8 +312,11 @@ def compare(before, after, targets: set[tuple[str, str]], rule_ids: set[str],
         reasons.append("target finding is not resolved to pass: " + ", ".join(
             f"{t['rule_id']} {t['before']} -> {t['after']}" for t in target_status))
     if changed_results:
+        tag = {c["rule_id"]: "" if requested is None or c["rule_id"] in requested else ", outside the requested packs"
+               for c in changed_results}
         reasons.append("other rule results change: " + ", ".join(
-            f"{c['rule_id']} on {c['resource_id']} ({c['before']} -> {c['after']})" for c in changed_results))
+            f"{c['rule_id']} on {c['resource_id']} ({c['before']} -> {c['after']}{tag[c['rule_id']]})"
+            for c in changed_results))
     if changed_findings:
         reasons.append("other findings change their evidence: " + ", ".join(
             f"{c['rule_id']} on {c['resource_id']}" for c in changed_findings))
@@ -267,11 +338,27 @@ def _patched_copy(snapshot_dir: Path, name: str, root: Path, texts: dict[str, st
     return dest
 
 
-def propose(params, snapshot_dir, manifest, context, tools, ev, results, findings, rules) -> dict[str, Any]:
+def _publish_problems(before: dict[str, str], after: dict[str, str], diff: str, sensitive: set[str]) -> list[str]:
+    """Why a diff may not be published: sensitive raw lines in its context or changes, a credential-like value,
+    or a diff that does not reproduce the patched files when applied as text."""
+    problems = [h for f in sorted(after) for h in diff_guard(f, before[f], after[f])]
+    problems += redact.leaks(diff, sensitive)
+    try:
+        applied = apply_unified({f: before[f] for f in after}, diff)
+        if any(applied[f] != after[f] for f in after):
+            problems.append("the diff does not reproduce the patched file when applied as text")
+    except (ValueError, KeyError, IndexError) as exc:
+        problems.append(f"the diff does not apply as text ({exc})")
+    return problems
+
+
+def propose(params, snapshot_dir, manifest, context, tools, ev, results, findings, rules,
+            provider_rule_ids: set[str] | None = None) -> dict[str, Any]:
     from policyforge.pipeline import evaluate
 
     name = manifest["name"]
-    rule_ids = {r["rule_id"] for r in results} | set(rules)
+    requested = {r["rule_id"] for r in results} | set(rules)
+    rule_ids = set(provider_rule_ids or ()) | requested
     by_res = {r["id"]: r for r in ev.inventory}
     by_key = {_key(r): r for r in results}
     originals = {f"snapshots/{name}/{f}": (snapshot_dir / f).read_text() for f in manifest["files"]}
@@ -310,16 +397,16 @@ def propose(params, snapshot_dir, manifest, context, tools, ev, results, finding
             diff = "".join(unified_diff(file, originals[file], texts[file]) for file in sorted(texts))
             entry = {"id": pid, **{k: p[k] for k in ("finding_id", "rule_id", "resource_id", "strategy")},
                      "files": sorted(texts), "json_patch": [{"file": f, "ops": p["ops"][f]} for f in sorted(p["ops"])]}
-            leaked = redact.leaks(diff, sensitive)
-            if leaked:
+            blocked = _publish_problems(originals, texts, diff, sensitive)
+            if blocked:
                 out.append({**entry, "status": "withheld", "diff": None, "json_patch": None, "regression": None,
-                            "reason": "the diff context would publish sensitive raw content ("
-                                      + "; ".join(leaked) + "); apply the change by hand"})
+                            "reason": "the diff would publish sensitive raw content or could not be verified as text ("
+                                      + "; ".join(blocked) + "); apply the change by hand"})
                 continue
             copy_dir = _patched_copy(snapshot_dir, name, Path(tmp) / pid, texts)
             after = evaluate(copy_dir, manifest, context, tools)
             patched = {f: [op["path"] for op in ops] for f, ops in p["ops"].items()}
-            reg = compare(ev, after, {(p["rule_id"], p["resource_id"])}, rule_ids, patched)
+            reg = compare(ev, after, {(p["rule_id"], p["resource_id"])}, rule_ids, patched, requested)
             if reg["ok"]:
                 out.append({**entry, "status": "accepted", "diff": diff, "regression": reg,
                             "reason": "target finding resolves to pass; no other rule result, finding or resource "
@@ -343,9 +430,10 @@ def propose(params, snapshot_dir, manifest, context, tools, ev, results, finding
             for e in accepted:
                 for block in e["json_patch"]:
                     patched.setdefault(block["file"], []).extend(op["path"] for op in block["ops"])
-            reg = compare(ev, after, {(e["rule_id"], e["resource_id"]) for e in accepted}, rule_ids, patched)
+            reg = compare(ev, after, {(e["rule_id"], e["resource_id"]) for e in accepted}, rule_ids, patched,
+                          requested)
             combined_diff = "".join(unified_diff(f, originals[f], accepted_texts[f]) for f in sorted(accepted_texts))
-            leaked = redact.leaks(combined_diff, sensitive)
+            leaked = _publish_problems(originals, accepted_texts, combined_diff, sensitive)
             combined = {"patch_file": "remediation.patch", "patch_ids": [e["id"] for e in accepted],
                         "files": sorted(accepted_texts), "regression": reg,
                         "ok": reg["ok"] and not leaked, "withheld_reason": "; ".join(leaked) or None,

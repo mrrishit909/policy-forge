@@ -143,6 +143,16 @@
           },
           "SubnetId": "subnet-0fe0000000000f001",
           "VpcId": "vpc-0fe0000000000c001",
+          "Tags": [
+            {
+              "Key": "Name",
+              "Value": "ops-1"
+            },
+            {
+              "Key": "db_password",
+              "Value": "pf-canary-00000000000000a7-not-a-secret"
+            }
+          ],
           "IamInstanceProfile": {
             "Arn": "arn:aws:iam::111122223333:instance-profile/ops-automation-profile",
             "Id": "PFIPEXAMPLEa004"
@@ -151,12 +161,6 @@
             {
               "GroupName": "legacy-ops",
               "GroupId": "sg-0fe00000000000005"
-            }
-          ],
-          "Tags": [
-            {
-              "Key": "Name",
-              "Value": "ops-1"
             }
           ]
         }

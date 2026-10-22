@@ -1,0 +1,472 @@
+{
+  "boundary-2": {
+    "description": "An Owner assignment with an unreadable scope on an exposed VM is unknown, a Reader one is not admin; IAM:* (any case) on an exposed instance role is admin",
+    "input": {
+      "resources": [
+        {
+          "id": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Network/networkSecurityGroups/nsg-fx-web2",
+          "provider": "azure",
+          "type": "network_security_group",
+          "native_type": "Microsoft.Network/networkSecurityGroups",
+          "name": "nsg-fx-web2",
+          "region": "fixture-region",
+          "properties": {
+            "ingress": [
+              {
+                "protocol": "tcp",
+                "port_from": 443,
+                "port_to": 443,
+                "cidrs": [],
+                "source_tags": [
+                  "Internet"
+                ],
+                "source_groups": [],
+                "prefix_lists": [],
+                "destination_prefixes": [
+                  "*"
+                ],
+                "source_port_ranges": [
+                  "*"
+                ],
+                "action": "allow",
+                "priority": 100,
+                "raw": "snapshots/fixtures/fixture.json#/157/IpPermissions/0"
+              }
+            ],
+            "tags": {}
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/158"
+          }
+        },
+        {
+          "id": "azure:role_definition:owner-id",
+          "provider": "azure",
+          "type": "role_definition",
+          "native_type": "Microsoft.Authorization/roleDefinitions",
+          "name": "Owner",
+          "region": "fixture-region",
+          "properties": {
+            "role_name": "Owner",
+            "is_custom": false,
+            "assignable_scopes": [
+              "/"
+            ],
+            "data_actions": [],
+            "permissions": {
+              "parse_error": false,
+              "statements": [
+                {
+                  "sid": null,
+                  "effect": "Allow",
+                  "actions": [
+                    "*"
+                  ],
+                  "not_actions": null,
+                  "resources": [
+                    "/"
+                  ],
+                  "not_resources": null,
+                  "principals": null,
+                  "not_principals": null,
+                  "has_condition": false,
+                  "raw": "snapshots/fixtures/fixture.json#/158/Statement/0",
+                  "policy": "fixture"
+                }
+              ]
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/159"
+          }
+        },
+        {
+          "id": "azure:role_definition:reader-id",
+          "provider": "azure",
+          "type": "role_definition",
+          "native_type": "Microsoft.Authorization/roleDefinitions",
+          "name": "Reader",
+          "region": "fixture-region",
+          "properties": {
+            "role_name": "Reader",
+            "is_custom": false,
+            "assignable_scopes": [
+              "/"
+            ],
+            "data_actions": [],
+            "permissions": {
+              "parse_error": false,
+              "statements": [
+                {
+                  "sid": null,
+                  "effect": "Allow",
+                  "actions": [
+                    "*/read"
+                  ],
+                  "not_actions": null,
+                  "resources": [
+                    "/"
+                  ],
+                  "not_resources": null,
+                  "principals": null,
+                  "not_principals": null,
+                  "has_condition": false,
+                  "raw": "snapshots/fixtures/fixture.json#/159/Statement/0",
+                  "policy": "fixture"
+                }
+              ]
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/160"
+          }
+        },
+        {
+          "id": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Compute/virtualMachines/vm-fx-scope-unknown",
+          "provider": "azure",
+          "type": "compute_instance",
+          "native_type": "Microsoft.Compute/virtualMachines",
+          "name": "vm-fx-scope-unknown",
+          "region": "fixture-region",
+          "properties": {
+            "public_ips": [
+              "203.0.113.50"
+            ],
+            "network_groups": [
+              "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Network/networkSecurityGroups/nsg-fx-web2"
+            ],
+            "raw": {
+              "public_ips": "snapshots/fixtures/fixture.json#/160/PublicIpAddress",
+              "network_groups": "snapshots/fixtures/fixture.json#/160/SecurityGroups",
+              "instance_profile": "snapshots/fixtures/fixture.json#/160/IamInstanceProfile"
+            },
+            "identity_type": "SystemAssigned",
+            "identity_principal_id": "principal-vm-fx-scope-unknown",
+            "tags": {}
+          },
+          "refs": [
+            {
+              "kind": "uses_network_group",
+              "target": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Network/networkSecurityGroups/nsg-fx-web2"
+            }
+          ],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/161"
+          }
+        },
+        {
+          "id": "azure:role_assignment:None/providers/Microsoft.Authorization/roleAssignments/fixture-30",
+          "provider": "azure",
+          "type": "role_assignment",
+          "native_type": "Microsoft.Authorization/roleAssignments",
+          "name": "fixture-30",
+          "region": "fixture-region",
+          "properties": {
+            "scope": null,
+            "scope_level": "unknown",
+            "principal_id": "principal-vm-fx-scope-unknown",
+            "principal_type": "User",
+            "principal_name": "principal-vm-fx-scope-unknown",
+            "role_definition_id": "owner-id",
+            "role_name": "Owner",
+            "has_condition": false,
+            "raw": {
+              "scope": "snapshots/fixtures/fixture.json#/161/Scope",
+              "role": "snapshots/fixtures/fixture.json#/161/RoleDefinitionId",
+              "principal": "snapshots/fixtures/fixture.json#/161/ObjectId",
+              "condition": "snapshots/fixtures/fixture.json#/161/Condition"
+            }
+          },
+          "refs": [
+            {
+              "kind": "assigned_role",
+              "target": "azure:role_definition:owner-id"
+            },
+            {
+              "kind": "assigned_to",
+              "target": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Compute/virtualMachines/vm-fx-scope-unknown"
+            }
+          ],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/162"
+          }
+        },
+        {
+          "id": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Compute/virtualMachines/vm-fx-reader-scope-unknown",
+          "provider": "azure",
+          "type": "compute_instance",
+          "native_type": "Microsoft.Compute/virtualMachines",
+          "name": "vm-fx-reader-scope-unknown",
+          "region": "fixture-region",
+          "properties": {
+            "public_ips": [
+              "203.0.113.51"
+            ],
+            "network_groups": [
+              "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Network/networkSecurityGroups/nsg-fx-web2"
+            ],
+            "raw": {
+              "public_ips": "snapshots/fixtures/fixture.json#/162/PublicIpAddress",
+              "network_groups": "snapshots/fixtures/fixture.json#/162/SecurityGroups",
+              "instance_profile": "snapshots/fixtures/fixture.json#/162/IamInstanceProfile"
+            },
+            "identity_type": "SystemAssigned",
+            "identity_principal_id": "principal-vm-fx-reader-scope-unknown",
+            "tags": {}
+          },
+          "refs": [
+            {
+              "kind": "uses_network_group",
+              "target": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Network/networkSecurityGroups/nsg-fx-web2"
+            }
+          ],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/163"
+          }
+        },
+        {
+          "id": "azure:role_assignment:None/providers/Microsoft.Authorization/roleAssignments/fixture-31",
+          "provider": "azure",
+          "type": "role_assignment",
+          "native_type": "Microsoft.Authorization/roleAssignments",
+          "name": "fixture-31",
+          "region": "fixture-region",
+          "properties": {
+            "scope": null,
+            "scope_level": "unknown",
+            "principal_id": "principal-vm-fx-reader-scope-unknown",
+            "principal_type": "User",
+            "principal_name": "principal-vm-fx-reader-scope-unknown",
+            "role_definition_id": "reader-id",
+            "role_name": "Reader",
+            "has_condition": false,
+            "raw": {
+              "scope": "snapshots/fixtures/fixture.json#/163/Scope",
+              "role": "snapshots/fixtures/fixture.json#/163/RoleDefinitionId",
+              "principal": "snapshots/fixtures/fixture.json#/163/ObjectId",
+              "condition": "snapshots/fixtures/fixture.json#/163/Condition"
+            }
+          },
+          "refs": [
+            {
+              "kind": "assigned_role",
+              "target": "azure:role_definition:reader-id"
+            },
+            {
+              "kind": "assigned_to",
+              "target": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Compute/virtualMachines/vm-fx-reader-scope-unknown"
+            }
+          ],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/164"
+          }
+        },
+        {
+          "id": "aws:iam_role:arn:aws:iam::111122223333:role/fx-upper-admin-role",
+          "provider": "aws",
+          "type": "iam_role",
+          "native_type": "AWS::IAM::Role",
+          "name": "fx-upper-admin-role",
+          "region": "fixture-region",
+          "properties": {
+            "arn": "arn:aws:iam::111122223333:role/fx-upper-admin-role",
+            "permissions": {
+              "parse_error": false,
+              "statements": [
+                {
+                  "sid": null,
+                  "effect": "Allow",
+                  "actions": [
+                    "IAM:*"
+                  ],
+                  "not_actions": null,
+                  "resources": [
+                    "*"
+                  ],
+                  "not_resources": null,
+                  "principals": null,
+                  "not_principals": null,
+                  "has_condition": false,
+                  "raw": "snapshots/fixtures/fixture.json#/164/Statement/0",
+                  "policy": "fixture"
+                }
+              ]
+            },
+            "attached_policy_arns": [],
+            "instance_profile_arns": []
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/165"
+          }
+        },
+        {
+          "id": "aws:security_group:sg-fx-web-2",
+          "provider": "aws",
+          "type": "security_group",
+          "native_type": "AWS::EC2::SecurityGroup",
+          "name": "sg-fx-web-2",
+          "region": "fixture-region",
+          "properties": {
+            "ingress": [
+              {
+                "protocol": "tcp",
+                "port_from": 443,
+                "port_to": 443,
+                "cidrs": [
+                  "0.0.0.0/0"
+                ],
+                "source_tags": [],
+                "source_groups": [],
+                "prefix_lists": [],
+                "destination_prefixes": [
+                  "*"
+                ],
+                "source_port_ranges": [
+                  "*"
+                ],
+                "action": "allow",
+                "priority": null,
+                "raw": "snapshots/fixtures/fixture.json#/165/IpPermissions/0"
+              }
+            ],
+            "vpc_id": "vpc-fixture",
+            "tags": {}
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/166"
+          }
+        },
+        {
+          "id": "aws:compute_instance:i-fx-upper-admin",
+          "provider": "aws",
+          "type": "compute_instance",
+          "native_type": "AWS::EC2::Instance",
+          "name": "i-fx-upper-admin",
+          "region": "fixture-region",
+          "properties": {
+            "public_ips": [
+              "203.0.113.52"
+            ],
+            "network_groups": [
+              "aws:security_group:sg-fx-web-2"
+            ],
+            "raw": {
+              "public_ips": "snapshots/fixtures/fixture.json#/166/PublicIpAddress",
+              "network_groups": "snapshots/fixtures/fixture.json#/166/SecurityGroups",
+              "instance_profile": "snapshots/fixtures/fixture.json#/166/IamInstanceProfile"
+            },
+            "instance_profile": "fixture-profile",
+            "state": "running",
+            "tags": {}
+          },
+          "refs": [
+            {
+              "kind": "uses_network_group",
+              "target": "aws:security_group:sg-fx-web-2"
+            },
+            {
+              "kind": "instance_role",
+              "target": "aws:iam_role:arn:aws:iam::111122223333:role/fx-upper-admin-role"
+            }
+          ],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/167"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "from": "aws:compute_instance:i-fx-upper-admin",
+          "to": "aws:iam_role:arn:aws:iam::111122223333:role/fx-upper-admin-role",
+          "kind": "instance_role"
+        },
+        {
+          "from": "aws:compute_instance:i-fx-upper-admin",
+          "to": "aws:security_group:sg-fx-web-2",
+          "kind": "uses_network_group"
+        },
+        {
+          "from": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Compute/virtualMachines/vm-fx-reader-scope-unknown",
+          "to": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Network/networkSecurityGroups/nsg-fx-web2",
+          "kind": "uses_network_group"
+        },
+        {
+          "from": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Compute/virtualMachines/vm-fx-scope-unknown",
+          "to": "azure:network_security_group:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Network/networkSecurityGroups/nsg-fx-web2",
+          "kind": "uses_network_group"
+        },
+        {
+          "from": "azure:role_assignment:None/providers/Microsoft.Authorization/roleAssignments/fixture-30",
+          "to": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Compute/virtualMachines/vm-fx-scope-unknown",
+          "kind": "assigned_to"
+        },
+        {
+          "from": "azure:role_assignment:None/providers/Microsoft.Authorization/roleAssignments/fixture-30",
+          "to": "azure:role_definition:owner-id",
+          "kind": "assigned_role"
+        },
+        {
+          "from": "azure:role_assignment:None/providers/Microsoft.Authorization/roleAssignments/fixture-31",
+          "to": "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Compute/virtualMachines/vm-fx-reader-scope-unknown",
+          "kind": "assigned_to"
+        },
+        {
+          "from": "azure:role_assignment:None/providers/Microsoft.Authorization/roleAssignments/fixture-31",
+          "to": "azure:role_definition:reader-id",
+          "kind": "assigned_role"
+        }
+      ],
+      "unresolved": [],
+      "context": {
+        "admin_cidrs": [
+          "203.0.113.0/26"
+        ],
+        "remote_admin_ports": [
+          22,
+          3389
+        ],
+        "sensitive_ports": [
+          22,
+          3389,
+          1433,
+          3306,
+          5432,
+          6379,
+          9200,
+          27017
+        ],
+        "break_glass_principals": [
+          "arn:aws:iam::111122223333:user/breakglass",
+          "breakglass@fixture.example",
+          "00000000-0000-4000-9000-0000000000bb"
+        ],
+        "audit_log_targets": [],
+        "required_activity_log_categories": [
+          "Administrative",
+          "Security",
+          "Policy"
+        ]
+      }
+    },
+    "expected": {
+      "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Compute/virtualMachines/vm-fx-scope-unknown": "unknown",
+      "azure:compute_instance:/subscriptions/00000000-0000-4000-8000-0000000000f1/resourceGroups/rg/providers/Microsoft.Compute/virtualMachines/vm-fx-reader-scope-unknown": "pass",
+      "aws:compute_instance:i-fx-upper-admin": "fail"
+    }
+  }
+}

@@ -55,17 +55,25 @@ aws_admin_unknown(r) if {
 	count(lib.unresolved_targets(role.id, "attached_policy")) > 0
 }
 
-# Azure: role assignments whose principal is this VM's managed identity.
+# Azure: role assignments whose principal is this VM's managed identity (an unreadable scope may be broad).
 assignments(r) := [a |
 	some id in lib.sources(r.id, "assigned_to")
 	a := lib.by_id[id]
-	a.properties.scope_level in {"root", "management_group", "subscription"}
+	a.properties.scope_level in {"root", "management_group", "subscription", "unknown"}
 ]
+
+role_of(a) := lib.resolved_targets(a.id, "assigned_role")
 
 assignment_capability(a) := "unknown" if {
 	a.properties.has_condition == true
-} else := lib.admin_capability(lib.resolved_targets(a.id, "assigned_role")[0].properties.permissions) if {
-	count(lib.resolved_targets(a.id, "assigned_role")) > 0
+} else := "no" if {
+	a.properties.scope_level == "unknown"
+	count(role_of(a)) > 0
+	lib.admin_capability(role_of(a)[0].properties.permissions) == "no"
+} else := "unknown" if {
+	a.properties.scope_level == "unknown"
+} else := lib.admin_capability(role_of(a)[0].properties.permissions) if {
+	count(role_of(a)) > 0
 } else := "unknown"
 
 azure_admin(r) if {

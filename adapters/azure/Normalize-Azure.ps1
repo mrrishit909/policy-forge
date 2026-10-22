@@ -21,7 +21,8 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
-$script:SensitiveName = 'passw(or)?d|secret|token|credential|connection_?string|private_?key|account_?key|user_?data|sas_?token'
+Import-Module (Join-Path $PSScriptRoot 'SensitiveNames.psm1') -Force
+$script:Vocabulary = Get-SensitiveNameVocabulary -Path (Join-Path $PSScriptRoot '../../policy/sensitive-names.json')
 
 function ConvertTo-JsonPointer {
     param([object[]] $Path)
@@ -62,7 +63,7 @@ function Get-TagMap {
     $out = [ordered]@{}
     if ($Tags -is [System.Collections.IDictionary]) {
         foreach ($k in $Tags.Keys) {
-            if ($k -notmatch $script:SensitiveName) { $out[$k] = $Tags[$k] }
+            if (-not (Test-SensitiveName -Name $k -Vocabulary $script:Vocabulary)) { $out[$k] = $Tags[$k] }
         }
     }
     return $out
@@ -138,7 +139,11 @@ function Get-PortRange {
 }
 
 function Get-ScopeLevel {
-    param([string] $Scope)
+    # Case-insensitive; a trailing slash is ignored. A missing or empty scope is "unknown", never resource scope.
+    param([AllowNull()] $Scope)
+    if ($Scope -isnot [string] -or -not $Scope.Trim()) { return 'unknown' }
+    $Scope = $Scope.Trim()
+    if ($Scope -ne '/') { $Scope = $Scope.TrimEnd('/') }
     if ($Scope -eq '/') { return 'root' }
     if ($Scope -match '^/providers/Microsoft\.Management/managementGroups/[^/]+$') { return 'management_group' }
     if ($Scope -match '^/subscriptions/[^/]+$') { return 'subscription' }
@@ -160,8 +165,17 @@ function Get-IngressEntry {
         $gid = Get-PathValue $g @('Id')
         if ($gid) { $groups.Add("azure:application_security_group:$gid") }
     }
+    # A rule with no readable source is kept with a marker tag the rules cannot expand (unknown, never pass).
+    if ($cidrs.Count -eq 0 -and $tags.Count -eq 0 -and $groups.Count -eq 0) { $tags.Add('<missing>') }
+    $destinations = [System.Collections.Generic.List[object]]::new()
+    foreach ($d in (Get-ListValue (Get-PathValue $Rule @('DestinationAddressPrefix')))) { $destinations.Add("$d") }
+    $sourcePorts = [System.Collections.Generic.List[object]]::new()
+    foreach ($sp in (Get-ListValue (Get-PathValue $Rule @('SourcePortRange')))) { $sourcePorts.Add("$sp") }
     $portless = $protocol -notin @('tcp', 'udp', 'all')
-    foreach ($range in (Get-ListValue (Get-PathValue $Rule @('DestinationPortRange')))) {
+    $ranges = Get-ListValue (Get-PathValue $Rule @('DestinationPortRange'))
+    # A rule with no readable destination port is kept with null ports (unknown, never pass) instead of dropped.
+    if ($ranges.Count -eq 0) { $ranges = @('<missing>') }
+    foreach ($range in $ranges) {
         $ports = Get-PortRange ([string]$range)
         $entries.Add([ordered]@{
                 protocol      = $protocol
@@ -171,6 +185,8 @@ function Get-IngressEntry {
                 source_tags   = $tags
                 source_groups = $groups
                 prefix_lists  = @()
+                destination_prefixes = $destinations
+                source_port_ranges   = $sourcePorts
                 action        = ([string](Get-PathValue $Rule @('Access'))).ToLowerInvariant()
                 priority      = Get-PathValue $Rule @('Priority')
                 raw           = $Raw
@@ -185,7 +201,20 @@ function Read-JsonFile {
 }
 
 # ------------------------------------------------------------------ main
+function Test-SymbolicLink {
+    param([string] $Path)
+    if (-not (Test-Path -LiteralPath $Path)) { return $false }
+    $item = Get-Item -LiteralPath $Path -Force
+    return [bool]($item.Attributes -band [System.IO.FileAttributes]::ReparsePoint)
+}
+
 $dir = $SnapshotPath.TrimEnd('/', '\')
+foreach ($p in @($dir, (Join-Path $dir 'manifest.json'), (Join-Path $dir 'context.json'))) {
+    if (Test-SymbolicLink $p) {
+        [Console]::Error.WriteLine("Normalize-Azure.ps1: refusing a symbolic link in the snapshot: $p")
+        exit 2
+    }
+}
 if (-not (Test-Path -LiteralPath (Join-Path $dir 'manifest.json') -PathType Leaf)) {
     [Console]::Error.WriteLine("Normalize-Azure.ps1: not a snapshot directory (missing manifest.json): $dir")
     exit 2
@@ -208,6 +237,10 @@ foreach ($name in (Get-ListValue (Get-PathValue $manifest @('files')))) {
         exit 2
     }
     $p = Join-Path $dir $name
+    if (Test-SymbolicLink $p) {
+        [Console]::Error.WriteLine("Normalize-Azure.ps1: refusing a symbolic link in the snapshot: $name")
+        exit 2
+    }
     if (-not (Test-Path -LiteralPath $p -PathType Leaf)) {
         [Console]::Error.WriteLine("Normalize-Azure.ps1: manifest lists a missing file: $name")
         exit 2
@@ -347,7 +380,7 @@ foreach ($fileName in $docs.Keys) {
                 (Get-PathValue $it @('Name')) 'global' $props @() $file $path
             }
             'Get-AzRoleAssignment.json' {
-                $scope = [string](Get-PathValue $it @('Scope'))
+                $scope = Get-PathValue $it @('Scope')
                 $principal = Get-PathValue $it @('ObjectId')
                 $refs = [System.Collections.Generic.List[object]]::new()
                 $refs.Add([ordered]@{ kind = 'assigned_role'; target = "azure:role_definition:$(Get-PathValue $it @('RoleDefinitionId'))" })

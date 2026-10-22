@@ -22,6 +22,12 @@
                 "source_tags": [],
                 "source_groups": [],
                 "prefix_lists": [],
+                "destination_prefixes": [
+                  "*"
+                ],
+                "source_port_ranges": [
+                  "*"
+                ],
                 "action": "allow",
                 "priority": null,
                 "raw": "snapshots/fixtures/fixture.json#/104/IpPermissions/0"
@@ -204,6 +210,12 @@
                 "source_tags": [],
                 "source_groups": [],
                 "prefix_lists": [],
+                "destination_prefixes": [
+                  "*"
+                ],
+                "source_port_ranges": [
+                  "*"
+                ],
                 "action": "allow",
                 "priority": null,
                 "raw": "snapshots/fixtures/fixture.json#/120/IpPermissions/0"
@@ -389,6 +401,12 @@
                 ],
                 "source_groups": [],
                 "prefix_lists": [],
+                "destination_prefixes": [
+                  "*"
+                ],
+                "source_port_ranges": [
+                  "*"
+                ],
                 "action": "deny",
                 "priority": 100,
                 "raw": "snapshots/fixtures/fixture.json#/125/IpPermissions/0"
@@ -403,6 +421,12 @@
                 ],
                 "source_groups": [],
                 "prefix_lists": [],
+                "destination_prefixes": [
+                  "*"
+                ],
+                "source_port_ranges": [
+                  "*"
+                ],
                 "action": "allow",
                 "priority": 300,
                 "raw": "snapshots/fixtures/fixture.json#/125/IpPermissions/0"

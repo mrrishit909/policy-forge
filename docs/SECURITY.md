@@ -60,6 +60,11 @@
 - Only allow-listed result files of completed runs are copied into the Pages snapshot
   (`project_hooks.PUBLIC_FILES`). Raw snapshot files are never published by a run; the site shows
   redacted excerpts produced by the engine.
+- Sensitive field names follow one rule shared by the Python engine, the jq and PowerShell adapters and
+  Conftest (`policy/sensitive-names.json`, with examples tested in all four). A value is also treated as
+  sensitive when a sibling `Key`/`Name` member is sensitive-named, and JSON-encoded strings are checked
+  recursively. Patches whose context or changes would include a sensitive line are withheld, never
+  redacted (a redacted patch would not apply).
 - The synthetic snapshots contain planted, obviously fake values in fields a real export could hold
   secrets in (access-key secrets, storage keys, connection strings, admin passwords). They exist to
   prove redaction: a release gate fails if any of them, or any value from a sensitive-named field,

@@ -77,6 +77,12 @@ verdict(r) := lib.verdict("pass", "Principal is on the break-glass list.", []) i
 	r.type == "iam_user"
 } else := lib.verdict("pass", "Principal is on the break-glass list.", assignment_ev(r)) if {
 	lib.listed([r.properties.principal_id, r.properties.principal_name])
+} else := lib.verdict(
+	"unknown",
+	"The assignment scope could not be read, so its breadth is not evaluated.",
+	assignment_ev(r),
+) if {
+	r.properties.scope_level == "unknown"
 } else := lib.verdict("pass", "Assignment scope is narrower than a subscription.", assignment_ev(r)) if {
 	not r.properties.scope_level in broad_scope
 } else := lib.verdict(

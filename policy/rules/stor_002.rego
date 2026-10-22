@@ -31,7 +31,7 @@ verdict(r) := lib.verdict(
 	lib.policy_parse_error(r)
 } else := lib.verdict(
 	"unknown",
-	"A policy statement uses NotPrincipal or a Condition on an anonymous principal; those semantics are not evaluated.",
+	"A policy statement uses NotPrincipal, a Condition on an anonymous principal, or a Principal or Effect that could not be read; those semantics are not evaluated.",
 	array.concat(unknown_ev(r), [lib.guard_ev(r)]),
 ) if {
 	lib.policy_unknown(r)

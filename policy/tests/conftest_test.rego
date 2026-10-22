@@ -8,8 +8,30 @@ good_exception := {
 	"reason": "r", "owner": "o", "ticket": "T-1", "created": "2026-10-01", "expires": "2026-12-30",
 }
 
-deny_for(e) := msgs if {
-	msgs := data.main.deny with input as {"exceptions": [e]}
+deny_for(e) := {d.msg | some d in denials} if {
+	denials := data.main.deny with input as {"exceptions": [e]}
+}
+
+test_rejection_carries_index_and_reason if {
+	denials := data.main.deny with input as {"exceptions": [good_exception, object.union(good_exception, {"id": "X: y", "rule_id": "PF-XYZ-001"})]}
+	denials == {{"msg": "X: y: unknown rule id", "index": 1, "reason": "unknown rule id"}}
+}
+
+test_null_id_rejected if "null: missing id" in deny_for(object.union(good_exception, {"id": null}))
+
+test_non_object_entry_rejected if {
+	denials := data.main.deny with input as {"exceptions": ["EXC-9"]}
+	denials == {{"msg": "unidentified: entry is not an object", "index": 0, "reason": "entry is not an object"}}
+}
+
+test_sensitive_property_names if {
+	data.main.sensitive_key("clientSecret")
+	data.main.sensitive_key("x-api-key")
+	data.main.sensitive_key("SecretAccessKey")
+	data.main.sensitive_key("DeliveryToken")
+	not data.main.sensitive_key("TokenEndpoint")
+	not data.main.sensitive_key("AccessKeyId")
+	not data.main.sensitive_key("PasswordLastUsed")
 }
 
 test_valid_exception_passes if count(deny_for(good_exception)) == 0

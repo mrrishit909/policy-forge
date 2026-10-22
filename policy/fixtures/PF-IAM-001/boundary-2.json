@@ -1,0 +1,296 @@
+{
+  "boundary-2": {
+    "description": "A wildcard resource pattern that may cover everything, a lowercase Effect and an unreadable action are unknown; management-group and oddly cased scopes are broad; a wildcard after a literal bucket name is scoped",
+    "input": {
+      "resources": [
+        {
+          "id": "aws:iam_policy:arn:aws:iam::111122223333:policy/fx-arn-star",
+          "provider": "aws",
+          "type": "iam_policy",
+          "native_type": "AWS::IAM::ManagedPolicy",
+          "name": "fx-arn-star",
+          "region": "fixture-region",
+          "properties": {
+            "managed_by": "customer",
+            "arn": "arn:aws:iam::111122223333:policy/fx-arn-star",
+            "attachment_count": 1,
+            "permissions": {
+              "parse_error": false,
+              "statements": [
+                {
+                  "sid": null,
+                  "effect": "Allow",
+                  "actions": [
+                    "*"
+                  ],
+                  "not_actions": null,
+                  "resources": [
+                    "arn:aws:*:*:*:*"
+                  ],
+                  "not_resources": null,
+                  "principals": null,
+                  "not_principals": null,
+                  "has_condition": false,
+                  "raw": "snapshots/fixtures/fixture.json#/128/Statement/0",
+                  "policy": "fixture"
+                }
+              ]
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/129"
+          }
+        },
+        {
+          "id": "aws:iam_policy:arn:aws:iam::111122223333:policy/fx-lower-effect",
+          "provider": "aws",
+          "type": "iam_policy",
+          "native_type": "AWS::IAM::ManagedPolicy",
+          "name": "fx-lower-effect",
+          "region": "fixture-region",
+          "properties": {
+            "managed_by": "customer",
+            "arn": "arn:aws:iam::111122223333:policy/fx-lower-effect",
+            "attachment_count": 1,
+            "permissions": {
+              "parse_error": false,
+              "statements": [
+                {
+                  "sid": null,
+                  "effect": "allow",
+                  "actions": [
+                    "*"
+                  ],
+                  "not_actions": null,
+                  "resources": [
+                    "*"
+                  ],
+                  "not_resources": null,
+                  "principals": null,
+                  "not_principals": null,
+                  "has_condition": false,
+                  "raw": "snapshots/fixtures/fixture.json#/129/Statement/0",
+                  "policy": "fixture"
+                }
+              ]
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/130"
+          }
+        },
+        {
+          "id": "azure:role_definition:fx-mg-star",
+          "provider": "azure",
+          "type": "role_definition",
+          "native_type": "Microsoft.Authorization/roleDefinitions",
+          "name": "FX MG Star",
+          "region": "fixture-region",
+          "properties": {
+            "role_name": "FX MG Star",
+            "is_custom": true,
+            "assignable_scopes": [
+              "/providers/Microsoft.Management/managementGroups/fx"
+            ],
+            "data_actions": [],
+            "permissions": {
+              "parse_error": false,
+              "statements": [
+                {
+                  "sid": null,
+                  "effect": "Allow",
+                  "actions": [
+                    "*"
+                  ],
+                  "not_actions": null,
+                  "resources": [
+                    "/providers/Microsoft.Management/managementGroups/fx"
+                  ],
+                  "not_resources": null,
+                  "principals": null,
+                  "not_principals": null,
+                  "has_condition": false,
+                  "raw": "snapshots/fixtures/fixture.json#/130/Statement/0",
+                  "policy": "fixture"
+                }
+              ]
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/131"
+          }
+        },
+        {
+          "id": "azure:role_definition:fx-odd-case-scope",
+          "provider": "azure",
+          "type": "role_definition",
+          "native_type": "Microsoft.Authorization/roleDefinitions",
+          "name": "FX Odd Scope",
+          "region": "fixture-region",
+          "properties": {
+            "role_name": "FX Odd Scope",
+            "is_custom": true,
+            "assignable_scopes": [
+              "/Subscriptions/00000000-0000-4000-8000-0000000000f1/"
+            ],
+            "data_actions": [],
+            "permissions": {
+              "parse_error": false,
+              "statements": [
+                {
+                  "sid": null,
+                  "effect": "Allow",
+                  "actions": [
+                    "*"
+                  ],
+                  "not_actions": null,
+                  "resources": [
+                    "/Subscriptions/00000000-0000-4000-8000-0000000000f1/"
+                  ],
+                  "not_resources": null,
+                  "principals": null,
+                  "not_principals": null,
+                  "has_condition": false,
+                  "raw": "snapshots/fixtures/fixture.json#/131/Statement/0",
+                  "policy": "fixture"
+                }
+              ]
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/132"
+          }
+        },
+        {
+          "id": "aws:iam_policy:arn:aws:iam::111122223333:policy/fx-odd-action",
+          "provider": "aws",
+          "type": "iam_policy",
+          "native_type": "AWS::IAM::ManagedPolicy",
+          "name": "fx-odd-action",
+          "region": "fixture-region",
+          "properties": {
+            "managed_by": "customer",
+            "arn": "arn:aws:iam::111122223333:policy/fx-odd-action",
+            "attachment_count": 1,
+            "permissions": {
+              "parse_error": false,
+              "statements": [
+                {
+                  "sid": null,
+                  "effect": "Allow",
+                  "actions": [
+                    "s3:GetObject",
+                    "iam:{Put,Attach}UserPolicy"
+                  ],
+                  "not_actions": null,
+                  "resources": [
+                    "*"
+                  ],
+                  "not_resources": null,
+                  "principals": null,
+                  "not_principals": null,
+                  "has_condition": false,
+                  "raw": "snapshots/fixtures/fixture.json#/132/Statement/0",
+                  "policy": "fixture"
+                }
+              ]
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/133"
+          }
+        },
+        {
+          "id": "aws:iam_policy:arn:aws:iam::111122223333:policy/fx-bucket-objects",
+          "provider": "aws",
+          "type": "iam_policy",
+          "native_type": "AWS::IAM::ManagedPolicy",
+          "name": "fx-bucket-objects",
+          "region": "fixture-region",
+          "properties": {
+            "managed_by": "customer",
+            "arn": "arn:aws:iam::111122223333:policy/fx-bucket-objects",
+            "attachment_count": 1,
+            "permissions": {
+              "parse_error": false,
+              "statements": [
+                {
+                  "sid": null,
+                  "effect": "Allow",
+                  "actions": [
+                    "*"
+                  ],
+                  "not_actions": null,
+                  "resources": [
+                    "arn:aws:s3:::fx/*"
+                  ],
+                  "not_resources": null,
+                  "principals": null,
+                  "not_principals": null,
+                  "has_condition": false,
+                  "raw": "snapshots/fixtures/fixture.json#/133/Statement/0",
+                  "policy": "fixture"
+                }
+              ]
+            }
+          },
+          "refs": [],
+          "source": {
+            "file": "snapshots/fixtures/fixture.json",
+            "pointer": "/134"
+          }
+        }
+      ],
+      "edges": [],
+      "unresolved": [],
+      "context": {
+        "admin_cidrs": [
+          "203.0.113.0/26"
+        ],
+        "remote_admin_ports": [
+          22,
+          3389
+        ],
+        "sensitive_ports": [
+          22,
+          3389,
+          1433,
+          3306,
+          5432,
+          6379,
+          9200,
+          27017
+        ],
+        "break_glass_principals": [
+          "arn:aws:iam::111122223333:user/breakglass",
+          "breakglass@fixture.example",
+          "00000000-0000-4000-9000-0000000000bb"
+        ],
+        "audit_log_targets": [],
+        "required_activity_log_categories": [
+          "Administrative",
+          "Security",
+          "Policy"
+        ]
+      }
+    },
+    "expected": {
+      "aws:iam_policy:arn:aws:iam::111122223333:policy/fx-arn-star": "unknown",
+      "aws:iam_policy:arn:aws:iam::111122223333:policy/fx-lower-effect": "unknown",
+      "azure:role_definition:fx-mg-star": "fail",
+      "azure:role_definition:fx-odd-case-scope": "fail",
+      "aws:iam_policy:arn:aws:iam::111122223333:policy/fx-odd-action": "unknown",
+      "aws:iam_policy:arn:aws:iam::111122223333:policy/fx-bucket-objects": "pass"
+    }
+  }
+}

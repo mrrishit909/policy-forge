@@ -93,8 +93,14 @@ test("findings: not-evaluated and excepted views, pack filter", async ({ page })
   const show = page.getByRole("group", { name: "Show" });
   await show.getByRole("button", { name: /Not evaluated/ }).click();
   await expect(page.locator(".pf-finding .pf-mark[data-s='unknown']").first()).toBeVisible();
-  await show.getByRole("button", { name: /Excepted/ }).click();
-  await expect(page.locator(".pf-finding .pf-mark[data-s='excepted']").first()).toBeVisible();
+  const excepted = show.getByRole("button", { name: /Excepted/ });
+  await excepted.click();
+  // A run can legitimately have no excepted finding (for example after an exception expires); then the empty state shows.
+  if (/Excepted 0$/.test((await excepted.textContent())?.trim() ?? "")) {
+    await expect(page.getByText("No finding in this filter is covered by an exception.")).toBeVisible();
+  } else {
+    await expect(page.locator(".pf-finding .pf-mark[data-s='excepted']").first()).toBeVisible();
+  }
   await show.getByRole("button", { name: /Failed/ }).click();
   const packs = page.getByRole("group", { name: "Rule pack" });
   await packs.getByRole("button", { name: "Network" }).click();

@@ -1,0 +1,97 @@
+{
+  "sensitive_names": {
+    "rule": "Split a member name into words at underscores, hyphens, dots, other non-alphanumerics, lower-to-upper camel boundaries, acronym boundaries (APIKey -> API_Key) and letter-to-digit boundaries; fold ASCII case; drop all-digit words. The name is sensitive when its last word is in `words` or its last two words joined by '_' are in `pairs`. So SecretAccessKey, DB_PASSWORD, clientSecret, private-key, x-api-key and DeliveryToken are sensitive, while TokenEndpoint, PasswordLastUsed, AccessKeyId and KeyName are not. An object member named Value/Values is sensitive when a sibling Key/Name member holds a sensitive name (tag and parameter lists).",
+    "words": [
+      "accountkey",
+      "apikey",
+      "apikeys",
+      "clientsecret",
+      "connectionstring",
+      "connectionstrings",
+      "credential",
+      "credentials",
+      "passcode",
+      "passphrase",
+      "passwd",
+      "password",
+      "passwords",
+      "privatekey",
+      "pwd",
+      "sastoken",
+      "secret",
+      "secretkey",
+      "secrets",
+      "token",
+      "tokens",
+      "userdata"
+    ],
+    "pairs": [
+      "access_key",
+      "access_keys",
+      "account_key",
+      "account_keys",
+      "api_key",
+      "api_keys",
+      "client_secret",
+      "connection_string",
+      "connection_strings",
+      "master_key",
+      "private_key",
+      "private_keys",
+      "sas_key",
+      "secret_key",
+      "shared_key",
+      "signing_key",
+      "storage_key",
+      "user_data"
+    ],
+    "name_members": [
+      "key",
+      "name"
+    ],
+    "value_members": [
+      "value",
+      "values"
+    ],
+    "examples": {
+      "sensitive": [
+        "SecretAccessKey",
+        "DB_PASSWORD",
+        "db-password",
+        "clientSecret",
+        "client_secret",
+        "private-key",
+        "PrivateKey",
+        "x-api-key",
+        "apikey",
+        "APIKey",
+        "api_key",
+        "access_key",
+        "passphrase",
+        "token",
+        "DeliveryToken",
+        "SASToken",
+        "AWSSecretKey",
+        "connection-string",
+        "ConnectionStrings",
+        "UserData",
+        "AdminPassword",
+        "db_password2"
+      ],
+      "not_sensitive": [
+        "TokenEndpoint",
+        "PasswordLastUsed",
+        "AccessKeyId",
+        "KeyName",
+        "Name",
+        "Value",
+        "DisablePasswordAuthentication",
+        "PublicAccessBlockConfiguration",
+        "TokenVersion",
+        "Keys",
+        "",
+        "2fa"
+      ]
+    }
+  }
+}

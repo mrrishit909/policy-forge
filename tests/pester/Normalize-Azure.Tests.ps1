@@ -41,6 +41,16 @@ Describe 'Normalize-Azure.ps1' {
         $output | Should -Not -Match 'AdminPassword|ConnectionString'
     }
 
+    It 'applies the shared sensitive-name rule to the documented examples' {
+        Import-Module (Join-Path $Root 'adapters/azure/SensitiveNames.psm1') -Force
+        $vocabulary = Get-SensitiveNameVocabulary -Path (Join-Path $Root 'policy/sensitive-names.json')
+        $examples = $vocabulary['examples']
+        $missed = @($examples['sensitive'] | Where-Object { -not (Test-SensitiveName -Name $_ -Vocabulary $vocabulary) })
+        $extra = @($examples['not_sensitive'] | Where-Object { Test-SensitiveName -Name $_ -Vocabulary $vocabulary })
+        $missed.Count | Should -Be 0
+        $extra.Count | Should -Be 0
+    }
+
     It 'fails cleanly on a missing directory' {
         # A path that is never created (TestDrive is disabled so the run writes no temporary folders).
         $missing = Join-Path $Root '.tmp/no-such-snapshot-for-pester'

@@ -121,7 +121,9 @@ def test_exception_states_on_edge_dates():
     reg = {"exceptions": [_exc("E1", "2026-10-01", "2026-10-21"), _exc("E2", "2026-09-01", "2026-10-20"),
                           _exc("E3", "2026-10-22", "2026-11-01"), _exc("E4", "2026-10-21", "2026-10-30"),
                           _exc("E5", "2026-10-01", "2027-06-01")]}
-    hygiene = {"failures": ["E5: expiry is more than 90 days after created"]}
+    hygiene = {"failures": ["E5: expiry is more than 90 days after created"],
+               "failure_details": [{"msg": "E5: expiry is more than 90 days after created", "index": 4,
+                                    "reason": "expiry is more than 90 days after created"}]}
     out = {e["id"]: e for e in pipeline.evaluate_exceptions(
         reg, hygiene, "2026-10-21", {"PF-NET-001"}, {("PF-NET-001", "aws:security_group:sg-1")},
         {"aws:security_group:sg-1"})}
@@ -272,13 +274,13 @@ def _written_files():
         yield from ([p] if p.is_file() else sorted(x for x in p.rglob("*") if x.is_file() and "__pycache__" not in x.parts))
 
 
-def test_no_em_dash_or_secret_patterns_in_written_files():
+def test_written_files_are_ascii_without_secret_patterns():
     sys.path.insert(0, str(ROOT / "scripts"))
     from secret_scan import scan_text
 
     for f in _written_files():
         text = f.read_text()
-        assert chr(0x2014) not in text and chr(0x2015) not in text, f
+        assert text.isascii(), f"{f} contains non-ASCII characters"
         assert scan_text(str(f.relative_to(ROOT)), text) == [], f
 
 
@@ -288,3 +290,67 @@ def test_catalog_entries_are_complete():
         assert rule["remediation"]["kind"] in {"auto", "manual"}
         key = "strategy" if rule["remediation"]["kind"] == "auto" else "guidance"
         assert rule["remediation"][key], rule["id"]
+
+
+# ------------------------------------------------------------------ one sensitive-name rule in four implementations
+def _examples():
+    return json.loads((ROOT / "policy" / "sensitive-names.json").read_text())["sensitive_names"]["examples"]
+
+
+def test_sensitive_name_rule_matches_examples_in_python_jq_and_rego():
+    ex = _examples()
+    assert [k for k in ex["sensitive"] if not redact.sensitive_name(k)] == []
+    assert [k for k in ex["not_sensitive"] if redact.sensitive_name(k)] == []
+    names = ex["sensitive"] + ex["not_sensitive"]
+    jq = subprocess.run([shutil.which("jq"), "-n", "-c", "-L", "adapters/aws", "--slurpfile", "v",
+                         "policy/sensitive-names.json", "--argjson", "names", json.dumps(names),
+                         'include "names"; [$names[] | sensitive_name($v[0].sensitive_names)]'],
+                        cwd=ROOT, capture_output=True, text=True, check=True)
+    assert json.loads(jq.stdout) == [redact.sensitive_name(k) for k in names]
+    rego = _opa_conftest("[k | some k in data.sensitive_names.examples.sensitive; not data.main.sensitive_key(k)]")
+    assert rego == []
+    rego = _opa_conftest("[k | some k in data.sensitive_names.examples.not_sensitive; data.main.sensitive_key(k)]")
+    assert rego == []
+
+
+def _opa_conftest(query: str):
+    proc = subprocess.run([shutil.which("opa"), "eval", "--v1-compatible", "--format", "json", "-d", "policy/conftest",
+                           "-d", "policy/sensitive-names.json", query], cwd=ROOT, capture_output=True, text=True,
+                          check=True)
+    return json.loads(proc.stdout)["result"][0]["expressions"][0]["value"]
+
+
+def test_redaction_rules_for_siblings_nested_json_and_scalars():
+    canary = "pf-canary-" + "12" * 8 + "-not-a-secret"
+    text = json.dumps({
+        "Tags": [{"Key": "db_password", "Value": "short"}, {"Key": "env", "Value": "prod"}],
+        "Param": {"Name": "/prod/app/api-key", "Value": {"v": 7}},
+        "Env": {"APP_CONFIG": json.dumps({"nested": {"client_secret": canary}})},
+        "DeliveryToken": 4821739265, "TokenEndpoint": "https://login.example.invalid/token",
+    }, indent=2) + "\n"
+    a = redact.analyse(Scan(text))
+    masked = {t.path for t in a.masked}
+    assert ("Tags", 0, "Value") in masked and ("Tags", 1, "Value") not in masked
+    assert ("Param", "Value", "v") in masked and ("DeliveryToken",) in masked and ("TokenEndpoint",) not in masked
+    assert ("Env", "APP_CONFIG") in masked
+    assert {canary, "4821739265", "short"} <= set(a.known)
+    out = redact.redacted_text(Scan(text))
+    assert canary not in out and "4821739265" not in out and "short" not in out and "login.example.invalid" in out
+    clean, records = redact.redact_tree({"tags": [{"Key": "db_password", "Value": "x"}],
+                                         "cfg": json.dumps({"password": "y"})})
+    assert clean == {"tags": [{"Key": "db_password"}], "cfg": redact.MASK}
+    assert [r["reason"] for r in records] == ["sensitive-name", "sensitive-value"]
+
+
+def test_diff_guard_blocks_short_sensitive_context_and_apply_unified_is_strict():
+    before = remediate.canonical_text({"IsLogging": False, "DeliveryToken": "Zq7!x", "Name": "t"})
+    after = remediate.canonical_text({"IsLogging": True, "DeliveryToken": "Zq7!x", "Name": "t"})
+    assert remediate.diff_guard("snapshots/x/f.json", before, after) == ["snapshots/x/f.json line 3",
+                                                                          "snapshots/x/f.json new line 3"]
+    sep = chr(0x2028)
+    before = remediate.canonical_text({"a": False, "d": f"one{sep}two", "b": 1})
+    after = remediate.canonical_text({"a": True, "d": f"one{sep}two", "b": 1})
+    diff = remediate.unified_diff("snapshots/x/f.json", before, after)
+    assert remediate.apply_unified({"snapshots/x/f.json": before}, diff) == {"snapshots/x/f.json": after}
+    with pytest.raises(ValueError):
+        remediate.apply_unified({"snapshots/x/f.json": before.replace('"b": 1', '"b": 2')}, diff)

@@ -55,7 +55,8 @@
       "unknown_when": [
         "the policy document cannot be parsed",
         "an Allow statement uses NotPrincipal",
-        "an anonymous Allow statement carries a Condition (for example a source IP restriction)"
+        "an anonymous Allow statement carries a Condition (for example a source IP restriction)",
+        "a Principal the adapter could not read (for example a JSON array), an Allow with no principal, or an Effect other than exactly Allow or Deny"
       ],
       "does_not_evaluate": [
         "Condition keys and their values",
@@ -76,7 +77,8 @@
           "policy/fixtures/PF-STOR-002/negative-1.json"
         ],
         "boundary": [
-          "policy/fixtures/PF-STOR-002/boundary-1.json"
+          "policy/fixtures/PF-STOR-002/boundary-1.json",
+          "policy/fixtures/PF-STOR-002/boundary-2.json"
         ]
       }
     },
@@ -95,14 +97,17 @@
         "role_definition"
       ],
       "title": "Allow statement grants every action on every resource",
-      "checks": "AWS customer-managed policies and inline user/role policies: an Allow with Action \"*\" and Resource \"*\" and no Condition. Azure custom role definitions: Actions \"*\" assignable at subscription or root scope.",
+      "checks": "AWS customer-managed policies and inline user/role policies: an Allow with Action \"*\" and Resource \"*\" and no Condition. Azure custom role definitions: Actions \"*\" assignable at root, management-group or subscription scope (scopes compared case-insensitively, a trailing slash ignored). Action names are compared case-insensitively.",
       "unknown_when": [
         "an Allow statement uses NotAction or NotResource",
         "a wildcard Allow carries a Condition",
-        "a policy document cannot be parsed"
+        "a policy document cannot be parsed",
+        "every action is allowed on a wildcard resource pattern other than \"*\" that could cover every resource (for example arn:aws:*:*:*:* or arn:aws:s3:::*)",
+        "a statement has an Effect other than exactly Allow or Deny, or an action entry that cannot be read"
       ],
       "does_not_evaluate": [
         "AWS-managed policies and Azure built-in role definitions (their use is evaluated through PF-IAM-003 and PF-REL-001)",
+        "a wildcard after a literal resource name (arn:aws:s3:::bucket/*, role/app-*) is treated as scoped to that name",
         "permissions boundaries, service control policies and session policies",
         "Deny statements narrower than \"*\" on \"*\" (they are not subtracted from the grant)",
         "Azure DataActions"
@@ -119,7 +124,8 @@
           "policy/fixtures/PF-IAM-001/negative-1.json"
         ],
         "boundary": [
-          "policy/fixtures/PF-IAM-001/boundary-1.json"
+          "policy/fixtures/PF-IAM-001/boundary-1.json",
+          "policy/fixtures/PF-IAM-001/boundary-2.json"
         ]
       }
     },
@@ -142,7 +148,9 @@
       "unknown_when": [
         "an Allow statement uses NotAction or NotResource",
         "a service-wide Allow carries a Condition",
-        "a policy document cannot be parsed"
+        "a policy document cannot be parsed",
+        "a service-wide Allow on a wildcard resource pattern other than \"*\" that could cover every resource (for example arn:aws:s3:::*)",
+        "an Effect other than exactly Allow or Deny, or an action entry that cannot be read"
       ],
       "does_not_evaluate": [
         "partial wildcards such as \"s3:Get*\"",
@@ -161,7 +169,8 @@
           "policy/fixtures/PF-IAM-002/negative-1.json"
         ],
         "boundary": [
-          "policy/fixtures/PF-IAM-002/boundary-1.json"
+          "policy/fixtures/PF-IAM-002/boundary-1.json",
+          "policy/fixtures/PF-IAM-002/boundary-2.json"
         ]
       }
     },
@@ -178,11 +187,13 @@
         "role_assignment"
       ],
       "title": "Standing admin-capable access outside the break-glass list",
-      "checks": "AWS: an IAM user with admin-capable permissions attached directly (AdministratorAccess, an attached policy or inline statement granting \"*\", \"iam:*\" on \"*\"). Azure: a role assignment at subscription, management group or root scope whose role grants \"*\" or Microsoft.Authorization/* without NotActions. Principals listed in context break_glass_principals pass.",
+      "checks": "AWS: an IAM user with admin-capable permissions attached directly (AdministratorAccess, or an attached policy or inline statement allowing an admin-capable action on \"*\"). Azure: a role assignment at subscription, management group or root scope whose role allows an admin-capable action without NotActions; Azure roles are judged by their actions whatever their assignable scopes. Admin-capable actions: \"*\", iam:* and the IAM privilege-escalation actions (Attach*/Put*Policy, CreatePolicyVersion, SetDefaultPolicyVersion, CreateAccessKey, Create/UpdateLoginProfile, UpdateAssumeRolePolicy), Microsoft.Authorization/*, roleAssignments/write, roleDefinitions/write and elevateAccess/action. Actions are compared case-insensitively and a wildcard action counts when it glob-matches any of them (IAM:*, roleAssignments/*). Principals listed in context break_glass_principals pass.",
       "unknown_when": [
         "an AWS user belongs to IAM groups (group-inherited permissions are not evaluated)",
         "statements use NotAction/NotResource or a conditional admin grant",
         "an Azure assignment carries a Condition",
+        "the assignment scope could not be read",
+        "an admin-capable action is allowed on a wildcard resource pattern other than \"*\"",
         "the assigned Azure role definition is not in the snapshot",
         "the Azure role uses NotActions (for example Contributor)"
       ],
@@ -203,7 +214,8 @@
           "policy/fixtures/PF-IAM-003/negative-1.json"
         ],
         "boundary": [
-          "policy/fixtures/PF-IAM-003/boundary-1.json"
+          "policy/fixtures/PF-IAM-003/boundary-1.json",
+          "policy/fixtures/PF-IAM-003/boundary-2.json"
         ]
       }
     },
@@ -220,16 +232,17 @@
         "network_security_group"
       ],
       "title": "Remote administration ports open to internet-wide sources",
-      "checks": "An allow ingress rule (tcp, udp or all protocols) whose port range covers a context remote_admin_ports port (22, 3389) from an internet-wide source: 0.0.0.0/0, ::/0, any public IPv4 block of /8 or larger (for example 0.0.0.0/1), any public IPv6 block of /16 or larger, or the Azure tags *, Internet, Any. An Azure allow is not counted when a higher-priority deny from any source covers the same port.",
+      "checks": "An allow ingress rule (tcp, udp or all protocols) whose port range covers a context remote_admin_ports port (22, 3389) from an internet-wide source: 0.0.0.0/0, ::/0, any public IPv4 block of /8 or larger (for example 0.0.0.0/1), any public IPv6 block of /16 or larger, or the Azure tags *, Internet, Any. An Azure allow is not counted when a higher-priority deny covers the same port and protocol for every source, every destination and every source port.",
       "unknown_when": [
         "a protocol other than tcp, udp, all, icmp or icmpv6 (for example ESP, protocol 50) from an internet-wide or unexpanded source",
-        "a port specification that is not a number, a range or '*'",
+        "a port specification that is not a number, a range or '*', or an inbound rule with no readable destination port",
+        "an inbound rule with no readable source",
         "a source given as an AWS managed prefix list or an Azure service tag other than Internet/Any/VirtualNetwork/AzureLoadBalancer"
       ],
       "does_not_evaluate": [
         "AWS network ACLs, route tables, internet gateways and load balancers in front of the group",
         "Azure subnet-level NSGs, application security group membership and Azure Firewall",
-        "deny rules that cover only part of an allow rule's ports or sources (they do not reduce the reported exposure)",
+        "deny rules that cover only part of an allow rule's ports or sources, or that are limited to some destinations or source ports (they do not reduce the reported exposure)",
         "whether anything is actually listening on the port",
         "egress rules"
       ],
@@ -247,7 +260,8 @@
         ],
         "boundary": [
           "policy/fixtures/PF-NET-001/boundary-1.json",
-          "policy/fixtures/PF-NET-001/boundary-2.json"
+          "policy/fixtures/PF-NET-001/boundary-2.json",
+          "policy/fixtures/PF-NET-001/boundary-3.json"
         ]
       }
     },
@@ -267,13 +281,14 @@
       "checks": "The same test as PF-NET-001 for the context sensitive_ports that are not remote administration ports (1433, 3306, 5432, 6379, 9200, 27017).",
       "unknown_when": [
         "a protocol other than tcp, udp, all, icmp or icmpv6 (for example ESP, protocol 50) from an internet-wide or unexpanded source",
-        "a port specification that is not a number, a range or '*'",
+        "a port specification that is not a number, a range or '*', or an inbound rule with no readable destination port",
+        "an inbound rule with no readable source",
         "a source given as an AWS managed prefix list or an Azure service tag other than Internet/Any/VirtualNetwork/AzureLoadBalancer"
       ],
       "does_not_evaluate": [
         "AWS network ACLs, route tables, internet gateways and load balancers in front of the group",
         "Azure subnet-level NSGs, application security group membership and Azure Firewall",
-        "deny rules that cover only part of an allow rule's ports or sources (they do not reduce the reported exposure)",
+        "deny rules that cover only part of an allow rule's ports or sources, or that are limited to some destinations or source ports (they do not reduce the reported exposure)",
         "whether anything is actually listening on the port",
         "egress rules"
       ],
@@ -448,7 +463,7 @@
       "unknown_when": [
         "an attached security group or the instance role is not in the snapshot",
         "role permissions use NotAction/NotResource or a conditional admin grant",
-        "an Azure assignment to the identity carries a Condition or its role is missing"
+        "an Azure assignment to the identity carries a Condition, its role is missing or its scope could not be read"
       ],
       "does_not_evaluate": [
         "load balancers, NAT and routing in front of the instance",
@@ -467,7 +482,8 @@
           "policy/fixtures/PF-REL-001/negative-1.json"
         ],
         "boundary": [
-          "policy/fixtures/PF-REL-001/boundary-1.json"
+          "policy/fixtures/PF-REL-001/boundary-1.json",
+          "policy/fixtures/PF-REL-001/boundary-2.json"
         ]
       }
     },

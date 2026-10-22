@@ -14,6 +14,7 @@ from typing import Any
 from jsonschema import Draft202012Validator
 
 from policyforge import __version__, redact
+from policyforge.jsonpos import Scan
 
 ROOT = Path(__file__).resolve().parents[2]
 JSON_FILES = ["manifest.json", "inventory.json", "relationships.json", "coverage.json", "findings.json",
@@ -55,6 +56,39 @@ class Bundle:
 
 def _plural(n: int, word: str) -> str:
     return f"{n} {word}{'' if n == 1 else 's'}"
+
+
+HYGIENE_FIELDS = ("input", "successes", "failures", "warnings", "passed")
+
+
+def complete_coverage(totals: dict[str, Any], not_covered: list[str]) -> bool:
+    """Complete only when every resource present was evaluated by some rule and no check returned unknown."""
+    return (totals["unknown"] == 0 and totals["resources_unsupported"] == 0 and totals["resources_not_evaluated"] == 0
+            and not not_covered)
+
+
+def data_strings(scans: list[Scan]) -> set[str]:
+    """Snapshot strings (values and member names) that contain banned wording: those are data, not engine text."""
+    found = set()
+    for scan in scans:
+        found |= {tok.value for tok in scan.strings if BANNED.search(tok.value)}
+        found |= {k for keys in scan.members.values() for k in keys if BANNED.search(k)}
+    return found
+
+
+def engine_banned(text: str, data: set[str]) -> list[int]:
+    """Offsets of banned wording in text that is not part of a snapshot string reproduced verbatim (raw or as it
+    appears JSON-escaped once or twice). The engine never writes such wording itself."""
+    spans = []
+    for s in data:
+        once = json.dumps(s, ensure_ascii=False)[1:-1]
+        for form in {s, once, json.dumps(once, ensure_ascii=False)[1:-1]}:
+            start = text.find(form)
+            while start >= 0:
+                spans.append((start, start + len(form)))
+                start = text.find(form, start + 1)
+    return [m.start() for m in BANNED.finditer(text)
+            if not any(a <= m.start() and m.end() <= b for a, b in spans)]
 
 
 def coverage(b: Bundle) -> dict[str, Any]:
@@ -124,7 +158,7 @@ def coverage(b: Bundle) -> dict[str, Any]:
 def coverage_statement(b: Bundle, cov: dict[str, Any]) -> tuple[str, bool]:
     t = cov["totals"]
     uncovered = [x["type"] for x in cov["resource_types"] if not x["covered"]]
-    complete = t["unknown"] == 0 and t["resources_unsupported"] == 0 and not uncovered
+    complete = complete_coverage(t, uncovered)
     evaluated = t["resources"] - t["resources_unsupported"] - t["resources_not_evaluated"]
     native_unsupported = sorted({u["native_type"] for u in cov["unsupported"]})
     parts = [
@@ -143,7 +177,8 @@ def coverage_statement(b: Bundle, cov: dict[str, Any]) -> tuple[str, bool]:
         parts.append(f"{_plural(t['resources_unsupported'], 'resource')} of unsupported types "
                      f"({', '.join(native_unsupported)}) were inventoried but not evaluated.")
     if t["resources_not_evaluated"]:
-        parts.append(f"{_plural(t['resources_not_evaluated'], 'resource')} of covered types had no applicable rule.")
+        parts.append(f"{_plural(t['resources_not_evaluated'], 'resource')} of covered types had no applicable rule "
+                     "and were not evaluated.")
     uncovered_known = [x for x in uncovered if x != "unsupported"]
     if uncovered_known:
         parts.append(f"Resource types present but not covered by the requested packs: {', '.join(uncovered_known)}.")
@@ -225,7 +260,8 @@ def report(b: Bundle, s: dict[str, Any], cov: dict[str, Any]) -> str:
 def _checks(b: Bundle, s: dict[str, Any], cov: dict[str, Any], texts: dict[str, str], sensitive: set[str]):
     t = cov["totals"]
     leaks = {name: redact.leaks(text, sensitive) for name, text in texts.items()}
-    banned = sorted(name for name, text in texts.items() if BANNED.search(text))
+    data = data_strings(list(b.ev.scans.values()))
+    banned = sorted(name for name, text in texts.items() if engine_banned(text, data))
     size = sum(len(x.encode()) for x in texts.values())
     rule_sum = {s: sum(r[s] for r in cov["rules"]) for s in STATUSES}
     return [
@@ -240,8 +276,7 @@ def _checks(b: Bundle, s: dict[str, Any], cov: dict[str, Any], texts: dict[str, 
         {"id": "no_cloud_command_invoked", "ok": set(b.launched) <= {"bash", "pwsh", "opa", "conftest", "jq"},
          "detail": "executables launched: " + ", ".join(b.launched)},
         {"id": "coverage_statement_consistent",
-         "ok": s["complete_coverage"] == (t["unknown"] == 0 and t["resources_unsupported"] == 0
-                                          and not s["resource_types"]["not_covered"])
+         "ok": s["complete_coverage"] == complete_coverage(t, s["resource_types"]["not_covered"])
          and ("unknown" in s["coverage_statement"]) and not banned
          and (s["complete_coverage"] or "partial" in s["coverage_statement"]),
          "detail": "banned wording in: " + ", ".join(banned) if banned else "statement matches the counts"},
@@ -272,7 +307,8 @@ def write(b: Bundle, out_dir: Path, sensitive: set[str]) -> dict[str, Any]:
         "exceptions.json": dumps({"as_of": b.params["as_of"], "registry": "exceptions/registry.json",
                                   "entries": b.exceptions, "counts": s["exceptions"]}),
         "conftest.json": dumps({"tool": "conftest test --output json --policy policy/conftest",
-                                "inventory": b.ev.conftest, "exceptions_registry": b.exc_hygiene}),
+                                "inventory": {k: b.ev.conftest[k] for k in HYGIENE_FIELDS},
+                                "exceptions_registry": {k: b.exc_hygiene[k] for k in HYGIENE_FIELDS}}),
         "rule_tests.json": dumps(b.rule_tests),
         "remediation.json": dumps(rem),
         "catalog.json": dumps({"catalog_version": b.catalog["catalog_version"], "rules": b.pack_rules}),
@@ -299,6 +335,19 @@ def write(b: Bundle, out_dir: Path, sensitive: set[str]) -> dict[str, Any]:
 # ------------------------------------------------------------------ validation
 def _schema() -> dict[str, Any]:
     return json.loads((ROOT / "schemas" / "outputs.schema.json").read_text())
+
+
+def _snapshot_scans(manifest: dict[str, Any]) -> list[Scan]:
+    """Scans of the run's snapshot files (regular files only), used to tell snapshot strings from engine text."""
+    scans = []
+    for f in manifest.get("snapshot", {}).get("files", []):
+        path = ROOT / str(f.get("path", ""))
+        if f.get("path", "").startswith("snapshots/") and path.is_file() and not path.is_symlink():
+            try:
+                scans.append(Scan(path.read_text()))
+            except (OSError, ValueError):
+                continue
+    return scans
 
 
 def validate(out_dir: Path) -> list[str]:
@@ -358,7 +407,7 @@ def validate(out_dir: Path) -> list[str]:
     for f in fnd["findings"]:
         if f["status"] == "excepted" and (f["rule_id"], f["resource_id"]) not in active:
             problems.append(f"{f['id']}: excepted without an active exception")
-    complete = t["unknown"] == 0 and t["resources_unsupported"] == 0 and not s["resource_types"]["not_covered"]
+    complete = complete_coverage(t, s["resource_types"]["not_covered"])
     if s["complete_coverage"] != complete:
         problems.append("complete_coverage does not follow from the coverage totals")
     if t["unknown"] and "unknown" not in s["coverage_statement"]:
@@ -366,11 +415,14 @@ def validate(out_dir: Path) -> list[str]:
     if not data["checks.json"]["passed"]:
         failed = [c["id"] for c in data["checks.json"]["checks"] if not c["ok"]]
         problems.append("self-checks failed: " + ", ".join(failed))
+    if t["resources_not_evaluated"] and "not evaluated" not in s["coverage_statement"]:
+        problems.append("coverage_statement does not mention resources that were not evaluated")
+    snapshot_strings = data_strings(_snapshot_scans(m))
     size = 0
     for p in out_dir.iterdir():
         text = p.read_text()
         size += len(text.encode())
-        if BANNED.search(text):
+        if engine_banned(text, snapshot_strings):
             problems.append(f"{p.name}: contains wording that presents results as compliance")
         if redact.SENSITIVE_VALUE.search(text):
             problems.append(f"{p.name}: contains a credential-like value")

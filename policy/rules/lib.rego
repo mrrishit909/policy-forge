@@ -40,10 +40,16 @@ listed(principal_ids) if {
 # ------------------------------------------------------------------ permission statements
 # Normalized statement: {effect, actions, not_actions, resources, not_resources, principals, not_principals,
 # has_condition, raw, policy}. null means "the field is absent"; a list means it is present.
+# Action names are compared case-insensitively (AWS actions and Azure operations are case-insensitive). An action
+# pattern is admin-capable when it glob-matches any entry of admin_actions, so "IAM:*",
+# "Microsoft.Authorization/roleAssignments/*" and "iam:Put*Policy" all count.
 
 allows(s) if s.effect == "Allow"
 
 denies(s) if s.effect == "Deny"
+
+# An Effect other than exactly "Allow" or "Deny" is not evaluated: unknown, never pass.
+odd_effect(s) if not s.effect in {"Allow", "Deny"}
 
 plain(s) if {
 	s.not_actions == null
@@ -51,37 +57,124 @@ plain(s) if {
 	s.has_condition == false
 }
 
-all_resources(s) if {
-	is_array(s.resources)
-	some x in s.resources
-	x in {"*", "/"}
+actions(s) := [lower(a) | some a in s.actions; is_string(a)] if is_array(s.actions)
+
+else := []
+
+readable_action(a) if {
+	is_string(a)
+	regex.match(`^[A-Za-z0-9:*?/._-]+$`, a)
 }
 
-all_resources(s) if {
-	is_array(s.resources)
-	some x in s.resources
-	regex.match(`^/subscriptions/[^/]+$`, x)
+# Action entries that are not plain action or operation names (or not strings) cannot be matched reliably.
+odd_action(s) if {
+	is_array(s.actions)
+	some a in s.actions
+	not readable_action(a)
 }
 
 full_wildcard(s) if {
-	is_array(s.actions)
-	some a in s.actions
+	some a in actions(s)
 	a in {"*", "*:*"}
 }
 
 service_wildcards(s) := [a |
 	is_array(s.actions)
 	some a in s.actions
-	regex.match(`^([A-Za-z0-9-]+:\*|Microsoft\.[A-Za-z0-9]+/\*)$`, a)
+	is_string(a)
+	regex.match(`(?i)^([a-z0-9-]+:\*|microsoft\.[a-z0-9]+/\*)$`, a)
 ]
 
-admin_actions := {"*", "*:*", "iam:*", "Microsoft.Authorization/*", "Microsoft.Authorization/roleAssignments/write"}
+# Lowercase action names that grant administration or privilege escalation on their own.
+admin_actions := [
+	"*", "*:*", "iam:*",
+	"iam:attachgrouppolicy", "iam:attachrolepolicy", "iam:attachuserpolicy",
+	"iam:createaccesskey", "iam:createloginprofile", "iam:createpolicyversion",
+	"iam:putgrouppolicy", "iam:putrolepolicy", "iam:putuserpolicy",
+	"iam:setdefaultpolicyversion", "iam:updateassumerolepolicy", "iam:updateloginprofile",
+	"microsoft.authorization/*", "microsoft.authorization/elevateaccess/action",
+	"microsoft.authorization/roleassignments/write", "microsoft.authorization/roledefinitions/write",
+]
 
 admin_action(s) if {
-	is_array(s.actions)
-	some a in s.actions
-	a in admin_actions
+	some a in actions(s)
+	readable_action(a)
+	some x in admin_actions
+	glob.match(a, null, x)
 }
+
+# Every resource: the literal "*" (AWS), or a root, management-group or subscription scope (Azure; any case, a
+# trailing slash ignored).
+all_resources(s) if {
+	is_array(s.resources)
+	some x in s.resources
+	x == "*"
+}
+
+all_resources(s) if {
+	is_array(s.resources)
+	some x in s.resources
+	broad_scope(x)
+}
+
+scope_key(x) := trim_suffix(lower(trim_space(x)), "/")
+
+broad_scope(x) if {
+	is_string(x)
+	trim_space(x) != ""
+	scope_key(x) == ""
+}
+
+broad_scope(x) if {
+	is_string(x)
+	regex.match(`^/subscriptions/[^/]+$`, scope_key(x))
+}
+
+broad_scope(x) if {
+	is_string(x)
+	regex.match(`^/providers/microsoft\.management/managementgroups/[^/]+$`, scope_key(x))
+}
+
+wildcard(x) if contains(x, "*")
+
+wildcard(x) if contains(x, "?")
+
+# A wildcard after a literal resource name (arn:aws:s3:::bucket/*, role/app-*) is scoped to that name.
+scoped_pattern(x) if {
+	parts := split(x, ":")
+	count(parts) >= 6
+	every i in numbers.range(0, 4) {
+		not wildcard(parts[i])
+	}
+	regex.match(`^[^*?]`, concat(":", array.slice(parts, 5, count(parts))))
+}
+
+possibly_all(x) if {
+	is_string(x)
+	x != "*"
+	wildcard(x)
+	not scoped_pattern(x)
+}
+
+# A resource pattern other than the literal "*" that could still cover every resource (arn:aws:*:*:*:*,
+# arn:aws:s3:::*), or a resource entry that is not a string: not evaluated, so unknown rather than narrow.
+maybe_all_resources(s) if {
+	not all_resources(s)
+	is_array(s.resources)
+	some x in s.resources
+	possibly_all(x)
+}
+
+maybe_all_resources(s) if {
+	is_array(s.resources)
+	some x in s.resources
+	not is_string(x)
+}
+
+# Azure role definitions are judged by their actions; the breadth of a grant is the assignment's scope.
+broad_or_role(s) if all_resources(s)
+
+broad_or_role(s) if object.get(s, "policy", null) == "role-definition"
 
 # An unconditional Deny of every action on every resource negates every Allow in the same document.
 negated(statements) if {
@@ -103,7 +196,7 @@ grants_admin(s) if {
 	allows(s)
 	plain(s)
 	admin_action(s)
-	all_resources(s)
+	broad_or_role(s)
 }
 
 # Statements whose effective grant the rules do not compute: NotAction / NotResource on an Allow, or a
@@ -118,14 +211,34 @@ unevaluable_allow(s) if {
 	s.not_resources != null
 }
 
+# Statements no rule may read as a pass: an action entry that cannot be matched in a statement that is not a
+# Deny. (An unreadable Effect is handled per rule, next to the actions that rule looks for.)
+unreadable_actions(s) if {
+	not denies(s)
+	odd_action(s)
+}
+
 unevaluable_admin(s) if unevaluable_allow(s)
 
 unevaluable_admin(s) if {
 	allows(s)
 	s.has_condition == true
 	admin_action(s)
-	all_resources(s)
+	broad_or_role(s)
 }
+
+unevaluable_admin(s) if {
+	allows(s)
+	admin_action(s)
+	maybe_all_resources(s)
+}
+
+unevaluable_admin(s) if {
+	odd_effect(s)
+	admin_action(s)
+}
+
+unevaluable_admin(s) if unreadable_actions(s)
 
 stmt_ev(s) := ev(
 	"/properties/permissions/statements", {
@@ -190,6 +303,23 @@ unknown_public_statement(s) if {
 	"*" in s.principals
 	s.has_condition == true
 }
+
+# A Principal the adapter could not read (marked "unparsed:"), an Allow with no principal at all, or an Effect
+# other than Allow / Deny: not evaluated.
+unknown_public_statement(s) if {
+	allows(s)
+	is_array(s.principals)
+	some p in s.principals
+	startswith(p, "unparsed:")
+}
+
+unknown_public_statement(s) if {
+	allows(s)
+	s.principals == null
+	s.not_principals == null
+}
+
+unknown_public_statement(s) if odd_effect(s)
 
 policy_parse_error(b) if object.get(b.properties.public_access, "policy", null).parse_error == true
 
@@ -277,10 +407,15 @@ covers(e, p) if {
 	p <= e.port_to
 }
 
-# A higher-priority (lower number) deny from any source covering the port and protocol shadows an allow.
-deny_any_source(d) if {
+# A higher-priority (lower number) deny shadows an allow only when it applies to every source, every destination
+# and every source port, and covers the port and protocol.
+broad_deny(d) if {
 	d.action == "deny"
 	count([t | some t in d.source_tags; t in internet_tags]) + count([c | some c in d.cidrs; c in {"0.0.0.0/0", "::/0"}]) > 0
+	some x in object.get(d, "destination_prefixes", [])
+	lower(x) in {"*", "any", "0.0.0.0/0", "::/0"}
+	some sp in object.get(d, "source_port_ranges", [])
+	sp in {"*", "0-65535"}
 }
 
 outranks(d, e) if {
@@ -292,14 +427,14 @@ outranks(d, e) if {
 
 shadowed(g, e, p) if {
 	some d in g.properties.ingress
-	deny_any_source(d)
+	broad_deny(d)
 	outranks(d, e)
 	covers(d, p)
 }
 
 fully_shadowed(g, e) if {
 	some d in g.properties.ingress
-	deny_any_source(d)
+	broad_deny(d)
 	outranks(d, e)
 	e.port_from != null
 	covers(d, e.port_from)

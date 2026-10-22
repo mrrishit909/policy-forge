@@ -1,7 +1,9 @@
 """Position-tracking JSON scanner.
 
 Maps every value in a JSON document to the 1-based line where it starts (keyed by RFC 6901 pointer) and
-records the span and key path of every string token, so excerpts can be redacted in place.
+records the span and key path of every scalar token plus the member names of every object, so excerpts can be
+redacted in place. Lines are counted on "\n" only (as git and the line numbers in findings do), never on the other
+characters str.splitlines() treats as line breaks.
 """
 
 from __future__ import annotations
@@ -17,11 +19,23 @@ _scanstring = json.decoder.scanstring  # type: ignore[attr-defined]
 
 
 @dataclass(frozen=True)
-class StringToken:
+class Token:
+    """A scalar token. kind is string, number or literal; value is the decoded string or the raw text."""
+
     start: int
     end: int
     path: tuple[str | int, ...]
     value: str
+    kind: str = "string"
+
+
+StringToken = Token
+
+
+def split_lines(text: str) -> list[str]:
+    """Lines split on "\n" only, without the terminators (a trailing newline does not add an empty line)."""
+    lines = text.split("\n")
+    return lines[:-1] if text.endswith("\n") else lines
 
 
 def escape(token: str | int) -> str:
@@ -59,7 +73,9 @@ class Scan:
         self.text = text
         self._starts = [0] + [m.end() for m in re.finditer("\n", text)]
         self.lines: dict[str, int] = {}
-        self.strings: list[StringToken] = []
+        self.tokens: list[Token] = []
+        self.members: dict[tuple[str | int, ...], list[str]] = {}
+        self.scalars: dict[tuple[str | int, ...], Token] = {}
         try:
             end = self._value(self._skip(0), ())
         except IndexError as exc:
@@ -68,8 +84,17 @@ class Scan:
             raise ValueError(f"trailing data at line {self.line_of(end)}")
 
     @property
+    def strings(self) -> list[Token]:
+        return [t for t in self.tokens if t.kind == "string"]
+
+    @property
     def line_count(self) -> int:
-        return len(self.text.splitlines())
+        return len(split_lines(self.text))
+
+    def _add(self, tok: Token) -> int:
+        self.tokens.append(tok)
+        self.scalars[tok.path] = tok
+        return tok.end
 
     def line_of(self, pos: int) -> int:
         return bisect.bisect_right(self._starts, pos)
@@ -92,6 +117,7 @@ class Scan:
         self.lines[pointer(path)] = self.line_of(i)
         c = t[i]
         if c == "{":
+            keys = self.members.setdefault(path, [])
             i = self._skip(i + 1)
             if t[i] == "}":
                 return i + 1
@@ -99,6 +125,7 @@ class Scan:
                 if t[i] != '"':
                     raise ValueError(f"expected an object key at line {self.line_of(i)}")
                 key, i = _scanstring(t, i + 1)
+                keys.append(key)
                 i = self._skip(i)
                 if t[i] != ":":
                     raise ValueError(f"expected ':' at line {self.line_of(i)}")
@@ -125,12 +152,11 @@ class Scan:
                     raise ValueError(f"expected ',' or ']' at line {self.line_of(i)}")
         if c == '"':
             value, end = _scanstring(t, i + 1)
-            self.strings.append(StringToken(i, end, path, value))
-            return end
+            return self._add(Token(i, end, path, value))
         for literal in ("true", "false", "null"):
             if t.startswith(literal, i):
-                return i + len(literal)
+                return self._add(Token(i, i + len(literal), path, literal, "literal"))
         m = _NUMBER.match(t, i)
         if m:
-            return m.end()
+            return self._add(Token(i, m.end(), path, m.group(0), "number"))
         raise ValueError(f"invalid JSON value at line {self.line_of(i)}")

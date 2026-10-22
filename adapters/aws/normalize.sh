@@ -8,11 +8,16 @@ set -euo pipefail
 usage() { echo "usage: normalize.sh SNAPSHOT_DIR" >&2; exit 2; }
 [[ $# -eq 1 ]] || usage
 dir="${1%/}"
+if [[ -L "$dir" || -L "$dir/manifest.json" ]]; then
+  echo "normalize.sh: refusing a symbolic link in the snapshot: $dir" >&2
+  exit 2
+fi
 if [[ ! -d "$dir" || ! -f "$dir/manifest.json" ]]; then
   echo "normalize.sh: not a snapshot directory (missing manifest.json): $dir" >&2
   exit 2
 fi
 here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+vocab="$here/../../policy/sensitive-names.json"
 
 provider="$(jq -r '.provider // empty' "$dir/manifest.json")"
 if [[ "$provider" != "aws" ]]; then
@@ -23,10 +28,18 @@ fi
 # Inputs in a fixed order: manifest, context, then the data files in manifest order (never a glob, whose
 # order depends on the locale).
 inputs=("$dir/manifest.json")
+if [[ -L "$dir/context.json" ]]; then
+  echo "normalize.sh: refusing a symbolic link in the snapshot: context.json" >&2
+  exit 2
+fi
 if [[ -f "$dir/context.json" ]]; then inputs+=("$dir/context.json"); fi
 while IFS= read -r name; do
   if [[ "$name" == */* || "$name" == .* ]]; then
     echo "normalize.sh: manifest file name must be a plain file name: $name" >&2
+    exit 2
+  fi
+  if [[ -L "$dir/$name" ]]; then
+    echo "normalize.sh: refusing a symbolic link in the snapshot: $name" >&2
     exit 2
   fi
   if [[ ! -f "$dir/$name" ]]; then
@@ -36,4 +49,4 @@ while IFS= read -r name; do
   inputs+=("$dir/$name")
 done < <(jq -r '.files[]' "$dir/manifest.json")
 
-LC_ALL=C jq -n -c -f "$here/normalize.jq" "${inputs[@]}"
+LC_ALL=C jq -n -c -L "$here" --slurpfile vocab "$vocab" -f "$here/normalize.jq" "${inputs[@]}"

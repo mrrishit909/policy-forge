@@ -34,8 +34,29 @@ conditional(perms) := [lib.stmt_ev(s) |
 	lib.allows(s)
 	s.has_condition == true
 	lib.full_wildcard(s)
-	lib.all_resources(s)
+	broad_or_maybe(s)
 ]
+
+broad_or_maybe(s) if lib.all_resources(s)
+
+broad_or_maybe(s) if lib.maybe_all_resources(s)
+
+wide_pattern(perms) := [lib.stmt_ev(s) |
+	some s in perms.statements
+	lib.allows(s)
+	lib.plain(s)
+	lib.full_wildcard(s)
+	lib.maybe_all_resources(s)
+]
+
+unreadable(perms) := [lib.stmt_ev(s) | some s in perms.statements; unreadable_stmt(s)]
+
+unreadable_stmt(s) if {
+	lib.odd_effect(s)
+	lib.full_wildcard(s)
+}
+
+unreadable_stmt(s) if lib.unreadable_actions(s)
 
 verdict(perms) := lib.verdict(
 	"fail",
@@ -62,6 +83,18 @@ verdict(perms) := lib.verdict(
 	conditional(perms),
 ) if {
 	count(conditional(perms)) > 0
+} else := lib.verdict(
+	"unknown",
+	"Every action is allowed on a wildcard resource pattern other than \"*\"; its reach is not evaluated.",
+	wide_pattern(perms),
+) if {
+	count(wide_pattern(perms)) > 0
+} else := lib.verdict(
+	"unknown",
+	"A statement has an Effect other than Allow or Deny, or an action entry that cannot be read.",
+	unreadable(perms),
+) if {
+	count(unreadable(perms)) > 0
 } else := lib.verdict(
 	"unknown",
 	"A policy document could not be parsed.",

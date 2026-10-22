@@ -18,7 +18,7 @@ from typing import Any
 from jsonschema import Draft202012Validator
 
 from policyforge import __version__, outputs, redact
-from policyforge.jsonpos import Scan
+from policyforge.jsonpos import Scan, split_lines
 
 ROOT = Path(__file__).resolve().parents[2]
 PACKS = ["storage", "iam", "network", "audit", "relationships"]
@@ -52,13 +52,44 @@ def load_json(path: Path) -> Any:
 
 # ------------------------------------------------------------------ request
 def request_problems(params: dict[str, Any]) -> list[str]:
-    """Problems beyond the request schema: rule packs must be in canonical order (one set is one request)."""
-    packs = params.get("rule_packs") if isinstance(params, dict) else None
-    if not isinstance(packs, list) or not all(p in PACKS for p in packs):
+    """Problems beyond the request schema: rule packs must be in canonical order (one set is one request), as_of
+    must be a real calendar date, and as_of may not be earlier than the snapshot's capture date (so an exception
+    that had already expired when the snapshot was taken cannot be revived by backdating the request)."""
+    if not isinstance(params, dict):
         return []
-    if packs != sorted(packs, key=PACKS.index):
-        return ["rule_packs: list packs in the canonical order " + ", ".join(PACKS)]
-    return []
+    problems = []
+    packs = params.get("rule_packs")
+    if isinstance(packs, list) and all(p in PACKS for p in packs) and packs != sorted(packs, key=PACKS.index):
+        problems.append("rule_packs: list packs in the canonical order " + ", ".join(PACKS))
+    as_of = params.get("as_of")
+    if isinstance(as_of, str) and re.fullmatch(r"\d{4}-\d{2}-\d{2}", as_of):
+        try:
+            day = date.fromisoformat(as_of)
+        except ValueError:
+            return problems + [f"as_of: {as_of} is not a real calendar date"]
+        captured = _captured_on(params.get("snapshot"))
+        if captured is not None and day < captured:
+            problems.append(f"as_of: {as_of} is earlier than the snapshot capture date {captured.isoformat()}")
+    return problems
+
+
+def _captured_on(snapshot: Any) -> date | None:
+    if not isinstance(snapshot, str) or not re.fullmatch(r"[a-z0-9-]+", snapshot):
+        return None
+    try:
+        captured = load_json(ROOT / "snapshots" / snapshot / "manifest.json")["captured_at"]
+        return date.fromisoformat(str(captured)[:10])
+    except (OSError, ValueError, KeyError, TypeError):
+        return None
+
+
+def check_snapshot_dir(snapshot_dir: Path) -> None:
+    """Refuse symbolic links (and anything that is not a regular file) anywhere in a snapshot directory."""
+    if snapshot_dir.is_symlink() or not snapshot_dir.is_dir():
+        raise InputError(f"snapshot directory is missing or is a symbolic link: {snapshot_dir.name}")
+    for entry in sorted(snapshot_dir.iterdir()):
+        if entry.is_symlink() or not entry.is_file():
+            raise InputError(f"snapshot {snapshot_dir.name}: {entry.name} is a symbolic link or not a regular file")
 
 
 def schema_problems(params: Any) -> list[str]:
@@ -141,7 +172,7 @@ def run_adapter(snapshot_dir: Path, provider: str, tools: Tools) -> list[dict[st
     if proc.returncode != 0:
         raise InputError(f"adapter failed for {snapshot_dir.name}: {proc.stderr.strip()[-2000:]}")
     records = []
-    for n, line in enumerate(proc.stdout.splitlines(), start=1):
+    for n, line in enumerate(proc.stdout.split("\n"), start=1):
         if not line.strip():
             continue
         try:
@@ -152,14 +183,22 @@ def run_adapter(snapshot_dir: Path, provider: str, tools: Tools) -> list[dict[st
 
 
 def raw_locations(node: Any) -> list[str]:
-    """Every 'snapshots/...#pointer' string inside a properties tree."""
+    """The 'snapshots/...#pointer' locations the adapters record in `raw` members (a string, or an object of
+    strings) of a properties tree. Tag maps hold snapshot data, so they are never read as locations."""
+    out: list[str] = []
     if isinstance(node, dict):
-        return [loc for v in node.values() for loc in raw_locations(v)]
-    if isinstance(node, list):
-        return [loc for v in node for loc in raw_locations(v)]
-    if isinstance(node, str) and node.startswith("snapshots/") and "#" in node:
-        return [node]
-    return []
+        for key, value in node.items():
+            if key == "tags":
+                continue
+            if key == "raw":
+                vals = [value] if isinstance(value, str) else list(value.values()) if isinstance(value, dict) else []
+                out += [v for v in vals if isinstance(v, str) and v.startswith("snapshots/") and "#" in v]
+            else:
+                out += raw_locations(value)
+    elif isinstance(node, list):
+        for value in node:
+            out += raw_locations(value)
+    return out
 
 
 def resolve_refs(inventory: list[dict[str, Any]]) -> tuple[list[dict[str, str]], list[dict[str, str]]]:
@@ -187,20 +226,28 @@ def resolve_refs(inventory: list[dict[str, Any]]) -> tuple[list[dict[str, str]],
             [{"from": f, "kind": k, "target": t} for f, k, t in sorted(unresolved)])
 
 
+HYGIENE_FIELDS = ("input", "successes", "failures", "warnings", "passed")
+
+
 def conftest_check(tools: Tools, label: str, payload: Any, workdir: Path) -> dict[str, Any]:
+    """Conftest result. `failure_details` ({msg, index, reason}) is internal: it maps registry rejections back to
+    entries by index and is not published (conftest.json keeps HYGIENE_FIELDS)."""
     path = workdir / f"{label}.json"
     path.write_text(json.dumps(payload))
     proc = tools.run([tools.path("conftest"), "test", "--no-color", "--output", "json", "--policy",
-                      str(ROOT / "policy" / "conftest"), "--data", str(ROOT / "policy" / "catalog.json"), str(path)],
-                     ok_codes=(0, 1))
+                      str(ROOT / "policy" / "conftest"), "--data", str(ROOT / "policy" / "catalog.json"),
+                      "--data", str(ROOT / "policy" / "sensitive-names.json"), str(path)], ok_codes=(0, 1))
     try:
         report = json.loads(proc.stdout)
     except ValueError as exc:
         raise RuntimeError(f"conftest output is not JSON: {proc.stderr.strip()[-500:]}") from exc
-    fails = sorted(f["msg"] for entry in report for f in entry.get("failures") or [])
+    details = sorted(({"msg": f["msg"], "index": (f.get("metadata") or {}).get("index"),
+                       "reason": (f.get("metadata") or {}).get("reason")}
+                      for entry in report for f in entry.get("failures") or []), key=lambda d: d["msg"])
     warns = sorted(w["msg"] for entry in report for w in entry.get("warnings") or [])
     return {"input": label, "successes": sum(int(e.get("successes", 0)) for e in report),
-            "failures": fails, "warnings": warns, "passed": not fails}
+            "failures": [d["msg"] for d in details], "warnings": warns, "passed": not details,
+            "failure_details": details}
 
 
 def opa_results(tools: Tools, payload: dict[str, Any], workdir: Path) -> list[dict[str, Any]]:
@@ -219,6 +266,7 @@ def opa_results(tools: Tools, payload: dict[str, Any], workdir: Path) -> list[di
 def evaluate(snapshot_dir: Path, manifest: dict[str, Any], context: dict[str, Any], tools: Tools) -> Evaluation:
     """Full evaluation of one snapshot directory (the committed one or a patched temporary copy)."""
     name, provider = manifest["name"], manifest["provider"]
+    check_snapshot_dir(snapshot_dir)
     records = run_adapter(snapshot_dir, provider, tools)
     validator = _inventory_validator()
     seen: set[str] = set()
@@ -281,7 +329,7 @@ def locate(ev: Evaluation, raw: str) -> dict[str, Any] | None:
 
 def excerpt(ev: Evaluation, file: str, lines: list[int], context: int = 6, cap: int = 40) -> dict[str, Any]:
     scan = ev.scans[file]
-    text = redact.redacted_text(scan).splitlines()
+    text = split_lines(redact.redacted_text(scan))
     lines = sorted(set(lines))
     lo, hi = lines[0] - context, lines[-1] + context
     if hi - lo + 1 > cap:
@@ -309,24 +357,38 @@ def cite(ev: Evaluation, resource: dict[str, Any], evidence: list[dict[str, Any]
 # ------------------------------------------------------------------ exceptions
 def evaluate_exceptions(registry: dict[str, Any], hygiene: dict[str, Any], as_of: str, rule_ids: set[str],
                         failing: set[tuple[str, str]], resource_ids: set[str]) -> list[dict[str, Any]]:
-    rejected: dict[str, list[str]] = {}
-    for msg in hygiene["failures"]:
-        eid, _, reason = msg.partition(": ")
-        rejected.setdefault(eid, []).append(reason)
+    """State of every registry entry as of a date. Conftest rejections are matched to entries by their structured
+    index (hygiene["failure_details"]), never by message text. An entry the engine itself cannot read (not an
+    object, an id or date that is not usable) is rejected too, never active."""
+    rejected: dict[int, list[str]] = {}
+    for d in hygiene.get("failure_details", []):
+        if isinstance(d.get("index"), int):
+            rejected.setdefault(d["index"], []).append(str(d.get("reason") or d.get("msg")))
+    items = registry.get("exceptions") if isinstance(registry, dict) else None
+    items = items if isinstance(items, list) else []
     today = date.fromisoformat(as_of)
     out = []
-    for e in registry.get("exceptions", []):
-        eid = str(e.get("id", "unidentified"))
+    for i, raw_entry in enumerate(items):
+        e = raw_entry if isinstance(raw_entry, dict) else {}
         entry = {k: e.get(k) for k in ("id", "rule_id", "resource_id", "reason", "owner", "ticket", "created",
                                        "expires")}
         key = (e.get("rule_id"), e.get("resource_id"))
         entry["in_scope"] = e.get("rule_id") in rule_ids and e.get("resource_id") in resource_ids
         entry["matches_failing_result"] = key in failing
-        if eid in rejected:
-            entry.update(state="rejected", problems=sorted(rejected[eid]),
+        problems = list(rejected.get(i, []))
+        if not isinstance(raw_entry, dict) and not problems:
+            problems.append("entry is not an object")
+        if not isinstance(e.get("id"), str) or not e.get("id", "").strip():
+            problems.append("missing id")
+        try:
+            created, expires = date.fromisoformat(e["created"]), date.fromisoformat(e["expires"])
+        except (KeyError, TypeError, ValueError):
+            created = expires = None
+            problems.append("created/expires is not a usable date")
+        if problems:
+            entry.update(state="rejected", problems=sorted(set(problems)),
                          effect="ignored: rejected by the registry hygiene checks")
         else:
-            created, expires = date.fromisoformat(e["created"]), date.fromisoformat(e["expires"])
             if today < created:
                 state, effect = "not_yet_active", "ignored: created after as_of"
             elif today > expires:
@@ -338,13 +400,14 @@ def evaluate_exceptions(registry: dict[str, Any], hygiene: dict[str, Any], as_of
                           else "active, but no failing result matches")
             entry.update(state=state, problems=[], effect=effect)
         out.append(entry)
-    return sorted(out, key=lambda x: str(x["id"]))
+    return sorted(out, key=lambda x: (str(x["id"]), x["state"]))
 
 
 # ------------------------------------------------------------------ run
 def snapshot_hashes(snapshot_dir: Path, name: str) -> list[dict[str, Any]]:
+    check_snapshot_dir(snapshot_dir)
     return [{"path": f"snapshots/{name}/{p.name}", "sha256": sha256(p.read_bytes()), "bytes": p.stat().st_size}
-            for p in sorted(snapshot_dir.iterdir(), key=lambda p: p.name) if p.is_file()]
+            for p in sorted(snapshot_dir.iterdir(), key=lambda p: p.name)]
 
 
 def run(params: dict[str, Any], out_dir: Path) -> dict[str, Any]:
@@ -356,6 +419,7 @@ def run(params: dict[str, Any], out_dir: Path) -> dict[str, Any]:
         raise InputError(f"output directory must not exist or must be empty: {out_dir}")
     name = params["snapshot"]
     snapshot_dir = ROOT / "snapshots" / name
+    check_snapshot_dir(snapshot_dir)
     try:
         manifest = load_json(snapshot_dir / "manifest.json")
         context = load_json(snapshot_dir / "context.json")
@@ -369,6 +433,7 @@ def run(params: dict[str, Any], out_dir: Path) -> dict[str, Any]:
     pack_rules = [r for r in catalog["rules"] if r["pack"] in packs]
     rules = [r for r in pack_rules if provider in r["providers"]]
     rule_ids = {r["id"] for r in rules}
+    provider_rule_ids = {r["id"] for r in catalog["rules"] if provider in r["providers"]}
 
     tools = Tools()
     hashes = snapshot_hashes(snapshot_dir, name)
@@ -402,8 +467,8 @@ def run(params: dict[str, Any], out_dir: Path) -> dict[str, Any]:
         })
     findings.sort(key=lambda f: (SEVERITY_ORDER[f["severity"]], f["rule_id"], f["resource_id"]))
 
-    rem = remediate.propose(params, snapshot_dir, manifest, context, tools, ev, results, findings, rules_by_id) \
-        if params["remediation"] == "propose" else remediate.not_requested()
+    rem = remediate.propose(params, snapshot_dir, manifest, context, tools, ev, results, findings, rules_by_id,
+                            provider_rule_ids) if params["remediation"] == "propose" else remediate.not_requested()
     for f in findings:
         for p in rem["patches"]:
             if p["finding_id"] == f["id"]:
