@@ -1,8 +1,8 @@
 {
   "blocked_reason": null,
-  "created_at": "2026-10-22T04:21:02Z",
+  "created_at": "2026-10-22T05:45:56Z",
   "defect_batch_id": null,
-  "evidence_dir": "outcomes/policy-forge-20261022T042102Z-84d8b87/",
+  "evidence_dir": "outcomes/policy-forge-20261022T054556Z-57da8ea/",
   "findings": [
     {
       "detail": "sha256:3dfbc98a979d5121647a783e67f4951addb20c441bcf2713762db876b14020b3",
@@ -23,7 +23,7 @@
       "id": "policy-gates",
       "kind": "pytest",
       "objective": true,
-      "seconds": 44.76,
+      "seconds": 44.38,
       "status": "pass",
       "title": "Positive, negative and boundary fixtures for every rule; unsupported resources marked unknown; patches resolve their finding; unrelated behaviour unchanged; no cloud mutation commands execute; sensitive configuration not published; partial coverage never presented as complete; deterministic outputs"
     },
@@ -35,12 +35,12 @@
       "id": "shell-checks",
       "kind": "command",
       "objective": true,
-      "seconds": 6.71,
+      "seconds": 6.69,
       "status": "pass",
       "title": "ShellCheck, Bats, Pester and PSScriptAnalyzer pass for the Bash and PowerShell adapters"
     },
     {
-      "detail": "............................                                             [100%]",
+      "detail": ".............................                                            [100%]",
       "evidence_paths": [
         "harness.junit.xml",
         "harness.log"
@@ -48,7 +48,7 @@
       "id": "harness",
       "kind": "pytest",
       "objective": true,
-      "seconds": 5.69,
+      "seconds": 5.63,
       "status": "pass",
       "title": "State machine, idempotency, concurrency, intake authorization, outcome and memory guards"
     },
@@ -60,7 +60,7 @@
       "id": "secret-scan",
       "kind": "command",
       "objective": true,
-      "seconds": 0.39,
+      "seconds": 0.68,
       "status": "pass",
       "title": "No credentials in the repository or in the live site's shipped assets"
     },
@@ -72,7 +72,7 @@
       "id": "live-site",
       "kind": "live",
       "objective": true,
-      "seconds": 0.05,
+      "seconds": 0.2,
       "status": "pass",
       "title": "Live Pages site loads and its data snapshot points at the state branch's latest run"
     },
@@ -84,7 +84,7 @@
       "id": "published-matches-state",
       "kind": "command",
       "objective": true,
-      "seconds": 0.52,
+      "seconds": 3.04,
       "status": "pass",
       "title": "Published result files are byte-identical to the accepted computation"
     },
@@ -102,16 +102,16 @@
     }
   ],
   "project": "policy-forge",
-  "release_id": "policy-forge-20261022T042102Z-84d8b87",
+  "release_id": "policy-forge-20261022T054556Z-57da8ea",
   "repair_round": 0,
   "rubric_sha256": "sha256:3dfbc98a979d5121647a783e67f4951addb20c441bcf2713762db876b14020b3",
   "run_id": "policy-forge-20261022T041546Z-b622e9e4-a1",
-  "source_commit": "84d8b872ebe73079550f5fa74302683784a50bda",
+  "source_commit": "57da8ead4e36162f29036fcb3421251e074dd1a7",
   "status": "released",
   "subjective": {
     "reason": "inference credentials are not configured for this repository",
     "scores": [],
     "status": "not_run"
   },
-  "workflow_run_url": "https://github.com/mrrishit909/policy-forge/actions/runs/39721375573"
+  "workflow_run_url": "https://github.com/mrrishit909/policy-forge/actions/runs/39729494674"
 }

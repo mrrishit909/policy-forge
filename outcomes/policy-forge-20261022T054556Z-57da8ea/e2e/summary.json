@@ -1,0 +1,261 @@
+{
+  "target": "https://mrrishit909.github.io/policy-forge/",
+  "status": "passed",
+  "passed": 42,
+  "failed": 0,
+  "skipped": 0,
+  "tests": [
+    {
+      "title": "coverage: statement, tally and legend; partial coverage stated; accessible, no overflow",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 3600
+    },
+    {
+      "title": "coverage: statement, tally and legend; partial coverage stated; accessible, no overflow",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 3648
+    },
+    {
+      "title": "findings: a finding opens its evidence at the cited line",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 3101
+    },
+    {
+      "title": "findings: a finding opens its evidence at the cited line",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 3213
+    },
+    {
+      "title": "findings: not-evaluated and excepted views, pack filter",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 1271
+    },
+    {
+      "title": "findings: not-evaluated and excepted views, pack filter",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 1288
+    },
+    {
+      "title": "tabs: every section by link, focus moves to its heading, back button restores",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 1182
+    },
+    {
+      "title": "tabs: every section by link, focus moves to its heading, back button restores",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 1216
+    },
+    {
+      "title": "inventory: unsupported types are listed as having no rule",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 2937
+    },
+    {
+      "title": "inventory: unsupported types are listed as having no rule",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 2926
+    },
+    {
+      "title": "policies: each rule states what it does not evaluate",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 3254
+    },
+    {
+      "title": "policies: each rule states what it does not evaluate",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 3768
+    },
+    {
+      "title": "rule tests: positive, negative and boundary fixtures for every rule, all passing",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 3423
+    },
+    {
+      "title": "rule tests: positive, negative and boundary fixtures for every rule, all passing",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 3263
+    },
+    {
+      "title": "exceptions: active, expired and rejected entries with validity spans",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 2540
+    },
+    {
+      "title": "exceptions: active, expired and rejected entries with validity spans",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 2728
+    },
+    {
+      "title": "remediation: verified patch diff, before and after views, download",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 3151
+    },
+    {
+      "title": "remediation: verified patch diff, before and after views, download",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 3069
+    },
+    {
+      "title": "keyboard: skip link and visible focus",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 1603
+    },
+    {
+      "title": "keyboard: skip link and visible focus",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 1540
+    },
+    {
+      "title": "dark theme: the theme control applies and stays accessible",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 3259
+    },
+    {
+      "title": "dark theme: the theme control applies and stays accessible",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 3287
+    },
+    {
+      "title": "reduced motion: no running animations, tally complete",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 674
+    },
+    {
+      "title": "reduced motion: no running animations, tally complete",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 1019
+    },
+    {
+      "title": "states: loading, empty, error with retry, stale",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 3194
+    },
+    {
+      "title": "states: loading, empty, error with retry, stale",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 2753
+    },
+    {
+      "title": "pages: runs ledger, request form link, about",
+      "project": "tablet-768",
+      "status": "passed",
+      "duration": 1221
+    },
+    {
+      "title": "pages: runs ledger, request form link, about",
+      "project": "mobile-390",
+      "status": "passed",
+      "duration": 1254
+    },
+    {
+      "title": "coverage: statement, tally and legend; partial coverage stated; accessible, no overflow",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 2831
+    },
+    {
+      "title": "findings: a finding opens its evidence at the cited line",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 2566
+    },
+    {
+      "title": "findings: not-evaluated and excepted views, pack filter",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 1106
+    },
+    {
+      "title": "tabs: every section by link, focus moves to its heading, back button restores",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 767
+    },
+    {
+      "title": "inventory: unsupported types are listed as having no rule",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 2234
+    },
+    {
+      "title": "policies: each rule states what it does not evaluate",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 2429
+    },
+    {
+      "title": "rule tests: positive, negative and boundary fixtures for every rule, all passing",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 2528
+    },
+    {
+      "title": "exceptions: active, expired and rejected entries with validity spans",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 2245
+    },
+    {
+      "title": "remediation: verified patch diff, before and after views, download",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 2598
+    },
+    {
+      "title": "keyboard: skip link and visible focus",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 1167
+    },
+    {
+      "title": "dark theme: the theme control applies and stays accessible",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 2509
+    },
+    {
+      "title": "reduced motion: no running animations, tally complete",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 321
+    },
+    {
+      "title": "states: loading, empty, error with retry, stale",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 2506
+    },
+    {
+      "title": "pages: runs ledger, request form link, about",
+      "project": "desktop-1440",
+      "status": "passed",
+      "duration": 1091
+    }
+  ]
+}
