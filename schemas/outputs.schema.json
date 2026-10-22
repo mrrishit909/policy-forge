@@ -355,7 +355,8 @@
           }
         },
         "input_manifest_hash": {
-          "$ref": "#/$defs/sha256"
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
         },
         "outputs": {
           "type": "object",

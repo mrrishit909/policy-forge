@@ -33,15 +33,22 @@ setup() {
 
 @test "drops sensitive raw fields" {
   out="$(bash "$ADAPTER" "$SNAP")"
+  # Each sensitive raw value, JSON-escaped onto one line exactly as it would appear inside the JSON Lines output.
   values="$(jq -r '.. | objects | to_entries[]
     | select(.key | test("secret|passw(or)?d|user_?data|connection_?string"; "i"))
-    | .value | strings' "$SNAP"/*.json)"
+    | .value | strings | select(length > 0) | @json | .[1:-1]' "$SNAP"/*.json)"
   [ -n "$values" ]
+  leaked=0
   while IFS= read -r v; do
-    [[ "$out" != *"$v"* ]]
+    if [[ "$out" == *"$v"* ]]; then
+      echo "leaked: $v"
+      leaked=1
+    fi
   done <<< "$values"
-  [[ "$out" != *"SecretAccessKey"* ]]
-  [[ "$out" != *"UserData"* ]]
+  # Plain [ ] tests: bash 3.2 does not fail a Bats test on a [[ ]] that is not the last command.
+  [ "$leaked" -eq 0 ]
+  [ "$(grep -c "SecretAccessKey" <<< "$out")" -eq 0 ]
+  [ "$(grep -c "UserData" <<< "$out")" -eq 0 ]
 }
 
 @test "fails cleanly on a missing directory" {

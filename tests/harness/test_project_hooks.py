@@ -1,6 +1,7 @@
 """Real hooks against real engine output (the fake-hook tests cannot catch contract drift)."""
 
 import json
+import re
 import shutil
 from pathlib import Path
 
@@ -15,6 +16,8 @@ def test_hooks_on_real_outputs(tmp_path: Path):
     out = tmp_path / "out"
     project_hooks.compute(REQUEST, out)
     assert project_hooks.validate_outputs(out) == []
+    # The harness copies this into the run record, whose schema requires the sha256: prefix.
+    assert re.fullmatch(r"sha256:[0-9a-f]{64}", json.loads((out / "manifest.json").read_text())["input_manifest_hash"])
 
     summary = json.loads((out / "summary.json").read_text())
     line = project_hooks.headline(out)

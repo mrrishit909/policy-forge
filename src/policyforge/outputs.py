@@ -286,7 +286,7 @@ def write(b: Bundle, out_dir: Path, sensitive: set[str]) -> dict[str, Any]:
         "package": "policyforge", "package_version": __version__, "params": b.params,
         "snapshot": {"name": b.manifest["name"], "provider": b.provider, "captured_at": b.manifest["captured_at"],
                      "synthetic": True, "files": b.hashes},
-        "tools": b.versions, "input_manifest_hash": b.input_hash,
+        "tools": b.versions, "input_manifest_hash": f"sha256:{b.input_hash}",
         "outputs": {name: hashlib.sha256(text.encode()).hexdigest() for name, text in sorted(texts.items())},
     })
     checks = _checks(b, s, cov, texts, sensitive)
