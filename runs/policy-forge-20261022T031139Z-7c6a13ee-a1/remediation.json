@@ -1,0 +1,853 @@
+{
+  "combined": {
+    "files": [
+      "snapshots/aws-drifted-2026-10/cloudtrail-describe-trails.json",
+      "snapshots/aws-drifted-2026-10/cloudtrail-get-trail-status.json",
+      "snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json",
+      "snapshots/aws-drifted-2026-10/s3-buckets.json"
+    ],
+    "ok": true,
+    "patch_file": "remediation.patch",
+    "patch_ids": [
+      "P-01",
+      "P-02",
+      "P-03",
+      "P-04",
+      "P-06",
+      "P-07",
+      "P-09",
+      "P-10"
+    ],
+    "regression": {
+      "changed_findings": [],
+      "changed_resources": [],
+      "changed_results": [],
+      "checked_resources": 45,
+      "checked_results": 82,
+      "ok": true,
+      "reasons": [],
+      "targets": [
+        {
+          "after": "pass",
+          "before": "fail",
+          "resource_id": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/org-management-trail",
+          "rule_id": "PF-AUD-001"
+        },
+        {
+          "after": "pass",
+          "before": "fail",
+          "resource_id": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+          "rule_id": "PF-AUD-002"
+        },
+        {
+          "after": "pass",
+          "before": "fail",
+          "resource_id": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+          "rule_id": "PF-AUD-003"
+        },
+        {
+          "after": "pass",
+          "before": "fail",
+          "resource_id": "aws:security_group:sg-0fe00000000000002",
+          "rule_id": "PF-NET-001"
+        },
+        {
+          "after": "pass",
+          "before": "fail",
+          "resource_id": "aws:security_group:sg-0fe00000000000006",
+          "rule_id": "PF-NET-001"
+        },
+        {
+          "after": "pass",
+          "before": "fail",
+          "resource_id": "aws:security_group:sg-0fe00000000000007",
+          "rule_id": "PF-NET-001"
+        },
+        {
+          "after": "pass",
+          "before": "fail",
+          "resource_id": "aws:security_group:sg-0fe00000000000008",
+          "rule_id": "PF-NET-002"
+        },
+        {
+          "after": "pass",
+          "before": "fail",
+          "resource_id": "aws:storage_bucket:fh-marketing-assets",
+          "rule_id": "PF-STOR-001"
+        }
+      ],
+      "touched_resources": [
+        "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+        "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/org-management-trail",
+        "aws:security_group:sg-0fe00000000000002",
+        "aws:security_group:sg-0fe00000000000006",
+        "aws:security_group:sg-0fe00000000000007",
+        "aws:security_group:sg-0fe00000000000008",
+        "aws:storage_bucket:fh-marketing-assets"
+      ]
+    },
+    "withheld_reason": null
+  },
+  "counts": {
+    "accepted": 8,
+    "not_proposed": 8,
+    "proposed": 11,
+    "rejected": 3,
+    "withheld": 0
+  },
+  "explanation": "Each auto-remediable active finding gets a JSON Patch against its raw snapshot file. The patch is applied to a temporary copy of the snapshot and the whole evaluation is re-run; it is accepted only when the targeted finding resolves to pass and nothing else changes. remediation.patch combines the accepted patches (one diff per file, re-verified together) and applies from the repository root. The committed snapshot is never modified.",
+  "mode": "propose",
+  "not_proposed": [
+    {
+      "finding_id": "PF-IAM-001::aws:iam_policy:arn:aws:iam::111122223333:policy/fh-wildcard-admin",
+      "reason": "manual remediation: Replace the wildcard with the specific actions and resources the workload uses. The intended permission set cannot be inferred from configuration, so no patch is generated.",
+      "resource_id": "aws:iam_policy:arn:aws:iam::111122223333:policy/fh-wildcard-admin",
+      "rule_id": "PF-IAM-001"
+    },
+    {
+      "finding_id": "PF-IAM-001::aws:iam_role:arn:aws:iam::111122223333:role/app-server-role",
+      "reason": "manual remediation: Replace the wildcard with the specific actions and resources the workload uses. The intended permission set cannot be inferred from configuration, so no patch is generated.",
+      "resource_id": "aws:iam_role:arn:aws:iam::111122223333:role/app-server-role",
+      "rule_id": "PF-IAM-001"
+    },
+    {
+      "finding_id": "PF-IAM-002::aws:iam_policy:arn:aws:iam::111122223333:policy/fh-ci-deploy",
+      "reason": "manual remediation: Narrow the service wildcard to the actions in use and scope Resource to the specific ARNs or resource groups. Intent is required, so no patch is generated.",
+      "resource_id": "aws:iam_policy:arn:aws:iam::111122223333:policy/fh-ci-deploy",
+      "rule_id": "PF-IAM-002"
+    },
+    {
+      "finding_id": "PF-IAM-002::aws:iam_user:arn:aws:iam::111122223333:user/ci.deployer",
+      "reason": "manual remediation: Narrow the service wildcard to the actions in use and scope Resource to the specific ARNs or resource groups. Intent is required, so no patch is generated.",
+      "resource_id": "aws:iam_user:arn:aws:iam::111122223333:user/ci.deployer",
+      "rule_id": "PF-IAM-002"
+    },
+    {
+      "finding_id": "PF-IAM-003::aws:iam_user:arn:aws:iam::111122223333:user/contractor.temp",
+      "reason": "manual remediation: Move standing admin access to just-in-time elevation or the break-glass principal, and grant the user a least-privilege role. Requires an owner decision.",
+      "resource_id": "aws:iam_user:arn:aws:iam::111122223333:user/contractor.temp",
+      "rule_id": "PF-IAM-003"
+    },
+    {
+      "finding_id": "PF-REL-001::aws:compute_instance:i-0fe0000000000a001",
+      "reason": "manual remediation: Remove the public exposure or replace the identity with a least-privilege one. Either change alters workload behaviour, so no patch is generated.",
+      "resource_id": "aws:compute_instance:i-0fe0000000000a001",
+      "rule_id": "PF-REL-001"
+    },
+    {
+      "finding_id": "PF-REL-002::aws:storage_bucket:fh-audit-logs",
+      "reason": "manual remediation: Make the audit storage private and review who read it while it was public. The storage-level patches for this bucket also change this result, so they are rejected by the regression check and the fix needs a reviewed change.",
+      "resource_id": "aws:storage_bucket:fh-audit-logs",
+      "rule_id": "PF-REL-002"
+    },
+    {
+      "finding_id": "PF-STOR-002::aws:storage_bucket:fh-public-docs",
+      "reason": "finding is excepted by EXC-001",
+      "resource_id": "aws:storage_bucket:fh-public-docs",
+      "rule_id": "PF-STOR-002"
+    }
+  ],
+  "patches": [
+    {
+      "diff": "diff --git a/snapshots/aws-drifted-2026-10/cloudtrail-get-trail-status.json b/snapshots/aws-drifted-2026-10/cloudtrail-get-trail-status.json\n--- a/snapshots/aws-drifted-2026-10/cloudtrail-get-trail-status.json\n+++ b/snapshots/aws-drifted-2026-10/cloudtrail-get-trail-status.json\n@@ -10,7 +10,7 @@\n     {\n       \"Name\": \"org-management-trail\",\n       \"TrailARN\": \"arn:aws:cloudtrail:us-east-2:111122223333:trail/org-management-trail\",\n-      \"IsLogging\": false,\n+      \"IsLogging\": true,\n       \"LatestDeliveryTime\": \"2026-10-20T23:55:00+00:00\",\n       \"StartLoggingTime\": \"2025-03-02T09:05:00+00:00\"\n     }\n",
+      "files": [
+        "snapshots/aws-drifted-2026-10/cloudtrail-get-trail-status.json"
+      ],
+      "finding_id": "PF-AUD-001::aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/org-management-trail",
+      "id": "P-01",
+      "json_patch": [
+        {
+          "file": "snapshots/aws-drifted-2026-10/cloudtrail-get-trail-status.json",
+          "ops": [
+            {
+              "op": "test",
+              "path": "/TrailStatus/1/IsLogging",
+              "value": false
+            },
+            {
+              "op": "replace",
+              "path": "/TrailStatus/1/IsLogging",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "reason": "target finding resolves to pass; no other rule result, finding or resource changes",
+      "regression": {
+        "changed_findings": [],
+        "changed_resources": [],
+        "changed_results": [],
+        "checked_resources": 45,
+        "checked_results": 82,
+        "ok": true,
+        "reasons": [],
+        "targets": [
+          {
+            "after": "pass",
+            "before": "fail",
+            "resource_id": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/org-management-trail",
+            "rule_id": "PF-AUD-001"
+          }
+        ],
+        "touched_resources": [
+          "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/org-management-trail"
+        ]
+      },
+      "resource_id": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/org-management-trail",
+      "rule_id": "PF-AUD-001",
+      "status": "accepted",
+      "strategy": "Set IsLogging to true in the captured trail status (desired state: logging started for the trail)."
+    },
+    {
+      "diff": "diff --git a/snapshots/aws-drifted-2026-10/cloudtrail-describe-trails.json b/snapshots/aws-drifted-2026-10/cloudtrail-describe-trails.json\n--- a/snapshots/aws-drifted-2026-10/cloudtrail-describe-trails.json\n+++ b/snapshots/aws-drifted-2026-10/cloudtrail-describe-trails.json\n@@ -5,7 +5,7 @@\n       \"S3BucketName\": \"fh-audit-logs\",\n       \"S3KeyPrefix\": \"\",\n       \"IncludeGlobalServiceEvents\": true,\n-      \"IsMultiRegionTrail\": false,\n+      \"IsMultiRegionTrail\": true,\n       \"HomeRegion\": \"us-east-2\",\n       \"TrailARN\": \"arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail\",\n       \"LogFileValidationEnabled\": false,\n",
+      "files": [
+        "snapshots/aws-drifted-2026-10/cloudtrail-describe-trails.json"
+      ],
+      "finding_id": "PF-AUD-002::aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+      "id": "P-02",
+      "json_patch": [
+        {
+          "file": "snapshots/aws-drifted-2026-10/cloudtrail-describe-trails.json",
+          "ops": [
+            {
+              "op": "test",
+              "path": "/trailList/0/IsMultiRegionTrail",
+              "value": false
+            },
+            {
+              "op": "replace",
+              "path": "/trailList/0/IsMultiRegionTrail",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "reason": "target finding resolves to pass; no other rule result, finding or resource changes",
+      "regression": {
+        "changed_findings": [],
+        "changed_resources": [],
+        "changed_results": [],
+        "checked_resources": 45,
+        "checked_results": 82,
+        "ok": true,
+        "reasons": [],
+        "targets": [
+          {
+            "after": "pass",
+            "before": "fail",
+            "resource_id": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+            "rule_id": "PF-AUD-002"
+          }
+        ],
+        "touched_resources": [
+          "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail"
+        ]
+      },
+      "resource_id": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+      "rule_id": "PF-AUD-002",
+      "status": "accepted",
+      "strategy": "Set IsMultiRegionTrail to true on the trail."
+    },
+    {
+      "diff": "diff --git a/snapshots/aws-drifted-2026-10/cloudtrail-describe-trails.json b/snapshots/aws-drifted-2026-10/cloudtrail-describe-trails.json\n--- a/snapshots/aws-drifted-2026-10/cloudtrail-describe-trails.json\n+++ b/snapshots/aws-drifted-2026-10/cloudtrail-describe-trails.json\n@@ -8,7 +8,7 @@\n       \"IsMultiRegionTrail\": false,\n       \"HomeRegion\": \"us-east-2\",\n       \"TrailARN\": \"arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail\",\n-      \"LogFileValidationEnabled\": false,\n+      \"LogFileValidationEnabled\": true,\n       \"HasCustomEventSelectors\": false,\n       \"HasInsightSelectors\": false,\n       \"IsOrganizationTrail\": false\n",
+      "files": [
+        "snapshots/aws-drifted-2026-10/cloudtrail-describe-trails.json"
+      ],
+      "finding_id": "PF-AUD-003::aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+      "id": "P-03",
+      "json_patch": [
+        {
+          "file": "snapshots/aws-drifted-2026-10/cloudtrail-describe-trails.json",
+          "ops": [
+            {
+              "op": "test",
+              "path": "/trailList/0/LogFileValidationEnabled",
+              "value": false
+            },
+            {
+              "op": "replace",
+              "path": "/trailList/0/LogFileValidationEnabled",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "reason": "target finding resolves to pass; no other rule result, finding or resource changes",
+      "regression": {
+        "changed_findings": [],
+        "changed_resources": [],
+        "changed_results": [],
+        "checked_resources": 45,
+        "checked_results": 82,
+        "ok": true,
+        "reasons": [],
+        "targets": [
+          {
+            "after": "pass",
+            "before": "fail",
+            "resource_id": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+            "rule_id": "PF-AUD-003"
+          }
+        ],
+        "touched_resources": [
+          "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail"
+        ]
+      },
+      "resource_id": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+      "rule_id": "PF-AUD-003",
+      "status": "accepted",
+      "strategy": "Set LogFileValidationEnabled to true on the trail."
+    },
+    {
+      "diff": "diff --git a/snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json b/snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json\n--- a/snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json\n+++ b/snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json\n@@ -70,15 +70,15 @@\n           \"ToPort\": 22,\n           \"IpRanges\": [\n             {\n-              \"CidrIp\": \"0.0.0.0/0\",\n-              \"Description\": \"Temporary vendor access\"\n-            }\n-          ],\n-          \"Ipv6Ranges\": [\n-            {\n-              \"CidrIpv6\": \"::/0\"\n-            }\n-          ],\n+              \"CidrIp\": \"203.0.113.0/26\",\n+              \"Description\": \"Restricted to admin_cidrs (Policy Forge proposal)\"\n+            },\n+            {\n+              \"CidrIp\": \"198.51.100.16/28\",\n+              \"Description\": \"Restricted to admin_cidrs (Policy Forge proposal)\"\n+            }\n+          ],\n+          \"Ipv6Ranges\": [],\n           \"PrefixListIds\": [],\n           \"UserIdGroupPairs\": []\n         }\n",
+      "files": [
+        "snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json"
+      ],
+      "finding_id": "PF-NET-001::aws:security_group:sg-0fe00000000000002",
+      "id": "P-04",
+      "json_patch": [
+        {
+          "file": "snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json",
+          "ops": [
+            {
+              "op": "test",
+              "path": "/SecurityGroups/1/IpPermissions/0/IpRanges",
+              "value": [
+                {
+                  "CidrIp": "0.0.0.0/0",
+                  "Description": "Temporary vendor access"
+                }
+              ]
+            },
+            {
+              "op": "replace",
+              "path": "/SecurityGroups/1/IpPermissions/0/IpRanges",
+              "value": [
+                {
+                  "CidrIp": "203.0.113.0/26",
+                  "Description": "Restricted to admin_cidrs (Policy Forge proposal)"
+                },
+                {
+                  "CidrIp": "198.51.100.16/28",
+                  "Description": "Restricted to admin_cidrs (Policy Forge proposal)"
+                }
+              ]
+            },
+            {
+              "op": "test",
+              "path": "/SecurityGroups/1/IpPermissions/0/Ipv6Ranges",
+              "value": [
+                {
+                  "CidrIpv6": "::/0"
+                }
+              ]
+            },
+            {
+              "op": "replace",
+              "path": "/SecurityGroups/1/IpPermissions/0/Ipv6Ranges",
+              "value": []
+            }
+          ]
+        }
+      ],
+      "reason": "target finding resolves to pass; no other rule result, finding or resource changes",
+      "regression": {
+        "changed_findings": [],
+        "changed_resources": [],
+        "changed_results": [],
+        "checked_resources": 45,
+        "checked_results": 82,
+        "ok": true,
+        "reasons": [],
+        "targets": [
+          {
+            "after": "pass",
+            "before": "fail",
+            "resource_id": "aws:security_group:sg-0fe00000000000002",
+            "rule_id": "PF-NET-001"
+          }
+        ],
+        "touched_resources": [
+          "aws:security_group:sg-0fe00000000000002"
+        ]
+      },
+      "resource_id": "aws:security_group:sg-0fe00000000000002",
+      "rule_id": "PF-NET-001",
+      "status": "accepted",
+      "strategy": "replace the internet-wide sources of each offending ingress rule with the context admin_cidrs (AWS: IpRanges/Ipv6Ranges of the IpPermissions entry; Azure: SourceAddressPrefix of the security rule)"
+    },
+    {
+      "diff": null,
+      "files": [
+        "snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json"
+      ],
+      "finding_id": "PF-NET-001::aws:security_group:sg-0fe00000000000005",
+      "id": "P-05",
+      "json_patch": [
+        {
+          "file": "snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json",
+          "ops": [
+            {
+              "op": "test",
+              "path": "/SecurityGroups/4/IpPermissions/0/IpRanges",
+              "value": [
+                {
+                  "CidrIp": "0.0.0.0/0"
+                }
+              ]
+            },
+            {
+              "op": "replace",
+              "path": "/SecurityGroups/4/IpPermissions/0/IpRanges",
+              "value": [
+                {
+                  "CidrIp": "203.0.113.0/26",
+                  "Description": "Restricted to admin_cidrs (Policy Forge proposal)"
+                },
+                {
+                  "CidrIp": "198.51.100.16/28",
+                  "Description": "Restricted to admin_cidrs (Policy Forge proposal)"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "reason": "other rule results change: PF-NET-002 on aws:security_group:sg-0fe00000000000005 (fail -> pass), PF-REL-001 on aws:compute_instance:i-0fe0000000000a004 (unknown -> pass)",
+      "regression": {
+        "changed_findings": [],
+        "changed_resources": [],
+        "changed_results": [
+          {
+            "after": "pass",
+            "before": "fail",
+            "resource_id": "aws:security_group:sg-0fe00000000000005",
+            "rule_id": "PF-NET-002"
+          },
+          {
+            "after": "pass",
+            "before": "unknown",
+            "resource_id": "aws:compute_instance:i-0fe0000000000a004",
+            "rule_id": "PF-REL-001"
+          }
+        ],
+        "checked_resources": 45,
+        "checked_results": 82,
+        "ok": false,
+        "reasons": [
+          "other rule results change: PF-NET-002 on aws:security_group:sg-0fe00000000000005 (fail -> pass), PF-REL-001 on aws:compute_instance:i-0fe0000000000a004 (unknown -> pass)"
+        ],
+        "targets": [
+          {
+            "after": "pass",
+            "before": "fail",
+            "resource_id": "aws:security_group:sg-0fe00000000000005",
+            "rule_id": "PF-NET-001"
+          }
+        ],
+        "touched_resources": [
+          "aws:security_group:sg-0fe00000000000005"
+        ]
+      },
+      "resource_id": "aws:security_group:sg-0fe00000000000005",
+      "rule_id": "PF-NET-001",
+      "status": "rejected",
+      "strategy": "replace the internet-wide sources of each offending ingress rule with the context admin_cidrs (AWS: IpRanges/Ipv6Ranges of the IpPermissions entry; Azure: SourceAddressPrefix of the security rule)"
+    },
+    {
+      "diff": "diff --git a/snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json b/snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json\n--- a/snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json\n+++ b/snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json\n@@ -255,8 +255,12 @@\n           \"ToPort\": 3389,\n           \"IpRanges\": [\n             {\n-              \"CidrIp\": \"0.0.0.0/1\",\n-              \"Description\": \"Half the internet\"\n+              \"CidrIp\": \"203.0.113.0/26\",\n+              \"Description\": \"Restricted to admin_cidrs (Policy Forge proposal)\"\n+            },\n+            {\n+              \"CidrIp\": \"198.51.100.16/28\",\n+              \"Description\": \"Restricted to admin_cidrs (Policy Forge proposal)\"\n             }\n           ],\n           \"Ipv6Ranges\": [],\n",
+      "files": [
+        "snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json"
+      ],
+      "finding_id": "PF-NET-001::aws:security_group:sg-0fe00000000000006",
+      "id": "P-06",
+      "json_patch": [
+        {
+          "file": "snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json",
+          "ops": [
+            {
+              "op": "test",
+              "path": "/SecurityGroups/5/IpPermissions/0/IpRanges",
+              "value": [
+                {
+                  "CidrIp": "0.0.0.0/1",
+                  "Description": "Half the internet"
+                }
+              ]
+            },
+            {
+              "op": "replace",
+              "path": "/SecurityGroups/5/IpPermissions/0/IpRanges",
+              "value": [
+                {
+                  "CidrIp": "203.0.113.0/26",
+                  "Description": "Restricted to admin_cidrs (Policy Forge proposal)"
+                },
+                {
+                  "CidrIp": "198.51.100.16/28",
+                  "Description": "Restricted to admin_cidrs (Policy Forge proposal)"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "reason": "target finding resolves to pass; no other rule result, finding or resource changes",
+      "regression": {
+        "changed_findings": [],
+        "changed_resources": [],
+        "changed_results": [],
+        "checked_resources": 45,
+        "checked_results": 82,
+        "ok": true,
+        "reasons": [],
+        "targets": [
+          {
+            "after": "pass",
+            "before": "fail",
+            "resource_id": "aws:security_group:sg-0fe00000000000006",
+            "rule_id": "PF-NET-001"
+          }
+        ],
+        "touched_resources": [
+          "aws:security_group:sg-0fe00000000000006"
+        ]
+      },
+      "resource_id": "aws:security_group:sg-0fe00000000000006",
+      "rule_id": "PF-NET-001",
+      "status": "accepted",
+      "strategy": "replace the internet-wide sources of each offending ingress rule with the context admin_cidrs (AWS: IpRanges/Ipv6Ranges of the IpPermissions entry; Azure: SourceAddressPrefix of the security rule)"
+    },
+    {
+      "diff": "diff --git a/snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json b/snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json\n--- a/snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json\n+++ b/snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json\n@@ -297,7 +297,12 @@\n           \"ToPort\": 22,\n           \"IpRanges\": [\n             {\n-              \"CidrIp\": \"0.0.0.0/0\"\n+              \"CidrIp\": \"203.0.113.0/26\",\n+              \"Description\": \"Restricted to admin_cidrs (Policy Forge proposal)\"\n+            },\n+            {\n+              \"CidrIp\": \"198.51.100.16/28\",\n+              \"Description\": \"Restricted to admin_cidrs (Policy Forge proposal)\"\n             }\n           ],\n           \"Ipv6Ranges\": [],\n",
+      "files": [
+        "snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json"
+      ],
+      "finding_id": "PF-NET-001::aws:security_group:sg-0fe00000000000007",
+      "id": "P-07",
+      "json_patch": [
+        {
+          "file": "snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json",
+          "ops": [
+            {
+              "op": "test",
+              "path": "/SecurityGroups/6/IpPermissions/0/IpRanges",
+              "value": [
+                {
+                  "CidrIp": "0.0.0.0/0"
+                }
+              ]
+            },
+            {
+              "op": "replace",
+              "path": "/SecurityGroups/6/IpPermissions/0/IpRanges",
+              "value": [
+                {
+                  "CidrIp": "203.0.113.0/26",
+                  "Description": "Restricted to admin_cidrs (Policy Forge proposal)"
+                },
+                {
+                  "CidrIp": "198.51.100.16/28",
+                  "Description": "Restricted to admin_cidrs (Policy Forge proposal)"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "reason": "target finding resolves to pass; no other rule result, finding or resource changes",
+      "regression": {
+        "changed_findings": [],
+        "changed_resources": [],
+        "changed_results": [],
+        "checked_resources": 45,
+        "checked_results": 82,
+        "ok": true,
+        "reasons": [],
+        "targets": [
+          {
+            "after": "pass",
+            "before": "fail",
+            "resource_id": "aws:security_group:sg-0fe00000000000007",
+            "rule_id": "PF-NET-001"
+          }
+        ],
+        "touched_resources": [
+          "aws:security_group:sg-0fe00000000000007"
+        ]
+      },
+      "resource_id": "aws:security_group:sg-0fe00000000000007",
+      "rule_id": "PF-NET-001",
+      "status": "accepted",
+      "strategy": "replace the internet-wide sources of each offending ingress rule with the context admin_cidrs (AWS: IpRanges/Ipv6Ranges of the IpPermissions entry; Azure: SourceAddressPrefix of the security rule)"
+    },
+    {
+      "diff": null,
+      "files": [
+        "snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json"
+      ],
+      "finding_id": "PF-NET-002::aws:security_group:sg-0fe00000000000005",
+      "id": "P-08",
+      "json_patch": [
+        {
+          "file": "snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json",
+          "ops": [
+            {
+              "op": "test",
+              "path": "/SecurityGroups/4/IpPermissions/0/IpRanges",
+              "value": [
+                {
+                  "CidrIp": "0.0.0.0/0"
+                }
+              ]
+            },
+            {
+              "op": "replace",
+              "path": "/SecurityGroups/4/IpPermissions/0/IpRanges",
+              "value": [
+                {
+                  "CidrIp": "203.0.113.0/26",
+                  "Description": "Restricted to admin_cidrs (Policy Forge proposal)"
+                },
+                {
+                  "CidrIp": "198.51.100.16/28",
+                  "Description": "Restricted to admin_cidrs (Policy Forge proposal)"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "reason": "other rule results change: PF-NET-001 on aws:security_group:sg-0fe00000000000005 (fail -> pass), PF-REL-001 on aws:compute_instance:i-0fe0000000000a004 (unknown -> pass)",
+      "regression": {
+        "changed_findings": [],
+        "changed_resources": [],
+        "changed_results": [
+          {
+            "after": "pass",
+            "before": "fail",
+            "resource_id": "aws:security_group:sg-0fe00000000000005",
+            "rule_id": "PF-NET-001"
+          },
+          {
+            "after": "pass",
+            "before": "unknown",
+            "resource_id": "aws:compute_instance:i-0fe0000000000a004",
+            "rule_id": "PF-REL-001"
+          }
+        ],
+        "checked_resources": 45,
+        "checked_results": 82,
+        "ok": false,
+        "reasons": [
+          "other rule results change: PF-NET-001 on aws:security_group:sg-0fe00000000000005 (fail -> pass), PF-REL-001 on aws:compute_instance:i-0fe0000000000a004 (unknown -> pass)"
+        ],
+        "targets": [
+          {
+            "after": "pass",
+            "before": "fail",
+            "resource_id": "aws:security_group:sg-0fe00000000000005",
+            "rule_id": "PF-NET-002"
+          }
+        ],
+        "touched_resources": [
+          "aws:security_group:sg-0fe00000000000005"
+        ]
+      },
+      "resource_id": "aws:security_group:sg-0fe00000000000005",
+      "rule_id": "PF-NET-002",
+      "status": "rejected",
+      "strategy": "replace the internet-wide sources of each offending ingress rule with the context admin_cidrs (AWS: IpRanges/Ipv6Ranges of the IpPermissions entry; Azure: SourceAddressPrefix of the security rule)"
+    },
+    {
+      "diff": "diff --git a/snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json b/snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json\n--- a/snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json\n+++ b/snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json\n@@ -365,8 +365,12 @@\n           \"ToPort\": 3306,\n           \"IpRanges\": [\n             {\n-              \"CidrIp\": \"0.0.0.0/0\",\n-              \"Description\": \"BI vendor\"\n+              \"CidrIp\": \"203.0.113.0/26\",\n+              \"Description\": \"Restricted to admin_cidrs (Policy Forge proposal)\"\n+            },\n+            {\n+              \"CidrIp\": \"198.51.100.16/28\",\n+              \"Description\": \"Restricted to admin_cidrs (Policy Forge proposal)\"\n             }\n           ],\n           \"Ipv6Ranges\": [],\n",
+      "files": [
+        "snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json"
+      ],
+      "finding_id": "PF-NET-002::aws:security_group:sg-0fe00000000000008",
+      "id": "P-09",
+      "json_patch": [
+        {
+          "file": "snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json",
+          "ops": [
+            {
+              "op": "test",
+              "path": "/SecurityGroups/7/IpPermissions/1/IpRanges",
+              "value": [
+                {
+                  "CidrIp": "0.0.0.0/0",
+                  "Description": "BI vendor"
+                }
+              ]
+            },
+            {
+              "op": "replace",
+              "path": "/SecurityGroups/7/IpPermissions/1/IpRanges",
+              "value": [
+                {
+                  "CidrIp": "203.0.113.0/26",
+                  "Description": "Restricted to admin_cidrs (Policy Forge proposal)"
+                },
+                {
+                  "CidrIp": "198.51.100.16/28",
+                  "Description": "Restricted to admin_cidrs (Policy Forge proposal)"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "reason": "target finding resolves to pass; no other rule result, finding or resource changes",
+      "regression": {
+        "changed_findings": [],
+        "changed_resources": [],
+        "changed_results": [],
+        "checked_resources": 45,
+        "checked_results": 82,
+        "ok": true,
+        "reasons": [],
+        "targets": [
+          {
+            "after": "pass",
+            "before": "fail",
+            "resource_id": "aws:security_group:sg-0fe00000000000008",
+            "rule_id": "PF-NET-002"
+          }
+        ],
+        "touched_resources": [
+          "aws:security_group:sg-0fe00000000000008"
+        ]
+      },
+      "resource_id": "aws:security_group:sg-0fe00000000000008",
+      "rule_id": "PF-NET-002",
+      "status": "accepted",
+      "strategy": "replace the internet-wide sources of each offending ingress rule with the context admin_cidrs (AWS: IpRanges/Ipv6Ranges of the IpPermissions entry; Azure: SourceAddressPrefix of the security rule)"
+    },
+    {
+      "diff": "diff --git a/snapshots/aws-drifted-2026-10/s3-buckets.json b/snapshots/aws-drifted-2026-10/s3-buckets.json\n--- a/snapshots/aws-drifted-2026-10/s3-buckets.json\n+++ b/snapshots/aws-drifted-2026-10/s3-buckets.json\n@@ -251,7 +251,14 @@\n         ]\n       },\n       \"GetBucketPolicy\": null,\n-      \"GetPublicAccessBlock\": null,\n+      \"GetPublicAccessBlock\": {\n+        \"PublicAccessBlockConfiguration\": {\n+          \"BlockPublicAcls\": true,\n+          \"IgnorePublicAcls\": true,\n+          \"BlockPublicPolicy\": false,\n+          \"RestrictPublicBuckets\": false\n+        }\n+      },\n       \"GetBucketLogging\": {},\n       \"GetBucketTagging\": {\n         \"TagSet\": [\n",
+      "files": [
+        "snapshots/aws-drifted-2026-10/s3-buckets.json"
+      ],
+      "finding_id": "PF-STOR-001::aws:storage_bucket:fh-marketing-assets",
+      "id": "P-10",
+      "json_patch": [
+        {
+          "file": "snapshots/aws-drifted-2026-10/s3-buckets.json",
+          "ops": [
+            {
+              "op": "test",
+              "path": "/Buckets/5/GetPublicAccessBlock",
+              "value": null
+            },
+            {
+              "op": "add",
+              "path": "/Buckets/5/GetPublicAccessBlock",
+              "value": {
+                "PublicAccessBlockConfiguration": {
+                  "BlockPublicAcls": true,
+                  "BlockPublicPolicy": false,
+                  "IgnorePublicAcls": true,
+                  "RestrictPublicBuckets": false
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "reason": "target finding resolves to pass; no other rule result, finding or resource changes",
+      "regression": {
+        "changed_findings": [],
+        "changed_resources": [],
+        "changed_results": [],
+        "checked_resources": 45,
+        "checked_results": 82,
+        "ok": true,
+        "reasons": [],
+        "targets": [
+          {
+            "after": "pass",
+            "before": "fail",
+            "resource_id": "aws:storage_bucket:fh-marketing-assets",
+            "rule_id": "PF-STOR-001"
+          }
+        ],
+        "touched_resources": [
+          "aws:storage_bucket:fh-marketing-assets"
+        ]
+      },
+      "resource_id": "aws:storage_bucket:fh-marketing-assets",
+      "rule_id": "PF-STOR-001",
+      "status": "accepted",
+      "strategy": "AWS: turn on BlockPublicAcls and IgnorePublicAcls in the bucket's public access block (the policy-related flags are left as they are). Azure: set AllowBlobPublicAccess to false on the storage account."
+    },
+    {
+      "diff": null,
+      "files": [
+        "snapshots/aws-drifted-2026-10/s3-buckets.json"
+      ],
+      "finding_id": "PF-STOR-002::aws:storage_bucket:fh-audit-logs",
+      "id": "P-11",
+      "json_patch": [
+        {
+          "file": "snapshots/aws-drifted-2026-10/s3-buckets.json",
+          "ops": [
+            {
+              "op": "test",
+              "path": "/Buckets/1/GetPublicAccessBlock/PublicAccessBlockConfiguration/BlockPublicPolicy",
+              "value": false
+            },
+            {
+              "op": "replace",
+              "path": "/Buckets/1/GetPublicAccessBlock/PublicAccessBlockConfiguration/BlockPublicPolicy",
+              "value": true
+            },
+            {
+              "op": "test",
+              "path": "/Buckets/1/GetPublicAccessBlock/PublicAccessBlockConfiguration/RestrictPublicBuckets",
+              "value": false
+            },
+            {
+              "op": "replace",
+              "path": "/Buckets/1/GetPublicAccessBlock/PublicAccessBlockConfiguration/RestrictPublicBuckets",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "reason": "other rule results change: PF-REL-002 on aws:storage_bucket:fh-audit-logs (fail -> pass)",
+      "regression": {
+        "changed_findings": [],
+        "changed_resources": [],
+        "changed_results": [
+          {
+            "after": "pass",
+            "before": "fail",
+            "resource_id": "aws:storage_bucket:fh-audit-logs",
+            "rule_id": "PF-REL-002"
+          }
+        ],
+        "checked_resources": 45,
+        "checked_results": 82,
+        "ok": false,
+        "reasons": [
+          "other rule results change: PF-REL-002 on aws:storage_bucket:fh-audit-logs (fail -> pass)"
+        ],
+        "targets": [
+          {
+            "after": "pass",
+            "before": "fail",
+            "resource_id": "aws:storage_bucket:fh-audit-logs",
+            "rule_id": "PF-STOR-002"
+          }
+        ],
+        "touched_resources": [
+          "aws:storage_bucket:fh-audit-logs"
+        ]
+      },
+      "resource_id": "aws:storage_bucket:fh-audit-logs",
+      "rule_id": "PF-STOR-002",
+      "status": "rejected",
+      "strategy": "Turn on BlockPublicPolicy and RestrictPublicBuckets in the bucket's public access block (the ACL-related flags are left as they are)."
+    }
+  ]
+}

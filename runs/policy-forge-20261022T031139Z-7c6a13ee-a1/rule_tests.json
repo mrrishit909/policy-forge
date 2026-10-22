@@ -1,0 +1,417 @@
+{
+  "other_tests": [
+    {
+      "name": "data.main_test.test_expiry_91_days_rejected",
+      "passed": true
+    },
+    {
+      "name": "data.main_test.test_expiry_before_created_rejected",
+      "passed": true
+    },
+    {
+      "name": "data.main_test.test_expiry_exactly_90_days_passes",
+      "passed": true
+    },
+    {
+      "name": "data.main_test.test_inventory_credential_value_rejected",
+      "passed": true
+    },
+    {
+      "name": "data.main_test.test_inventory_missing_source_rejected",
+      "passed": true
+    },
+    {
+      "name": "data.main_test.test_missing_expiry_rejected",
+      "passed": true
+    },
+    {
+      "name": "data.main_test.test_missing_owner_rejected",
+      "passed": true
+    },
+    {
+      "name": "data.main_test.test_unknown_rule_rejected",
+      "passed": true
+    },
+    {
+      "name": "data.main_test.test_valid_exception_passes",
+      "passed": true
+    },
+    {
+      "name": "data.main_test.test_wildcard_resource_rejected",
+      "passed": true
+    },
+    {
+      "name": "data.policyforge.tests.test_catalog_fixture_references_exist",
+      "passed": true
+    },
+    {
+      "name": "data.policyforge.tests.test_catalog_matches_rules",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "rules": [
+    {
+      "kinds": {
+        "boundary": {
+          "files": [
+            "boundary-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        },
+        "negative": {
+          "files": [
+            "negative-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        },
+        "positive": {
+          "files": [
+            "positive-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        }
+      },
+      "passed": true,
+      "rule_id": "PF-STOR-001"
+    },
+    {
+      "kinds": {
+        "boundary": {
+          "files": [
+            "boundary-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        },
+        "negative": {
+          "files": [
+            "negative-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        },
+        "positive": {
+          "files": [
+            "positive-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        }
+      },
+      "passed": true,
+      "rule_id": "PF-STOR-002"
+    },
+    {
+      "kinds": {
+        "boundary": {
+          "files": [
+            "boundary-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        },
+        "negative": {
+          "files": [
+            "negative-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        },
+        "positive": {
+          "files": [
+            "positive-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        }
+      },
+      "passed": true,
+      "rule_id": "PF-IAM-001"
+    },
+    {
+      "kinds": {
+        "boundary": {
+          "files": [
+            "boundary-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        },
+        "negative": {
+          "files": [
+            "negative-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        },
+        "positive": {
+          "files": [
+            "positive-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        }
+      },
+      "passed": true,
+      "rule_id": "PF-IAM-002"
+    },
+    {
+      "kinds": {
+        "boundary": {
+          "files": [
+            "boundary-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        },
+        "negative": {
+          "files": [
+            "negative-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        },
+        "positive": {
+          "files": [
+            "positive-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        }
+      },
+      "passed": true,
+      "rule_id": "PF-IAM-003"
+    },
+    {
+      "kinds": {
+        "boundary": {
+          "files": [
+            "boundary-1.json",
+            "boundary-2.json"
+          ],
+          "fixtures": 2,
+          "passed": true
+        },
+        "negative": {
+          "files": [
+            "negative-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        },
+        "positive": {
+          "files": [
+            "positive-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        }
+      },
+      "passed": true,
+      "rule_id": "PF-NET-001"
+    },
+    {
+      "kinds": {
+        "boundary": {
+          "files": [
+            "boundary-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        },
+        "negative": {
+          "files": [
+            "negative-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        },
+        "positive": {
+          "files": [
+            "positive-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        }
+      },
+      "passed": true,
+      "rule_id": "PF-NET-002"
+    },
+    {
+      "kinds": {
+        "boundary": {
+          "files": [
+            "boundary-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        },
+        "negative": {
+          "files": [
+            "negative-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        },
+        "positive": {
+          "files": [
+            "positive-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        }
+      },
+      "passed": true,
+      "rule_id": "PF-AUD-001"
+    },
+    {
+      "kinds": {
+        "boundary": {
+          "files": [
+            "boundary-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        },
+        "negative": {
+          "files": [
+            "negative-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        },
+        "positive": {
+          "files": [
+            "positive-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        }
+      },
+      "passed": true,
+      "rule_id": "PF-AUD-002"
+    },
+    {
+      "kinds": {
+        "boundary": {
+          "files": [
+            "boundary-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        },
+        "negative": {
+          "files": [
+            "negative-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        },
+        "positive": {
+          "files": [
+            "positive-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        }
+      },
+      "passed": true,
+      "rule_id": "PF-AUD-003"
+    },
+    {
+      "kinds": {
+        "boundary": {
+          "files": [
+            "boundary-1.json",
+            "boundary-2.json"
+          ],
+          "fixtures": 2,
+          "passed": true
+        },
+        "negative": {
+          "files": [
+            "negative-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        },
+        "positive": {
+          "files": [
+            "positive-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        }
+      },
+      "passed": true,
+      "rule_id": "PF-AUD-004"
+    },
+    {
+      "kinds": {
+        "boundary": {
+          "files": [
+            "boundary-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        },
+        "negative": {
+          "files": [
+            "negative-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        },
+        "positive": {
+          "files": [
+            "positive-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        }
+      },
+      "passed": true,
+      "rule_id": "PF-REL-001"
+    },
+    {
+      "kinds": {
+        "boundary": {
+          "files": [
+            "boundary-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        },
+        "negative": {
+          "files": [
+            "negative-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        },
+        "positive": {
+          "files": [
+            "positive-1.json"
+          ],
+          "fixtures": 1,
+          "passed": true
+        }
+      },
+      "passed": true,
+      "rule_id": "PF-REL-002"
+    }
+  ],
+  "tool": "opa test --format json policy",
+  "totals": {
+    "other": 12,
+    "other_passed": 12,
+    "rule_kinds": 39,
+    "rule_kinds_passed": 39,
+    "rules": 13,
+    "rules_passed": 13
+  }
+}

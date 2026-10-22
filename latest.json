@@ -1,0 +1,21 @@
+{
+  "completed_at": "2026-10-22T03:12:23Z",
+  "input_manifest_hash": "sha256:cf701c7284028d1e1dc10289faae02ead90d4c8cbb5b485ef1b419fe1d05f2d6",
+  "result_paths": [
+    "runs/policy-forge-20261022T031139Z-7c6a13ee-a1/catalog.json",
+    "runs/policy-forge-20261022T031139Z-7c6a13ee-a1/checks.json",
+    "runs/policy-forge-20261022T031139Z-7c6a13ee-a1/conftest.json",
+    "runs/policy-forge-20261022T031139Z-7c6a13ee-a1/coverage.json",
+    "runs/policy-forge-20261022T031139Z-7c6a13ee-a1/exceptions.json",
+    "runs/policy-forge-20261022T031139Z-7c6a13ee-a1/findings.json",
+    "runs/policy-forge-20261022T031139Z-7c6a13ee-a1/inventory.json",
+    "runs/policy-forge-20261022T031139Z-7c6a13ee-a1/manifest.json",
+    "runs/policy-forge-20261022T031139Z-7c6a13ee-a1/relationships.json",
+    "runs/policy-forge-20261022T031139Z-7c6a13ee-a1/remediation.json",
+    "runs/policy-forge-20261022T031139Z-7c6a13ee-a1/remediation.patch",
+    "runs/policy-forge-20261022T031139Z-7c6a13ee-a1/report.md",
+    "runs/policy-forge-20261022T031139Z-7c6a13ee-a1/rule_tests.json",
+    "runs/policy-forge-20261022T031139Z-7c6a13ee-a1/summary.json"
+  ],
+  "run_id": "policy-forge-20261022T031139Z-7c6a13ee-a1"
+}

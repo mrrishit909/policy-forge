@@ -1,0 +1,91 @@
+{
+  "input_manifest_hash": "sha256:cf701c7284028d1e1dc10289faae02ead90d4c8cbb5b485ef1b419fe1d05f2d6",
+  "outputs": {
+    "catalog.json": "a5edc8819b0caccbab86ca6d0cb5424d3e4e19f2bd6d4074b732c7c52dde7e8c",
+    "conftest.json": "0a35a6bc4bce4e915e6e96a510ff3b3f2ce76294125b8e68678b5947275c1b75",
+    "coverage.json": "ac12190a00193a289c9dcd1c654c843bf8ac5a64aa6bf44532267ad1987c2687",
+    "exceptions.json": "19bf5ce95b5cc680f2fb452fc9a8be483a18a699fed3ed24940054807af83a61",
+    "findings.json": "0ae436c7337403d16a8fab78e57c043599a00e854c9feff06f31eaf6edaebfe9",
+    "inventory.json": "ffbc36ef7eb77f451886f471868d630800d9bc0a99d6770720bbfc75e838ba5e",
+    "relationships.json": "695d55b11f89e7598ad1d02bc7362a24d121fbbf9c25debd53f8a7adada9ba47",
+    "remediation.json": "bfd97654f6b64a67a6083e7580a73c0f1ff7864875c7eeda0aa9b9932535ba08",
+    "remediation.patch": "3590098326b0d83fa898c25bab6af94fda6cc01bd7ba0db4039a648fd6d1ab8f",
+    "report.md": "efa4d5a1db863e0852e2a6d824c070c42ac1d81aededc1366da75918c6f3661e",
+    "rule_tests.json": "9aa582d146857ef349a93fe54aa9387b5015b919953eef453ff4bb9a4f80d3af",
+    "summary.json": "375447bd7afb7ffead2204a35820e4f311cbc0840ca83aa066ef63dc9888d543"
+  },
+  "package": "policyforge",
+  "package_version": "1.0.0",
+  "params": {
+    "as_of": "2026-10-21",
+    "remediation": "propose",
+    "rule_packs": [
+      "storage",
+      "iam",
+      "network",
+      "audit",
+      "relationships"
+    ],
+    "snapshot": "aws-drifted-2026-10"
+  },
+  "snapshot": {
+    "captured_at": "2026-10-19T09:00:00Z",
+    "files": [
+      {
+        "bytes": 1420,
+        "path": "snapshots/aws-drifted-2026-10/cloudtrail-describe-trails.json",
+        "sha256": "3f660e720d118b6aad633e98fd13b4de5bc7ad5ecf1e83fc0a28444e5c8fcf4d"
+      },
+      {
+        "bytes": 575,
+        "path": "snapshots/aws-drifted-2026-10/cloudtrail-get-trail-status.json",
+        "sha256": "7a21a29a13d4a906777549214d0ade161871168dbb1d476863d1a76e62594212"
+      },
+      {
+        "bytes": 521,
+        "path": "snapshots/aws-drifted-2026-10/context.json",
+        "sha256": "5b362bfdafc4e7c6580b0ccc0e348857c406db4b399b0c9b6b0d2cf67d776735"
+      },
+      {
+        "bytes": 4792,
+        "path": "snapshots/aws-drifted-2026-10/ec2-describe-instances.json",
+        "sha256": "03ab5ad7781fd0ce7a865274d944cc2e245096ffcf2ce5b403b3a8cdefd47557"
+      },
+      {
+        "bytes": 10942,
+        "path": "snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json",
+        "sha256": "9c97be874b11c5e8b4929db22ee6798b320889563b53a1e3187e7e4087103d6e"
+      },
+      {
+        "bytes": 13469,
+        "path": "snapshots/aws-drifted-2026-10/iam-account-authorization-details.json",
+        "sha256": "43d9b75618defce316ff1ccd3cc224fc293aa67d0bcf8474d91186abfe6edf11"
+      },
+      {
+        "bytes": 1422,
+        "path": "snapshots/aws-drifted-2026-10/lambda-list-functions.json",
+        "sha256": "08eb0705eeede05083293590d0291640ba18142f6c7a42de6b28091b17505bff"
+      },
+      {
+        "bytes": 622,
+        "path": "snapshots/aws-drifted-2026-10/manifest.json",
+        "sha256": "0ad591e50a46951d0fc04df7f9167e8dc12894b52f737c8edb00a288ea9e4b8f"
+      },
+      {
+        "bytes": 13459,
+        "path": "snapshots/aws-drifted-2026-10/s3-buckets.json",
+        "sha256": "bc3b53961cc6196aad815d736aea5a7ccda8d9b0f2ea78aad9b6bae0c2111e04"
+      }
+    ],
+    "name": "aws-drifted-2026-10",
+    "provider": "aws",
+    "synthetic": true
+  },
+  "tools": {
+    "bash": "5.2.21(1)-release",
+    "conftest": "0.71.1",
+    "jq": "1.7",
+    "opa": "1.21.1",
+    "pwsh": "7.6.6"
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "as_of": "2026-10-21",
+  "checks": {
+    "evaluated": 82,
+    "failed": 19,
+    "passed": 49,
+    "unknown": 14
+  },
+  "complete_coverage": false,
+  "coverage_statement": "Evaluated 12 rules from the storage, iam, network, audit, relationships packs against 39 of 45 resources in aws-drifted-2026-10: 82 checks, 49 passed, 19 failed, 14 unknown. 14 unknown checks rely on configuration semantics these rules do not evaluate (for example IAM Conditions, NotAction, unexpanded prefix lists or service tags) and are neither passes nor failures. 4 resources of unsupported types (AWS::IAM::Group, AWS::lambda::Function) were inventoried but not evaluated. 2 resources of covered types had no applicable rule. Coverage is partial: passing checks describe only what was evaluated, not the whole configuration.",
+  "exceptions": {
+    "active": 2,
+    "expired": 1,
+    "not_yet_active": 0,
+    "rejected": 4
+  },
+  "findings": {
+    "active": 18,
+    "by_severity": {
+      "critical": 8,
+      "high": 9,
+      "low": 0,
+      "medium": 2
+    },
+    "excepted": 1,
+    "total": 19
+  },
+  "provider": "aws",
+  "relationships": {
+    "edges": 17,
+    "unresolved": 1
+  },
+  "remediation": {
+    "accepted": 8,
+    "not_proposed": 8,
+    "proposed": 11,
+    "rejected": 3,
+    "withheld": 0
+  },
+  "remediation_mode": "propose",
+  "resource_types": {
+    "covered": [
+      "audit_trail",
+      "compute_instance",
+      "iam_policy",
+      "iam_role",
+      "iam_user",
+      "security_group",
+      "storage_bucket"
+    ],
+    "not_covered": [
+      "unsupported"
+    ],
+    "present": [
+      "audit_trail",
+      "compute_instance",
+      "iam_policy",
+      "iam_role",
+      "iam_user",
+      "security_group",
+      "storage_bucket",
+      "unsupported"
+    ]
+  },
+  "resources": {
+    "evaluated": 39,
+    "not_evaluated": 2,
+    "present": 45,
+    "unsupported": 4
+  },
+  "rule_packs": [
+    "storage",
+    "iam",
+    "network",
+    "audit",
+    "relationships"
+  ],
+  "rules": {
+    "evaluated": [
+      "PF-STOR-001",
+      "PF-STOR-002",
+      "PF-IAM-001",
+      "PF-IAM-002",
+      "PF-IAM-003",
+      "PF-NET-001",
+      "PF-NET-002",
+      "PF-AUD-001",
+      "PF-AUD-002",
+      "PF-AUD-003",
+      "PF-REL-001",
+      "PF-REL-002"
+    ],
+    "packs_without_rules_for_provider": [],
+    "requested_not_applicable": [
+      "PF-AUD-004"
+    ]
+  },
+  "snapshot": "aws-drifted-2026-10"
+}

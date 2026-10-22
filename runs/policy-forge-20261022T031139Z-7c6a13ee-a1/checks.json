@@ -1,0 +1,45 @@
+{
+  "checks": [
+    {
+      "detail": "19 findings, 19 failing checks, per-rule totals {'pass': 49, 'fail': 19, 'unknown': 14}",
+      "id": "counts_reconcile",
+      "ok": true
+    },
+    {
+      "detail": "13 output files scanned against 9 sensitive raw values and credential patterns",
+      "id": "no_sensitive_value_published",
+      "ok": true
+    },
+    {
+      "detail": "executables launched: bash, conftest, jq, opa, pwsh",
+      "id": "no_cloud_command_invoked",
+      "ok": true
+    },
+    {
+      "detail": "statement matches the counts",
+      "id": "coverage_statement_consistent",
+      "ok": true
+    },
+    {
+      "detail": "13/13 rules with passing positive, negative and boundary fixtures",
+      "id": "rule_tests_passed",
+      "ok": true
+    },
+    {
+      "detail": "0 Conftest failures on the normalized inventory",
+      "id": "inventory_hygiene_passed",
+      "ok": true
+    },
+    {
+      "detail": "snapshot file hashes are identical before and after the run",
+      "id": "committed_snapshot_unchanged",
+      "ok": true
+    },
+    {
+      "detail": "302755 bytes",
+      "id": "output_size",
+      "ok": true
+    }
+  ],
+  "passed": true
+}
