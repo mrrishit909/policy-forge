@@ -1,8 +1,8 @@
 {
   "blocked_reason": null,
-  "created_at": "2026-10-22T05:45:56Z",
+  "created_at": "2026-10-22T05:51:29Z",
   "defect_batch_id": null,
-  "evidence_dir": "outcomes/policy-forge-20261022T054556Z-57da8ea/",
+  "evidence_dir": "outcomes/policy-forge-20261022T055129Z-57da8ea/",
   "findings": [
     {
       "detail": "sha256:3dfbc98a979d5121647a783e67f4951addb20c441bcf2713762db876b14020b3",
@@ -23,7 +23,7 @@
       "id": "policy-gates",
       "kind": "pytest",
       "objective": true,
-      "seconds": 44.38,
+      "seconds": 44.77,
       "status": "pass",
       "title": "Positive, negative and boundary fixtures for every rule; unsupported resources marked unknown; patches resolve their finding; unrelated behaviour unchanged; no cloud mutation commands execute; sensitive configuration not published; partial coverage never presented as complete; deterministic outputs"
     },
@@ -35,7 +35,7 @@
       "id": "shell-checks",
       "kind": "command",
       "objective": true,
-      "seconds": 6.69,
+      "seconds": 6.92,
       "status": "pass",
       "title": "ShellCheck, Bats, Pester and PSScriptAnalyzer pass for the Bash and PowerShell adapters"
     },
@@ -48,7 +48,7 @@
       "id": "harness",
       "kind": "pytest",
       "objective": true,
-      "seconds": 5.63,
+      "seconds": 5.68,
       "status": "pass",
       "title": "State machine, idempotency, concurrency, intake authorization, outcome and memory guards"
     },
@@ -60,7 +60,7 @@
       "id": "secret-scan",
       "kind": "command",
       "objective": true,
-      "seconds": 0.68,
+      "seconds": 0.63,
       "status": "pass",
       "title": "No credentials in the repository or in the live site's shipped assets"
     },
@@ -72,19 +72,19 @@
       "id": "live-site",
       "kind": "live",
       "objective": true,
-      "seconds": 0.2,
+      "seconds": 0.24,
       "status": "pass",
       "title": "Live Pages site loads and its data snapshot points at the state branch's latest run"
     },
     {
-      "detail": "checked 14 published files for policy-forge-20261022T041546Z-b622e9e4-a1; mismatches: none",
+      "detail": "checked 14 published files for policy-forge-20261022T054631Z-99a60140-a1; mismatches: none",
       "evidence_paths": [
         "published-matches-state.log"
       ],
       "id": "published-matches-state",
       "kind": "command",
       "objective": true,
-      "seconds": 3.04,
+      "seconds": 13.6,
       "status": "pass",
       "title": "Published result files are byte-identical to the accepted computation"
     },
@@ -102,10 +102,10 @@
     }
   ],
   "project": "policy-forge",
-  "release_id": "policy-forge-20261022T054556Z-57da8ea",
+  "release_id": "policy-forge-20261022T055129Z-57da8ea",
   "repair_round": 0,
   "rubric_sha256": "sha256:3dfbc98a979d5121647a783e67f4951addb20c441bcf2713762db876b14020b3",
-  "run_id": "policy-forge-20261022T041546Z-b622e9e4-a1",
+  "run_id": "policy-forge-20261022T054631Z-99a60140-a1",
   "source_commit": "57da8ead4e36162f29036fcb3421251e074dd1a7",
   "status": "released",
   "subjective": {
@@ -113,5 +113,5 @@
     "scores": [],
     "status": "not_run"
   },
-  "workflow_run_url": "https://github.com/mrrishit909/policy-forge/actions/runs/39729494674"
+  "workflow_run_url": "https://github.com/mrrishit909/policy-forge/actions/runs/39729932651"
 }
