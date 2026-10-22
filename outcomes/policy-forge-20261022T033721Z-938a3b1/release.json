@@ -1,0 +1,117 @@
+{
+  "blocked_reason": null,
+  "created_at": "2026-10-22T03:37:21Z",
+  "defect_batch_id": null,
+  "evidence_dir": "outcomes/policy-forge-20261022T033721Z-938a3b1/",
+  "findings": [
+    {
+      "detail": "sha256:3dfbc98a979d5121647a783e67f4951addb20c441bcf2713762db876b14020b3",
+      "evidence_paths": [],
+      "id": "rubric-integrity",
+      "kind": "integrity",
+      "objective": true,
+      "seconds": 0.0,
+      "status": "pass",
+      "title": "Rubric matches its review lock"
+    },
+    {
+      "detail": "........                                                                 [100%]",
+      "evidence_paths": [
+        "policy-gates.junit.xml",
+        "policy-gates.log"
+      ],
+      "id": "policy-gates",
+      "kind": "pytest",
+      "objective": true,
+      "seconds": 40.19,
+      "status": "pass",
+      "title": "Positive, negative and boundary fixtures for every rule; unsupported resources marked unknown; patches resolve their finding; unrelated behaviour unchanged; no cloud mutation commands execute; sensitive configuration not published; partial coverage never presented as complete; deterministic outputs"
+    },
+    {
+      "detail": "shell checks passed",
+      "evidence_paths": [
+        "shell-checks.log"
+      ],
+      "id": "shell-checks",
+      "kind": "command",
+      "objective": true,
+      "seconds": 6.1,
+      "status": "pass",
+      "title": "ShellCheck, Bats, Pester and PSScriptAnalyzer pass for the Bash and PowerShell adapters"
+    },
+    {
+      "detail": "............................                                             [100%]",
+      "evidence_paths": [
+        "harness.junit.xml",
+        "harness.log"
+      ],
+      "id": "harness",
+      "kind": "pytest",
+      "objective": true,
+      "seconds": 5.22,
+      "status": "pass",
+      "title": "State machine, idempotency, concurrency, intake authorization, outcome and memory guards"
+    },
+    {
+      "detail": "secret scan: 0 finding(s)",
+      "evidence_paths": [
+        "secret-scan.log"
+      ],
+      "id": "secret-scan",
+      "kind": "command",
+      "objective": true,
+      "seconds": 0.53,
+      "status": "pass",
+      "title": "No credentials in the repository or in the live site's shipped assets"
+    },
+    {
+      "detail": "live site and snapshot reachable; snapshot matches state",
+      "evidence_paths": [
+        "live-site.json"
+      ],
+      "id": "live-site",
+      "kind": "live",
+      "objective": true,
+      "seconds": 0.12,
+      "status": "pass",
+      "title": "Live Pages site loads and its data snapshot points at the state branch's latest run"
+    },
+    {
+      "detail": "checked 14 published files for policy-forge-20261022T031139Z-7c6a13ee-a1; mismatches: none",
+      "evidence_paths": [
+        "published-matches-state.log"
+      ],
+      "id": "published-matches-state",
+      "kind": "command",
+      "objective": true,
+      "seconds": 1.47,
+      "status": "pass",
+      "title": "Published result files are byte-identical to the accepted computation"
+    },
+    {
+      "detail": "42 passed, 0 failed",
+      "evidence_paths": [
+        "e2e/summary.json"
+      ],
+      "id": "browser",
+      "kind": "evidence-file",
+      "objective": true,
+      "seconds": 0.0,
+      "status": "pass",
+      "title": "Live-site browser checks at 390, 768 and 1440 px (coverage statement, findings and evidence, tabs, diffs, exceptions, rule tests, states, keyboard, reduced motion, dark theme, axe, overflow, console)"
+    }
+  ],
+  "project": "policy-forge",
+  "release_id": "policy-forge-20261022T033721Z-938a3b1",
+  "repair_round": 0,
+  "rubric_sha256": "sha256:3dfbc98a979d5121647a783e67f4951addb20c441bcf2713762db876b14020b3",
+  "run_id": "policy-forge-20261022T031139Z-7c6a13ee-a1",
+  "source_commit": "938a3b122622e947dcca071afa5ca4755cbc4833",
+  "status": "released",
+  "subjective": {
+    "reason": "inference credentials are not configured for this repository",
+    "scores": [],
+    "status": "not_run"
+  },
+  "workflow_run_url": "https://github.com/mrrishit909/policy-forge/actions/runs/39717541420"
+}

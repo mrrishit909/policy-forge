@@ -1,0 +1,27 @@
+== ShellCheck
+== Bats
+1..5
+ok 1 emits valid JSON Lines, one normalized resource per line
+ok 2 output is deterministic
+ok 3 emits unsupported resource types instead of dropping them
+ok 4 drops sensitive raw fields
+ok 5 fails cleanly on a missing directory
+== Pester
+[95mPester v6.2.0[0m
+[95m
+[95mRunning tests from 1 files.[0m
+[95m
+[95mRunning tests from '/home/runner/work/policy-forge/policy-forge/tests/pester/Normalize-Azure.Tests.ps1'[0m
+[92mDescribing Normalize-Azure.ps1[0m
+[32m  [+] emits valid JSON Lines, one normalized resource per line[0m[90m 229ms[0m
+[32m  [+] is deterministic[0m[90m 195ms[0m
+[32m  [+] emits unsupported resource types instead of dropping them[0m[90m 16ms[0m
+[32m  [+] drops sensitive raw fields[0m[90m 35ms[0m
+[32m  [+] fails cleanly on a missing directory[0m[90m 25ms[0m
+[97mTests completed in 1.16s[0m
+[32mTests Passed: 5, [0m[90mFailed: 0, [0m[90mSkipped: 0, [0m[90mInconclusive: 0, [0m[90mNotRun: 0[0m
+== PSScriptAnalyzer
+
+PSScriptAnalyzer: 0 warning/error finding(s)
+shell checks passed
+Normalize-Azure.ps1: not a snapshot directory (missing manifest.json): /home/runner/work/policy-forge/policy-forge/.tmp/no-such-snapshot-for-pester
