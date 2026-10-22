@@ -3,6 +3,17 @@
     {
       "attempt": 1,
       "completed_at": null,
+      "created_at": "2026-10-22T03:11:39Z",
+      "headline": null,
+      "issue": null,
+      "request_id": "7c6a13ee89f2ce9b",
+      "run_id": "policy-forge-20261022T031139Z-7c6a13ee-a1",
+      "source": "manual",
+      "status": "running"
+    },
+    {
+      "attempt": 1,
+      "completed_at": null,
       "created_at": "2026-10-22T02:57:44Z",
       "headline": null,
       "issue": null,
