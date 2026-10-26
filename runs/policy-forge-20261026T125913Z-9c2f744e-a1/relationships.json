@@ -1,0 +1,96 @@
+{
+  "edges": [
+    {
+      "from": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+      "kind": "delivers_logs_to",
+      "to": "aws:storage_bucket:fh-audit-logs"
+    },
+    {
+      "from": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/org-management-trail",
+      "kind": "delivers_logs_to",
+      "to": "aws:storage_bucket:fh-audit-logs"
+    },
+    {
+      "from": "aws:compute_instance:i-0fe0000000000a001",
+      "kind": "instance_role",
+      "to": "aws:iam_role:arn:aws:iam::111122223333:role/app-server-role"
+    },
+    {
+      "from": "aws:compute_instance:i-0fe0000000000a001",
+      "kind": "uses_network_group",
+      "to": "aws:security_group:sg-0fe00000000000001"
+    },
+    {
+      "from": "aws:compute_instance:i-0fe0000000000a002",
+      "kind": "uses_network_group",
+      "to": "aws:security_group:sg-0fe00000000000002"
+    },
+    {
+      "from": "aws:compute_instance:i-0fe0000000000a003",
+      "kind": "instance_role",
+      "to": "aws:iam_role:arn:aws:iam::111122223333:role/app-server-role"
+    },
+    {
+      "from": "aws:compute_instance:i-0fe0000000000a003",
+      "kind": "uses_network_group",
+      "to": "aws:security_group:sg-0fe00000000000003"
+    },
+    {
+      "from": "aws:compute_instance:i-0fe0000000000a004",
+      "kind": "instance_role",
+      "to": "aws:iam_role:arn:aws:iam::111122223333:role/ops-automation-role"
+    },
+    {
+      "from": "aws:compute_instance:i-0fe0000000000a004",
+      "kind": "uses_network_group",
+      "to": "aws:security_group:sg-0fe00000000000005"
+    },
+    {
+      "from": "aws:iam_role:arn:aws:iam::111122223333:role/app-server-role",
+      "kind": "attached_policy",
+      "to": "aws:iam_policy:arn:aws:iam::111122223333:policy/fh-app-read"
+    },
+    {
+      "from": "aws:iam_user:arn:aws:iam::111122223333:user/alice.ops",
+      "kind": "attached_policy",
+      "to": "aws:iam_policy:arn:aws:iam::aws:policy/ReadOnlyAccess"
+    },
+    {
+      "from": "aws:iam_user:arn:aws:iam::111122223333:user/alice.ops",
+      "kind": "member_of",
+      "to": "aws:unsupported:arn:aws:iam::111122223333:group/ops-readers"
+    },
+    {
+      "from": "aws:iam_user:arn:aws:iam::111122223333:user/breakglass.admin",
+      "kind": "attached_policy",
+      "to": "aws:iam_policy:arn:aws:iam::aws:policy/AdministratorAccess"
+    },
+    {
+      "from": "aws:iam_user:arn:aws:iam::111122223333:user/contractor.temp",
+      "kind": "attached_policy",
+      "to": "aws:iam_policy:arn:aws:iam::aws:policy/AdministratorAccess"
+    },
+    {
+      "from": "aws:storage_bucket:fh-app-artifacts",
+      "kind": "logs_to",
+      "to": "aws:storage_bucket:fh-logs-access"
+    },
+    {
+      "from": "aws:storage_bucket:fh-audit-logs",
+      "kind": "logs_to",
+      "to": "aws:storage_bucket:fh-logs-access"
+    },
+    {
+      "from": "aws:storage_bucket:fh-data-lake",
+      "kind": "logs_to",
+      "to": "aws:storage_bucket:fh-logs-access"
+    }
+  ],
+  "unresolved": [
+    {
+      "from": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/partner-trail",
+      "kind": "delivers_logs_to",
+      "target": "aws:storage_bucket:fh-external-archive-444455556666"
+    }
+  ]
+}
