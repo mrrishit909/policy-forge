@@ -1,0 +1,2830 @@
+{
+  "packs_without_rules_for_provider": [],
+  "resource_types": [
+    {
+      "count": 3,
+      "covered": true,
+      "native_types": [
+        "AWS::CloudTrail::Trail"
+      ],
+      "rules": [
+        "PF-AUD-001",
+        "PF-AUD-002",
+        "PF-AUD-003"
+      ],
+      "type": "audit_trail"
+    },
+    {
+      "count": 4,
+      "covered": true,
+      "native_types": [
+        "AWS::EC2::Instance"
+      ],
+      "rules": [
+        "PF-REL-001"
+      ],
+      "type": "compute_instance"
+    },
+    {
+      "count": 6,
+      "covered": true,
+      "native_types": [
+        "AWS::IAM::ManagedPolicy"
+      ],
+      "rules": [
+        "PF-IAM-001",
+        "PF-IAM-002"
+      ],
+      "type": "iam_policy"
+    },
+    {
+      "count": 4,
+      "covered": true,
+      "native_types": [
+        "AWS::IAM::Role"
+      ],
+      "rules": [
+        "PF-IAM-001",
+        "PF-IAM-002"
+      ],
+      "type": "iam_role"
+    },
+    {
+      "count": 4,
+      "covered": true,
+      "native_types": [
+        "AWS::IAM::User"
+      ],
+      "rules": [
+        "PF-IAM-001",
+        "PF-IAM-002",
+        "PF-IAM-003"
+      ],
+      "type": "iam_user"
+    },
+    {
+      "count": 10,
+      "covered": true,
+      "native_types": [
+        "AWS::EC2::SecurityGroup"
+      ],
+      "rules": [
+        "PF-NET-001",
+        "PF-NET-002"
+      ],
+      "type": "security_group"
+    },
+    {
+      "count": 10,
+      "covered": true,
+      "native_types": [
+        "AWS::S3::Bucket"
+      ],
+      "rules": [
+        "PF-REL-002",
+        "PF-STOR-001",
+        "PF-STOR-002"
+      ],
+      "type": "storage_bucket"
+    },
+    {
+      "count": 4,
+      "covered": false,
+      "native_types": [
+        "AWS::IAM::Group",
+        "AWS::lambda::Function"
+      ],
+      "rules": [],
+      "type": "unsupported"
+    }
+  ],
+  "resources": [
+    {
+      "evaluated_rules": 3,
+      "id": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+      "name": "data-events-trail",
+      "native_type": "AWS::CloudTrail::Trail",
+      "note": null,
+      "status": "fail",
+      "type": "audit_trail"
+    },
+    {
+      "evaluated_rules": 3,
+      "id": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/org-management-trail",
+      "name": "org-management-trail",
+      "native_type": "AWS::CloudTrail::Trail",
+      "note": null,
+      "status": "fail",
+      "type": "audit_trail"
+    },
+    {
+      "evaluated_rules": 3,
+      "id": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/partner-trail",
+      "name": "partner-trail",
+      "native_type": "AWS::CloudTrail::Trail",
+      "note": null,
+      "status": "unknown",
+      "type": "audit_trail"
+    },
+    {
+      "evaluated_rules": 1,
+      "id": "aws:compute_instance:i-0fe0000000000a001",
+      "name": "web-1",
+      "native_type": "AWS::EC2::Instance",
+      "note": null,
+      "status": "fail",
+      "type": "compute_instance"
+    },
+    {
+      "evaluated_rules": 1,
+      "id": "aws:compute_instance:i-0fe0000000000a002",
+      "name": "bastion-1",
+      "native_type": "AWS::EC2::Instance",
+      "note": null,
+      "status": "pass",
+      "type": "compute_instance"
+    },
+    {
+      "evaluated_rules": 1,
+      "id": "aws:compute_instance:i-0fe0000000000a003",
+      "name": "app-1",
+      "native_type": "AWS::EC2::Instance",
+      "note": null,
+      "status": "pass",
+      "type": "compute_instance"
+    },
+    {
+      "evaluated_rules": 1,
+      "id": "aws:compute_instance:i-0fe0000000000a004",
+      "name": "ops-1",
+      "native_type": "AWS::EC2::Instance",
+      "note": null,
+      "status": "unknown",
+      "type": "compute_instance"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "aws:iam_policy:arn:aws:iam::111122223333:policy/fh-app-read",
+      "name": "fh-app-read",
+      "native_type": "AWS::IAM::ManagedPolicy",
+      "note": null,
+      "status": "pass",
+      "type": "iam_policy"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "aws:iam_policy:arn:aws:iam::111122223333:policy/fh-ci-deploy",
+      "name": "fh-ci-deploy",
+      "native_type": "AWS::IAM::ManagedPolicy",
+      "note": null,
+      "status": "fail",
+      "type": "iam_policy"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "aws:iam_policy:arn:aws:iam::111122223333:policy/fh-quarantine",
+      "name": "fh-quarantine",
+      "native_type": "AWS::IAM::ManagedPolicy",
+      "note": null,
+      "status": "pass",
+      "type": "iam_policy"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "aws:iam_policy:arn:aws:iam::111122223333:policy/fh-wildcard-admin",
+      "name": "fh-wildcard-admin",
+      "native_type": "AWS::IAM::ManagedPolicy",
+      "note": null,
+      "status": "fail",
+      "type": "iam_policy"
+    },
+    {
+      "evaluated_rules": 0,
+      "id": "aws:iam_policy:arn:aws:iam::aws:policy/AdministratorAccess",
+      "name": "AdministratorAccess",
+      "native_type": "AWS::IAM::ManagedPolicy",
+      "note": "no requested rule applies to this resource (for example a provider-managed policy)",
+      "status": "not_evaluated",
+      "type": "iam_policy"
+    },
+    {
+      "evaluated_rules": 0,
+      "id": "aws:iam_policy:arn:aws:iam::aws:policy/ReadOnlyAccess",
+      "name": "ReadOnlyAccess",
+      "native_type": "AWS::IAM::ManagedPolicy",
+      "note": "no requested rule applies to this resource (for example a provider-managed policy)",
+      "status": "not_evaluated",
+      "type": "iam_policy"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "aws:iam_role:arn:aws:iam::111122223333:role/app-server-role",
+      "name": "app-server-role",
+      "native_type": "AWS::IAM::Role",
+      "note": null,
+      "status": "fail",
+      "type": "iam_role"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "aws:iam_role:arn:aws:iam::111122223333:role/legacy-etl-role",
+      "name": "legacy-etl-role",
+      "native_type": "AWS::IAM::Role",
+      "note": null,
+      "status": "unknown",
+      "type": "iam_role"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "aws:iam_role:arn:aws:iam::111122223333:role/ops-automation-role",
+      "name": "ops-automation-role",
+      "native_type": "AWS::IAM::Role",
+      "note": null,
+      "status": "unknown",
+      "type": "iam_role"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "aws:iam_role:arn:aws:iam::111122223333:role/scoped-admin-role",
+      "name": "scoped-admin-role",
+      "native_type": "AWS::IAM::Role",
+      "note": null,
+      "status": "unknown",
+      "type": "iam_role"
+    },
+    {
+      "evaluated_rules": 3,
+      "id": "aws:iam_user:arn:aws:iam::111122223333:user/alice.ops",
+      "name": "alice.ops",
+      "native_type": "AWS::IAM::User",
+      "note": null,
+      "status": "unknown",
+      "type": "iam_user"
+    },
+    {
+      "evaluated_rules": 3,
+      "id": "aws:iam_user:arn:aws:iam::111122223333:user/breakglass.admin",
+      "name": "breakglass.admin",
+      "native_type": "AWS::IAM::User",
+      "note": null,
+      "status": "pass",
+      "type": "iam_user"
+    },
+    {
+      "evaluated_rules": 3,
+      "id": "aws:iam_user:arn:aws:iam::111122223333:user/ci.deployer",
+      "name": "ci.deployer",
+      "native_type": "AWS::IAM::User",
+      "note": null,
+      "status": "fail",
+      "type": "iam_user"
+    },
+    {
+      "evaluated_rules": 3,
+      "id": "aws:iam_user:arn:aws:iam::111122223333:user/contractor.temp",
+      "name": "contractor.temp",
+      "native_type": "AWS::IAM::User",
+      "note": null,
+      "status": "fail",
+      "type": "iam_user"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "aws:security_group:sg-0fe00000000000001",
+      "name": "web-public",
+      "native_type": "AWS::EC2::SecurityGroup",
+      "note": null,
+      "status": "pass",
+      "type": "security_group"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "aws:security_group:sg-0fe00000000000002",
+      "name": "bastion-admin",
+      "native_type": "AWS::EC2::SecurityGroup",
+      "note": null,
+      "status": "fail",
+      "type": "security_group"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "aws:security_group:sg-0fe00000000000003",
+      "name": "app-internal",
+      "native_type": "AWS::EC2::SecurityGroup",
+      "note": null,
+      "status": "pass",
+      "type": "security_group"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "aws:security_group:sg-0fe00000000000004",
+      "name": "db-private",
+      "native_type": "AWS::EC2::SecurityGroup",
+      "note": null,
+      "status": "pass",
+      "type": "security_group"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "aws:security_group:sg-0fe00000000000005",
+      "name": "legacy-ops",
+      "native_type": "AWS::EC2::SecurityGroup",
+      "note": null,
+      "status": "fail",
+      "type": "security_group"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "aws:security_group:sg-0fe00000000000006",
+      "name": "rdp-jump",
+      "native_type": "AWS::EC2::SecurityGroup",
+      "note": null,
+      "status": "fail",
+      "type": "security_group"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "aws:security_group:sg-0fe00000000000007",
+      "name": "ftp-legacy",
+      "native_type": "AWS::EC2::SecurityGroup",
+      "note": null,
+      "status": "fail",
+      "type": "security_group"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "aws:security_group:sg-0fe00000000000008",
+      "name": "db-exposed",
+      "native_type": "AWS::EC2::SecurityGroup",
+      "note": null,
+      "status": "fail",
+      "type": "security_group"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "aws:security_group:sg-0fe00000000000009",
+      "name": "cache-partner",
+      "native_type": "AWS::EC2::SecurityGroup",
+      "note": null,
+      "status": "unknown",
+      "type": "security_group"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "aws:security_group:sg-0fe00000000000010",
+      "name": "esp-tunnel",
+      "native_type": "AWS::EC2::SecurityGroup",
+      "note": null,
+      "status": "unknown",
+      "type": "security_group"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "aws:storage_bucket:fh-app-artifacts",
+      "name": "fh-app-artifacts",
+      "native_type": "AWS::S3::Bucket",
+      "note": null,
+      "status": "pass",
+      "type": "storage_bucket"
+    },
+    {
+      "evaluated_rules": 3,
+      "id": "aws:storage_bucket:fh-audit-logs",
+      "name": "fh-audit-logs",
+      "native_type": "AWS::S3::Bucket",
+      "note": null,
+      "status": "fail",
+      "type": "storage_bucket"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "aws:storage_bucket:fh-data-lake",
+      "name": "fh-data-lake",
+      "native_type": "AWS::S3::Bucket",
+      "note": null,
+      "status": "pass",
+      "type": "storage_bucket"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "aws:storage_bucket:fh-legacy-reports",
+      "name": "fh-legacy-reports",
+      "native_type": "AWS::S3::Bucket",
+      "note": null,
+      "status": "unknown",
+      "type": "storage_bucket"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "aws:storage_bucket:fh-logs-access",
+      "name": "fh-logs-access",
+      "native_type": "AWS::S3::Bucket",
+      "note": null,
+      "status": "pass",
+      "type": "storage_bucket"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "aws:storage_bucket:fh-marketing-assets",
+      "name": "fh-marketing-assets",
+      "native_type": "AWS::S3::Bucket",
+      "note": null,
+      "status": "fail",
+      "type": "storage_bucket"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "aws:storage_bucket:fh-partner-exchange",
+      "name": "fh-partner-exchange",
+      "native_type": "AWS::S3::Bucket",
+      "note": null,
+      "status": "pass",
+      "type": "storage_bucket"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "aws:storage_bucket:fh-public-docs",
+      "name": "fh-public-docs",
+      "native_type": "AWS::S3::Bucket",
+      "note": null,
+      "status": "fail",
+      "type": "storage_bucket"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "aws:storage_bucket:fh-shared-research",
+      "name": "fh-shared-research",
+      "native_type": "AWS::S3::Bucket",
+      "note": null,
+      "status": "unknown",
+      "type": "storage_bucket"
+    },
+    {
+      "evaluated_rules": 2,
+      "id": "aws:storage_bucket:fh-vendor-drop",
+      "name": "fh-vendor-drop",
+      "native_type": "AWS::S3::Bucket",
+      "note": null,
+      "status": "unknown",
+      "type": "storage_bucket"
+    },
+    {
+      "evaluated_rules": 0,
+      "id": "aws:unsupported:arn:aws:iam::111122223333:group/ops-readers",
+      "name": "ops-readers",
+      "native_type": "AWS::IAM::Group",
+      "note": "unsupported native type AWS::IAM::Group: no rule evaluates it",
+      "status": "unknown",
+      "type": "unsupported"
+    },
+    {
+      "evaluated_rules": 0,
+      "id": "aws:unsupported:arn:aws:lambda:us-east-2:111122223333:function:fh-ops-hook",
+      "name": "fh-ops-hook",
+      "native_type": "AWS::lambda::Function",
+      "note": "unsupported native type AWS::lambda::Function: no rule evaluates it",
+      "status": "unknown",
+      "type": "unsupported"
+    },
+    {
+      "evaluated_rules": 0,
+      "id": "aws:unsupported:arn:aws:lambda:us-east-2:111122223333:function:fh-report-export",
+      "name": "fh-report-export",
+      "native_type": "AWS::lambda::Function",
+      "note": "unsupported native type AWS::lambda::Function: no rule evaluates it",
+      "status": "unknown",
+      "type": "unsupported"
+    },
+    {
+      "evaluated_rules": 0,
+      "id": "aws:unsupported:arn:aws:lambda:us-east-2:111122223333:function:fh-thumbnailer",
+      "name": "fh-thumbnailer",
+      "native_type": "AWS::lambda::Function",
+      "note": "unsupported native type AWS::lambda::Function: no rule evaluates it",
+      "status": "unknown",
+      "type": "unsupported"
+    }
+  ],
+  "results": [
+    {
+      "evidence": [
+        {
+          "path": "/properties/is_logging",
+          "raw": "snapshots/aws-drifted-2026-10/cloudtrail-get-trail-status.json#/TrailStatus/0/IsLogging",
+          "value": true
+        }
+      ],
+      "reason": "The trail is logging.",
+      "resource_id": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+      "resource_type": "audit_trail",
+      "rule_id": "PF-AUD-001",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/is_logging",
+          "raw": "snapshots/aws-drifted-2026-10/cloudtrail-get-trail-status.json#/TrailStatus/1/IsLogging",
+          "value": false
+        }
+      ],
+      "reason": "The trail exists but is not logging (IsLogging is false).",
+      "resource_id": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/org-management-trail",
+      "resource_type": "audit_trail",
+      "rule_id": "PF-AUD-001",
+      "status": "fail"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/aws-drifted-2026-10/cloudtrail-describe-trails.json",
+          "line": 29,
+          "pointer": "/trailList/2"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/is_logging",
+          "raw": null,
+          "value": null
+        }
+      ],
+      "reason": "No trail status was captured for this trail, so logging state is unknown.",
+      "resource_id": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/partner-trail",
+      "resource_type": "audit_trail",
+      "rule_id": "PF-AUD-001",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            29
+          ],
+          "first_line": 23,
+          "lines": [
+            "      \"TrailARN\": \"arn:aws:cloudtrail:us-east-2:111122223333:trail/org-management-trail\",",
+            "      \"LogFileValidationEnabled\": true,",
+            "      \"HasCustomEventSelectors\": false,",
+            "      \"HasInsightSelectors\": false,",
+            "      \"IsOrganizationTrail\": false",
+            "    },",
+            "    {",
+            "      \"Name\": \"partner-trail\",",
+            "      \"S3BucketName\": \"fh-external-archive-444455556666\",",
+            "      \"S3KeyPrefix\": \"\",",
+            "      \"IncludeGlobalServiceEvents\": true,",
+            "      \"IsMultiRegionTrail\": true,",
+            "      \"HomeRegion\": \"us-east-2\","
+          ]
+        },
+        "file": "snapshots/aws-drifted-2026-10/cloudtrail-describe-trails.json",
+        "line": 29,
+        "pointer": "/trailList/2"
+      },
+      "status": "unknown"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/multi_region",
+          "raw": "snapshots/aws-drifted-2026-10/cloudtrail-describe-trails.json#/trailList/0/IsMultiRegionTrail",
+          "value": false
+        }
+      ],
+      "reason": "The trail is not multi-region; activity in other regions is not recorded by it.",
+      "resource_id": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+      "resource_type": "audit_trail",
+      "rule_id": "PF-AUD-002",
+      "status": "fail"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/multi_region",
+          "raw": "snapshots/aws-drifted-2026-10/cloudtrail-describe-trails.json#/trailList/1/IsMultiRegionTrail",
+          "value": true
+        }
+      ],
+      "reason": "The trail is multi-region.",
+      "resource_id": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/org-management-trail",
+      "resource_type": "audit_trail",
+      "rule_id": "PF-AUD-002",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/multi_region",
+          "raw": "snapshots/aws-drifted-2026-10/cloudtrail-describe-trails.json#/trailList/2/IsMultiRegionTrail",
+          "value": true
+        }
+      ],
+      "reason": "The trail is multi-region.",
+      "resource_id": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/partner-trail",
+      "resource_type": "audit_trail",
+      "rule_id": "PF-AUD-002",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/log_file_validation",
+          "raw": "snapshots/aws-drifted-2026-10/cloudtrail-describe-trails.json#/trailList/0/LogFileValidationEnabled",
+          "value": false
+        }
+      ],
+      "reason": "Log file integrity validation is disabled; tampering with delivered logs would not be detectable.",
+      "resource_id": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+      "resource_type": "audit_trail",
+      "rule_id": "PF-AUD-003",
+      "status": "fail"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/log_file_validation",
+          "raw": "snapshots/aws-drifted-2026-10/cloudtrail-describe-trails.json#/trailList/1/LogFileValidationEnabled",
+          "value": true
+        }
+      ],
+      "reason": "Log file integrity validation is enabled.",
+      "resource_id": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/org-management-trail",
+      "resource_type": "audit_trail",
+      "rule_id": "PF-AUD-003",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/log_file_validation",
+          "raw": "snapshots/aws-drifted-2026-10/cloudtrail-describe-trails.json#/trailList/2/LogFileValidationEnabled",
+          "value": true
+        }
+      ],
+      "reason": "Log file integrity validation is enabled.",
+      "resource_id": "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/partner-trail",
+      "resource_type": "audit_trail",
+      "rule_id": "PF-AUD-003",
+      "status": "pass"
+    },
+    {
+      "evidence": [],
+      "reason": "No Allow statement grants every action on every resource.",
+      "resource_id": "aws:iam_policy:arn:aws:iam::111122223333:policy/fh-app-read",
+      "resource_type": "iam_policy",
+      "rule_id": "PF-IAM-001",
+      "status": "pass"
+    },
+    {
+      "evidence": [],
+      "reason": "No Allow statement grants every action on every resource.",
+      "resource_id": "aws:iam_policy:arn:aws:iam::111122223333:policy/fh-ci-deploy",
+      "resource_type": "iam_policy",
+      "rule_id": "PF-IAM-001",
+      "status": "pass"
+    },
+    {
+      "evidence": [],
+      "reason": "Every Allow is negated by an unconditional Deny of every action on every resource in the same document.",
+      "resource_id": "aws:iam_policy:arn:aws:iam::111122223333:policy/fh-quarantine",
+      "resource_type": "iam_policy",
+      "rule_id": "PF-IAM-001",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/permissions/statements",
+          "raw": "snapshots/aws-drifted-2026-10/iam-account-authorization-details.json#/Policies/5/PolicyVersionList/0/Document/Statement/0",
+          "value": {
+            "actions": [
+              "*"
+            ],
+            "effect": "Allow",
+            "has_condition": false,
+            "not_actions": null,
+            "policy": "fh-wildcard-admin",
+            "resources": [
+              "*"
+            ],
+            "sid": "AllowAll"
+          }
+        }
+      ],
+      "reason": "1 Allow statement(s) grant every action on every resource.",
+      "resource_id": "aws:iam_policy:arn:aws:iam::111122223333:policy/fh-wildcard-admin",
+      "resource_type": "iam_policy",
+      "rule_id": "PF-IAM-001",
+      "status": "fail"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/permissions/statements",
+          "raw": "snapshots/aws-drifted-2026-10/iam-account-authorization-details.json#/RoleDetailList/0/RolePolicyList/0/PolicyDocument/Statement/0",
+          "value": {
+            "actions": [
+              "*"
+            ],
+            "effect": "Allow",
+            "has_condition": false,
+            "not_actions": null,
+            "policy": "inline:debug-all",
+            "resources": [
+              "*"
+            ],
+            "sid": null
+          }
+        }
+      ],
+      "reason": "1 Allow statement(s) grant every action on every resource.",
+      "resource_id": "aws:iam_role:arn:aws:iam::111122223333:role/app-server-role",
+      "resource_type": "iam_role",
+      "rule_id": "PF-IAM-001",
+      "status": "fail"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/aws-drifted-2026-10/iam-account-authorization-details.json",
+          "line": 164,
+          "pointer": "/RoleDetailList/1"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/permissions/parse_error",
+          "raw": null,
+          "value": true
+        }
+      ],
+      "reason": "A policy document could not be parsed.",
+      "resource_id": "aws:iam_role:arn:aws:iam::111122223333:role/legacy-etl-role",
+      "resource_type": "iam_role",
+      "rule_id": "PF-IAM-001",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            164
+          ],
+          "first_line": 158,
+          "lines": [
+            "          \"PolicyArn\": \"arn:aws:iam::111122223333:policy/fh-app-read\"",
+            "        }",
+            "      ],",
+            "      \"Tags\": [],",
+            "      \"RoleLastUsed\": {}",
+            "    },",
+            "    {",
+            "      \"Path\": \"/\",",
+            "      \"RoleName\": \"legacy-etl-role\",",
+            "      \"RoleId\": \"PFROLEEXAMPLE0002\",",
+            "      \"Arn\": \"arn:aws:iam::111122223333:role/legacy-etl-role\",",
+            "      \"CreateDate\": \"2025-02-03T09:30:00+00:00\",",
+            "      \"AssumeRolePolicyDocument\": {"
+          ]
+        },
+        "file": "snapshots/aws-drifted-2026-10/iam-account-authorization-details.json",
+        "line": 164,
+        "pointer": "/RoleDetailList/1"
+      },
+      "status": "unknown"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/aws-drifted-2026-10/iam-account-authorization-details.json",
+          "line": 225,
+          "pointer": "/RoleDetailList/2/RolePolicyList/0/PolicyDocument/Statement/0"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/permissions/statements",
+          "raw": "snapshots/aws-drifted-2026-10/iam-account-authorization-details.json#/RoleDetailList/2/RolePolicyList/0/PolicyDocument/Statement/0",
+          "value": {
+            "actions": null,
+            "effect": "Allow",
+            "has_condition": false,
+            "not_actions": [
+              "iam:*",
+              "organizations:*"
+            ],
+            "policy": "inline:everything-but-iam",
+            "resources": [
+              "*"
+            ],
+            "sid": null
+          }
+        }
+      ],
+      "reason": "An Allow statement uses NotAction or NotResource; the effective grant is not computed.",
+      "resource_id": "aws:iam_role:arn:aws:iam::111122223333:role/ops-automation-role",
+      "resource_type": "iam_role",
+      "rule_id": "PF-IAM-001",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            225
+          ],
+          "first_line": 219,
+          "lines": [
+            "      \"RolePolicyList\": [",
+            "        {",
+            "          \"PolicyName\": \"everything-but-iam\",",
+            "          \"PolicyDocument\": {",
+            "            \"Version\": \"2012-10-17\",",
+            "            \"Statement\": [",
+            "              {",
+            "                \"Effect\": \"Allow\",",
+            "                \"NotAction\": [",
+            "                  \"iam:*\",",
+            "                  \"organizations:*\"",
+            "                ],",
+            "                \"Resource\": \"*\""
+          ]
+        },
+        "file": "snapshots/aws-drifted-2026-10/iam-account-authorization-details.json",
+        "line": 225,
+        "pointer": "/RoleDetailList/2/RolePolicyList/0/PolicyDocument/Statement/0"
+      },
+      "status": "unknown"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/aws-drifted-2026-10/iam-account-authorization-details.json",
+          "line": 266,
+          "pointer": "/RoleDetailList/3/RolePolicyList/0/PolicyDocument/Statement/0"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/permissions/statements",
+          "raw": "snapshots/aws-drifted-2026-10/iam-account-authorization-details.json#/RoleDetailList/3/RolePolicyList/0/PolicyDocument/Statement/0",
+          "value": {
+            "actions": [
+              "*"
+            ],
+            "effect": "Allow",
+            "has_condition": true,
+            "not_actions": null,
+            "policy": "inline:mfa-admin",
+            "resources": [
+              "*"
+            ],
+            "sid": null
+          }
+        }
+      ],
+      "reason": "A wildcard Allow is conditional; Condition semantics are not evaluated.",
+      "resource_id": "aws:iam_role:arn:aws:iam::111122223333:role/scoped-admin-role",
+      "resource_type": "iam_role",
+      "rule_id": "PF-IAM-001",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            266
+          ],
+          "first_line": 260,
+          "lines": [
+            "      \"RolePolicyList\": [",
+            "        {",
+            "          \"PolicyName\": \"mfa-admin\",",
+            "          \"PolicyDocument\": {",
+            "            \"Version\": \"2012-10-17\",",
+            "            \"Statement\": [",
+            "              {",
+            "                \"Effect\": \"Allow\",",
+            "                \"Action\": \"*\",",
+            "                \"Resource\": \"*\",",
+            "                \"Condition\": {",
+            "                  \"Bool\": {",
+            "                    \"aws:MultiFactorAuthPresent\": \"true\""
+          ]
+        },
+        "file": "snapshots/aws-drifted-2026-10/iam-account-authorization-details.json",
+        "line": 266,
+        "pointer": "/RoleDetailList/3/RolePolicyList/0/PolicyDocument/Statement/0"
+      },
+      "status": "unknown"
+    },
+    {
+      "evidence": [],
+      "reason": "No Allow statement grants every action on every resource.",
+      "resource_id": "aws:iam_user:arn:aws:iam::111122223333:user/alice.ops",
+      "resource_type": "iam_user",
+      "rule_id": "PF-IAM-001",
+      "status": "pass"
+    },
+    {
+      "evidence": [],
+      "reason": "No Allow statement grants every action on every resource.",
+      "resource_id": "aws:iam_user:arn:aws:iam::111122223333:user/breakglass.admin",
+      "resource_type": "iam_user",
+      "rule_id": "PF-IAM-001",
+      "status": "pass"
+    },
+    {
+      "evidence": [],
+      "reason": "No Allow statement grants every action on every resource.",
+      "resource_id": "aws:iam_user:arn:aws:iam::111122223333:user/ci.deployer",
+      "resource_type": "iam_user",
+      "rule_id": "PF-IAM-001",
+      "status": "pass"
+    },
+    {
+      "evidence": [],
+      "reason": "No Allow statement grants every action on every resource.",
+      "resource_id": "aws:iam_user:arn:aws:iam::111122223333:user/contractor.temp",
+      "resource_type": "iam_user",
+      "rule_id": "PF-IAM-001",
+      "status": "pass"
+    },
+    {
+      "evidence": [],
+      "reason": "No Allow statement grants a whole service on every resource.",
+      "resource_id": "aws:iam_policy:arn:aws:iam::111122223333:policy/fh-app-read",
+      "resource_type": "iam_policy",
+      "rule_id": "PF-IAM-002",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/permissions/statements",
+          "raw": "snapshots/aws-drifted-2026-10/iam-account-authorization-details.json#/Policies/3/PolicyVersionList/0/Document/Statement/0",
+          "service_wildcards": [
+            "s3:*"
+          ],
+          "value": {
+            "actions": [
+              "s3:*"
+            ],
+            "effect": "Allow",
+            "has_condition": false,
+            "not_actions": null,
+            "policy": "fh-ci-deploy",
+            "resources": [
+              "*"
+            ],
+            "sid": "DeployEverywhere"
+          }
+        }
+      ],
+      "reason": "1 Allow statement(s) grant a whole service on every resource.",
+      "resource_id": "aws:iam_policy:arn:aws:iam::111122223333:policy/fh-ci-deploy",
+      "resource_type": "iam_policy",
+      "rule_id": "PF-IAM-002",
+      "status": "fail"
+    },
+    {
+      "evidence": [],
+      "reason": "Every Allow is negated by an unconditional Deny of every action on every resource.",
+      "resource_id": "aws:iam_policy:arn:aws:iam::111122223333:policy/fh-quarantine",
+      "resource_type": "iam_policy",
+      "rule_id": "PF-IAM-002",
+      "status": "pass"
+    },
+    {
+      "evidence": [],
+      "reason": "No Allow statement grants a whole service on every resource.",
+      "resource_id": "aws:iam_policy:arn:aws:iam::111122223333:policy/fh-wildcard-admin",
+      "resource_type": "iam_policy",
+      "rule_id": "PF-IAM-002",
+      "status": "pass"
+    },
+    {
+      "evidence": [],
+      "reason": "No Allow statement grants a whole service on every resource.",
+      "resource_id": "aws:iam_role:arn:aws:iam::111122223333:role/app-server-role",
+      "resource_type": "iam_role",
+      "rule_id": "PF-IAM-002",
+      "status": "pass"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/aws-drifted-2026-10/iam-account-authorization-details.json",
+          "line": 164,
+          "pointer": "/RoleDetailList/1"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/permissions/parse_error",
+          "raw": null,
+          "value": true
+        }
+      ],
+      "reason": "A policy document could not be parsed.",
+      "resource_id": "aws:iam_role:arn:aws:iam::111122223333:role/legacy-etl-role",
+      "resource_type": "iam_role",
+      "rule_id": "PF-IAM-002",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            164
+          ],
+          "first_line": 158,
+          "lines": [
+            "          \"PolicyArn\": \"arn:aws:iam::111122223333:policy/fh-app-read\"",
+            "        }",
+            "      ],",
+            "      \"Tags\": [],",
+            "      \"RoleLastUsed\": {}",
+            "    },",
+            "    {",
+            "      \"Path\": \"/\",",
+            "      \"RoleName\": \"legacy-etl-role\",",
+            "      \"RoleId\": \"PFROLEEXAMPLE0002\",",
+            "      \"Arn\": \"arn:aws:iam::111122223333:role/legacy-etl-role\",",
+            "      \"CreateDate\": \"2025-02-03T09:30:00+00:00\",",
+            "      \"AssumeRolePolicyDocument\": {"
+          ]
+        },
+        "file": "snapshots/aws-drifted-2026-10/iam-account-authorization-details.json",
+        "line": 164,
+        "pointer": "/RoleDetailList/1"
+      },
+      "status": "unknown"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/aws-drifted-2026-10/iam-account-authorization-details.json",
+          "line": 225,
+          "pointer": "/RoleDetailList/2/RolePolicyList/0/PolicyDocument/Statement/0"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/permissions/statements",
+          "raw": "snapshots/aws-drifted-2026-10/iam-account-authorization-details.json#/RoleDetailList/2/RolePolicyList/0/PolicyDocument/Statement/0",
+          "value": {
+            "actions": null,
+            "effect": "Allow",
+            "has_condition": false,
+            "not_actions": [
+              "iam:*",
+              "organizations:*"
+            ],
+            "policy": "inline:everything-but-iam",
+            "resources": [
+              "*"
+            ],
+            "sid": null
+          }
+        }
+      ],
+      "reason": "A statement uses NotAction, NotResource, a Condition, a wildcard resource pattern or an unreadable Effect or action alongside service-level actions; not evaluated.",
+      "resource_id": "aws:iam_role:arn:aws:iam::111122223333:role/ops-automation-role",
+      "resource_type": "iam_role",
+      "rule_id": "PF-IAM-002",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            225
+          ],
+          "first_line": 219,
+          "lines": [
+            "      \"RolePolicyList\": [",
+            "        {",
+            "          \"PolicyName\": \"everything-but-iam\",",
+            "          \"PolicyDocument\": {",
+            "            \"Version\": \"2012-10-17\",",
+            "            \"Statement\": [",
+            "              {",
+            "                \"Effect\": \"Allow\",",
+            "                \"NotAction\": [",
+            "                  \"iam:*\",",
+            "                  \"organizations:*\"",
+            "                ],",
+            "                \"Resource\": \"*\""
+          ]
+        },
+        "file": "snapshots/aws-drifted-2026-10/iam-account-authorization-details.json",
+        "line": 225,
+        "pointer": "/RoleDetailList/2/RolePolicyList/0/PolicyDocument/Statement/0"
+      },
+      "status": "unknown"
+    },
+    {
+      "evidence": [],
+      "reason": "No Allow statement grants a whole service on every resource.",
+      "resource_id": "aws:iam_role:arn:aws:iam::111122223333:role/scoped-admin-role",
+      "resource_type": "iam_role",
+      "rule_id": "PF-IAM-002",
+      "status": "pass"
+    },
+    {
+      "evidence": [],
+      "reason": "No Allow statement grants a whole service on every resource.",
+      "resource_id": "aws:iam_user:arn:aws:iam::111122223333:user/alice.ops",
+      "resource_type": "iam_user",
+      "rule_id": "PF-IAM-002",
+      "status": "pass"
+    },
+    {
+      "evidence": [],
+      "reason": "No Allow statement grants a whole service on every resource.",
+      "resource_id": "aws:iam_user:arn:aws:iam::111122223333:user/breakglass.admin",
+      "resource_type": "iam_user",
+      "rule_id": "PF-IAM-002",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/permissions/statements",
+          "raw": "snapshots/aws-drifted-2026-10/iam-account-authorization-details.json#/UserDetailList/2/UserPolicyList/0/PolicyDocument/Statement/0",
+          "service_wildcards": [
+            "s3:*"
+          ],
+          "value": {
+            "actions": [
+              "s3:*"
+            ],
+            "effect": "Allow",
+            "has_condition": false,
+            "not_actions": null,
+            "policy": "inline:artifact-upload",
+            "resources": [
+              "*"
+            ],
+            "sid": null
+          }
+        }
+      ],
+      "reason": "1 Allow statement(s) grant a whole service on every resource.",
+      "resource_id": "aws:iam_user:arn:aws:iam::111122223333:user/ci.deployer",
+      "resource_type": "iam_user",
+      "rule_id": "PF-IAM-002",
+      "status": "fail"
+    },
+    {
+      "evidence": [],
+      "reason": "No Allow statement grants a whole service on every resource.",
+      "resource_id": "aws:iam_user:arn:aws:iam::111122223333:user/contractor.temp",
+      "resource_type": "iam_user",
+      "rule_id": "PF-IAM-002",
+      "status": "pass"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/aws-drifted-2026-10/iam-account-authorization-details.json",
+          "line": 9,
+          "pointer": "/UserDetailList/0/GroupList"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/group_names",
+          "raw": "snapshots/aws-drifted-2026-10/iam-account-authorization-details.json#/UserDetailList/0/GroupList",
+          "value": [
+            "ops-readers"
+          ]
+        }
+      ],
+      "reason": "Permissions inherited from IAM groups, or statements using NotAction/Condition, are not evaluated.",
+      "resource_id": "aws:iam_user:arn:aws:iam::111122223333:user/alice.ops",
+      "resource_type": "iam_user",
+      "rule_id": "PF-IAM-003",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            9
+          ],
+          "first_line": 3,
+          "lines": [
+            "    {",
+            "      \"Path\": \"/\",",
+            "      \"UserName\": \"alice.ops\",",
+            "      \"UserId\": \"PFUSEREXAMPLE0001\",",
+            "      \"Arn\": \"arn:aws:iam::111122223333:user/alice.ops\",",
+            "      \"CreateDate\": \"2025-02-01T09:30:00+00:00\",",
+            "      \"GroupList\": [",
+            "        \"ops-readers\"",
+            "      ],",
+            "      \"AttachedManagedPolicies\": [",
+            "        {",
+            "          \"PolicyName\": \"ReadOnlyAccess\",",
+            "          \"PolicyArn\": \"arn:aws:iam::aws:policy/ReadOnlyAccess\""
+          ]
+        },
+        "file": "snapshots/aws-drifted-2026-10/iam-account-authorization-details.json",
+        "line": 9,
+        "pointer": "/UserDetailList/0/GroupList"
+      },
+      "status": "unknown"
+    },
+    {
+      "evidence": [],
+      "reason": "Principal is on the break-glass list.",
+      "resource_id": "aws:iam_user:arn:aws:iam::111122223333:user/breakglass.admin",
+      "resource_type": "iam_user",
+      "rule_id": "PF-IAM-003",
+      "status": "pass"
+    },
+    {
+      "evidence": [],
+      "reason": "No admin-capable permission is attached to the user.",
+      "resource_id": "aws:iam_user:arn:aws:iam::111122223333:user/ci.deployer",
+      "resource_type": "iam_user",
+      "rule_id": "PF-IAM-003",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/attached_policy_arns",
+          "raw": "snapshots/aws-drifted-2026-10/iam-account-authorization-details.json#/UserDetailList/3/AttachedManagedPolicies",
+          "value": "arn:aws:iam::aws:policy/AdministratorAccess"
+        }
+      ],
+      "reason": "The user holds admin-capable permissions directly and is not a break-glass principal.",
+      "resource_id": "aws:iam_user:arn:aws:iam::111122223333:user/contractor.temp",
+      "resource_type": "iam_user",
+      "rule_id": "PF-IAM-003",
+      "status": "fail"
+    },
+    {
+      "evidence": [],
+      "reason": "No remote administration port is open to internet-wide sources.",
+      "resource_id": "aws:security_group:sg-0fe00000000000001",
+      "resource_type": "security_group",
+      "rule_id": "PF-NET-001",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "internet_sources": [
+            "0.0.0.0/0",
+            "::/0"
+          ],
+          "path": "/properties/ingress/0",
+          "ports": [
+            22
+          ],
+          "raw": "snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json#/SecurityGroups/1/IpPermissions/0",
+          "value": {
+            "cidrs": [
+              "0.0.0.0/0",
+              "::/0"
+            ],
+            "port_from": 22,
+            "port_to": 22,
+            "prefix_lists": [],
+            "priority": null,
+            "protocol": "tcp",
+            "source_tags": []
+          }
+        }
+      ],
+      "reason": "1 ingress rule(s) expose remote administration ports to internet-wide sources.",
+      "resource_id": "aws:security_group:sg-0fe00000000000002",
+      "resource_type": "security_group",
+      "rule_id": "PF-NET-001",
+      "status": "fail"
+    },
+    {
+      "evidence": [],
+      "reason": "No remote administration port is open to internet-wide sources.",
+      "resource_id": "aws:security_group:sg-0fe00000000000003",
+      "resource_type": "security_group",
+      "rule_id": "PF-NET-001",
+      "status": "pass"
+    },
+    {
+      "evidence": [],
+      "reason": "No remote administration port is open to internet-wide sources.",
+      "resource_id": "aws:security_group:sg-0fe00000000000004",
+      "resource_type": "security_group",
+      "rule_id": "PF-NET-001",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "internet_sources": [
+            "0.0.0.0/0"
+          ],
+          "path": "/properties/ingress/0",
+          "ports": [
+            22,
+            3389
+          ],
+          "raw": "snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json#/SecurityGroups/4/IpPermissions/0",
+          "value": {
+            "cidrs": [
+              "0.0.0.0/0"
+            ],
+            "port_from": 0,
+            "port_to": 65535,
+            "prefix_lists": [],
+            "priority": null,
+            "protocol": "tcp",
+            "source_tags": []
+          }
+        }
+      ],
+      "reason": "1 ingress rule(s) expose remote administration ports to internet-wide sources.",
+      "resource_id": "aws:security_group:sg-0fe00000000000005",
+      "resource_type": "security_group",
+      "rule_id": "PF-NET-001",
+      "status": "fail"
+    },
+    {
+      "evidence": [
+        {
+          "internet_sources": [
+            "0.0.0.0/1"
+          ],
+          "path": "/properties/ingress/0",
+          "ports": [
+            3389
+          ],
+          "raw": "snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json#/SecurityGroups/5/IpPermissions/0",
+          "value": {
+            "cidrs": [
+              "0.0.0.0/1"
+            ],
+            "port_from": 3389,
+            "port_to": 3389,
+            "prefix_lists": [],
+            "priority": null,
+            "protocol": "tcp",
+            "source_tags": []
+          }
+        }
+      ],
+      "reason": "1 ingress rule(s) expose remote administration ports to internet-wide sources.",
+      "resource_id": "aws:security_group:sg-0fe00000000000006",
+      "resource_type": "security_group",
+      "rule_id": "PF-NET-001",
+      "status": "fail"
+    },
+    {
+      "evidence": [
+        {
+          "internet_sources": [
+            "0.0.0.0/0"
+          ],
+          "path": "/properties/ingress/0",
+          "ports": [
+            22
+          ],
+          "raw": "snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json#/SecurityGroups/6/IpPermissions/0",
+          "value": {
+            "cidrs": [
+              "0.0.0.0/0"
+            ],
+            "port_from": 20,
+            "port_to": 22,
+            "prefix_lists": [],
+            "priority": null,
+            "protocol": "tcp",
+            "source_tags": []
+          }
+        }
+      ],
+      "reason": "1 ingress rule(s) expose remote administration ports to internet-wide sources.",
+      "resource_id": "aws:security_group:sg-0fe00000000000007",
+      "resource_type": "security_group",
+      "rule_id": "PF-NET-001",
+      "status": "fail"
+    },
+    {
+      "evidence": [],
+      "reason": "No remote administration port is open to internet-wide sources.",
+      "resource_id": "aws:security_group:sg-0fe00000000000008",
+      "resource_type": "security_group",
+      "rule_id": "PF-NET-001",
+      "status": "pass"
+    },
+    {
+      "evidence": [],
+      "reason": "No remote administration port is open to internet-wide sources.",
+      "resource_id": "aws:security_group:sg-0fe00000000000009",
+      "resource_type": "security_group",
+      "rule_id": "PF-NET-001",
+      "status": "pass"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json",
+          "line": 445,
+          "pointer": "/SecurityGroups/9/IpPermissions/0"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/ingress/0",
+          "raw": "snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json#/SecurityGroups/9/IpPermissions/0",
+          "value": {
+            "cidrs": [
+              "0.0.0.0/0"
+            ],
+            "port_from": null,
+            "port_to": null,
+            "prefix_lists": [],
+            "priority": null,
+            "protocol": "50",
+            "source_tags": []
+          },
+          "why": "protocol form not evaluated"
+        }
+      ],
+      "reason": "An ingress rule uses a protocol, port form, prefix list or service tag that is not evaluated.",
+      "resource_id": "aws:security_group:sg-0fe00000000000010",
+      "resource_type": "security_group",
+      "rule_id": "PF-NET-001",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            445
+          ],
+          "first_line": 439,
+          "lines": [
+            "      \"VpcId\": \"vpc-0fe0000000000c001\"",
+            "    },",
+            "    {",
+            "      \"Description\": \"IPsec tunnel endpoint\",",
+            "      \"GroupName\": \"esp-tunnel\",",
+            "      \"IpPermissions\": [",
+            "        {",
+            "          \"IpProtocol\": \"50\",",
+            "          \"IpRanges\": [",
+            "            {",
+            "              \"CidrIp\": \"0.0.0.0/0\"",
+            "            }",
+            "          ],"
+          ]
+        },
+        "file": "snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json",
+        "line": 445,
+        "pointer": "/SecurityGroups/9/IpPermissions/0"
+      },
+      "status": "unknown"
+    },
+    {
+      "evidence": [],
+      "reason": "No data-service port is open to internet-wide sources.",
+      "resource_id": "aws:security_group:sg-0fe00000000000001",
+      "resource_type": "security_group",
+      "rule_id": "PF-NET-002",
+      "status": "pass"
+    },
+    {
+      "evidence": [],
+      "reason": "No data-service port is open to internet-wide sources.",
+      "resource_id": "aws:security_group:sg-0fe00000000000002",
+      "resource_type": "security_group",
+      "rule_id": "PF-NET-002",
+      "status": "pass"
+    },
+    {
+      "evidence": [],
+      "reason": "No data-service port is open to internet-wide sources.",
+      "resource_id": "aws:security_group:sg-0fe00000000000003",
+      "resource_type": "security_group",
+      "rule_id": "PF-NET-002",
+      "status": "pass"
+    },
+    {
+      "evidence": [],
+      "reason": "No data-service port is open to internet-wide sources.",
+      "resource_id": "aws:security_group:sg-0fe00000000000004",
+      "resource_type": "security_group",
+      "rule_id": "PF-NET-002",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "internet_sources": [
+            "0.0.0.0/0"
+          ],
+          "path": "/properties/ingress/0",
+          "ports": [
+            1433,
+            3306,
+            5432,
+            6379,
+            9200,
+            27017
+          ],
+          "raw": "snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json#/SecurityGroups/4/IpPermissions/0",
+          "value": {
+            "cidrs": [
+              "0.0.0.0/0"
+            ],
+            "port_from": 0,
+            "port_to": 65535,
+            "prefix_lists": [],
+            "priority": null,
+            "protocol": "tcp",
+            "source_tags": []
+          }
+        }
+      ],
+      "reason": "1 ingress rule(s) expose data-service ports to internet-wide sources.",
+      "resource_id": "aws:security_group:sg-0fe00000000000005",
+      "resource_type": "security_group",
+      "rule_id": "PF-NET-002",
+      "status": "fail"
+    },
+    {
+      "evidence": [],
+      "reason": "No data-service port is open to internet-wide sources.",
+      "resource_id": "aws:security_group:sg-0fe00000000000006",
+      "resource_type": "security_group",
+      "rule_id": "PF-NET-002",
+      "status": "pass"
+    },
+    {
+      "evidence": [],
+      "reason": "No data-service port is open to internet-wide sources.",
+      "resource_id": "aws:security_group:sg-0fe00000000000007",
+      "resource_type": "security_group",
+      "rule_id": "PF-NET-002",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "internet_sources": [
+            "0.0.0.0/0"
+          ],
+          "path": "/properties/ingress/1",
+          "ports": [
+            3306
+          ],
+          "raw": "snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json#/SecurityGroups/7/IpPermissions/1",
+          "value": {
+            "cidrs": [
+              "0.0.0.0/0"
+            ],
+            "port_from": 3306,
+            "port_to": 3306,
+            "prefix_lists": [],
+            "priority": null,
+            "protocol": "tcp",
+            "source_tags": []
+          }
+        }
+      ],
+      "reason": "1 ingress rule(s) expose data-service ports to internet-wide sources.",
+      "resource_id": "aws:security_group:sg-0fe00000000000008",
+      "resource_type": "security_group",
+      "rule_id": "PF-NET-002",
+      "status": "fail"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json",
+          "line": 404,
+          "pointer": "/SecurityGroups/8/IpPermissions/0"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/ingress/0",
+          "raw": "snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json#/SecurityGroups/8/IpPermissions/0",
+          "unevaluable_sources": [
+            "prefix-list:pl-0fe0000000000d001"
+          ],
+          "value": {
+            "cidrs": [],
+            "port_from": 6379,
+            "port_to": 6379,
+            "prefix_lists": [
+              "pl-0fe0000000000d001"
+            ],
+            "priority": null,
+            "protocol": "tcp",
+            "source_tags": []
+          },
+          "why": "source not expanded"
+        }
+      ],
+      "reason": "An ingress rule uses a protocol, port form, prefix list or service tag that is not evaluated.",
+      "resource_id": "aws:security_group:sg-0fe00000000000009",
+      "resource_type": "security_group",
+      "rule_id": "PF-NET-002",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            404
+          ],
+          "first_line": 398,
+          "lines": [
+            "      \"VpcId\": \"vpc-0fe0000000000c001\"",
+            "    },",
+            "    {",
+            "      \"Description\": \"Partner cache access\",",
+            "      \"GroupName\": \"cache-partner\",",
+            "      \"IpPermissions\": [",
+            "        {",
+            "          \"IpProtocol\": \"tcp\",",
+            "          \"FromPort\": 6379,",
+            "          \"ToPort\": 6379,",
+            "          \"IpRanges\": [],",
+            "          \"Ipv6Ranges\": [],",
+            "          \"PrefixListIds\": ["
+          ]
+        },
+        "file": "snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json",
+        "line": 404,
+        "pointer": "/SecurityGroups/8/IpPermissions/0"
+      },
+      "status": "unknown"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json",
+          "line": 445,
+          "pointer": "/SecurityGroups/9/IpPermissions/0"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/ingress/0",
+          "raw": "snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json#/SecurityGroups/9/IpPermissions/0",
+          "value": {
+            "cidrs": [
+              "0.0.0.0/0"
+            ],
+            "port_from": null,
+            "port_to": null,
+            "prefix_lists": [],
+            "priority": null,
+            "protocol": "50",
+            "source_tags": []
+          },
+          "why": "protocol form not evaluated"
+        }
+      ],
+      "reason": "An ingress rule uses a protocol, port form, prefix list or service tag that is not evaluated.",
+      "resource_id": "aws:security_group:sg-0fe00000000000010",
+      "resource_type": "security_group",
+      "rule_id": "PF-NET-002",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            445
+          ],
+          "first_line": 439,
+          "lines": [
+            "      \"VpcId\": \"vpc-0fe0000000000c001\"",
+            "    },",
+            "    {",
+            "      \"Description\": \"IPsec tunnel endpoint\",",
+            "      \"GroupName\": \"esp-tunnel\",",
+            "      \"IpPermissions\": [",
+            "        {",
+            "          \"IpProtocol\": \"50\",",
+            "          \"IpRanges\": [",
+            "            {",
+            "              \"CidrIp\": \"0.0.0.0/0\"",
+            "            }",
+            "          ],"
+          ]
+        },
+        "file": "snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json",
+        "line": 445,
+        "pointer": "/SecurityGroups/9/IpPermissions/0"
+      },
+      "status": "unknown"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/network_groups",
+          "raw": "snapshots/aws-drifted-2026-10/ec2-describe-instances.json#/Reservations/0/Instances/0/SecurityGroups",
+          "value": {
+            "open_groups": [
+              "aws:security_group:sg-0fe00000000000001"
+            ],
+            "public_ips": [
+              "203.0.113.10"
+            ]
+          }
+        },
+        {
+          "path": "/properties/instance_profile",
+          "raw": "snapshots/aws-drifted-2026-10/ec2-describe-instances.json#/Reservations/0/Instances/0/IamInstanceProfile",
+          "value": "aws:iam_role:arn:aws:iam::111122223333:role/app-server-role"
+        }
+      ],
+      "reason": "The instance has a public IP, admits internet-wide ingress and runs with an admin-capable identity.",
+      "resource_id": "aws:compute_instance:i-0fe0000000000a001",
+      "resource_type": "compute_instance",
+      "rule_id": "PF-REL-001",
+      "status": "fail"
+    },
+    {
+      "evidence": [],
+      "reason": "The instance identity is not admin-capable.",
+      "resource_id": "aws:compute_instance:i-0fe0000000000a002",
+      "resource_type": "compute_instance",
+      "rule_id": "PF-REL-001",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/network_groups",
+          "raw": "snapshots/aws-drifted-2026-10/ec2-describe-instances.json#/Reservations/2/Instances/0/SecurityGroups",
+          "value": {
+            "open_groups": [],
+            "public_ips": []
+          }
+        }
+      ],
+      "reason": "The instance is not internet-exposed.",
+      "resource_id": "aws:compute_instance:i-0fe0000000000a003",
+      "resource_type": "compute_instance",
+      "rule_id": "PF-REL-001",
+      "status": "pass"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/aws-drifted-2026-10/ec2-describe-instances.json",
+          "line": 160,
+          "pointer": "/Reservations/3/Instances/0/SecurityGroups"
+        },
+        {
+          "file": "snapshots/aws-drifted-2026-10/ec2-describe-instances.json",
+          "line": 156,
+          "pointer": "/Reservations/3/Instances/0/IamInstanceProfile"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/network_groups",
+          "raw": "snapshots/aws-drifted-2026-10/ec2-describe-instances.json#/Reservations/3/Instances/0/SecurityGroups",
+          "value": {
+            "open_groups": [
+              "aws:security_group:sg-0fe00000000000005"
+            ],
+            "public_ips": [
+              "203.0.113.12"
+            ]
+          }
+        },
+        {
+          "path": "/properties/instance_profile",
+          "raw": "snapshots/aws-drifted-2026-10/ec2-describe-instances.json#/Reservations/3/Instances/0/IamInstanceProfile",
+          "value": "aws:iam_role:arn:aws:iam::111122223333:role/ops-automation-role"
+        }
+      ],
+      "reason": "Exposure or identity permissions could not be fully evaluated (unresolved references, NotAction or conditional grants).",
+      "resource_id": "aws:compute_instance:i-0fe0000000000a004",
+      "resource_type": "compute_instance",
+      "rule_id": "PF-REL-001",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            156,
+            160
+          ],
+          "first_line": 150,
+          "lines": [
+            "            },",
+            "            {",
+            "              \"Key\": \"db_password\",",
+            "              \"Value\": \"[redacted]\"",
+            "            }",
+            "          ],",
+            "          \"IamInstanceProfile\": {",
+            "            \"Arn\": \"arn:aws:iam::111122223333:instance-profile/ops-automation-profile\",",
+            "            \"Id\": \"PFIPEXAMPLEa004\"",
+            "          },",
+            "          \"SecurityGroups\": [",
+            "            {",
+            "              \"GroupName\": \"legacy-ops\",",
+            "              \"GroupId\": \"sg-0fe00000000000005\"",
+            "            }",
+            "          ]",
+            "        }"
+          ]
+        },
+        "file": "snapshots/aws-drifted-2026-10/ec2-describe-instances.json",
+        "line": 160,
+        "pointer": "/Reservations/3/Instances/0/SecurityGroups"
+      },
+      "status": "unknown"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/refs",
+          "raw": null,
+          "value": {
+            "delivered_by": [
+              "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+              "aws:audit_trail:arn:aws:cloudtrail:us-east-2:111122223333:trail/org-management-trail"
+            ]
+          }
+        },
+        {
+          "path": "/properties/permissions/statements",
+          "raw": "snapshots/aws-drifted-2026-10/s3-buckets.json#/Buckets/1/GetBucketPolicy/Policy",
+          "value": {
+            "actions": [
+              "s3:GetObject"
+            ],
+            "effect": "Allow",
+            "has_condition": false,
+            "not_actions": null,
+            "policy": "bucket-policy",
+            "resources": [
+              "arn:aws:s3:::fh-audit-logs/*"
+            ],
+            "sid": "TempDebugRead"
+          }
+        },
+        {
+          "path": "/properties/public_access/guard",
+          "raw": "snapshots/aws-drifted-2026-10/s3-buckets.json#/Buckets/1/GetPublicAccessBlock",
+          "value": {
+            "block_public_acls": true,
+            "block_public_policy": false,
+            "configured": true,
+            "ignore_public_acls": true,
+            "restrict_public_buckets": false
+          }
+        }
+      ],
+      "reason": "This storage receives audit logs and its bucket policy allows anonymous access.",
+      "resource_id": "aws:storage_bucket:fh-audit-logs",
+      "resource_type": "storage_bucket",
+      "rule_id": "PF-REL-002",
+      "status": "fail"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/public_access/guard",
+          "raw": "snapshots/aws-drifted-2026-10/s3-buckets.json#/Buckets/0/GetPublicAccessBlock",
+          "value": {
+            "block_public_acls": true,
+            "block_public_policy": true,
+            "configured": true,
+            "ignore_public_acls": true,
+            "restrict_public_buckets": true
+          }
+        }
+      ],
+      "reason": "No anonymous ACL grant or public container access level.",
+      "resource_id": "aws:storage_bucket:fh-app-artifacts",
+      "resource_type": "storage_bucket",
+      "rule_id": "PF-STOR-001",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/public_access/guard",
+          "raw": "snapshots/aws-drifted-2026-10/s3-buckets.json#/Buckets/1/GetPublicAccessBlock",
+          "value": {
+            "block_public_acls": true,
+            "block_public_policy": false,
+            "configured": true,
+            "ignore_public_acls": true,
+            "restrict_public_buckets": false
+          }
+        }
+      ],
+      "reason": "No anonymous ACL grant or public container access level.",
+      "resource_id": "aws:storage_bucket:fh-audit-logs",
+      "resource_type": "storage_bucket",
+      "rule_id": "PF-STOR-001",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/public_access/guard",
+          "raw": "snapshots/aws-drifted-2026-10/s3-buckets.json#/Buckets/2/GetPublicAccessBlock",
+          "value": {
+            "block_public_acls": true,
+            "block_public_policy": true,
+            "configured": true,
+            "ignore_public_acls": true,
+            "restrict_public_buckets": true
+          }
+        }
+      ],
+      "reason": "No anonymous ACL grant or public container access level.",
+      "resource_id": "aws:storage_bucket:fh-data-lake",
+      "resource_type": "storage_bucket",
+      "rule_id": "PF-STOR-001",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/public_access/guard",
+          "raw": "snapshots/aws-drifted-2026-10/s3-buckets.json#/Buckets/3/GetPublicAccessBlock",
+          "value": {
+            "block_public_acls": false,
+            "block_public_policy": false,
+            "configured": false,
+            "ignore_public_acls": false,
+            "restrict_public_buckets": false
+          }
+        }
+      ],
+      "reason": "No anonymous ACL grant or public container access level.",
+      "resource_id": "aws:storage_bucket:fh-legacy-reports",
+      "resource_type": "storage_bucket",
+      "rule_id": "PF-STOR-001",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/public_access/guard",
+          "raw": "snapshots/aws-drifted-2026-10/s3-buckets.json#/Buckets/4/GetPublicAccessBlock",
+          "value": {
+            "block_public_acls": true,
+            "block_public_policy": true,
+            "configured": true,
+            "ignore_public_acls": true,
+            "restrict_public_buckets": false
+          }
+        }
+      ],
+      "reason": "No anonymous ACL grant or public container access level.",
+      "resource_id": "aws:storage_bucket:fh-logs-access",
+      "resource_type": "storage_bucket",
+      "rule_id": "PF-STOR-001",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/public_access/anonymous_grants/0",
+          "raw": "snapshots/aws-drifted-2026-10/s3-buckets.json#/Buckets/5/GetBucketAcl/Grants/1",
+          "value": {
+            "grantee": "AllUsers",
+            "permission": "READ",
+            "raw": "snapshots/aws-drifted-2026-10/s3-buckets.json#/Buckets/5/GetBucketAcl/Grants/1",
+            "via": "acl"
+          }
+        },
+        {
+          "path": "/properties/public_access/guard",
+          "raw": "snapshots/aws-drifted-2026-10/s3-buckets.json#/Buckets/5/GetPublicAccessBlock",
+          "value": {
+            "block_public_acls": false,
+            "block_public_policy": false,
+            "configured": false,
+            "ignore_public_acls": false,
+            "restrict_public_buckets": false
+          }
+        }
+      ],
+      "reason": "Anonymous access is granted (AllUsers READ) and the public access guard does not neutralize it.",
+      "resource_id": "aws:storage_bucket:fh-marketing-assets",
+      "resource_type": "storage_bucket",
+      "rule_id": "PF-STOR-001",
+      "status": "fail"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/public_access/anonymous_grants/0",
+          "raw": "snapshots/aws-drifted-2026-10/s3-buckets.json#/Buckets/6/GetBucketAcl/Grants/1",
+          "value": {
+            "grantee": "AuthenticatedUsers",
+            "permission": "READ",
+            "raw": "snapshots/aws-drifted-2026-10/s3-buckets.json#/Buckets/6/GetBucketAcl/Grants/1",
+            "via": "acl"
+          }
+        },
+        {
+          "path": "/properties/public_access/guard",
+          "raw": "snapshots/aws-drifted-2026-10/s3-buckets.json#/Buckets/6/GetPublicAccessBlock",
+          "value": {
+            "block_public_acls": true,
+            "block_public_policy": false,
+            "configured": true,
+            "ignore_public_acls": true,
+            "restrict_public_buckets": false
+          }
+        }
+      ],
+      "reason": "Anonymous grants exist but the public access guard neutralizes them.",
+      "resource_id": "aws:storage_bucket:fh-partner-exchange",
+      "resource_type": "storage_bucket",
+      "rule_id": "PF-STOR-001",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/public_access/guard",
+          "raw": "snapshots/aws-drifted-2026-10/s3-buckets.json#/Buckets/7/GetPublicAccessBlock",
+          "value": {
+            "block_public_acls": true,
+            "block_public_policy": false,
+            "configured": true,
+            "ignore_public_acls": true,
+            "restrict_public_buckets": false
+          }
+        }
+      ],
+      "reason": "No anonymous ACL grant or public container access level.",
+      "resource_id": "aws:storage_bucket:fh-public-docs",
+      "resource_type": "storage_bucket",
+      "rule_id": "PF-STOR-001",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/public_access/guard",
+          "raw": "snapshots/aws-drifted-2026-10/s3-buckets.json#/Buckets/8/GetPublicAccessBlock",
+          "value": {
+            "block_public_acls": true,
+            "block_public_policy": false,
+            "configured": true,
+            "ignore_public_acls": true,
+            "restrict_public_buckets": false
+          }
+        }
+      ],
+      "reason": "No anonymous ACL grant or public container access level.",
+      "resource_id": "aws:storage_bucket:fh-shared-research",
+      "resource_type": "storage_bucket",
+      "rule_id": "PF-STOR-001",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/public_access/guard",
+          "raw": "snapshots/aws-drifted-2026-10/s3-buckets.json#/Buckets/9/GetPublicAccessBlock",
+          "value": {
+            "block_public_acls": true,
+            "block_public_policy": false,
+            "configured": true,
+            "ignore_public_acls": true,
+            "restrict_public_buckets": false
+          }
+        }
+      ],
+      "reason": "No anonymous ACL grant or public container access level.",
+      "resource_id": "aws:storage_bucket:fh-vendor-drop",
+      "resource_type": "storage_bucket",
+      "rule_id": "PF-STOR-001",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/public_access/guard",
+          "raw": "snapshots/aws-drifted-2026-10/s3-buckets.json#/Buckets/0/GetPublicAccessBlock",
+          "value": {
+            "block_public_acls": true,
+            "block_public_policy": true,
+            "configured": true,
+            "ignore_public_acls": true,
+            "restrict_public_buckets": true
+          }
+        }
+      ],
+      "reason": "No bucket policy statement allows an anonymous principal.",
+      "resource_id": "aws:storage_bucket:fh-app-artifacts",
+      "resource_type": "storage_bucket",
+      "rule_id": "PF-STOR-002",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/permissions/statements",
+          "raw": "snapshots/aws-drifted-2026-10/s3-buckets.json#/Buckets/1/GetBucketPolicy/Policy",
+          "value": {
+            "actions": [
+              "s3:GetObject"
+            ],
+            "effect": "Allow",
+            "has_condition": false,
+            "not_actions": null,
+            "policy": "bucket-policy",
+            "resources": [
+              "arn:aws:s3:::fh-audit-logs/*"
+            ],
+            "sid": "TempDebugRead"
+          }
+        },
+        {
+          "path": "/properties/public_access/guard",
+          "raw": "snapshots/aws-drifted-2026-10/s3-buckets.json#/Buckets/1/GetPublicAccessBlock",
+          "value": {
+            "block_public_acls": true,
+            "block_public_policy": false,
+            "configured": true,
+            "ignore_public_acls": true,
+            "restrict_public_buckets": false
+          }
+        }
+      ],
+      "reason": "The bucket policy allows the anonymous principal \"*\" in 1 statement(s) and RestrictPublicBuckets is off.",
+      "resource_id": "aws:storage_bucket:fh-audit-logs",
+      "resource_type": "storage_bucket",
+      "rule_id": "PF-STOR-002",
+      "status": "fail"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/public_access/guard",
+          "raw": "snapshots/aws-drifted-2026-10/s3-buckets.json#/Buckets/2/GetPublicAccessBlock",
+          "value": {
+            "block_public_acls": true,
+            "block_public_policy": true,
+            "configured": true,
+            "ignore_public_acls": true,
+            "restrict_public_buckets": true
+          }
+        }
+      ],
+      "reason": "No bucket policy statement allows an anonymous principal.",
+      "resource_id": "aws:storage_bucket:fh-data-lake",
+      "resource_type": "storage_bucket",
+      "rule_id": "PF-STOR-002",
+      "status": "pass"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/aws-drifted-2026-10/s3-buckets.json",
+          "line": 159,
+          "pointer": "/Buckets/3/GetBucketPolicy"
+        },
+        {
+          "file": "snapshots/aws-drifted-2026-10/s3-buckets.json",
+          "line": 162,
+          "pointer": "/Buckets/3/GetPublicAccessBlock"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/public_access/policy",
+          "raw": "snapshots/aws-drifted-2026-10/s3-buckets.json#/Buckets/3/GetBucketPolicy",
+          "value": {
+            "parse_error": true
+          }
+        },
+        {
+          "path": "/properties/public_access/guard",
+          "raw": "snapshots/aws-drifted-2026-10/s3-buckets.json#/Buckets/3/GetPublicAccessBlock",
+          "value": {
+            "block_public_acls": false,
+            "block_public_policy": false,
+            "configured": false,
+            "ignore_public_acls": false,
+            "restrict_public_buckets": false
+          }
+        }
+      ],
+      "reason": "The bucket policy document could not be parsed, so public grants cannot be evaluated.",
+      "resource_id": "aws:storage_bucket:fh-legacy-reports",
+      "resource_type": "storage_bucket",
+      "rule_id": "PF-STOR-002",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            159,
+            162
+          ],
+          "first_line": 153,
+          "lines": [
+            "              \"Type\": \"CanonicalUser\"",
+            "            },",
+            "            \"Permission\": \"FULL_CONTROL\"",
+            "          }",
+            "        ]",
+            "      },",
+            "      \"GetBucketPolicy\": {",
+            "        \"Policy\": \"{\\\"Version\\\":\\\"2012-10-17\\\",\\\"Statement\\\":[{\\\"Sid\\\":\\\"LegacyRead\\\",\\\"Effect\\\":\\\"Allow\\\",\\\"Principal\\\":\\\"*\\\",\\\"Action\\\":\\\"s3:GetObject\\\",\\\"Resource\\\":\\\"arn:aws:s3:::fh-legacy-reports/*\\\"\"",
+            "      },",
+            "      \"GetPublicAccessBlock\": null,",
+            "      \"GetBucketLogging\": {},",
+            "      \"GetBucketTagging\": {",
+            "        \"TagSet\": [",
+            "          {",
+            "            \"Key\": \"owner\",",
+            "            \"Value\": \"platform\""
+          ]
+        },
+        "file": "snapshots/aws-drifted-2026-10/s3-buckets.json",
+        "line": 159,
+        "pointer": "/Buckets/3/GetBucketPolicy"
+      },
+      "status": "unknown"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/public_access/guard",
+          "raw": "snapshots/aws-drifted-2026-10/s3-buckets.json#/Buckets/4/GetPublicAccessBlock",
+          "value": {
+            "block_public_acls": true,
+            "block_public_policy": true,
+            "configured": true,
+            "ignore_public_acls": true,
+            "restrict_public_buckets": false
+          }
+        }
+      ],
+      "reason": "No bucket policy statement allows an anonymous principal.",
+      "resource_id": "aws:storage_bucket:fh-logs-access",
+      "resource_type": "storage_bucket",
+      "rule_id": "PF-STOR-002",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/public_access/guard",
+          "raw": "snapshots/aws-drifted-2026-10/s3-buckets.json#/Buckets/5/GetPublicAccessBlock",
+          "value": {
+            "block_public_acls": false,
+            "block_public_policy": false,
+            "configured": false,
+            "ignore_public_acls": false,
+            "restrict_public_buckets": false
+          }
+        }
+      ],
+      "reason": "No bucket policy statement allows an anonymous principal.",
+      "resource_id": "aws:storage_bucket:fh-marketing-assets",
+      "resource_type": "storage_bucket",
+      "rule_id": "PF-STOR-002",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/public_access/guard",
+          "raw": "snapshots/aws-drifted-2026-10/s3-buckets.json#/Buckets/6/GetPublicAccessBlock",
+          "value": {
+            "block_public_acls": true,
+            "block_public_policy": false,
+            "configured": true,
+            "ignore_public_acls": true,
+            "restrict_public_buckets": false
+          }
+        }
+      ],
+      "reason": "No bucket policy statement allows an anonymous principal.",
+      "resource_id": "aws:storage_bucket:fh-partner-exchange",
+      "resource_type": "storage_bucket",
+      "rule_id": "PF-STOR-002",
+      "status": "pass"
+    },
+    {
+      "evidence": [
+        {
+          "path": "/properties/permissions/statements",
+          "raw": "snapshots/aws-drifted-2026-10/s3-buckets.json#/Buckets/7/GetBucketPolicy/Policy",
+          "value": {
+            "actions": [
+              "s3:GetObject"
+            ],
+            "effect": "Allow",
+            "has_condition": false,
+            "not_actions": null,
+            "policy": "bucket-policy",
+            "resources": [
+              "arn:aws:s3:::fh-public-docs/*"
+            ],
+            "sid": "PublicReadDocs"
+          }
+        },
+        {
+          "path": "/properties/public_access/guard",
+          "raw": "snapshots/aws-drifted-2026-10/s3-buckets.json#/Buckets/7/GetPublicAccessBlock",
+          "value": {
+            "block_public_acls": true,
+            "block_public_policy": false,
+            "configured": true,
+            "ignore_public_acls": true,
+            "restrict_public_buckets": false
+          }
+        }
+      ],
+      "reason": "The bucket policy allows the anonymous principal \"*\" in 1 statement(s) and RestrictPublicBuckets is off.",
+      "resource_id": "aws:storage_bucket:fh-public-docs",
+      "resource_type": "storage_bucket",
+      "rule_id": "PF-STOR-002",
+      "status": "fail"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/aws-drifted-2026-10/s3-buckets.json",
+          "line": 377,
+          "pointer": "/Buckets/8/GetBucketPolicy/Policy"
+        },
+        {
+          "file": "snapshots/aws-drifted-2026-10/s3-buckets.json",
+          "line": 379,
+          "pointer": "/Buckets/8/GetPublicAccessBlock"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/permissions/statements",
+          "raw": "snapshots/aws-drifted-2026-10/s3-buckets.json#/Buckets/8/GetBucketPolicy/Policy",
+          "value": {
+            "actions": [
+              "s3:GetObject"
+            ],
+            "effect": "Allow",
+            "has_condition": true,
+            "not_actions": null,
+            "policy": "bucket-policy",
+            "resources": [
+              "arn:aws:s3:::fh-shared-research/*"
+            ],
+            "sid": "PartnerNetworkRead"
+          }
+        },
+        {
+          "path": "/properties/public_access/guard",
+          "raw": "snapshots/aws-drifted-2026-10/s3-buckets.json#/Buckets/8/GetPublicAccessBlock",
+          "value": {
+            "block_public_acls": true,
+            "block_public_policy": false,
+            "configured": true,
+            "ignore_public_acls": true,
+            "restrict_public_buckets": false
+          }
+        }
+      ],
+      "reason": "A policy statement uses NotPrincipal, a Condition on an anonymous principal, or a Principal or Effect that could not be read; those semantics are not evaluated.",
+      "resource_id": "aws:storage_bucket:fh-shared-research",
+      "resource_type": "storage_bucket",
+      "rule_id": "PF-STOR-002",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            377,
+            379
+          ],
+          "first_line": 371,
+          "lines": [
+            "            },",
+            "            \"Permission\": \"FULL_CONTROL\"",
+            "          }",
+            "        ]",
+            "      },",
+            "      \"GetBucketPolicy\": {",
+            "        \"Policy\": \"{\\\"Version\\\":\\\"2012-10-17\\\",\\\"Statement\\\":[{\\\"Sid\\\":\\\"PartnerNetworkRead\\\",\\\"Effect\\\":\\\"Allow\\\",\\\"Principal\\\":\\\"*\\\",\\\"Action\\\":\\\"s3:GetObject\\\",\\\"Resource\\\":\\\"arn:aws:s3:::fh-shared-research/*\\\",\\\"Condition\\\":{\\\"IpAddress\\\":{\\\"aws:SourceIp\\\":\\\"198.51.100.0/24\\\"}}}]}\"",
+            "      },",
+            "      \"GetPublicAccessBlock\": {",
+            "        \"PublicAccessBlockConfiguration\": {",
+            "          \"BlockPublicAcls\": true,",
+            "          \"IgnorePublicAcls\": true,",
+            "          \"BlockPublicPolicy\": false,",
+            "          \"RestrictPublicBuckets\": false",
+            "        }"
+          ]
+        },
+        "file": "snapshots/aws-drifted-2026-10/s3-buckets.json",
+        "line": 377,
+        "pointer": "/Buckets/8/GetBucketPolicy/Policy"
+      },
+      "status": "unknown"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/aws-drifted-2026-10/s3-buckets.json",
+          "line": 418,
+          "pointer": "/Buckets/9/GetBucketPolicy/Policy"
+        },
+        {
+          "file": "snapshots/aws-drifted-2026-10/s3-buckets.json",
+          "line": 420,
+          "pointer": "/Buckets/9/GetPublicAccessBlock"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "/properties/permissions/statements",
+          "raw": "snapshots/aws-drifted-2026-10/s3-buckets.json#/Buckets/9/GetBucketPolicy/Policy",
+          "value": {
+            "actions": [
+              "s3:PutObject"
+            ],
+            "effect": "Allow",
+            "has_condition": false,
+            "not_actions": null,
+            "policy": "bucket-policy",
+            "resources": [
+              "arn:aws:s3:::fh-vendor-drop/*"
+            ],
+            "sid": "EveryoneButOwnerMayWrite"
+          }
+        },
+        {
+          "path": "/properties/public_access/guard",
+          "raw": "snapshots/aws-drifted-2026-10/s3-buckets.json#/Buckets/9/GetPublicAccessBlock",
+          "value": {
+            "block_public_acls": true,
+            "block_public_policy": false,
+            "configured": true,
+            "ignore_public_acls": true,
+            "restrict_public_buckets": false
+          }
+        }
+      ],
+      "reason": "A policy statement uses NotPrincipal, a Condition on an anonymous principal, or a Principal or Effect that could not be read; those semantics are not evaluated.",
+      "resource_id": "aws:storage_bucket:fh-vendor-drop",
+      "resource_type": "storage_bucket",
+      "rule_id": "PF-STOR-002",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            418,
+            420
+          ],
+          "first_line": 412,
+          "lines": [
+            "            },",
+            "            \"Permission\": \"FULL_CONTROL\"",
+            "          }",
+            "        ]",
+            "      },",
+            "      \"GetBucketPolicy\": {",
+            "        \"Policy\": \"{\\\"Version\\\":\\\"2012-10-17\\\",\\\"Statement\\\":[{\\\"Sid\\\":\\\"EveryoneButOwnerMayWrite\\\",\\\"Effect\\\":\\\"Allow\\\",\\\"NotPrincipal\\\":{\\\"AWS\\\":\\\"arn:aws:iam::111122223333:root\\\"},\\\"Action\\\":\\\"s3:PutObject\\\",\\\"Resource\\\":\\\"arn:aws:s3:::fh-vendor-drop/*\\\"}]}\"",
+            "      },",
+            "      \"GetPublicAccessBlock\": {",
+            "        \"PublicAccessBlockConfiguration\": {",
+            "          \"BlockPublicAcls\": true,",
+            "          \"IgnorePublicAcls\": true,",
+            "          \"BlockPublicPolicy\": false,",
+            "          \"RestrictPublicBuckets\": false",
+            "        }"
+          ]
+        },
+        "file": "snapshots/aws-drifted-2026-10/s3-buckets.json",
+        "line": 418,
+        "pointer": "/Buckets/9/GetBucketPolicy/Policy"
+      },
+      "status": "unknown"
+    }
+  ],
+  "rules": [
+    {
+      "evaluated": 10,
+      "fail": 1,
+      "pack": "storage",
+      "pass": 9,
+      "resource_types": [
+        "storage_bucket"
+      ],
+      "rule_id": "PF-STOR-001",
+      "severity": "high",
+      "title": "Storage readable anonymously through ACL grants or container access levels",
+      "unknown": 0
+    },
+    {
+      "evaluated": 10,
+      "fail": 2,
+      "pack": "storage",
+      "pass": 5,
+      "resource_types": [
+        "storage_bucket"
+      ],
+      "rule_id": "PF-STOR-002",
+      "severity": "high",
+      "title": "Bucket policy allows an anonymous principal",
+      "unknown": 3
+    },
+    {
+      "evaluated": 12,
+      "fail": 2,
+      "pack": "iam",
+      "pass": 7,
+      "resource_types": [
+        "iam_policy",
+        "iam_role",
+        "iam_user",
+        "role_definition"
+      ],
+      "rule_id": "PF-IAM-001",
+      "severity": "critical",
+      "title": "Allow statement grants every action on every resource",
+      "unknown": 3
+    },
+    {
+      "evaluated": 12,
+      "fail": 2,
+      "pack": "iam",
+      "pass": 8,
+      "resource_types": [
+        "iam_policy",
+        "iam_role",
+        "iam_user",
+        "role_definition"
+      ],
+      "rule_id": "PF-IAM-002",
+      "severity": "high",
+      "title": "Allow statement grants a whole service on every resource",
+      "unknown": 2
+    },
+    {
+      "evaluated": 4,
+      "fail": 1,
+      "pack": "iam",
+      "pass": 2,
+      "resource_types": [
+        "iam_user",
+        "role_assignment"
+      ],
+      "rule_id": "PF-IAM-003",
+      "severity": "high",
+      "title": "Standing admin-capable access outside the break-glass list",
+      "unknown": 1
+    },
+    {
+      "evaluated": 10,
+      "fail": 4,
+      "pack": "network",
+      "pass": 5,
+      "resource_types": [
+        "security_group",
+        "network_security_group"
+      ],
+      "rule_id": "PF-NET-001",
+      "severity": "critical",
+      "title": "Remote administration ports open to internet-wide sources",
+      "unknown": 1
+    },
+    {
+      "evaluated": 10,
+      "fail": 2,
+      "pack": "network",
+      "pass": 6,
+      "resource_types": [
+        "security_group",
+        "network_security_group"
+      ],
+      "rule_id": "PF-NET-002",
+      "severity": "high",
+      "title": "Data-service ports open to internet-wide sources",
+      "unknown": 2
+    },
+    {
+      "evaluated": 3,
+      "fail": 1,
+      "pack": "audit",
+      "pass": 1,
+      "resource_types": [
+        "audit_trail"
+      ],
+      "rule_id": "PF-AUD-001",
+      "severity": "high",
+      "title": "Audit trail is not logging",
+      "unknown": 1
+    },
+    {
+      "evaluated": 3,
+      "fail": 1,
+      "pack": "audit",
+      "pass": 2,
+      "resource_types": [
+        "audit_trail"
+      ],
+      "rule_id": "PF-AUD-002",
+      "severity": "medium",
+      "title": "Audit trail records only its home region",
+      "unknown": 0
+    },
+    {
+      "evaluated": 3,
+      "fail": 1,
+      "pack": "audit",
+      "pass": 2,
+      "resource_types": [
+        "audit_trail"
+      ],
+      "rule_id": "PF-AUD-003",
+      "severity": "medium",
+      "title": "Log file integrity validation is disabled",
+      "unknown": 0
+    },
+    {
+      "evaluated": 4,
+      "fail": 1,
+      "pack": "relationships",
+      "pass": 2,
+      "resource_types": [
+        "compute_instance"
+      ],
+      "rule_id": "PF-REL-001",
+      "severity": "critical",
+      "title": "Internet-exposed compute runs with an admin-capable identity",
+      "unknown": 1
+    },
+    {
+      "evaluated": 1,
+      "fail": 1,
+      "pack": "relationships",
+      "pass": 0,
+      "resource_types": [
+        "storage_bucket"
+      ],
+      "rule_id": "PF-REL-002",
+      "severity": "critical",
+      "title": "Storage that receives audit logs is publicly readable",
+      "unknown": 0
+    }
+  ],
+  "totals": {
+    "checks": 82,
+    "fail": 19,
+    "pass": 49,
+    "resources": 45,
+    "resources_by_status": {
+      "fail": 16,
+      "not_evaluated": 2,
+      "pass": 12,
+      "unknown": 15
+    },
+    "resources_not_evaluated": 2,
+    "resources_unsupported": 4,
+    "unknown": 14
+  },
+  "unsupported": [
+    {
+      "cited": [
+        {
+          "file": "snapshots/aws-drifted-2026-10/iam-account-authorization-details.json",
+          "line": 98,
+          "pointer": "/GroupDetailList/0"
+        }
+      ],
+      "id": "aws:unsupported:arn:aws:iam::111122223333:group/ops-readers",
+      "name": "ops-readers",
+      "native_type": "AWS::IAM::Group",
+      "reason": "unsupported native type AWS::IAM::Group: no rule evaluates it",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            98
+          ],
+          "first_line": 92,
+          "lines": [
+            "          \"SecretAccessKey\": \"[redacted]\"",
+            "        }",
+            "      ]",
+            "    }",
+            "  ],",
+            "  \"GroupDetailList\": [",
+            "    {",
+            "      \"Path\": \"/\",",
+            "      \"GroupName\": \"ops-readers\",",
+            "      \"GroupId\": \"PFGROUPEXAMPLE0001\",",
+            "      \"Arn\": \"arn:aws:iam::111122223333:group/ops-readers\",",
+            "      \"CreateDate\": \"2025-02-01T09:00:00+00:00\",",
+            "      \"GroupPolicyList\": [],"
+          ]
+        },
+        "file": "snapshots/aws-drifted-2026-10/iam-account-authorization-details.json",
+        "line": 98,
+        "pointer": "/GroupDetailList/0"
+      },
+      "status": "unknown"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/aws-drifted-2026-10/lambda-list-functions.json",
+          "line": 32,
+          "pointer": "/Functions/2"
+        }
+      ],
+      "id": "aws:unsupported:arn:aws:lambda:us-east-2:111122223333:function:fh-ops-hook",
+      "name": "fh-ops-hook",
+      "native_type": "AWS::lambda::Function",
+      "reason": "unsupported native type AWS::lambda::Function: no rule evaluates it",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            32
+          ],
+          "first_line": 26,
+          "lines": [
+            "        \"Variables\": {",
+            "          \"LOG_LEVEL\": \"warn\",",
+            "          \"DB_CONNECTION_STRING\": \"[redacted]\"",
+            "        }",
+            "      }",
+            "    },",
+            "    {",
+            "      \"FunctionName\": \"fh-ops-hook\",",
+            "      \"Environment\": {",
+            "        \"Variables\": {",
+            "          \"APP_CONFIG\": \"[redacted]\",",
+            "          \"DB_PASSWORD\": \"[redacted]\"",
+            "        }"
+          ]
+        },
+        "file": "snapshots/aws-drifted-2026-10/lambda-list-functions.json",
+        "line": 32,
+        "pointer": "/Functions/2"
+      },
+      "status": "unknown"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/aws-drifted-2026-10/lambda-list-functions.json",
+          "line": 17,
+          "pointer": "/Functions/1"
+        }
+      ],
+      "id": "aws:unsupported:arn:aws:lambda:us-east-2:111122223333:function:fh-report-export",
+      "name": "fh-report-export",
+      "native_type": "AWS::lambda::Function",
+      "reason": "unsupported native type AWS::lambda::Function: no rule evaluates it",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            17
+          ],
+          "first_line": 11,
+          "lines": [
+            "      \"Environment\": {",
+            "        \"Variables\": {",
+            "          \"LOG_LEVEL\": \"info\"",
+            "        }",
+            "      }",
+            "    },",
+            "    {",
+            "      \"FunctionName\": \"fh-report-export\",",
+            "      \"FunctionArn\": \"arn:aws:lambda:us-east-2:111122223333:function:fh-report-export\",",
+            "      \"Runtime\": \"nodejs22.x\",",
+            "      \"Role\": \"arn:aws:iam::111122223333:role/app-server-role\",",
+            "      \"Handler\": \"index.handler\",",
+            "      \"MemorySize\": 512,"
+          ]
+        },
+        "file": "snapshots/aws-drifted-2026-10/lambda-list-functions.json",
+        "line": 17,
+        "pointer": "/Functions/1"
+      },
+      "status": "unknown"
+    },
+    {
+      "cited": [
+        {
+          "file": "snapshots/aws-drifted-2026-10/lambda-list-functions.json",
+          "line": 3,
+          "pointer": "/Functions/0"
+        }
+      ],
+      "id": "aws:unsupported:arn:aws:lambda:us-east-2:111122223333:function:fh-thumbnailer",
+      "name": "fh-thumbnailer",
+      "native_type": "AWS::lambda::Function",
+      "reason": "unsupported native type AWS::lambda::Function: no rule evaluates it",
+      "source": {
+        "excerpt": {
+          "cited_lines": [
+            3
+          ],
+          "first_line": 1,
+          "lines": [
+            "{",
+            "  \"Functions\": [",
+            "    {",
+            "      \"FunctionName\": \"fh-thumbnailer\",",
+            "      \"FunctionArn\": \"arn:aws:lambda:us-east-2:111122223333:function:fh-thumbnailer\",",
+            "      \"Runtime\": \"python3.12\",",
+            "      \"Role\": \"arn:aws:iam::111122223333:role/app-server-role\",",
+            "      \"Handler\": \"app.handler\",",
+            "      \"MemorySize\": 256,"
+          ]
+        },
+        "file": "snapshots/aws-drifted-2026-10/lambda-list-functions.json",
+        "line": 3,
+        "pointer": "/Functions/0"
+      },
+      "status": "unknown"
+    }
+  ]
+}

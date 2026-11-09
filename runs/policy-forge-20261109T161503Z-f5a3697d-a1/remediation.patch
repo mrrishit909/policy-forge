@@ -1,0 +1,119 @@
+diff --git a/snapshots/aws-drifted-2026-10/cloudtrail-describe-trails.json b/snapshots/aws-drifted-2026-10/cloudtrail-describe-trails.json
+--- a/snapshots/aws-drifted-2026-10/cloudtrail-describe-trails.json
++++ b/snapshots/aws-drifted-2026-10/cloudtrail-describe-trails.json
+@@ -5,10 +5,10 @@
+       "S3BucketName": "fh-audit-logs",
+       "S3KeyPrefix": "",
+       "IncludeGlobalServiceEvents": true,
+-      "IsMultiRegionTrail": false,
++      "IsMultiRegionTrail": true,
+       "HomeRegion": "us-east-2",
+       "TrailARN": "arn:aws:cloudtrail:us-east-2:111122223333:trail/data-events-trail",
+-      "LogFileValidationEnabled": false,
++      "LogFileValidationEnabled": true,
+       "HasCustomEventSelectors": false,
+       "HasInsightSelectors": false,
+       "IsOrganizationTrail": false
+diff --git a/snapshots/aws-drifted-2026-10/cloudtrail-get-trail-status.json b/snapshots/aws-drifted-2026-10/cloudtrail-get-trail-status.json
+--- a/snapshots/aws-drifted-2026-10/cloudtrail-get-trail-status.json
++++ b/snapshots/aws-drifted-2026-10/cloudtrail-get-trail-status.json
+@@ -10,7 +10,7 @@
+     {
+       "Name": "org-management-trail",
+       "TrailARN": "arn:aws:cloudtrail:us-east-2:111122223333:trail/org-management-trail",
+-      "IsLogging": false,
++      "IsLogging": true,
+       "LatestDeliveryTime": "2026-10-20T23:55:00+00:00",
+       "StartLoggingTime": "2025-03-02T09:05:00+00:00"
+     }
+diff --git a/snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json b/snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json
+--- a/snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json
++++ b/snapshots/aws-drifted-2026-10/ec2-describe-security-groups.json
+@@ -70,15 +70,15 @@
+           "ToPort": 22,
+           "IpRanges": [
+             {
+-              "CidrIp": "0.0.0.0/0",
+-              "Description": "Temporary vendor access"
+-            }
+-          ],
+-          "Ipv6Ranges": [
+-            {
+-              "CidrIpv6": "::/0"
+-            }
+-          ],
++              "CidrIp": "203.0.113.0/26",
++              "Description": "Restricted to admin_cidrs (Policy Forge proposal)"
++            },
++            {
++              "CidrIp": "198.51.100.16/28",
++              "Description": "Restricted to admin_cidrs (Policy Forge proposal)"
++            }
++          ],
++          "Ipv6Ranges": [],
+           "PrefixListIds": [],
+           "UserIdGroupPairs": []
+         }
+@@ -255,8 +255,12 @@
+           "ToPort": 3389,
+           "IpRanges": [
+             {
+-              "CidrIp": "0.0.0.0/1",
+-              "Description": "Half the internet"
++              "CidrIp": "203.0.113.0/26",
++              "Description": "Restricted to admin_cidrs (Policy Forge proposal)"
++            },
++            {
++              "CidrIp": "198.51.100.16/28",
++              "Description": "Restricted to admin_cidrs (Policy Forge proposal)"
+             }
+           ],
+           "Ipv6Ranges": [],
+@@ -297,7 +301,12 @@
+           "ToPort": 22,
+           "IpRanges": [
+             {
+-              "CidrIp": "0.0.0.0/0"
++              "CidrIp": "203.0.113.0/26",
++              "Description": "Restricted to admin_cidrs (Policy Forge proposal)"
++            },
++            {
++              "CidrIp": "198.51.100.16/28",
++              "Description": "Restricted to admin_cidrs (Policy Forge proposal)"
+             }
+           ],
+           "Ipv6Ranges": [],
+@@ -365,8 +374,12 @@
+           "ToPort": 3306,
+           "IpRanges": [
+             {
+-              "CidrIp": "0.0.0.0/0",
+-              "Description": "BI vendor"
++              "CidrIp": "203.0.113.0/26",
++              "Description": "Restricted to admin_cidrs (Policy Forge proposal)"
++            },
++            {
++              "CidrIp": "198.51.100.16/28",
++              "Description": "Restricted to admin_cidrs (Policy Forge proposal)"
+             }
+           ],
+           "Ipv6Ranges": [],
+diff --git a/snapshots/aws-drifted-2026-10/s3-buckets.json b/snapshots/aws-drifted-2026-10/s3-buckets.json
+--- a/snapshots/aws-drifted-2026-10/s3-buckets.json
++++ b/snapshots/aws-drifted-2026-10/s3-buckets.json
+@@ -251,7 +251,14 @@
+         ]
+       },
+       "GetBucketPolicy": null,
+-      "GetPublicAccessBlock": null,
++      "GetPublicAccessBlock": {
++        "PublicAccessBlockConfiguration": {
++          "BlockPublicAcls": true,
++          "IgnorePublicAcls": true,
++          "BlockPublicPolicy": false,
++          "RestrictPublicBuckets": false
++        }
++      },
+       "GetBucketLogging": {},
+       "GetBucketTagging": {
+         "TagSet": [
