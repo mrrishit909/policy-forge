@@ -1,0 +1,12 @@
+{
+  "attempts": [
+    {
+      "attempt": 1,
+      "run_id": "policy-forge-20261116T154226Z-874856c7-a1",
+      "status": "running"
+    }
+  ],
+  "latest_status": "running",
+  "params_hash": "sha256:61115a6392fb011930fed3a1ac53c094bbff7c9994ec931b7e4769362d5c25c5",
+  "request_id": "874856c7ebbb3269"
+}

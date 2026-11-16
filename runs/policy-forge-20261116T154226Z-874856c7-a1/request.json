@@ -1,0 +1,16 @@
+{
+  "engine": "02c1888e0c350c11",
+  "params": {
+    "as_of": "2026-11-16",
+    "remediation": "propose",
+    "rule_packs": [
+      "storage",
+      "iam",
+      "network",
+      "audit",
+      "relationships"
+    ],
+    "snapshot": "aws-drifted-2026-10"
+  },
+  "request_id": "874856c7ebbb3269"
+}
