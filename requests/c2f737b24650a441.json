@@ -3,10 +3,10 @@
     {
       "attempt": 1,
       "run_id": "policy-forge-20261123T180409Z-c2f737b2-a1",
-      "status": "running"
+      "status": "completed"
     }
   ],
-  "latest_status": "running",
+  "latest_status": "completed",
   "params_hash": "sha256:19276495fc353f95883c4e7ef5121cb0633996c8968a6b77492d5bfedc3545c2",
   "request_id": "c2f737b24650a441"
 }
